@@ -58,7 +58,7 @@ window.C = {
 
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Herramientas que marcan la diferencia",
-  feat_sub: "Todo lo que necesitas para organizar y apreciar tus monedas",
+  feat_sub: "Todo lo que necesitas para organizar\ny apreciar tus monedas",
 
   f1_titulo: "Una galería digna de tu colección",
   f1_desc:   "Explora tus monedas en cinco modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con la lupa integrada mientras consultas su ficha técnica.",

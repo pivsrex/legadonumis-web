@@ -5,6 +5,7 @@ const {
 } = window.NumIcons;
 const { RevealWrapper } = window;
 const C = window.C;
+const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
 
 const FEATURES = [
   { icon: GridIcon,     title: C.f1_titulo, desc: C.f1_desc },
@@ -80,7 +81,7 @@ function Features() {
               font: '400 17px/1.6 var(--font-body)', color: 'var(--ds-text-mid)',
               margin: 0, paddingTop: 8,
             }}>
-              {C.feat_sub}
+              {br(C.feat_sub)}
             </p>
           </div>
         </RevealWrapper>
