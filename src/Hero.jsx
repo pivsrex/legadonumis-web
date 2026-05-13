@@ -5,8 +5,7 @@ const C = window.C;
 const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
-const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.3.0/Legado-0.3.0-arm64.dmg';
-const WIN_URL = '#';
+const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
 
 function Hero() {
   const s = {
@@ -100,7 +99,7 @@ function Hero() {
         <RevealWrapper delay={280}>
           <div style={s.ctaWrap}>
             <a
-              href={isMac ? MAC_URL : WIN_URL}
+              href={BUY_URL}
               style={s.btnPri}
               onMouseEnter={hoverPri} onMouseLeave={leavePri}
             >
@@ -108,7 +107,7 @@ function Hero() {
               {isMac ? C.hero_btn_mac : C.hero_btn_win}
             </a>
             <a
-              href={isMac ? WIN_URL : MAC_URL}
+              href={BUY_URL}
               style={s.otherOs}
               onMouseEnter={hoverOther} onMouseLeave={leaveOther}
             >
