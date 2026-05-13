@@ -46,6 +46,13 @@ const GROUPS = [
       { feat: 'Contexto histórico con IA **',  basico: 'Hasta 5 usos', pro: 'Ilimitado'  },
     ],
   },
+  {
+    label: 'Soporte y actualizaciones',
+    rows: [
+      { feat: 'Actualizaciones', basico: false, pro: true },
+      { feat: 'Soporte técnico', basico: false, pro: true },
+    ],
+  },
 ];
 
 function Cell({ value }) {
