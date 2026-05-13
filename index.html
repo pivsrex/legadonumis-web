@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Legado - El museo digital de tu colección</title>
+<meta name="viewport" content="width=1280, initial-scale=1" />
+<meta name="description" content="Software de escritorio para organizar, documentar y analizar tu colección de monedas. Descarga gratuita. Mac y Windows." />
+<link rel="icon" type="image/svg+xml" href="assets/LogoSoloClaroTrans.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="styles/tokens.css" />
+<style>
+  body { background: var(--ds-bg-0); color: var(--ds-text-high); }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; }
+  html { scroll-behavior: smooth; }
+
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: var(--ds-bg-0); }
+  ::-webkit-scrollbar-thumb { background: var(--ds-bg-3); border-radius: 6px; border: 3px solid var(--ds-bg-0); }
+
+  @media (max-width: 1024px) {
+    .lg-feature-grid   { grid-template-columns: repeat(2, 1fr) !important; }
+    .lg-workflow-track { grid-template-columns: repeat(2, 1fr) !important; }
+    .lg-footer-grid    { grid-template-columns: 1fr 1fr 1fr !important; gap: 32px !important; }
+    .lg-comparison-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 768px) {
+    .lg-nav-links      { display: none !important; }
+    .lg-nav-btns       { display: none !important; }
+    .lg-feature-grid   { grid-template-columns: 1fr !important; }
+    .lg-workflow-track { grid-template-columns: 1fr !important; }
+    .lg-showcase-section { min-height: auto !important; margin-top: 24px !important; }
+    .lg-showcase-sticky  { position: relative !important; top: auto !important; padding: 0 16px !important; }
+    .lg-showcase-card    { height: auto !important; grid-template-columns: 1fr !important; }
+    .lg-showcase-media   { height: 220px !important; }
+    .lg-footer-grid    { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+    .lg-pricing-grid   { grid-template-columns: 1fr !important; }
+    .lg-comparison-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- Contenido editable — carga window.C antes que los componentes -->
+<script src="contenido.js"></script>
+
+<script type="text/babel" src="src/icons.jsx"></script>
+<script type="text/babel" src="src/numismaticIcons.jsx"></script>
+<script type="text/babel" src="src/RevealWrapper.jsx"></script>
+<script type="text/babel" src="src/Navbar.jsx"></script>
+<script type="text/babel" src="src/Hero.jsx"></script>
+<script type="text/babel" src="src/Workflow.jsx"></script>
+<script type="text/babel" src="src/Showcase.jsx"></script>
+<script type="text/babel" src="src/Features.jsx"></script>
+<script type="text/babel" src="src/Comparison.jsx"></script>
+<script type="text/babel" src="src/FAQ_CTA.jsx"></script>
+<script type="text/babel" src="src/Footer.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+function App() {
+  return (
+    <>
+      <window.Navbar />
+      <main>
+        <window.Hero />
+        <window.Workflow />
+        <window.Showcase />
+        <window.Features />
+        <window.Comparison />
+        <window.FAQ />
+        <window.FinalCTA />
+      </main>
+      <window.Footer />
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
