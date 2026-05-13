@@ -1,9 +1,6 @@
 /* global React */
 const { useState: faqUseState } = React;
 const { PlusIcon, MinusIcon, AppleIcon, WindowsIcon } = window.LegadoIcons;
-const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
-const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.3.0/Legado-0.3.0-arm64.dmg';
-const WIN_URL = '#';
 const { RevealWrapper } = window;
 const C = window.C;
 
