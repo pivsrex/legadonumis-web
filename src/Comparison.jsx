@@ -199,6 +199,8 @@ function Comparison() {
                     </div>
                     <a
                       href={BUY_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={s.btnPri}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
