@@ -34,7 +34,7 @@ function Showcase() {
     <section id="showcase" style={{ background: 'var(--ds-bg-0)' }}>
 
       {/* ── Cabecera ── */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '125px 32px 48px' }}>
+      <div className="lg-showcase-header" style={{ maxWidth: 1200, margin: '0 auto', padding: '125px 32px 48px' }}>
         <RevealWrapper>
           <div className="lg-section-head" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
             <h2 style={{
