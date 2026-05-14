@@ -159,7 +159,7 @@ function Comparison() {
                   {/* Legado Básico */}
                   <th style={s.thPlan}>
                     <span style={{ ...s.planName, color: 'var(--ds-text-mid)' }}>Legado Básico</span>
-                    <span style={s.planSub}>Para empezar tu museo digital</span>
+                    <span style={s.planSub}>El inicio de tu museo digital</span>
                     {/* Mismo layout vertical que Pro para alinear precios */}
                     <div style={s.priceBlock}>
                       <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
