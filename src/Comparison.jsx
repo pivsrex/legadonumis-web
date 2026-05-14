@@ -185,13 +185,13 @@ function Comparison() {
                     <div style={s.priceBlock}>
                       {isEU ? (
                         <>
-                          <span style={s.priceCrossed}>69,95 €</span>
-                          <span style={s.priceMain}>49,95 €</span>
+                          <span style={s.priceCrossed}>79 €</span>
+                          <span style={s.priceMain}>59 €</span>
                         </>
                       ) : (
                         <>
-                          <span style={s.priceCrossed}>79,95 US$</span>
-                          <span style={s.priceMain}>59,95 US$</span>
+                          <span style={s.priceCrossed}>79 US$</span>
+                          <span style={s.priceMain}>59 US$</span>
                         </>
                       )}
                       <span style={s.noteAccent}>Precio especial de lanzamiento</span>
