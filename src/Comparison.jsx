@@ -143,14 +143,14 @@ function Comparison() {
       <div style={s.container}>
 
         <RevealWrapper>
-          <div style={s.head}>
+          <div style={s.head} className="lg-section-head">
             <h2 style={s.h2}>{br(C.comp_h2)}</h2>
             <p style={s.sub}>{br(C.comp_sub)}</p>
           </div>
         </RevealWrapper>
 
         <RevealWrapper delay={100}>
-          <div style={{ maxWidth: 900, margin: '0 auto', background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
+          <div className="lg-comparison-wrapper" style={{ maxWidth: 900, margin: '0 auto', background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
             <table style={s.table} className="lg-comparison">
               <thead>
                 <tr>

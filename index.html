@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <title>Legado - El museo digital de tu colección</title>
-<meta name="viewport" content="width=1280, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="Software de escritorio para organizar, documentar y analizar tu colección de monedas. Descarga gratuita. Mac y Windows." />
 <link rel="canonical" href="https://legadonumis.com/" />
 
@@ -45,6 +45,7 @@
   @media (max-width: 768px) {
     .lg-nav-links      { display: none !important; }
     .lg-nav-btns       { display: none !important; }
+    .lg-section-head   { grid-template-columns: 1fr !important; gap: 12px !important; }
     .lg-feature-grid   { grid-template-columns: 1fr !important; }
     .lg-workflow-track { grid-template-columns: 1fr !important; }
     .lg-showcase-section { min-height: auto !important; margin-top: 24px !important; }
@@ -53,7 +54,13 @@
     .lg-showcase-media   { height: 220px !important; }
     .lg-footer-grid    { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
     .lg-pricing-grid   { grid-template-columns: 1fr !important; }
+    .lg-comparison-wrapper { overflow-x: auto !important; border-radius: 12px !important; }
     .lg-comparison-grid { grid-template-columns: 1fr !important; }
+    section { padding-top: 80px !important; }
+  }
+  @media (max-width: 480px) {
+    .lg-footer-grid { grid-template-columns: 1fr !important; }
+    section { padding-top: 64px !important; }
   }
 </style>
 

@@ -99,7 +99,7 @@ function Workflow() {
       <div style={s.container}>
 
         <RevealWrapper>
-          <div style={s.head}>
+          <div style={s.head} className="lg-section-head">
             <h2 style={s.h2}>
               Tu colección merece más que un simple inventario
             </h2>

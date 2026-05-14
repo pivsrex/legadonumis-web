@@ -67,7 +67,7 @@ function Features() {
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
 
         <RevealWrapper>
-          <div style={{
+          <div className="lg-section-head" style={{
             display: 'grid', gridTemplateColumns: '1fr 1fr',
             gap: 64, alignItems: 'start', marginBottom: 56,
           }}>
