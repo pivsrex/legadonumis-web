@@ -42,7 +42,7 @@ const GROUPS = [
     label: 'Funciones avanzadas',
     rows: [
       { feat: 'Anotaciones sobre imágenes',    basico: false,          pro: true         },
-      { feat: 'Consultas a Numista *',         basico: 'Hasta 5',      pro: 'Ilimitadas' },
+      { feat: 'Consultas automáticas a Numista *', basico: 'Hasta 5',   pro: 'Ilimitadas' },
       { feat: 'Contexto histórico con IA **',  basico: 'Hasta 5 usos', pro: 'Ilimitado'  },
     ],
   },
@@ -233,8 +233,10 @@ function Comparison() {
 
         <RevealWrapper delay={200}>
           <div style={{ maxWidth: 900, margin: '16px auto 0', padding: '0 4px' }}>
-            <p style={{ font: '400 12px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: 0 }}>
-              * Requiere una clave API gratuita de Numista.<br />
+            <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: '0 0 2px' }}>
+              * Requiere una clave API gratuita de Numista.
+            </p>
+            <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: 0 }}>
               ** Requiere claves API de OpenAI o Anthropic, sujetas a costes adicionales según cada proveedor.
             </p>
           </div>

@@ -37,7 +37,8 @@ const AppleIcon     = (p) => <Icon {...p}><path d="M16 8a4 4 0 0 0-1.7 3.3 4 4 0
 const WindowsIcon   = (p) => <Icon {...p}><path d="M3 5.5 11 4.4v7.1H3zM12 4.3 21 3v8.5h-9zM3 12.5h8v7.1L3 18.5zM12 12.5h9V21l-9-1.3z" fill="currentColor" stroke="none" /></Icon>;
 const LinuxIcon     = (p) => <Icon {...p}><path d="M9 4a2 2 0 0 0-2 2c0 1 .3 1.7.5 2.3.3.7.5 1.4.5 2.7s-.5 1.5-1 2-1.5 1-2 2 0 2 0 3 1 1.5 2 1.5h10c1 0 2-.5 2-1.5s.5-2 0-3-1.5-1.5-2-2-1-.7-1-2 .2-2 .5-2.7c.2-.6.5-1.3.5-2.3a2 2 0 0 0-2-2 4 4 0 0 0-4 4 4 4 0 0 0-4-4z" /><circle cx="9" cy="9" r=".7" fill="currentColor" /><circle cx="13" cy="9" r=".7" fill="currentColor" /></Icon>;
 const GitHubIcon    = (p) => <Icon {...p}><path d="M9 19c-4 1.3-4-2-6-2.5M15 22v-4a3.4 3.4 0 0 0-1-2.6c3-.3 6.3-1.5 6.3-7 0-1.4-.5-2.6-1.4-3.5.1-.4.6-1.8-.1-3.7 0 0-1.2-.4-3.8 1.4a13 13 0 0 0-7 0C5.4 1.3 4.2 1.7 4.2 1.7c-.7 1.9-.3 3.3-.2 3.7-.9 1-1.4 2.1-1.4 3.5 0 5.5 3.3 6.7 6.3 7-.4.3-.7.9-.9 1.7-.7.4-2.6 1-3.7-1.2 0 0-.7-1.2-1.9-1.3 0 0-1.2 0-.1.7 0 0 .8.4 1.4 1.8 0 0 .7 2 4.1 1.3v3.5" /></Icon>;
-const TwitterIcon   = (p) => <Icon {...p}><path d="M22 4s-.7 2.1-2 3.4c1.6 9.4-9.7 16.3-18 8.6 2.2.1 4.4-.6 6-2-3-1-4.5-4.4-3.5-7 1 1 2.2 1.6 3.5 1.7C5 7 4.5 4.4 6 3c2 2.3 4.7 3.7 7.7 3.9-.6-2.6 2.3-4.6 4.5-3.4 1 .1 1.9-.5 2.8-.5z" /></Icon>;
+const TwitterIcon    = (p) => <Icon {...p}><path d="M22 4s-.7 2.1-2 3.4c1.6 9.4-9.7 16.3-18 8.6 2.2.1 4.4-.6 6-2-3-1-4.5-4.4-3.5-7 1 1 2.2 1.6 3.5 1.7C5 7 4.5 4.4 6 3c2 2.3 4.7 3.7 7.7 3.9-.6-2.6 2.3-4.6 4.5-3.4 1 .1 1.9-.5 2.8-.5z" /></Icon>;
+const InstagramIcon  = (p) => <Icon {...p}><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4.5" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></Icon>;
 const DiscordIcon   = (p) => <Icon {...p}><path d="M9 16c4 2 6 2 10 0M8 13.5h.01M16 13.5h.01M5 7s2-1 7-1 7 1 7 1c1 1 1.5 5 1.5 7s-1 3-3 4l-1-2c-2 1-7 1-9 0l-1 2c-2-1-3-2-3-4S4 8 5 7z" /></Icon>;
 
 window.LegadoIcons = {
@@ -45,5 +46,5 @@ window.LegadoIcons = {
   ScissorsIcon, KeyboardIcon, LockIcon, CloudIcon, SparklesIcon,
   CheckIcon, PlusIcon, MinusIcon, ChevronRight,
   AppleIcon, WindowsIcon, LinuxIcon,
-  GitHubIcon, TwitterIcon, DiscordIcon,
+  GitHubIcon, TwitterIcon, InstagramIcon, DiscordIcon,
 };

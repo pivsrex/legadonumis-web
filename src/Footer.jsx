@@ -1,4 +1,5 @@
 /* global React */
+const { TwitterIcon, InstagramIcon } = window.LegadoIcons;
 const C = window.C;
 
 function Footer() {
@@ -38,6 +39,20 @@ function Footer() {
                onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
               {C.footer_email}
             </a>
+            <div style={{ display: 'flex', gap: 16, marginTop: 14, justifyContent: 'center' }}>
+              <a href="https://x.com/LegadoNumis" target="_blank" rel="noopener noreferrer"
+                 style={{ color: 'var(--ds-text-mid)', transition: 'color 150ms ease' }}
+                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--ds-text-high)'}
+                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--ds-text-mid)'}>
+                <TwitterIcon size={17} />
+              </a>
+              <a href="https://www.instagram.com/legadonumis/" target="_blank" rel="noopener noreferrer"
+                 style={{ color: 'var(--ds-text-mid)', transition: 'color 150ms ease' }}
+                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--ds-text-high)'}
+                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--ds-text-mid)'}>
+                <InstagramIcon size={17} />
+              </a>
+            </div>
           </div>
 
           <div>

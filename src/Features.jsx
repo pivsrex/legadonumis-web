@@ -1,6 +1,6 @@
 /* global React */
 const {
-  GridIcon, FrameIcon, LayersIcon,
+  GridIcon, FrameIcon, ImportIcon,
   BookmarkIcon, ChartIcon, TagIcon,
 } = window.NumIcons;
 const { RevealWrapper } = window;
@@ -9,7 +9,7 @@ const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,Re
 
 const FEATURES = [
   { icon: GridIcon,     title: C.f1_titulo, desc: C.f1_desc },
-  { icon: LayersIcon,   title: C.f2_titulo, desc: C.f2_desc },
+  { icon: ImportIcon,   title: C.f2_titulo, desc: C.f2_desc },
   { icon: FrameIcon,    title: C.f3_titulo, desc: C.f3_desc },
   { icon: BookmarkIcon, title: C.f4_titulo, desc: C.f4_desc },
   { icon: ChartIcon,    title: C.f5_titulo, desc: C.f5_desc },

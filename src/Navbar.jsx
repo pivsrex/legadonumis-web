@@ -28,7 +28,7 @@ function Navbar() {
     inner: {
       maxWidth: 1200, margin: '0 auto', height: '100%',
       padding: '0 32px',
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center',
     },
     brand: { display: 'flex', alignItems: 'center', textDecoration: 'none' },
     logo: { height: 39, width: 'auto', objectFit: 'contain', display: 'block' },
@@ -70,7 +70,7 @@ function Navbar() {
           <a href="mailto:contacto@legadonumis.com" style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>Contacto</a>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20, justifyContent: 'flex-end' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-high)', letterSpacing: '0.04em' }}>ES</span>
             <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-low)', padding: '0 5px' }}>·</span>

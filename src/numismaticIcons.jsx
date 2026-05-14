@@ -17,10 +17,11 @@ const StarIcon = (p) => <Icon {...p}><path d="M12 3l2.6 5.5 6 .9-4.3 4.3 1 6-5.3
 const QuoteIcon = (p) => <Icon {...p}><path d="M7 8h3v3a4 4 0 0 1-4 4M14 8h3v3a4 4 0 0 1-4 4" fill="currentColor" stroke="currentColor"/></Icon>;
 const SparkIcon = (p) => <Icon {...p}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" /></Icon>;
 const LayersIcon = (p) => <Icon {...p}><path d="M12 3 3 8l9 5 9-5-9-5z" /><path d="M3 13l9 5 9-5M3 18l9 5 9-5" /></Icon>;
-const HistoryIcon = (p) => <Icon {...p}><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5M12 7v5l3 2" /></Icon>;
+const HistoryIcon  = (p) => <Icon {...p}><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5M12 7v5l3 2" /></Icon>;
+const ImportIcon   = (p) => <Icon {...p}><path d="M8 12l4 4 4-4M12 3v13" /><path d="M3 19h18" /></Icon>;
 
 window.NumIcons = {
   CoinIcon, StackIcon, SearchIcon, FilterIcon, FrameIcon, TagIcon, GridIcon,
   ChartIcon, ShieldIcon, BookmarkIcon, ArrowRightIcon, CalendarIcon,
-  StarIcon, QuoteIcon, SparkIcon, LayersIcon, HistoryIcon,
+  StarIcon, QuoteIcon, SparkIcon, LayersIcon, HistoryIcon, ImportIcon,
 };

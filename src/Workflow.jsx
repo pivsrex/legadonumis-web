@@ -1,5 +1,5 @@
 /* global React */
-const { CoinIcon, HistoryIcon, FilterIcon, SparkIcon } = window.NumIcons;
+const { CoinIcon, HistoryIcon, LayersIcon, SparkIcon } = window.NumIcons;
 const { RevealWrapper } = window;
 const C = window.C;
 const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
@@ -7,7 +7,7 @@ const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,Re
 const STEPS = [
   { n: '01', icon: CoinIcon,    title: C.paso1_titulo, body: C.paso1_body },
   { n: '02', icon: HistoryIcon, title: C.paso2_titulo, body: C.paso2_body },
-  { n: '03', icon: FilterIcon,  title: C.paso3_titulo, body: C.paso3_body },
+  { n: '03', icon: LayersIcon,  title: C.paso3_titulo, body: C.paso3_body },
   { n: '04', icon: SparkIcon,   title: C.paso4_titulo, body: C.paso4_body },
 ];
 
