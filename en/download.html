@@ -84,7 +84,12 @@
       overflow: hidden;
     }
     .dl-visual-frame img {
-      width: 100%; height: auto; display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: calc(100vh - 160px);
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     /* ── COLUMNA DERECHA: suscripción + descarga ─────────────────── */
@@ -409,8 +414,8 @@
                 src="/assets/Softlanding2eng.png"
                 alt="Legado — app overview"
                 loading="eager"
-                width="1424"
-                height="747"
+                width="1086"
+                height="1198"
               />
             </div>
           </div>
