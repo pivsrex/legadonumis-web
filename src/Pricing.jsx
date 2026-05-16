@@ -189,10 +189,8 @@ function Pricing() {
               note={C.trial_nota}
               items={TRIAL_ITEMS}
               isPrimary={false}
-              cta="Descargar para Mac"
-              href="https://github.com/pivsrex/Legado-releases/releases/download/v0.3.0/Legado-0.3.0-arm64.dmg"
-              secondBtn="Descargar para Windows"
-              secondHref="#"
+              cta="Descargar gratis"
+              href="descarga.html"
             />
             <PricingCard
               badge={C.full_tag}

@@ -32,7 +32,7 @@ function Footer() {
         <div style={s.grid} className="lg-footer-grid">
 
           <div style={s.brand}>
-            <img src="LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
+            <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
             <p style={s.tagline}>{C.footer_tagline}</p>
             <a href={`mailto:${C.footer_email}`} style={s.email}
                onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
@@ -56,22 +56,22 @@ function Footer() {
           </div>
 
           <div>
-            <span style={s.colLabel}>Producto</span>
-            <a href="#workflow"  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>Experiencia</a>
-            <a href="#versiones" style={s.link} onMouseEnter={hl} onMouseLeave={ll}>Versiones</a>
+            <span style={s.colLabel}>{C.footer_col_product}</span>
+            <a href="#workflow"  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_exp}</a>
+            <a href="#versiones" style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_ver}</a>
           </div>
 
           <div>
-            <span style={s.colLabel}>Soporte</span>
-            <a href="#faq"                       style={s.link} onMouseEnter={hl} onMouseLeave={ll}>Preguntas</a>
-            <a href={`mailto:${C.footer_email}`} style={s.link} onMouseEnter={hl} onMouseLeave={ll}>Contacto</a>
+            <span style={s.colLabel}>{C.footer_col_support}</span>
+            <a href="#faq"                       style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_faq}</a>
+            <a href={`mailto:${C.footer_email}`} style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_contact}</a>
           </div>
 
           <div>
-            <span style={s.colLabel}>Legal</span>
-            <a href="privacidad.html" style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.legal_privacidad}</a>
-            <a href="terminos.html"   style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.legal_terminos}</a>
-            <a href="reembolso.html"  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.legal_reembolso}</a>
+            <span style={s.colLabel}>{C.footer_col_legal}</span>
+            <a href={C.url_privacy} style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.legal_privacidad}</a>
+            <a href={C.url_terms}   style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.legal_terminos}</a>
+            <a href={C.url_refund}  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.legal_reembolso}</a>
           </div>
 
         </div>

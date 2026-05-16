@@ -19,10 +19,10 @@ const CARD_H  = 580;
 const OVERLAP = CARD_H;
 
 const CARDS = [
-  { title: C.sc1_titulo, desc: C.sc1_desc, type: 'video', src: 'assets/FichaNumista.mp4',   reverse: false },
-  { title: C.sc2_titulo, desc: C.sc2_desc, type: 'video', src: 'assets/FichaCompara.mp4',   reverse: true  },
-  { title: C.sc3_titulo, desc: C.sc3_desc, type: 'video', src: 'assets/FichaEtiqueta.mp4',  reverse: false },
-  { title: C.sc4_titulo, desc: C.sc4_desc, type: 'video', src: 'assets/FichaCecas.mp4',     reverse: true  },
+  { title: C.sc1_titulo, desc: C.sc1_desc, type: 'video', src: C.asset_sc1, reverse: false },
+  { title: C.sc2_titulo, desc: C.sc2_desc, type: 'video', src: C.asset_sc2, reverse: true  },
+  { title: C.sc3_titulo, desc: C.sc3_desc, type: 'video', src: C.asset_sc3, reverse: false },
+  { title: C.sc4_titulo, desc: C.sc4_desc, type: 'video', src: C.asset_sc4, reverse: true  },
 ];
 
 const N = CARDS.length;

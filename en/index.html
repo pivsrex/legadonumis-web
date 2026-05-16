@@ -1,33 +1,33 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Legado - El museo digital de tu colección</title>
+<title>Legado - Your collection's digital home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Software de escritorio para organizar, documentar y analizar tu colección de monedas. Descarga gratuita. Mac y Windows." />
-<link rel="canonical" href="https://legadonumis.com/" />
+<meta name="description" content="Desktop software to organize, document, and analyze your coin collection. Free download. Mac and Windows." />
+<link rel="canonical" href="https://legadonumis.com/en/" />
 <link rel="alternate" hreflang="es" href="https://legadonumis.com/" />
 <link rel="alternate" hreflang="en" href="https://legadonumis.com/en/" />
 
 <!-- Open Graph -->
 <meta property="og:type"        content="website" />
-<meta property="og:url"         content="https://legadonumis.com/" />
-<meta property="og:title"       content="Legado — El museo digital de tu colección" />
-<meta property="og:description" content="Software de escritorio para organizar, documentar y analizar tu colección de monedas. Descarga gratuita. Mac y Windows." />
+<meta property="og:url"         content="https://legadonumis.com/en/" />
+<meta property="og:title"       content="Legado — Your collection's digital home" />
+<meta property="og:description" content="Desktop software to organize, document, and analyze your coin collection. Free download. Mac and Windows." />
 <meta property="og:image"       content="https://legadonumis.com/assets/og-image.png" />
-<meta property="og:locale"      content="es_ES" />
+<meta property="og:locale"      content="en_US" />
 <meta property="og:site_name"   content="Legado" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card"        content="summary" />
-<meta name="twitter:title"       content="Legado — El museo digital de tu colección" />
-<meta name="twitter:description" content="Software de escritorio para organizar, documentar y analizar tu colección de monedas. Descarga gratuita. Mac y Windows." />
+<meta name="twitter:title"       content="Legado — Your collection's digital home" />
+<meta name="twitter:description" content="Desktop software to organize, document, and analyze your coin collection. Free download. Mac and Windows." />
 <meta name="twitter:image"       content="https://legadonumis.com/assets/og-image.png" />
 
-<link rel="icon" type="image/svg+xml" href="assets/LogoSoloClaroTrans.svg" />
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-<link rel="stylesheet" href="styles/tokens.css" />
+<link rel="icon" type="image/svg+xml" href="/assets/LogoSoloClaroTrans.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="stylesheet" href="/styles/tokens.css" />
 <style>
   body { background: var(--ds-bg-0); color: var(--ds-text-high); }
   a { color: inherit; text-decoration: none; }
@@ -76,15 +76,15 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Legado",
-  "description": "Software de escritorio para organizar, documentar y analizar colecciones de monedas.",
+  "description": "Desktop software to organize, document, and analyze coin collections.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": ["macOS", "Windows"],
-  "inLanguage": "es",
+  "inLanguage": "en",
   "url": "https://legadonumis.com",
   "offers": [
     {
       "@type": "Offer",
-      "name": "Legado Básico",
+      "name": "Legado Basic",
       "price": "0",
       "priceCurrency": "EUR"
     },
@@ -104,22 +104,25 @@
 <body>
 <div id="root"></div>
 
-<!-- Contenido editable — carga window.C antes que los componentes -->
-<script src="contenido.js"></script>
+<!-- English content — loads window.C before components -->
+<script src="./contenido.js"></script>
 
-<script type="text/babel" src="src/icons.jsx?v=4"></script>
-<script type="text/babel" src="src/numismaticIcons.jsx?v=4"></script>
-<script type="text/babel" src="src/RevealWrapper.jsx?v=4"></script>
-<script type="text/babel" src="src/Navbar.jsx?v=4"></script>
-<script type="text/babel" src="src/Hero.jsx?v=4"></script>
-<script type="text/babel" src="src/Workflow.jsx?v=4"></script>
-<script type="text/babel" src="src/Showcase.jsx?v=4"></script>
-<script type="text/babel" src="src/Features.jsx?v=4"></script>
-<script type="text/babel" src="src/Comparison.jsx?v=4"></script>
-<script type="text/babel" src="src/FAQ_CTA.jsx?v=4"></script>
-<script type="text/babel" src="src/Footer.jsx?v=4"></script>
+<script type="text/babel" src="/src/icons.jsx?v=4"></script>
+<script type="text/babel" src="/src/numismaticIcons.jsx?v=4"></script>
+<script type="text/babel" src="/src/RevealWrapper.jsx?v=4"></script>
+<script type="text/babel" src="/src/Navbar.jsx?v=4"></script>
+<script type="text/babel" src="/src/Hero.jsx?v=4"></script>
+<script type="text/babel" src="/src/Workflow.jsx?v=4"></script>
+<script type="text/babel" src="/src/Showcase.jsx?v=4"></script>
+<script type="text/babel" src="/src/Features.jsx?v=4"></script>
+<script type="text/babel" src="/src/Comparison.jsx?v=4"></script>
+<script type="text/babel" src="/src/FAQ_CTA.jsx?v=4"></script>
+<script type="text/babel" src="/src/Footer.jsx?v=4"></script>
 
 <script type="text/babel" data-presets="env,react">
+window.LANG         = 'en';
+window.LANG_ALT_URL = '/';
+
 function App() {
   return (
     <>
@@ -138,10 +141,7 @@ function App() {
   );
 }
 
-window.LANG         = 'es';
-window.LANG_ALT_URL = '/en/';
-
-/* Espera a que los fetch() asíncronos de Babel registren todos los componentes */
+/* Wait for async Babel fetches to register all components */
 (function waitAndRender() {
   const needed = ['Navbar','Hero','Workflow','Showcase','Features','Comparison','FAQ','FinalCTA','Footer'];
   if (needed.every(k => typeof window[k] === 'function')) {

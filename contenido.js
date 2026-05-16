@@ -53,7 +53,7 @@ window.C = {
   sc3_titulo: "Diseña etiquetas listas para imprimir",
   sc3_desc:   "Prepara etiquetas personalizadas para cada moneda en bandejas o expositores. Guarda plantillas y mantén una presentación uniforme en toda tu colección.",
 
-  sc4_titulo: "Recorre la geografía de tu colección",
+  sc4_titulo: "Pon tu colección en el mapa",
   sc4_desc:   "Consulta las cecas de tus monedas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
 
   /* ── CARACTERÍSTICAS ── */
@@ -121,5 +121,114 @@ window.C = {
   legal_privacidad: "Política de privacidad",
   legal_terminos:   "Términos de uso",
   legal_reembolso:  "Política de reembolso",
+
+  /* ── NAV LINKS ── */
+  nav_link_exp:     "Experiencia",
+  nav_link_ver:     "Versiones",
+  nav_link_faq:     "Preguntas",
+  nav_link_contact: "Contacto",
+
+  /* ── FOOTER COLUMNS ── */
+  footer_col_product: "Producto",
+  footer_col_support: "Soporte",
+  footer_col_legal:   "Legal",
+
+  /* ── URLS (varían por idioma) ── */
+  url_download: "descarga.html",
+  url_privacy:  "privacidad.html",
+  url_terms:    "terminos.html",
+  url_refund:   "reembolso.html",
+
+  /* ── ASSETS (varían por idioma) ── */
+  asset_hero:  "/assets/Hero.mp4",
+  asset_sc1:   "/assets/FichaNumista.mp4",
+  asset_sc2:   "/assets/FichaCompara.mp4",
+  asset_sc3:   "/assets/FichaEtiqueta.mp4",
+  asset_sc4:   "/assets/FichaCecas.mp4",
+
+  /* ── TABLA COMPARATIVA ── */
+  comp_groups: [
+    {
+      label: "Colección",
+      rows: [
+        { feat: "Ejemplares registrados",                  basico: "Hasta 20",     pro: "Ilimitado"  },
+        { feat: "Imágenes, vídeos y documentos adjuntos",  basico: true,           pro: true         },
+        { feat: "Métricas personalizadas",                 basico: true,           pro: true         },
+        { feat: "Post-Its",                                basico: "1",            pro: "Ilimitados" },
+      ],
+    },
+    {
+      label: "Visualización",
+      rows: [
+        { feat: "Galería de imágenes (5 modos)",                   basico: true,      pro: true         },
+        { feat: "Visor comparativo de ejemplares",                 basico: true,      pro: true         },
+        { feat: "Cecas sobre mapa actual",                         basico: "Hasta 5", pro: "Ilimitadas" },
+        { feat: "Cecas sobre mapa del Imperio Romano (125 d.C.)",  basico: false,     pro: true         },
+      ],
+    },
+    {
+      label: "Organización y exportación",
+      rows: [
+        { feat: "Importación desde Excel y CSV",  basico: true,  pro: true },
+        { feat: "Exportación a Excel y CSV",      basico: false, pro: true },
+        { feat: "Exportación de fichas en PDF",   basico: false, pro: true },
+        { feat: "Diseñador de etiquetas",         basico: false, pro: true },
+      ],
+    },
+    {
+      label: "Funciones avanzadas",
+      rows: [
+        { feat: "Anotaciones sobre imágenes",        basico: false,          pro: true         },
+        { feat: "Consultas automáticas a Numista *", basico: "Hasta 5",      pro: "Ilimitadas" },
+        { feat: "Contexto histórico con IA **",      basico: "Hasta 5 usos", pro: "Ilimitado"  },
+      ],
+    },
+    {
+      label: "Soporte y actualizaciones",
+      rows: [
+        { feat: "Actualizaciones", basico: true,  pro: true },
+        { feat: "Soporte técnico", basico: false, pro: true },
+      ],
+    },
+  ],
+  comp_plan_basic:         "Legado Básico",
+  comp_plan_basic_sub:     "El inicio de tu museo digital",
+  comp_plan_basic_price:   "Gratis",
+  comp_plan_basic_cta_mac: "Descargar para Mac",
+  comp_plan_basic_cta_win: "Descargar para Windows",
+  comp_plan_pro:           "Legado Pro",
+  comp_plan_pro_sub:       "Tu museo digital sin límites",
+  comp_price_launch:       "Precio especial de lanzamiento",
+  comp_payment_note:       "Pago seguro vía LemonSqueezy",
+  comp_plan_pro_cta:       "Descargar para Mac",
+  comp_footnote1:          "* Requiere una clave API gratuita de Numista.",
+  comp_footnote2:          "** Requiere claves API de OpenAI o Anthropic, sujetas a costes adicionales según cada proveedor.",
+
+  /* ── PRICING ── */
+  trial_badge:  "Básico",
+  trial_precio: "Gratis",
+  trial_nota:   "Sin límite de tiempo",
+  trial_items: [
+    "Hasta 15 ejemplares catalogados",
+    "5 usos del asistente IA",
+    "Galería fotográfica completa",
+    "Mapa de cecas interactivo",
+    "Sin límite de tiempo",
+  ],
+  trial_cta: "Descargar gratis",
+  full_tag:    "Pro",
+  full_badge:  "Más popular",
+  full_precio: "59",
+  full_divisa: "€",
+  full_nota:   "Pago único · sin suscripción",
+  full_btn:    "Obtener Legado Pro",
+  full_items: [
+    "Ejemplares ilimitados",
+    "Asistente IA ilimitado",
+    "Exportar a Excel, CSV y PDF",
+    "Etiquetador de bandejas",
+    "Actualizaciones durante dos años",
+    "Soporte técnico por correo",
+  ],
 
 };

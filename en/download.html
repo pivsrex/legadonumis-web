@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legado - Your collection's digital home</title>
+  <meta name="description" content="Download Legado Basic for free. Numismatics software for Mac and Windows. Organize, document, and visualize your coin collection." />
+  <meta name="robots" content="noindex, follow" />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/LogoSoloClaroTrans.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
+
+  <link rel="stylesheet" href="../styles/tokens.css" />
+
+  <style>
+    body { padding-top: 64px; }
+    a    { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    .dl-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px;
+      background: rgba(10,9,8,0.92);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border-bottom: 1px solid var(--ds-border-low);
+    }
+    .dl-nav-inner {
+      max-width: 1200px; margin: 0 auto; height: 100%;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .dl-nav-back {
+      font: 400 13px/1 var(--font-body);
+      color: var(--ds-text-mid);
+      transition: color 150ms ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .dl-nav-back:hover { color: var(--ds-accent); }
+
+    /* ── CONTENEDOR ──────────────────────────────────────────────── */
+    .dl-container {
+      max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    }
+
+    /* ── SECCIÓN PRINCIPAL (grid 2 columnas) ─────────────────────── */
+    .dl-main {
+      padding: 40px 0 56px;
+    }
+    .dl-grid {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    /* ── COLUMNA IZQUIERDA: imagen ───────────────────────────────── */
+    .dl-col-left {
+      position: sticky;
+      top: 88px;
+    }
+    .dl-visual {
+      position: relative;
+      width: 100%;
+    }
+    .dl-visual-glow {
+      position: absolute;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%; height: 60%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dl-visual-frame {
+      position: relative; z-index: 1;
+      border-radius: 14px;
+      border: 1px solid var(--ds-border-low);
+      box-shadow:
+        0 32px 80px rgba(0,0,0,0.65),
+        0 0 0 1px rgba(255,255,255,0.04) inset;
+      overflow: hidden;
+    }
+    .dl-visual-frame img {
+      width: 100%; height: auto; display: block;
+    }
+
+    /* ── COLUMNA DERECHA: suscripción + descarga ─────────────────── */
+    .dl-col-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── BLOQUE SUSCRIPCIÓN ──────────────────────────────────────── */
+    .dl-sub-label {
+      font: 500 11px/1 var(--font-body);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ds-text-low);
+      margin: 0 0 14px;
+    }
+    .dl-sub-h2 {
+      font: 600 clamp(20px, 2.5vw, 26px)/1.2 var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--ds-text-high);
+      margin: 0 0 12px;
+    }
+    .dl-sub-desc {
+      font: 400 15px/1.65 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0 0 28px;
+    }
+
+    /* ── FORMULARIO ──────────────────────────────────────────────── */
+    .dl-form {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .dl-form-row {
+      display: flex; gap: 8px;
+    }
+    .dl-input {
+      flex: 1; min-width: 0;
+      background: var(--ds-bg-2);
+      border: 1px solid var(--ds-border-low);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font: 400 14px/1 var(--font-body);
+      color: var(--ds-text-high);
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+    .dl-input::placeholder { color: var(--ds-text-low); }
+    .dl-input:focus {
+      border-color: var(--ds-accent-deep);
+      box-shadow: 0 0 0 3px var(--ds-accent-ring);
+    }
+    .dl-input-error {
+      border-color: var(--ds-error) !important;
+    }
+    .dl-btn-sub {
+      flex-shrink: 0;
+      background: var(--ds-bg-2);
+      border: 1px solid var(--ds-border-mid);
+      border-radius: 10px;
+      padding: 13px 20px;
+      font: 600 14px/1 var(--font-display);
+      color: var(--ds-text-high);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .dl-btn-sub:hover {
+      background: var(--ds-bg-3);
+      border-color: var(--ds-border-high);
+    }
+    .dl-btn-sub:disabled { opacity: 0.5; cursor: default; }
+
+    /* ── CHECKBOX ─────────────────────────────────────────────────── */
+    .dl-check-wrap {
+      display: flex; gap: 10px; align-items: flex-start;
+      cursor: pointer;
+    }
+    .dl-check-wrap input[type="checkbox"] {
+      width: 16px; height: 16px; flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--ds-accent);
+      cursor: pointer;
+    }
+    .dl-check-text {
+      font: 400 13px/1.55 var(--font-body);
+      color: var(--ds-text-mid);
+    }
+
+    /* ── MENSAJES DE ESTADO ──────────────────────────────────────── */
+    .dl-msg {
+      display: none; align-items: flex-start; gap: 10px;
+      font: 400 13px/1.5 var(--font-body);
+      padding: 12px 16px; border-radius: 10px;
+    }
+    .dl-msg-ok {
+      background: rgba(34,197,94,0.07);
+      border: 1px solid rgba(34,197,94,0.18);
+      color: #4ade80;
+    }
+    .dl-msg-err {
+      background: rgba(239,68,68,0.07);
+      border: 1px solid rgba(239,68,68,0.18);
+      color: #f87171;
+    }
+    .dl-msg-visible { display: flex !important; }
+
+    /* ── LEGAL ───────────────────────────────────────────────────── */
+    .dl-legal-note {
+      font: 400 12px/1.65 var(--font-body);
+      color: var(--ds-text-low);
+      margin-top: 16px;
+    }
+    .dl-legal-note a {
+      color: var(--ds-text-mid);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 150ms ease;
+    }
+    .dl-legal-note a:hover { color: var(--ds-accent); }
+
+    /* ── SEPARADOR ENTRE SUSCRIPCIÓN Y DESCARGA ──────────────────── */
+    .dl-col-sep {
+      border: none;
+      border-top: 1px solid var(--ds-border-low);
+      margin: 28px 0;
+    }
+
+    /* ── BLOQUE DESCARGA ─────────────────────────────────────────── */
+    .dl-cta-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .dl-cta-glow {
+      height: 0;
+      overflow: visible;
+      position: relative;
+      pointer-events: none;
+    }
+    .dl-cta-glow::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 44px;
+      transform: translate(-50%, -50%);
+      width: 420px; height: 130px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.1) 0%, transparent 60%);
+      filter: blur(48px);
+      pointer-events: none;
+      animation: dl-glow-breathe 9s ease-in-out infinite;
+    }
+    @keyframes dl-glow-breathe {
+      0%, 100% { opacity: 0.45; }
+      50%       { opacity: 1;   }
+    }
+
+    /* ── BOTONES ─────────────────────────────────────────────────── */
+    .dl-btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      background: var(--ds-accent);
+      color: #0a0908;
+      border: none; border-radius: 12px;
+      padding: 16px 32px;
+      font: 700 17px/1 var(--font-display);
+      letter-spacing: -0.01em;
+      transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.22);
+    }
+    .dl-btn-primary:hover {
+      background: var(--ds-accent-hi);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(201,168,76,0.32);
+    }
+    .dl-btn-primary:active { transform: translateY(0); }
+
+    .dl-hero-os-note {
+      margin-top: 12px;
+      font: 400 13px/1 var(--font-mono);
+      color: var(--ds-text-low);
+    }
+    .dl-hero-alt {
+      margin-top: 8px;
+      font: 400 12px/1 var(--font-body);
+      color: var(--ds-text-low);
+    }
+    .dl-hero-alt a {
+      color: var(--ds-text-mid);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 150ms ease;
+    }
+    .dl-hero-alt a:hover { color: var(--ds-accent); }
+
+    /* ── NUDGE PRO ───────────────────────────────────────────────── */
+    .dl-pro-nudge {
+      font: 400 13px/1 var(--font-body);
+      color: var(--ds-accent);
+      margin: 24px 0 12px;
+      letter-spacing: 0.01em;
+    }
+    .dl-btn-pro {
+      background: transparent;
+      border: 1px solid var(--ds-border-mid);
+      color: var(--ds-text-mid);
+      box-shadow: none;
+    }
+    .dl-btn-pro:hover {
+      background: var(--ds-bg-2);
+      border-color: var(--ds-accent-deep);
+      color: var(--ds-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.14);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    .dl-footer {
+      border-top: 1px solid var(--ds-border-low);
+      padding: 32px 0;
+      text-align: center;
+    }
+    .dl-footer-links {
+      display: flex; gap: 24px; justify-content: center;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .dl-footer-link {
+      font: 400 13px/1 var(--font-body);
+      color: var(--ds-text-low);
+      transition: color 150ms ease;
+    }
+    .dl-footer-link:hover { color: var(--ds-text-mid); }
+    .dl-footer-copy {
+      font: 400 12px/1 var(--font-mono);
+      color: var(--ds-text-low);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .dl-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .dl-col-left {
+        position: static;
+        max-width: 560px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+    @media (max-width: 768px) {
+      .dl-main { padding: 32px 0 48px; }
+      .dl-form-row { flex-direction: column; }
+      .dl-btn-sub { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .dl-container { padding: 0 20px; }
+      .dl-nav-inner { padding: 0 20px; }
+    }
+
+    /* ── FONDO DINÁMICO ─────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 60% at 18% 38%, rgba(201,168,76,0.045) 0%, transparent 65%),
+        radial-gradient(ellipse 65% 80% at 82% 65%, rgba(201,168,76,0.025) 0%, transparent 60%);
+      animation: dl-bg-drift 50s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes dl-bg-drift {
+      0%   { transform: translate(0, 0)          scale(1);     }
+      33%  { transform: translate(-1.5%, 1%)      scale(1.012); }
+      66%  { transform: translate(1%, -0.7%)      scale(0.99);  }
+      100% { transform: translate(-0.8%, 1.5%)   scale(1.006); }
+    }
+
+    .dl-grain {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 9999;
+      opacity: 0.036;
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before         { animation: none; }
+      .dl-cta-glow::after  { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <svg aria-hidden="true" class="dl-grain" xmlns="http://www.w3.org/2000/svg">
+    <filter id="dl-grain-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#dl-grain-filter)"/>
+  </svg>
+
+  <!-- ── NAV ─────────────────────────────────────────────────────── -->
+  <nav class="dl-nav">
+    <div class="dl-nav-inner">
+      <a href="/en/" style="display:flex; align-items:center;">
+        <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style="height:39px; width:auto; display:block;" />
+      </a>
+      <a href="/en/" class="dl-nav-back">← Back to the website</a>
+    </div>
+  </nav>
+
+  <!-- ── CONTENIDO PRINCIPAL ────────────────────────────────────── -->
+  <main class="dl-main">
+    <div class="dl-container">
+      <div class="dl-grid">
+
+        <!-- Left column: image -->
+        <div class="dl-col-left">
+          <div class="dl-visual">
+            <div class="dl-visual-glow"></div>
+            <div class="dl-visual-frame">
+              <img
+                src="/assets/Softlanding2eng.png"
+                alt="Legado — app overview"
+                loading="eager"
+                width="1424"
+                height="747"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: subscription + download -->
+        <div class="dl-col-right">
+
+          <!-- Subscription block -->
+          <p class="dl-sub-label">News &amp; updates</p>
+          <h2 class="dl-sub-h2">Stay in the loop</h2>
+          <p class="dl-sub-desc">
+            Get notified about updates, improvements, and upcoming features for Legado.
+            No spam, no noise.
+          </p>
+
+          <form class="dl-form" id="dl-sub-form" novalidate>
+            <div class="dl-form-row">
+              <input
+                type="email"
+                id="dl-email"
+                class="dl-input"
+                placeholder="you@email.com"
+                autocomplete="email"
+                required
+              />
+              <button type="submit" class="dl-btn-sub" id="dl-submit-btn">Subscribe</button>
+            </div>
+
+            <label class="dl-check-wrap">
+              <input type="checkbox" id="dl-consent" />
+              <span class="dl-check-text">
+                I'd like to receive news and updates about Legado.
+              </span>
+            </label>
+
+            <div class="dl-msg dl-msg-err" id="dl-msg-err">
+              Something went wrong. Please check the email address and try again.
+            </div>
+          </form>
+
+          <div class="dl-msg dl-msg-ok" id="dl-msg-ok">
+            You're subscribed. We'll keep you posted.
+          </div>
+
+          <p class="dl-legal-note">
+            We'll only use your email to send you news and updates about Legado.
+            We'll never share your information with third parties or send spam.
+            You can unsubscribe at any time.
+            <br /><br />
+            <a href="/en/privacy.html">Privacy Policy</a>
+          </p>
+
+          <!-- Divider -->
+          <hr class="dl-col-sep" />
+
+          <!-- Download CTA block -->
+          <div class="dl-cta-block">
+            <div class="dl-cta-glow" aria-hidden="true"></div>
+            <a id="dl-cta" href="#" class="dl-btn-primary">
+              <svg id="dl-icon-mac" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none; flex-shrink:0;">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
+              <svg id="dl-icon-win" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none; flex-shrink:0;">
+                <path d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91V13.1L20 13.25z" />
+              </svg>
+              <span id="dl-cta-label">Download free</span>
+            </a>
+            <p class="dl-hero-os-note" id="dl-os-note"></p>
+            <p class="dl-hero-alt" id="dl-alt-link"></p>
+
+            <p class="dl-pro-nudge">Want to go further?</p>
+
+            <a href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa"
+               class="dl-btn-primary dl-btn-pro"
+               target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              Activate the Pro Experience
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+  <footer class="dl-footer">
+    <div class="dl-container">
+      <div class="dl-footer-links">
+        <a href="/en/"                        class="dl-footer-link">Home</a>
+        <a href="/en/#workflow"               class="dl-footer-link">Experience</a>
+        <a href="/en/#versiones"              class="dl-footer-link">Versions</a>
+        <a href="/en/#faq"                    class="dl-footer-link">FAQ</a>
+        <a href="/en/privacy.html"            class="dl-footer-link">Privacy</a>
+        <a href="/en/terms.html"              class="dl-footer-link">Terms</a>
+        <a href="/en/refund-policy.html"      class="dl-footer-link">Refund Policy</a>
+        <a href="mailto:contacto@legadonumis.com" class="dl-footer-link">Contact</a>
+      </div>
+      <p class="dl-footer-copy">© 2026 Legado · legadonumis.com · All rights reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.2/Legado-0.8.2-arm64.dmg';
+      var WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.1/Legado.Setup.0.8.1.exe';
+
+      var isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
+      var dlUrl     = isMac ? MAC_URL : WIN_URL;
+      var altUrl    = isMac ? WIN_URL : MAC_URL;
+      var altLabel  = isMac ? 'Windows' : 'Mac';
+      var osLabel   = isMac ? 'For Mac · Apple Silicon (M1 and later)' : 'For Windows · Requires Windows 10 or later';
+
+      var cta        = document.getElementById('dl-cta');
+      var ctaLabel   = document.getElementById('dl-cta-label');
+      var osNote     = document.getElementById('dl-os-note');
+      var altLink    = document.getElementById('dl-alt-link');
+      var iconMac    = document.getElementById('dl-icon-mac');
+      var iconWin    = document.getElementById('dl-icon-win');
+
+      cta.href             = dlUrl;
+      ctaLabel.textContent = isMac ? 'Download Legado Basic for Mac' : 'Download Legado Basic for Windows';
+      osNote.textContent   = osLabel;
+      if (isMac) { iconMac.style.display = 'block'; }
+      else        { iconWin.style.display = 'block'; }
+
+      var altEl = document.createElement('a');
+      altEl.href = altUrl;
+      altEl.textContent = 'Using ' + altLabel + '? Download here';
+      altLink.appendChild(altEl);
+
+      var form      = document.getElementById('dl-sub-form');
+      var emailEl   = document.getElementById('dl-email');
+      var consentEl = document.getElementById('dl-consent');
+      var submitBtn = document.getElementById('dl-submit-btn');
+      var msgOk     = document.getElementById('dl-msg-ok');
+      var msgErr    = document.getElementById('dl-msg-err');
+
+      function clearMsgs() {
+        msgOk.classList.remove('dl-msg-visible');
+        msgErr.classList.remove('dl-msg-visible');
+      }
+      function showOk()  { clearMsgs(); msgOk.classList.add('dl-msg-visible'); }
+      function showErr() { clearMsgs(); msgErr.classList.add('dl-msg-visible'); }
+
+      function isValidEmail(v) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+      }
+
+      emailEl.addEventListener('input', function () {
+        emailEl.classList.remove('dl-input-error');
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = emailEl.value.trim();
+
+        if (!isValidEmail(email)) {
+          emailEl.classList.add('dl-input-error');
+          emailEl.focus();
+          return;
+        }
+        if (!consentEl.checked) {
+          consentEl.focus();
+          return;
+        }
+
+        submitBtn.disabled    = true;
+        submitBtn.textContent = 'Sending…';
+
+        fetch('/api/subscribe', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, language: 'en' }),
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.success || (data.message && /already exist/i.test(data.message))) {
+              form.style.display = 'none';
+              showOk();
+            } else {
+              console.error('Loops error:', data);
+              throw new Error(data.message || 'error');
+            }
+          })
+          .catch(function (err) {
+            console.error('Subscription error:', err);
+            submitBtn.disabled    = false;
+            submitBtn.textContent = 'Subscribe';
+            showErr();
+          });
+      });
+    })();
+  </script>
+
+</body>
+</html>

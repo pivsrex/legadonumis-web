@@ -60,21 +60,33 @@ function Navbar() {
       <div style={s.inner}>
 
         <a href="#" style={s.brand}>
-          <img src="LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
+          <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
         </a>
 
         <div style={s.links} className="lg-nav-links">
-          <a href="#workflow"  style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>Experiencia</a>
-          <a href="#versiones" style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>Versiones</a>
-          <a href="#faq"       style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>Preguntas</a>
-          <a href="mailto:contacto@legadonumis.com" style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>Contacto</a>
+          <a href="#workflow"  style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_exp}</a>
+          <a href="#versiones" style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_ver}</a>
+          <a href="#faq"       style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_faq}</a>
+          <a href={`mailto:${C.footer_email}`} style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_contact}</a>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 20, justifyContent: 'flex-end' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-high)', letterSpacing: '0.04em' }}>ES</span>
+            {window.LANG === 'en' ? (
+              <a href={window.LANG_ALT_URL} style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-low)', letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 150ms ease' }}
+                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--ds-text-high)'}
+                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--ds-text-low)'}>ES</a>
+            ) : (
+              <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-high)', letterSpacing: '0.04em' }}>ES</span>
+            )}
             <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-low)', padding: '0 5px' }}>·</span>
-            <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-low)', letterSpacing: '0.04em' }}>EN</span>
+            {window.LANG === 'es' ? (
+              <a href={window.LANG_ALT_URL} style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-low)', letterSpacing: '0.04em', textDecoration: 'none', transition: 'color 150ms ease' }}
+                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--ds-text-high)'}
+                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--ds-text-low)'}>EN</a>
+            ) : (
+              <span style={{ font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-high)', letterSpacing: '0.04em' }}>EN</span>
+            )}
           </div>
           <div className="lg-nav-btns">
             <a

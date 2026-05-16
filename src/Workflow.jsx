@@ -100,9 +100,7 @@ function Workflow() {
 
         <RevealWrapper>
           <div style={s.head} className="lg-section-head">
-            <h2 style={s.h2}>
-              Tu colección merece más que un simple inventario
-            </h2>
+            <h2 style={s.h2}>{br(C.pasos_h2)}</h2>
             <p style={s.sub}>{br(C.pasos_sub)}</p>
           </div>
         </RevealWrapper>

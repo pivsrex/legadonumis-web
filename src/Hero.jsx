@@ -121,7 +121,7 @@ function Hero() {
           <div style={s.videoWrap}>
             <div style={s.videoGradient} />
             <video autoPlay muted loop playsInline style={{ width: '100%', display: 'block' }}>
-              <source src="assets/Hero.mp4" type="video/mp4" />
+              <source src={C.asset_hero} type="video/mp4" />
             </video>
           </div>
         </RevealWrapper>

@@ -6,3 +6,12 @@
 
 /index.html
   Cache-Control: no-store, max-age=0
+
+/descarga.html
+  Cache-Control: no-store, max-age=0
+
+/en/index.html
+  Cache-Control: no-store, max-age=0
+
+/en/contenido.js
+  Cache-Control: no-store, max-age=0

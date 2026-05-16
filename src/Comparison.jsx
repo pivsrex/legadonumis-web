@@ -6,54 +6,9 @@ const C = window.C;
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
 const isEU = Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('Europe/');
-const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.2/Legado-0.8.2-arm64.dmg';
-const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.1/Legado.Setup.0.8.1.exe';
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
 
-const GROUPS = [
-  {
-    label: 'Colección',
-    rows: [
-      { feat: 'Ejemplares registrados',                  basico: 'Hasta 20', pro: 'Ilimitado'  },
-      { feat: 'Imágenes, vídeos y documentos adjuntos',  basico: true,       pro: true         },
-      { feat: 'Métricas personalizadas',                 basico: true,       pro: true         },
-      { feat: 'Post-Its',                                basico: '1',        pro: 'Ilimitados' },
-    ],
-  },
-  {
-    label: 'Visualización',
-    rows: [
-      { feat: 'Galería de imágenes (5 modos)',                  basico: true,      pro: true         },
-      { feat: 'Visor comparativo de ejemplares',                basico: true,      pro: true         },
-      { feat: 'Cecas sobre mapa actual',                        basico: 'Hasta 5', pro: 'Ilimitadas' },
-      { feat: 'Cecas sobre mapa del Imperio Romano (125 d.C.)', basico: false,     pro: true         },
-    ],
-  },
-  {
-    label: 'Organización y exportación',
-    rows: [
-      { feat: 'Importación desde Excel y CSV', basico: true,  pro: true },
-      { feat: 'Exportación a Excel y CSV',     basico: false, pro: true },
-      { feat: 'Exportación de fichas en PDF',  basico: false, pro: true },
-      { feat: 'Diseñador de etiquetas',        basico: false, pro: true },
-    ],
-  },
-  {
-    label: 'Funciones avanzadas',
-    rows: [
-      { feat: 'Anotaciones sobre imágenes',    basico: false,          pro: true         },
-      { feat: 'Consultas automáticas a Numista *', basico: 'Hasta 5',   pro: 'Ilimitadas' },
-      { feat: 'Contexto histórico con IA **',  basico: 'Hasta 5 usos', pro: 'Ilimitado'  },
-    ],
-  },
-  {
-    label: 'Soporte y actualizaciones',
-    rows: [
-      { feat: 'Actualizaciones', basico: false, pro: true },
-      { feat: 'Soporte técnico', basico: false, pro: true },
-    ],
-  },
-];
+const GROUPS = C.comp_groups;
 
 function Cell({ value }) {
   if (value === true)  return <CheckIcon size={15} style={{ color: 'var(--ds-accent)', display: 'block', margin: '0 auto' }} />;
@@ -158,30 +113,30 @@ function Comparison() {
 
                   {/* Legado Básico */}
                   <th style={s.thPlan}>
-                    <span style={{ ...s.planName, color: 'var(--ds-text-mid)' }}>Legado Básico</span>
-                    <span style={s.planSub}>El inicio de tu museo digital</span>
+                    <span style={{ ...s.planName, color: 'var(--ds-text-mid)' }}>{C.comp_plan_basic}</span>
+                    <span style={s.planSub}>{C.comp_plan_basic_sub}</span>
                     {/* Mismo layout vertical que Pro para alinear precios */}
                     <div style={s.priceBlock}>
                       <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
-                      <span style={s.priceMain}>Gratis</span>
+                      <span style={s.priceMain}>{C.comp_plan_basic_price}</span>
                       <span style={{ ...s.noteAccent, visibility: 'hidden' }}>—</span>
                       <span style={{ ...s.noteSec, visibility: 'hidden' }}>—</span>
                     </div>
                     <a
-                      href={isMac ? MAC_URL : WIN_URL}
+                      href={C.url_download}
                       style={s.btnSec}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-high)'}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-mid)'}
                     >
                       {isMac ? <AppleIcon size={13} /> : <WindowsIcon size={13} />}
-                      {isMac ? 'Descargar para Mac' : 'Descargar para Windows'}
+                      {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
 
                   {/* Legado Pro */}
                   <th style={s.thPlan}>
-                    <span style={{ ...s.planName, color: 'var(--ds-accent)' }}>Legado Pro</span>
-                    <span style={s.planSub}>Tu museo digital sin límites</span>
+                    <span style={{ ...s.planName, color: 'var(--ds-accent)' }}>{C.comp_plan_pro}</span>
+                    <span style={s.planSub}>{C.comp_plan_pro_sub}</span>
                     <div style={s.priceBlock}>
                       {isEU ? (
                         <>
@@ -194,8 +149,8 @@ function Comparison() {
                           <span style={s.priceMain}>59 US$</span>
                         </>
                       )}
-                      <span style={s.noteAccent}>Precio especial de lanzamiento</span>
-                      <span style={s.noteSec}>Pago seguro vía LemonSqueezy</span>
+                      <span style={s.noteAccent}>{C.comp_price_launch}</span>
+                      <span style={s.noteSec}>{C.comp_payment_note}</span>
                     </div>
                     <a
                       href={BUY_URL}
@@ -206,7 +161,7 @@ function Comparison() {
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                     >
                       <AppleIcon size={13} />
-                      Descargar para Mac
+                      {C.comp_plan_pro_cta}
                     </a>
                   </th>
                 </tr>
@@ -234,10 +189,10 @@ function Comparison() {
         <RevealWrapper delay={200}>
           <div style={{ maxWidth: 900, margin: '16px auto 0', padding: '0 4px' }}>
             <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: '0 0 2px' }}>
-              * Requiere una clave API gratuita de Numista.
+              {C.comp_footnote1}
             </p>
             <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: 0 }}>
-              ** Requiere claves API de OpenAI o Anthropic, sujetas a costes adicionales según cada proveedor.
+              {C.comp_footnote2}
             </p>
           </div>
         </RevealWrapper>
