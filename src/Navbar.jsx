@@ -5,7 +5,15 @@ const C = window.C;
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
 
+const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.2/Legado-0.8.2-arm64.dmg';
+const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.1/Legado.Setup.0.8.1.exe';
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
+
+function handleNavProClick(e) {
+  e.preventDefault();
+  window.open(isMac ? MAC_URL : WIN_URL, '_blank');
+  window.location.href = BUY_URL;
+}
 
 function Navbar() {
   const [scrolled, setScrolled] = navUseState(false);
@@ -66,7 +74,8 @@ function Navbar() {
         <div style={s.links} className="lg-nav-links">
           <a href="#workflow"  style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_exp}</a>
           <a href="#versiones" style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_ver}</a>
-          <a href="#faq"       style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_faq}</a>
+          <a href="#faq"        style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_faq}</a>
+          <a href="#novedades"  style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_novedades}</a>
           <a href={`mailto:${C.footer_email}`} style={s.link} onMouseEnter={hoverLink} onMouseLeave={leaveLink}>{C.nav_link_contact}</a>
         </div>
 
@@ -91,6 +100,7 @@ function Navbar() {
           <div className="lg-nav-btns">
             <a
               href={BUY_URL}
+              onClick={handleNavProClick}
               style={s.btn}
               onMouseEnter={hoverBtn} onMouseLeave={leaveBtn}
             >

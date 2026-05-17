@@ -57,8 +57,9 @@ function Footer() {
 
           <div>
             <span style={s.colLabel}>{C.footer_col_product}</span>
-            <a href="#workflow"  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_exp}</a>
-            <a href="#versiones" style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_ver}</a>
+            <a href="#workflow"   style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_exp}</a>
+            <a href="#versiones"  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_ver}</a>
+            <a href="#novedades"  style={s.link} onMouseEnter={hl} onMouseLeave={ll}>{C.nav_link_novedades}</a>
           </div>
 
           <div>

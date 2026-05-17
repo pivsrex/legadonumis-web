@@ -117,10 +117,11 @@ window.C = {
   legal_reembolso:  "Refund Policy",
 
   /* ── NAV LINKS ── */
-  nav_link_exp:     "Experience",
-  nav_link_ver:     "Versions",
+  nav_link_exp:     "Resources",
+  nav_link_ver:     "Experiences",
   nav_link_faq:     "FAQ",
-  nav_link_contact: "Contact",
+  nav_link_contact:   "Contact",
+  nav_link_novedades: "Updates",
 
   /* ── FOOTER COLUMNS ── */
   footer_col_product: "Product",
@@ -194,7 +195,8 @@ window.C = {
   comp_plan_pro_sub:       "Your digital museum, unlimited",
   comp_price_launch:       "Special launch price",
   comp_payment_note:       "Secure payment via LemonSqueezy",
-  comp_plan_pro_cta:       "Download for Mac",
+  comp_plan_pro_cta:       "Activate the Pro Experience",
+  comp_plan_pro_cta_sub:   "and Activate the Pro Experience",
   comp_footnote1:          "* Requires a free API key from Numista.",
   comp_footnote2:          "** Requires your own OpenAI or Anthropic API key, subject to each provider's pricing.",
 

@@ -213,7 +213,7 @@
     .dl-col-sep {
       border: none;
       border-top: 1px solid var(--ds-border-low);
-      margin: 28px 0;
+      margin: 16px 0;
     }
 
     /* ── BLOQUE DESCARGA ─────────────────────────────────────────── */
@@ -286,23 +286,23 @@
 
     /* ── NUDGE PRO ───────────────────────────────────────────────── */
     .dl-pro-nudge {
-      font: 400 13px/1 var(--font-body);
+      font: 500 18px/1 var(--font-body);
       color: var(--ds-accent);
-      margin: 24px 0 12px;
+      margin: 28px 0 14px;
       letter-spacing: 0.01em;
     }
-    .dl-btn-pro {
+    .dl-btn-sec {
       background: transparent;
       border: 1px solid var(--ds-border-mid);
       color: var(--ds-text-mid);
       box-shadow: none;
     }
-    .dl-btn-pro:hover {
+    .dl-btn-sec:hover {
       background: var(--ds-bg-2);
-      border-color: var(--ds-accent-deep);
-      color: var(--ds-accent);
+      border-color: var(--ds-border-high);
+      color: var(--ds-text-high);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(201,168,76,0.14);
+      box-shadow: none;
     }
 
     /* ── FOOTER ──────────────────────────────────────────────────── */
@@ -475,7 +475,7 @@
           <!-- Bloque descarga -->
           <div class="dl-cta-block">
             <div class="dl-cta-glow" aria-hidden="true"></div>
-            <a id="dl-cta" href="#" class="dl-btn-primary">
+            <a id="dl-cta" href="#" class="dl-btn-primary dl-btn-sec">
               <svg id="dl-icon-mac" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none; flex-shrink:0;">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
@@ -489,13 +489,15 @@
 
             <p class="dl-pro-nudge">¿Quieres ir más allá?</p>
 
-            <a href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa"
-               class="dl-btn-primary dl-btn-pro"
-               target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
+            <a id="dl-pro-btn" href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa"
+               class="dl-btn-primary" style="padding: 20px 32px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
-              Activar Experiencia Pro
+              <span style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                <span id="dl-pro-os">Descarga Legado para Mac</span>
+                <span>y activa la experiencia completa</span>
+              </span>
             </a>
           </div>
 
@@ -540,15 +542,23 @@
       var iconWin    = document.getElementById('dl-icon-win');
 
       cta.href             = dlUrl;
-      ctaLabel.textContent = isMac ? 'Descargar Legado Básico para Mac' : 'Descargar Legado Básico para Windows';
+      ctaLabel.textContent = isMac ? 'Descarga Legado para Mac' : 'Descarga Legado para Windows';
       osNote.textContent   = osLabel;
       if (isMac) { iconMac.style.display = 'block'; }
       else        { iconWin.style.display = 'block'; }
+      document.getElementById('dl-pro-os').textContent = isMac ? 'Descarga Legado para Mac' : 'Descarga Legado para Windows';
 
       var altEl = document.createElement('a');
       altEl.href = altUrl;
       altEl.textContent = '¿Usas ' + altLabel + '? Descarga aquí';
       altLink.appendChild(altEl);
+
+      var proBtn = document.getElementById('dl-pro-btn');
+      proBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open(dlUrl, '_blank');
+        window.location.href = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
+      });
 
       var form      = document.getElementById('dl-sub-form');
       var emailEl   = document.getElementById('dl-email');

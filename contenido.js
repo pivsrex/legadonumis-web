@@ -123,10 +123,11 @@ window.C = {
   legal_reembolso:  "Política de reembolso",
 
   /* ── NAV LINKS ── */
-  nav_link_exp:     "Experiencia",
-  nav_link_ver:     "Versiones",
+  nav_link_exp:     "Recursos",
+  nav_link_ver:     "Experiencias",
   nav_link_faq:     "Preguntas",
-  nav_link_contact: "Contacto",
+  nav_link_contact:   "Contacto",
+  nav_link_novedades: "Novedades",
 
   /* ── FOOTER COLUMNS ── */
   footer_col_product: "Producto",
@@ -194,13 +195,14 @@ window.C = {
   comp_plan_basic:         "Legado Básico",
   comp_plan_basic_sub:     "El inicio de tu museo digital",
   comp_plan_basic_price:   "Gratis",
-  comp_plan_basic_cta_mac: "Descargar para Mac",
-  comp_plan_basic_cta_win: "Descargar para Windows",
+  comp_plan_basic_cta_mac: "Descarga para Mac",
+  comp_plan_basic_cta_win: "Descarga para Windows",
   comp_plan_pro:           "Legado Pro",
   comp_plan_pro_sub:       "Tu museo digital sin límites",
   comp_price_launch:       "Precio especial de lanzamiento",
   comp_payment_note:       "Pago seguro vía LemonSqueezy",
-  comp_plan_pro_cta:       "Descargar para Mac",
+  comp_plan_pro_cta:       "Activa la experiencia Pro",
+  comp_plan_pro_cta_sub:   "y Activa Experiencia Pro",
   comp_footnote1:          "* Requiere una clave API gratuita de Numista.",
   comp_footnote2:          "** Requiere claves API de OpenAI o Anthropic, sujetas a costes adicionales según cada proveedor.",
 

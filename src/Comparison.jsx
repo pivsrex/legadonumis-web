@@ -7,6 +7,14 @@ const C = window.C;
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
 const isEU = Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('Europe/');
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
+const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.2/Legado-0.8.2-arm64.dmg';
+const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.1/Legado.Setup.0.8.1.exe';
+
+function handleCompProClick(e) {
+  e.preventDefault();
+  window.open(isMac ? MAC_URL : WIN_URL, '_blank');
+  window.location.href = BUY_URL;
+}
 
 const GROUPS = C.comp_groups;
 
@@ -81,14 +89,14 @@ function Comparison() {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
       padding: '11px 16px', borderRadius: 10,
       background: 'var(--ds-accent)', color: '#0a0908',
-      border: 'none', font: '600 13px/1 var(--font-display)', letterSpacing: '-0.01em',
-      textDecoration: 'none', transition: 'opacity 200ms ease', whiteSpace: 'nowrap',
+      border: 'none', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
+      textDecoration: 'none', transition: 'opacity 200ms ease',
     },
     btnSec: {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
       padding: '11px 16px', borderRadius: 10,
       background: 'transparent', color: 'var(--ds-text-high)',
-      border: '1px solid var(--ds-border-mid)', font: '500 13px/1 var(--font-display)', letterSpacing: '-0.01em',
+      border: '1px solid var(--ds-border-mid)', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
       textDecoration: 'none', transition: 'border-color 200ms ease', whiteSpace: 'nowrap',
     },
   };
@@ -123,7 +131,7 @@ function Comparison() {
                       <span style={{ ...s.noteSec, visibility: 'hidden' }}>—</span>
                     </div>
                     <a
-                      href={C.url_download}
+                      href={isMac ? MAC_URL : WIN_URL}
                       style={s.btnSec}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-high)'}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-mid)'}
@@ -154,14 +162,13 @@ function Comparison() {
                     </div>
                     <a
                       href={BUY_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      onClick={handleCompProClick}
                       style={s.btnPri}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                     >
-                      <AppleIcon size={13} />
-                      {C.comp_plan_pro_cta}
+                      {isMac ? <AppleIcon size={13} /> : <WindowsIcon size={13} />}
+                      {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
                 </tr>

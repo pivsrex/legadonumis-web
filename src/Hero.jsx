@@ -5,7 +5,16 @@ const C = window.C;
 const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
+
+const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.2/Legado-0.8.2-arm64.dmg';
+const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v0.8.1/Legado.Setup.0.8.1.exe';
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
+
+function handleHeroProClick(e) {
+  e.preventDefault();
+  window.open(isMac ? MAC_URL : WIN_URL, '_blank');
+  window.location.href = BUY_URL;
+}
 
 function Hero() {
   const s = {
@@ -100,6 +109,7 @@ function Hero() {
           <div style={s.ctaWrap}>
             <a
               href={BUY_URL}
+              onClick={handleHeroProClick}
               style={s.btnPri}
               onMouseEnter={hoverPri} onMouseLeave={leavePri}
             >
@@ -107,7 +117,7 @@ function Hero() {
               {isMac ? C.hero_btn_mac : C.hero_btn_win}
             </a>
             <a
-              href={BUY_URL}
+              href={isMac ? WIN_URL : MAC_URL}
               style={s.otherOs}
               onMouseEnter={hoverOther} onMouseLeave={leaveOther}
             >
