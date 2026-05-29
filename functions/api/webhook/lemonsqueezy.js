@@ -8,11 +8,9 @@
 // Para packs de créditos el checkout URL debe incluir:
 //   ?checkout[custom][license_key]={license_key_del_usuario}
 
-// ── Sustituir con los Variant IDs reales de LemonSqueezy ──────────────────
-const PACK_200  = 'VARIANT_ID_200'   // Pack 200 créditos (€4,99)
-const PACK_600  = 'VARIANT_ID_600'   // Pack 600 créditos (€9,99)
 const CREDITOS_INICIALES = 500
-// ─────────────────────────────────────────────────────────────────────────
+// PACK_200 y PACK_600 se leen de variables de entorno de Cloudflare (LS_VARIANT_PACK_200 y LS_VARIANT_PACK_600).
+// Configurar en el dashboard de Cloudflare Pages → Settings → Environment variables.
 
 export async function onRequestPost(context) {
   const rawBody  = await context.request.text()
@@ -48,9 +46,12 @@ export async function onRequestPost(context) {
 
     if (!licenseKey) return new Response('ok') // Pack sin licencia vinculada: ignorar
 
+    const PACK_200 = context.env.LS_VARIANT_PACK_200 ?? ''
+    const PACK_600 = context.env.LS_VARIANT_PACK_600 ?? ''
+
     let addCredits = 0
-    if (variantId === PACK_200) addCredits = 200
-    if (variantId === PACK_600) addCredits = 600
+    if (PACK_200 && variantId === PACK_200) addCredits = 200
+    if (PACK_600 && variantId === PACK_600) addCredits = 600
 
     if (addCredits > 0) {
       const current = parseInt(await kv.get(licenseKey) || '0') || 0
