@@ -11,7 +11,7 @@ export async function onRequestPost(context) {
   try { body = await context.request.json() }
   catch { return json({ error: 'invalid_body' }, 400) }
 
-  const { license_key, instance_id, model, max_tokens, messages } = body
+  const { license_key, instance_id, model, max_tokens, messages, system } = body
 
   if (!license_key || !instance_id || !model || !messages) {
     return json({ error: 'missing_params' }, 400)
@@ -37,7 +37,7 @@ export async function onRequestPost(context) {
       'anthropic-version': '2023-06-01',
       'x-api-key':         context.env.ANTHROPIC_API_KEY,
     },
-    body: JSON.stringify({ model, max_tokens, messages }),
+    body: JSON.stringify({ model, max_tokens, messages, ...(system ? { system } : {}) }),
   })
 
   const data = await antRes.json()
