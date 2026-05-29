@@ -2,6 +2,17 @@ const LOOPS_URL = 'https://app.loops.so/api/v1/contacts/create';
 
 export async function onRequestPost(context) {
   try {
+    // Rate limit: 5 peticiones por IP por hora
+    const ip = context.request.headers.get('CF-Connecting-IP') ?? 'unknown'
+    const kv = context.env.CREDITS
+    if (kv) {
+      const hour    = Math.floor(Date.now() / 3_600_000)
+      const rlKey   = `rl:sub:${ip}:${hour}`
+      const count   = parseInt(await kv.get(rlKey) || '0')
+      if (count >= 5) return json({ success: false, message: 'Too many requests' }, 429)
+      await kv.put(rlKey, String(count + 1), { expirationTtl: 7200 })
+    }
+
     const { email, language } = await context.request.json();
 
     if (!email) {
