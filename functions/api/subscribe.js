@@ -1,5 +1,4 @@
-const LOOPS_API_KEY = '5e5f46934ce216f3b7baffe5a9a076c8';
-const LOOPS_URL     = 'https://app.loops.so/api/v1/contacts/create';
+const LOOPS_URL = 'https://app.loops.so/api/v1/contacts/create';
 
 export async function onRequestPost(context) {
   try {
@@ -9,9 +8,12 @@ export async function onRequestPost(context) {
       return json({ success: false, message: 'Email required' }, 400);
     }
 
+    const loopsApiKey = context.env.LOOPS_API_KEY;
+    if (!loopsApiKey) return json({ success: false, message: 'Not configured' }, 503);
+
     const res  = await fetch(LOOPS_URL, {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + LOOPS_API_KEY },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + loopsApiKey },
       body:    JSON.stringify({ email, language: language || 'es' }),
     });
     const data = await res.json();
