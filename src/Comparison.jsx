@@ -40,12 +40,12 @@ function Comparison() {
       padding: '20px 24px 24px', textAlign: 'left',
       font: '400 13px/1.2 var(--font-body)', color: 'var(--ds-text-low)',
       borderBottom: '1px solid var(--ds-border-low)',
-      verticalAlign: 'bottom', width: '40%',
+      verticalAlign: 'bottom', width: '50%',
     },
     thPlan: {
       padding: '24px 24px 24px', textAlign: 'center',
       borderBottom: '1px solid var(--ds-border-low)',
-      verticalAlign: 'top', width: '30%',
+      verticalAlign: 'top', width: '25%',
     },
     planName: {
       font: '600 16px/1 var(--font-display)', letterSpacing: '-0.01em',
@@ -148,13 +148,13 @@ function Comparison() {
                     <div style={s.priceBlock}>
                       {isEU ? (
                         <>
-                          <span style={s.priceCrossed}>79 €</span>
-                          <span style={s.priceMain}>59 €</span>
+                          <span style={s.priceCrossed}>99 €</span>
+                          <span style={s.priceMain}>79 €</span>
                         </>
                       ) : (
                         <>
-                          <span style={s.priceCrossed}>79 US$</span>
-                          <span style={s.priceMain}>59 US$</span>
+                          <span style={s.priceCrossed}>99 US$</span>
+                          <span style={s.priceMain}>79 US$</span>
                         </>
                       )}
                       <span style={s.noteAccent}>{C.comp_price_launch}</span>
@@ -195,12 +195,14 @@ function Comparison() {
 
         <RevealWrapper delay={200}>
           <div style={{ maxWidth: 900, margin: '16px auto 0', padding: '0 4px' }}>
-            <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: '0 0 2px' }}>
+            <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: 0 }}>
               {C.comp_footnote1}
             </p>
-            <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: 0 }}>
-              {C.comp_footnote2}
-            </p>
+            {C.comp_footnote2 && (
+              <p style={{ font: '400 13px/1.7 var(--font-body)', color: 'var(--ds-text-low)', margin: '2px 0 0' }}>
+                {C.comp_footnote2}
+              </p>
+            )}
           </div>
         </RevealWrapper>
 

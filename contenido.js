@@ -29,7 +29,7 @@ window.C = {
   pasos_sub: "Cuatro sencillos pasos para gestionarla <br> con Legado de forma elegante y flexible",
 
   paso1_titulo: "Añade tus piezas",
-  paso1_body:   "Cataloga cada ejemplar manualmente o importa tu colección desde Excel con un solo clic. La asistencia de Numista y la IA completan y enriquecen la información de forma automática.",
+  paso1_body:   "Cataloga cada ejemplar personalmente o importa tu colección desde Excel/CSV con un solo clic, de forma fácil y rápida.",
 
   paso2_titulo: "Conserva su historia",
   paso2_body:   "Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.",
@@ -60,20 +60,20 @@ window.C = {
   feat_h2:  "Herramientas que marcan la diferencia",
   feat_sub: "Todo lo que necesitas para organizar\ny apreciar tus monedas",
 
-  f1_titulo: "Una galería digna de tu colección",
-  f1_desc:   "Explora tus monedas y billetes, juntos o por separado, en seis modos de visualización distintos. Busca por palabras clave, aplica filtros y examina cada detalle con lupa mientras consultas su ficha técnica.",
+  f1_titulo: "Importa años de trabajo en segundos",
+  f1_desc:   "Importa tus datos e imágenes de forma automatizada, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
 
-  f2_titulo: "Importa años de trabajo en segundos",
-  f2_desc:   "Importa tus datos e imágenes de forma automatizada, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
+  f2_titulo: "Una galería digna de tu colección",
+  f2_desc:   "Explora tus monedas y billetes en seis modos de visualización distintos. Busca por palabras clave, aplica filtros y examina cada detalle con lupa mientras consultas su ficha técnica.",
 
   f3_titulo: "Cada ejemplar, en su contexto",
-  f3_desc:   "Añade los campos que necesites, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.",
+  f3_desc:   "Añade campos, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.",
 
   f4_titulo: "Ideas, recordatorios y anotaciones",
   f4_desc:   "Utiliza Post-Its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones directamente sobre las fotografías y conserva versiones independientes para estudio o comparación.",
 
   f5_titulo: "Una perspectiva diferente de tu colección",
-  f5_desc:   "Analiza estadísticas, identifica patrones y tendencias, y consulta datos clave sobre tu colección, incluyendo su valor de adquisición, valor actual estimado y valor intrínseco, con precios actualizados del oro y la plata.",
+  f5_desc:   "Analiza estadísticas, identifica tendencias, y consulta datos clave sobre tu colección, incluyendo su valor de adquisición, valor actual estimado y valor intrínseco, con precios actualizados del oro y la plata.",
 
   f6_titulo: "Una experiencia hecha a tu medida",
   f6_desc:   "Personaliza la forma en que visualizas y organizas tu colección. Ajusta tipografías, colores, etiquetas, fichas y elementos visuales para adaptar Legado a tu manera de coleccionar.",
@@ -161,7 +161,7 @@ window.C = {
     {
       label: "Visualización",
       rows: [
-        { feat: "Galería de imágenes (5 modos)",                   basico: true,      pro: true         },
+        { feat: "Galería de imágenes (6 modos)",                   basico: true,      pro: true         },
         { feat: "Visor comparativo de ejemplares",                 basico: true,      pro: true         },
         { feat: "Cecas sobre mapa actual",                         basico: "Hasta 5", pro: "Ilimitadas" },
         { feat: "Cecas sobre mapa del Imperio Romano (125 d.C.)",  basico: false,     pro: true         },
@@ -170,24 +170,25 @@ window.C = {
     {
       label: "Organización y exportación",
       rows: [
-        { feat: "Importación desde Excel y CSV",  basico: true,  pro: true },
-        { feat: "Exportación a Excel y CSV",      basico: false, pro: true },
-        { feat: "Exportación de fichas en PDF",   basico: false, pro: true },
-        { feat: "Diseñador de etiquetas",         basico: false, pro: true },
+        { feat: "Importación desde Excel y CSV",              basico: true,  pro: true },
+        { feat: "Importación automatizada de fotografías",  basico: true,  pro: true },
+        { feat: "Exportación a Excel y CSV",                basico: false, pro: true },
+        { feat: "Exportación de fichas en PDF",             basico: false, pro: true },
+        { feat: "Diseñador de etiquetas",                   basico: false, pro: true },
       ],
     },
     {
       label: "Funciones avanzadas",
       rows: [
-        { feat: "Anotaciones sobre imágenes",        basico: false,          pro: true         },
-        { feat: "Consultas automáticas a Numista *", basico: "Hasta 5",      pro: "Ilimitadas" },
-        { feat: "Contexto histórico con IA **",      basico: "Hasta 5 usos", pro: "Ilimitado"  },
+        { feat: "Anotaciones sobre imágenes",        basico: false, pro: true           },
+        { feat: "Consultas automáticas a Numista *", basico: false, pro: "Ilimitadas"  },
+        { feat: "Contexto histórico con IA",         basico: false, pro: "500 consultas" },
       ],
     },
     {
       label: "Soporte y actualizaciones",
       rows: [
-        { feat: "Actualizaciones", basico: true,  pro: true },
+        { feat: "Actualizaciones", basico: false, pro: true },
         { feat: "Soporte técnico", basico: false, pro: true },
       ],
     },
@@ -204,7 +205,6 @@ window.C = {
   comp_plan_pro_cta:       "Activa la experiencia Pro",
   comp_plan_pro_cta_sub:   "y Activa Experiencia Pro",
   comp_footnote1:          "* Requiere una clave API gratuita de Numista.",
-  comp_footnote2:          "** Requiere claves API de OpenAI o Anthropic, sujetas a costes adicionales según cada proveedor.",
 
   /* ── PRICING ── */
   trial_badge:  "Básico",
@@ -220,7 +220,7 @@ window.C = {
   trial_cta: "Descargar gratis",
   full_tag:    "Pro",
   full_badge:  "Más popular",
-  full_precio: "59",
+  full_precio: "79",
   full_divisa: "€",
   full_nota:   "Pago único · sin suscripción",
   full_btn:    "Obtener Legado Pro",
