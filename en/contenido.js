@@ -146,7 +146,7 @@ window.C = {
     {
       label: "Collection",
       rows: [
-        { feat: "Registered pieces",             basico: "Up to 20",    pro: "Unlimited"  },
+        { feat: "Registered pieces",             basico: "Up to 50",    pro: "Unlimited"  },
         { feat: "Photos, videos & documents",    basico: true,          pro: true         },
         { feat: "Custom metrics",                basico: true,          pro: true         },
         { feat: "Sticky notes",                  basico: "1",           pro: "Unlimited"  },
@@ -205,7 +205,7 @@ window.C = {
   trial_precio: "Free",
   trial_nota:   "No time limit",
   trial_items: [
-    "Up to 15 cataloged pieces",
+    "Up to 50 cataloged pieces",
     "5 AI assistant uses",
     "Full photo gallery",
     "Interactive mint map",

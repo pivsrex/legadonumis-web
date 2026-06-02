@@ -152,7 +152,7 @@ window.C = {
     {
       label: "Colección",
       rows: [
-        { feat: "Ejemplares registrados",                  basico: "Hasta 20",     pro: "Ilimitado"  },
+        { feat: "Ejemplares registrados",                  basico: "Hasta 50",     pro: "Ilimitado"  },
         { feat: "Imágenes, vídeos y documentos adjuntos",  basico: true,           pro: true         },
         { feat: "Métricas personalizadas",                 basico: true,           pro: true         },
         { feat: "Post-Its",                                basico: "1",            pro: "Ilimitados" },
@@ -211,7 +211,7 @@ window.C = {
   trial_precio: "Gratis",
   trial_nota:   "Sin límite de tiempo",
   trial_items: [
-    "Hasta 15 ejemplares catalogados",
+    "Hasta 50 ejemplares catalogados",
     "5 usos del asistente IA",
     "Galería fotográfica completa",
     "Mapa de cecas interactivo",
