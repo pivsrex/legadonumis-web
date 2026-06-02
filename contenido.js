@@ -25,20 +25,20 @@ window.C = {
   hero_btn_win: "Descarga para Windows",
 
   /* ── PASOS (Workflow) ── */
-  pasos_h2:  "Porque tu colección merece\nmucho más que\nun simple inventario",
+  pasos_h2:  "Porque tu colección\nmerece mucho más que\nun simple inventario",
   pasos_sub: "Cuatro sencillos pasos para gestionarla <br> con Legado de forma elegante y flexible",
 
   paso1_titulo: "Añade tus piezas",
-  paso1_body:   "Cataloga cada ejemplar con todo detalle, o ahorra tiempo importando tus datos desde Excel o un archivo CSV.",
+  paso1_body:   "Cataloga cada ejemplar manualmente o importa tu colección desde Excel con un solo clic. La asistencia de Numista y la IA completan y enriquecen la información de forma automática.",
 
   paso2_titulo: "Conserva su historia",
   paso2_body:   "Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.",
 
   paso3_titulo: "Organiza a tu manera",
-  paso3_body:   "Clasifica y ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.",
+  paso3_body:   "Ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.",
 
   paso4_titulo: "Redescubre tu colección",
-  paso4_body:   "Visualiza tus piezas sobre mapas, compara dos ejemplares, guarda notas, anota sobre imágenes, crea etiquetas y consulta estadísticas relevantes.",
+  paso4_body:   "Visualiza tus piezas sobre mapas, compara dos ejemplares, guarda notas, anota sobre imágenes, crea etiquetas y consulta estadísticas.",
 
   /* ── SHOWCASE (tarjetas de producto) ── */
   sc_h2:     "Más contexto. Más detalle.\nMás perspectiva",
@@ -61,19 +61,19 @@ window.C = {
   feat_sub: "Todo lo que necesitas para organizar\ny apreciar tus monedas",
 
   f1_titulo: "Una galería digna de tu colección",
-  f1_desc:   "Explora tus monedas y billetes, juntos o por separado, en seis modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con la lupa integrada mientras consultas su ficha técnica.",
+  f1_desc:   "Explora tus monedas y billetes, juntos o por separado, en seis modos de visualización distintos. Busca por palabras clave, aplica filtros y examina cada detalle con lupa mientras consultas su ficha técnica.",
 
   f2_titulo: "Importa años de trabajo en segundos",
-  f2_desc:   "¿Ya gestionas tu colección en una hoja de cálculo? ¿Tienes tus fotos ordenadas? Importa tus datos e imágenes directamente, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
+  f2_desc:   "Importa tus datos e imágenes de forma automatizada, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
 
   f3_titulo: "Cada ejemplar, en su contexto",
-  f3_desc:   "Añade los campos que necesites, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial.",
+  f3_desc:   "Añade los campos que necesites, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.",
 
   f4_titulo: "Ideas, recordatorios y anotaciones",
   f4_desc:   "Utiliza Post-Its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones directamente sobre las fotografías y conserva versiones independientes para estudio o comparación.",
 
   f5_titulo: "Una perspectiva diferente de tu colección",
-  f5_desc:   "Analiza estadísticas, identifica patrones y tendencias, y consulta datos clave sobre tu colección, incluyendo su valor intrínseco con precios del oro y la plata actualizados.",
+  f5_desc:   "Analiza estadísticas, identifica patrones y tendencias, y consulta datos clave sobre tu colección, incluyendo su valor de adquisición, valor actual estimado y valor intrínseco, con precios actualizados del oro y la plata.",
 
   f6_titulo: "Una experiencia hecha a tu medida",
   f6_desc:   "Personaliza la forma en que visualizas y organizas tu colección. Ajusta tipografías, colores, etiquetas, fichas y elementos visuales para adaptar Legado a tu manera de coleccionar.",
