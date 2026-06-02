@@ -20,60 +20,60 @@ window.C = {
 
   /* ── HERO ── */
   hero_h1:  "El museo digital\nde tu colección",
-  hero_sub: "Conserva toda la información, imágenes e historia\nde tus monedas en un único lugar",
+  hero_sub: "Conserva toda la información, imágenes e historia\nde tus monedas y billetes en un único lugar",
   hero_btn_mac: "Descarga para Mac",
   hero_btn_win: "Descarga para Windows",
 
   /* ── PASOS (Workflow) ── */
-  pasos_h2:  "Porque tu colección merece mucho más que un simple inventario",
+  pasos_h2:  "Porque tu colección merece\nmucho más que\nun simple inventario",
   pasos_sub: "Cuatro sencillos pasos para gestionarla <br> con Legado de forma elegante y flexible",
 
-  paso1_titulo: "Añade tus monedas",
-  paso1_body:   "Cataloga cada ejemplar con toda su información, con ayuda de la IA, o simplemente importa tus datos desde Excel o un archivo CSV.",
+  paso1_titulo: "Añade tus piezas",
+  paso1_body:   "Cataloga cada ejemplar con todo detalle, o ahorra tiempo importando tus datos desde Excel o un archivo CSV.",
 
   paso2_titulo: "Conserva su historia",
-  paso2_body:   "Guarda fácilmente fotografías, vídeos, documentos y enlaces junto a cada moneda.\nTodo siempre accesible.",
+  paso2_body:   "Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.",
 
   paso3_titulo: "Organiza a tu manera",
-  paso3_body:   "Clasifica y ordena tus monedas como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.",
+  paso3_body:   "Clasifica y ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.",
 
   paso4_titulo: "Redescubre tu colección",
-  paso4_body:   "Visualiza tus monedas sobre mapas, compara dos ejemplares, guarda notas, crea etiquetas y consulta estadísticas relevantes.",
+  paso4_body:   "Visualiza tus piezas sobre mapas, compara dos ejemplares, guarda notas, anota sobre imágenes, crea etiquetas y consulta estadísticas relevantes.",
 
   /* ── SHOWCASE (tarjetas de producto) ── */
   sc_h2:     "Más contexto. Más detalle.\nMás perspectiva",
   sc_sub:    "Una experiencia visual, práctica e intuitiva\npara disfrutar la numismática",
 
   sc1_titulo: "Crea fichas detalladas en segundos",
-  sc1_desc:   "Importa la descripción y la información técnica de tus monedas desde Numista y añade contexto histórico mediante inteligencia artificial.",
+  sc1_desc:   "Importa la descripción y la información técnica de tus monedas y billetes desde Numista y añade información de su contexto histórico mediante inteligencia artificial.",
 
-  sc2_titulo: "Compara monedas con máximo detalle",
+  sc2_titulo: "Compara con el\nmáximo detalle",
   sc2_desc:   "Visualiza dos ejemplares simultáneamente y utiliza una lupa integrada para examinar diferencias, variantes y estados de conservación.",
 
   sc3_titulo: "Diseña etiquetas listas para imprimir",
   sc3_desc:   "Prepara etiquetas personalizadas para cada moneda en bandejas o expositores. Guarda plantillas y mantén una presentación uniforme en toda tu colección.",
 
   sc4_titulo: "Pon tu colección en el mapa",
-  sc4_desc:   "Consulta las cecas de tus monedas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
+  sc4_desc:   "Consulta las cecas de tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
 
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Herramientas que marcan la diferencia",
   feat_sub: "Todo lo que necesitas para organizar\ny apreciar tus monedas",
 
   f1_titulo: "Una galería digna de tu colección",
-  f1_desc:   "Explora tus monedas en cinco modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con la lupa integrada mientras consultas su ficha técnica.",
+  f1_desc:   "Explora tus monedas y billetes, juntos o por separado, en seis modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con la lupa integrada mientras consultas su ficha técnica.",
 
   f2_titulo: "Importa años de trabajo en segundos",
-  f2_desc:   "¿Ya gestionas tu colección en una hoja de cálculo? Importa tus datos directamente, edita múltiples monedas a la vez y continúa trabajando sin empezar desde cero.",
+  f2_desc:   "¿Ya gestionas tu colección en una hoja de cálculo? ¿Tienes tus fotos ordenadas? Importa tus datos e imágenes directamente, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
 
-  f3_titulo: "Cada moneda, en su contexto",
-  f3_desc:   "Añade los campos que necesites y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial.",
+  f3_titulo: "Cada ejemplar, en su contexto",
+  f3_desc:   "Añade los campos que necesites, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial.",
 
   f4_titulo: "Ideas, recordatorios y anotaciones",
   f4_desc:   "Utiliza Post-Its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones directamente sobre las fotografías y conserva versiones independientes para estudio o comparación.",
 
   f5_titulo: "Una perspectiva diferente de tu colección",
-  f5_desc:   "Analiza estadísticas, identifica patrones y tendencias, y consulta datos clave sobre tu colección, incluyendo el valor bullion de las monedas de oro y plata.",
+  f5_desc:   "Analiza estadísticas, identifica patrones y tendencias, y consulta datos clave sobre tu colección, incluyendo su valor intrínseco con precios del oro y la plata actualizados.",
 
   f6_titulo: "Una experiencia hecha a tu medida",
   f6_desc:   "Personaliza la forma en que visualizas y organizas tu colección. Ajusta tipografías, colores, etiquetas, fichas y elementos visuales para adaptar Legado a tu manera de coleccionar.",

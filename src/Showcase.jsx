@@ -111,7 +111,7 @@ function Showcase() {
                       font: '600 clamp(20px, 1.8vw, 26px)/1.25 var(--font-display)',
                       letterSpacing: '-0.02em', color: 'var(--ds-text-high)', margin: 0,
                     }}>
-                      {card.title}
+                      {br(card.title)}
                     </h3>
                     <p style={{
                       font: '400 16px/1.75 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0,
@@ -185,7 +185,7 @@ function Showcase() {
                       font: '600 clamp(20px, 1.8vw, 26px)/1.25 var(--font-display)',
                       letterSpacing: '-0.02em', color: 'var(--ds-text-high)', margin: 0,
                     }}>
-                      {card.title}
+                      {br(card.title)}
                     </h3>
                     <p style={{
                       font: '400 16px/1.75 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0,
