@@ -183,7 +183,19 @@ function Comparison() {
                       <tr key={ri} style={s.tr}>
                         <td style={s.tdFeat}>{row.feat}</td>
                         <td style={s.tdVal}><Cell value={row.basico} /></td>
-                        <td style={s.tdVal}><Cell value={row.pro} /></td>
+                        <td style={s.tdVal}>
+                          <Cell value={row.pro} />
+                          {row.cta && (
+                            <a
+                              href={row.cta.url}
+                              style={{ display: 'inline-block', marginTop: 6, font: '500 11px/1 var(--font-body)', color: 'var(--ds-accent)', textDecoration: 'none', opacity: 0.85 }}
+                              onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                              onMouseLeave={(e) => e.currentTarget.style.opacity = '0.85'}
+                            >
+                              {row.cta.label} →
+                            </a>
+                          )}
+                        </td>
                       </tr>
                     ))}
                   </React.Fragment>

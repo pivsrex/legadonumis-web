@@ -64,7 +64,7 @@ window.C = {
   f1_desc:   "Importa tus datos e imágenes de forma automatizada, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
 
   f2_titulo: "Una galería digna de tu colección",
-  f2_desc:   "Explora tus monedas y billetes en seis modos de visualización distintos. Busca por palabras clave, aplica filtros y examina cada detalle con lupa mientras consultas su ficha técnica.",
+  f2_desc:   "Explora tus monedas y billetes en seis modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con lupa mientras consultas su ficha técnica.",
 
   f3_titulo: "Cada ejemplar, en su contexto",
   f3_desc:   "Añade campos, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.",
@@ -82,20 +82,20 @@ window.C = {
   faq_titulo: "¿Preguntas?",
   faq_sub:    "Te respondemos las dudas más habituales",
 
-  faq1_q: "¿Qué tipo de información puedo añadir a cada moneda?",
-  faq1_a: "Puedes definir campos personalizados para cada pieza y añadir hasta 10 imágenes, un vídeo y dos documentos en formato PDF (una factura y un certificado de autenticidad, por ejemplo). Toda la información puede ajustarse según tus necesidades.",
+  faq1_q: "¿Qué tipo de información puedo añadir a cada ejemplar?",
+  faq1_a: "Puedes definir campos personalizados para cada pieza, organizarlos como quieras, y adjuntar imágenes, vídeos, documentos y enlaces a recursos web u otros archivos en tu ordenador. Toda la información puede ajustarse según tus necesidades.",
 
   faq2_q: "¿Puedo importar una colección existente?",
   faq2_a: "Sí. Puedes extraer datos desde una hoja de cálculo. Legado te permite seleccionar qué columnas importar y cómo asignarlas a los campos de la aplicación. Después puedes editar la información de forma individual o en bloque.",
 
   faq3_q: "¿Necesito conexión a Internet para usar Legado?",
-  faq3_a: "La aplicación funciona offline para la gestión y consulta de datos. Algunas funciones como el mapa, la actualización del valor bullion, la integración con Numista y los servicios de IA requieren conexión a Internet.",
+  faq3_a: "La aplicación funciona offline para la gestión y consulta de datos. Algunas funciones como el mapa, el cálculo del valor intrínseco, la conversión entre divisas, el acceso a la base de datos de Numista y la generación de contenido mediante IA requieren conexión a Internet.",
 
-  faq4_q: "¿Dónde se guarda la información de las monedas?",
+  faq4_q: "¿Dónde se guarda la información?",
   faq4_a: "Los datos se almacenan localmente en tu dispositivo o en servicios externos de almacenamiento que tú configures. Legado no almacena ni procesa esos datos en sus propios servidores.",
 
   faq5_q: "¿El uso de Numista y la IA tiene algún coste adicional?",
-  faq5_a: "El acceso a Numista requiere una clave API gratuita disponible en Numista.com. Además, Legado permite integrar servicios de inteligencia artificial (OpenAI y Anthropic) mediante claves API. Estos servicios son externos y pueden implicar costes según las tarifas de cada proveedor. Legado no está vinculado a estos proveedores ni es responsable de sus condiciones, disponibilidad o precios.",
+  faq5_a: "El acceso a la base de datos de Numista (disponible en Legado Pro) requiere una clave API gratuita disponible en Numista.com. Cabe mencionar que Legado no está vinculado a Numista ni es responsable de sus condiciones, disponibilidad o precios. Además, Legado Pro incluye en su precio 500 créditos para generar información contextual histórica de monedas y billetes. Es posible adquirir paquetes de créditos adicionales.",
 
   faq6_q: "¿Cómo activo mi Legado Pro?",
   faq6_a: "Tras realizar el pago con tarjeta de crédito o a través de PayPal, recibirás un correo electrónico con un código de activación. Introdúcelo en la sección de configuración de la aplicación.",
@@ -103,7 +103,7 @@ window.C = {
   faq7_q: "¿Tengo que pagar alguna suscripción periódica?",
   faq7_a: "No. Legado Básico es gratuito. La licencia de Legado Pro implica un pago único y no está sujeta a una suscripción periódica.",
 
-  faq8_q: "¿Legado es solo útil para coleccionistas de monedas?",
+  faq8_q: "¿Legado es solo para coleccionistas de monedas y billetes?",
   faq8_a: "No. Aunque está diseñado específicamente para numismática, su sistema flexible permite adaptarse fácilmente a otros tipos de colecciones.",
 
   /* ── COMPARATIVA ── */
@@ -182,7 +182,7 @@ window.C = {
       rows: [
         { feat: "Anotaciones sobre imágenes",        basico: false, pro: true           },
         { feat: "Consultas automáticas a Numista *", basico: false, pro: "Ilimitadas"  },
-        { feat: "Contexto histórico con IA",         basico: false, pro: "500 consultas" },
+        { feat: "Contexto histórico con IA",         basico: false, pro: "500 consultas incluidas", cta: { label: "¿Necesitas más?", url: "#pack-creditos" } },
       ],
     },
     {
