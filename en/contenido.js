@@ -14,7 +14,7 @@ window.C = {
 
   /* ── HERO ── */
   hero_h1:  "Your collection's\ndigital home",
-  hero_sub: "Store everything — photos, history, and specs —\nfor every coin, all in one place",
+  hero_sub: "Store everything — photos, history, and specs —\nfor every coin and banknote, all in one place",
   hero_btn_mac: "Download for Mac",
   hero_btn_win: "Download for Windows",
 
@@ -23,16 +23,16 @@ window.C = {
   pasos_sub: "Four simple steps to manage it <br> easily and elegantly with Legado",
 
   paso1_titulo: "Add your pieces",
-  paso1_body:   "Catalog every piece individually or import your collection from Excel/CSV in one click, quickly and easily.",
+  paso1_body:   "Catalog every item manually or import your collection from Excel or a CSV file with a single click—quickly and easily.",
 
   paso2_titulo: "Preserve their story",
-  paso2_body:   "Automatically assign photos to each piece and attach videos, documents, links, and references. Always accessible.",
+  paso2_body:   "Automatically assign photos to each item and attach videos, documents, links, and references. Everything in one place, always accessible.",
 
   paso3_titulo: "Organize your way",
   paso3_body:   "Sort and filter your coins however you like, then export or print whenever you need.\nYour collection, your rules.",
 
   paso4_titulo: "Rediscover your collection",
-  paso4_body:   "View your pieces on maps, compare two examples, keep notes, annotate on images, create tags, and explore stats.",
+  paso4_body:   "View your items on maps, compare examples side by side, keep notes, annotate images, create sticky notes, and explore detailed statistics.",
 
   /* ── SHOWCASE ── */
   sc_h2:     "More context. More detail.\nMore perspective",
