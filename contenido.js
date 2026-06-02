@@ -103,8 +103,8 @@ window.C = {
   faq7_q: "¿Tengo que pagar alguna suscripción periódica?",
   faq7_a: "No. Legado Básico es gratuito. La licencia de Legado Pro implica un pago único y no está sujeta a una suscripción periódica.",
 
-  faq8_q: "¿Legado es solo para coleccionistas de monedas y billetes?",
-  faq8_a: "No. Aunque está diseñado específicamente para numismática, su sistema flexible permite adaptarse fácilmente a otros tipos de colecciones.",
+  faq8_q: "¿Legado es solo para monedas y billetes?",
+  faq8_a: "No. Aunque está diseñado específicamente para numismática (monedas, billetes, fichas y medallas), su sistema flexible permite adaptarse fácilmente a otros tipos de colecciones.",
 
   /* ── COMPARATIVA ── */
   comp_h2:  "Lleva tu colección\nal siguiente nivel",
