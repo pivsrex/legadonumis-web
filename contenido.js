@@ -86,7 +86,7 @@ window.C = {
   faq1_a: "Puedes definir campos personalizados para cada pieza, organizarlos como quieras, y adjuntar imágenes, vídeos, documentos y enlaces a recursos web u otros archivos en tu ordenador. Toda la información puede ajustarse según tus necesidades.",
 
   faq2_q: "¿Puedo importar una colección existente?",
-  faq2_a: "Sí. Puedes extraer datos desde una hoja de cálculo. Legado te permite seleccionar qué columnas importar y cómo asignarlas a los campos de la aplicación. Después puedes editar la información de forma individual o en bloque.",
+  faq2_a: "Sí. Puedes extraer datos desde una hoja de cálculo. Legado te permite seleccionar qué columnas importar y cómo asignarlas a los campos de la aplicación. Después puedes editar la información de forma individual o en bloque. También puedes importar imágenes y asignarlas automáticamente a sus ejemplares, utilizando códigos compartidos.",
 
   faq3_q: "¿Necesito conexión a Internet para usar Legado?",
   faq3_a: "La aplicación funciona offline para la gestión y consulta de datos. Algunas funciones como el mapa, el cálculo del valor intrínseco, la conversión entre divisas, el acceso a la base de datos de Numista y la generación de contenido mediante IA requieren conexión a Internet.",
