@@ -40,12 +40,12 @@ function Comparison() {
       padding: '20px 24px 24px', textAlign: 'left',
       font: '400 13px/1.2 var(--font-body)', color: 'var(--ds-text-low)',
       borderBottom: '1px solid var(--ds-border-low)',
-      verticalAlign: 'bottom', width: '50%',
+      verticalAlign: 'bottom', width: '44%',
     },
     thPlan: {
       padding: '24px 24px 24px', textAlign: 'center',
       borderBottom: '1px solid var(--ds-border-low)',
-      verticalAlign: 'top', width: '25%',
+      verticalAlign: 'top', width: '28%',
     },
     planName: {
       font: '600 16px/1 var(--font-display)', letterSpacing: '-0.01em',
@@ -86,16 +86,14 @@ function Comparison() {
     },
     tdVal: { padding: '9px 24px', textAlign: 'center', verticalAlign: 'middle' },
     btnPri: {
-      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-      width: '100%', boxSizing: 'border-box',
+      display: 'block', textAlign: 'center',
       padding: '11px 16px', borderRadius: 10,
       background: 'var(--ds-accent)', color: '#0a0908',
       border: '1px solid transparent', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
       textDecoration: 'none', transition: 'opacity 200ms ease', whiteSpace: 'nowrap',
     },
     btnSec: {
-      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-      width: '100%', boxSizing: 'border-box',
+      display: 'block', textAlign: 'center',
       padding: '11px 16px', borderRadius: 10,
       background: 'transparent', color: 'var(--ds-text-high)',
       border: '1px solid var(--ds-border-mid)', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
@@ -138,7 +136,6 @@ function Comparison() {
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-high)'}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-mid)'}
                     >
-                      {isMac ? <AppleIcon size={13} /> : <WindowsIcon size={13} />}
                       {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
@@ -169,7 +166,6 @@ function Comparison() {
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                     >
-                      {isMac ? <AppleIcon size={13} /> : <WindowsIcon size={13} />}
                       {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
