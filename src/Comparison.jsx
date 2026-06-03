@@ -68,7 +68,7 @@ function Comparison() {
       textDecoration: 'line-through',
     },
     noteAccent: {
-      font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)',
+      font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', whiteSpace: 'pre-line',
     },
     noteSec: {
       font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)',
