@@ -1,5 +1,17 @@
 const LOOPS_URL = 'https://app.loops.so/api/v1/contacts/create';
 
+export async function onRequestOptions() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      'Access-Control-Allow-Origin':  'app://legado',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age':       '86400',
+    },
+  })
+}
+
 export async function onRequestPost(context) {
   try {
     // Rate limit: 5 peticiones por IP por hora
@@ -43,6 +55,9 @@ export async function onRequestPost(context) {
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'app://legado',
+    },
   });
 }
