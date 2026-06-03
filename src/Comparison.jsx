@@ -87,6 +87,7 @@ function Comparison() {
     tdVal: { padding: '9px 24px', textAlign: 'center', verticalAlign: 'middle' },
     btnPri: {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+      width: '100%', boxSizing: 'border-box',
       padding: '11px 16px', borderRadius: 10,
       background: 'var(--ds-accent)', color: '#0a0908',
       border: 'none', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
@@ -94,6 +95,7 @@ function Comparison() {
     },
     btnSec: {
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+      width: '100%', boxSizing: 'border-box',
       padding: '11px 16px', borderRadius: 10,
       background: 'transparent', color: 'var(--ds-text-high)',
       border: '1px solid var(--ds-border-mid)', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',

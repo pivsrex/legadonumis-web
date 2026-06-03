@@ -148,8 +148,6 @@ window.C = {
       rows: [
         { feat: "Registered pieces",             basico: "Up to 50",    pro: "Unlimited"  },
         { feat: "Photos, videos & documents",    basico: true,          pro: true         },
-        { feat: "Custom metrics",                basico: true,          pro: true         },
-        { feat: "Sticky notes",                  basico: "1",           pro: "Unlimited"  },
       ],
     },
     {
@@ -174,9 +172,11 @@ window.C = {
     {
       label: "Advanced features",
       rows: [
-        { feat: "Photo annotations",             basico: false,           pro: true         },
-        { feat: "Automatic Numista lookups *",   basico: false,  pro: "Unlimited"  },
-        { feat: "AI historical context",         basico: false,  pro: "500 queries included", cta: { label: "Need more?", url: "#pack-creditos" } },
+        { feat: "Sticky notes",                  basico: "1",            pro: "Unlimited"   },
+        { feat: "Statistics",                    basico: false,          pro: true          },
+        { feat: "Photo annotations",             basico: false,          pro: true          },
+        { feat: "Automatic Numista lookups *",   basico: false,          pro: "Unlimited"   },
+        { feat: "AI historical context",         basico: false,          pro: "500 queries included", cta: { label: "Need more?", url: "#pack-creditos" } },
       ],
     },
     {

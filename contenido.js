@@ -154,8 +154,6 @@ window.C = {
       rows: [
         { feat: "Ejemplares registrados",                  basico: "Hasta 50",     pro: "Ilimitado"  },
         { feat: "Imágenes, vídeos y documentos adjuntos",  basico: true,           pro: true         },
-        { feat: "Métricas personalizadas",                 basico: true,           pro: true         },
-        { feat: "Post-Its",                                basico: "1",            pro: "Ilimitados" },
       ],
     },
     {
@@ -180,9 +178,11 @@ window.C = {
     {
       label: "Funciones avanzadas",
       rows: [
-        { feat: "Anotaciones sobre imágenes",        basico: false, pro: true           },
-        { feat: "Consultas automáticas a Numista *", basico: false, pro: "Ilimitadas"  },
-        { feat: "Contexto histórico con IA",         basico: false, pro: "500 consultas incluidas", cta: { label: "¿Necesitas más?", url: "#pack-creditos" } },
+        { feat: "Post-Its",                                basico: "1",            pro: "Ilimitados"  },
+        { feat: "Estadísticas",                            basico: false,          pro: true          },
+        { feat: "Anotaciones sobre imágenes",              basico: false,          pro: true          },
+        { feat: "Consultas automáticas a Numista *",       basico: false,          pro: "Ilimitadas"  },
+        { feat: "Contexto histórico con IA",               basico: false,          pro: "500 consultas incluidas", cta: { label: "¿Necesitas más?", url: "#pack-creditos" } },
       ],
     },
     {
