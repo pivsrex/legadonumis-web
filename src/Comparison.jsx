@@ -147,12 +147,12 @@ function Comparison() {
                     <div style={s.priceBlock}>
                       {isEU ? (
                         <>
-                          <span style={s.priceCrossed}>99 €</span>
+                          <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
                           <span style={s.priceMain}>79 €</span>
                         </>
                       ) : (
                         <>
-                          <span style={s.priceCrossed}>99 US$</span>
+                          <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
                           <span style={s.priceMain}>79 US$</span>
                         </>
                       )}

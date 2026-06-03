@@ -20,7 +20,7 @@ window.C = {
 
   /* ── HERO ── */
   hero_h1:  "El museo digital\nde tu colección",
-  hero_sub: "Conserva toda la información, imágenes e historia\nde tus monedas y billetes en un único lugar",
+  hero_sub: "Cataloga tus monedas y billetes.\nConoce su historia. Descubre su valor.",
   hero_btn_mac: "Descarga para Mac",
   hero_btn_win: "Descarga para Windows",
 
@@ -200,7 +200,7 @@ window.C = {
   comp_plan_basic_cta_win: "Descarga para Windows",
   comp_plan_pro:           "Legado Pro",
   comp_plan_pro_sub:       "Tu museo digital sin límites",
-  comp_price_launch:       "Precio especial",
+  comp_price_launch:       "Pago único · Sin suscripciones",
   comp_payment_note:       "Pago seguro vía LemonSqueezy",
   comp_plan_pro_cta:       "Activa la experiencia Pro",
   comp_plan_pro_cta_sub:   "y Activa Experiencia Pro",

@@ -14,7 +14,7 @@ window.C = {
 
   /* ── HERO ── */
   hero_h1:  "Your collection's\ndigital home",
-  hero_sub: "Store everything — photos, history, and specs —\nfor every coin and banknote, all in one place",
+  hero_sub: "Catalog your coins and banknotes.\nLearn their history. Discover their value.",
   hero_btn_mac: "Download for Mac",
   hero_btn_win: "Download for Windows",
 
@@ -194,7 +194,7 @@ window.C = {
   comp_plan_basic_cta_win: "Download for Windows",
   comp_plan_pro:           "Legado Pro",
   comp_plan_pro_sub:       "Your digital museum, unlimited",
-  comp_price_launch:       "Special price",
+  comp_price_launch:       "One-time payment · No subscriptions",
   comp_payment_note:       "Secure payment via LemonSqueezy",
   comp_plan_pro_cta:       "Activate the Pro Experience",
   comp_plan_pro_cta_sub:   "and Activate the Pro Experience",
