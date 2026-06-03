@@ -125,7 +125,6 @@ function Comparison() {
                     <span style={s.planSub}>{C.comp_plan_basic_sub}</span>
                     {/* Mismo layout vertical que Pro para alinear precios */}
                     <div style={s.priceBlock}>
-                      <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
                       <span style={s.priceMain}>{C.comp_plan_basic_price}</span>
                       <span style={{ ...s.noteAccent, visibility: 'hidden' }}>—</span>
                       <span style={{ ...s.noteSec, visibility: 'hidden' }}>—</span>
@@ -146,15 +145,9 @@ function Comparison() {
                     <span style={s.planSub}>{C.comp_plan_pro_sub}</span>
                     <div style={s.priceBlock}>
                       {isEU ? (
-                        <>
-                          <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
-                          <span style={s.priceMain}>79 €</span>
-                        </>
+                        <span style={s.priceMain}>79 €</span>
                       ) : (
-                        <>
-                          <span style={{ ...s.priceCrossed, visibility: 'hidden' }}>—</span>
-                          <span style={s.priceMain}>79 US$</span>
-                        </>
+                        <span style={s.priceMain}>79 US$</span>
                       )}
                       <span style={s.noteAccent}>{C.comp_price_launch}</span>
                       <span style={s.noteSec}>{C.comp_payment_note}</span>
