@@ -57,7 +57,7 @@ function Comparison() {
     },
     priceBlock: {
       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-      marginBottom: 16,
+      marginBottom: 16, minHeight: 88,
     },
     priceMain: {
       font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em',
@@ -90,7 +90,7 @@ function Comparison() {
       width: '100%', boxSizing: 'border-box',
       padding: '11px 16px', borderRadius: 10,
       background: 'var(--ds-accent)', color: '#0a0908',
-      border: 'none', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
+      border: '1px solid transparent', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
       textDecoration: 'none', transition: 'opacity 200ms ease',
     },
     btnSec: {

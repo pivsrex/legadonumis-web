@@ -200,7 +200,7 @@ window.C = {
   comp_plan_basic_cta_win: "Descarga para Windows",
   comp_plan_pro:           "Legado Pro",
   comp_plan_pro_sub:       "Tu museo digital sin límites",
-  comp_price_launch:       "Precio especial de lanzamiento",
+  comp_price_launch:       "Precio especial",
   comp_payment_note:       "Pago seguro vía LemonSqueezy",
   comp_plan_pro_cta:       "Activa la experiencia Pro",
   comp_plan_pro_cta_sub:   "y Activa Experiencia Pro",
