@@ -10,11 +10,6 @@ const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323
 const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.0/Legado-1.1.0-arm64.dmg';
 const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.0/Legado-Setup-1.1.0.exe';
 
-function handleCompProClick(e) {
-  e.preventDefault();
-  window.open(isMac ? MAC_URL : WIN_URL, '_blank');
-  window.location.href = BUY_URL;
-}
 
 const GROUPS = C.comp_groups;
 
@@ -154,7 +149,6 @@ function Comparison() {
                     </div>
                     <a
                       href={BUY_URL}
-                      onClick={handleCompProClick}
                       style={s.btnPri}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
