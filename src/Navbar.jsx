@@ -9,11 +9,6 @@ const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1
 const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.0/Legado-Setup-1.1.0.exe';
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
 
-function handleNavProClick(e) {
-  e.preventDefault();
-  window.open(isMac ? MAC_URL : WIN_URL, '_blank');
-  window.location.href = BUY_URL;
-}
 
 function Navbar() {
   const [scrolled, setScrolled] = navUseState(false);
@@ -100,7 +95,7 @@ function Navbar() {
           <div className="lg-nav-btns">
             <a
               href={BUY_URL}
-              onClick={handleNavProClick}
+
               style={s.btn}
               onMouseEnter={hoverBtn} onMouseLeave={leaveBtn}
             >

@@ -10,11 +10,6 @@ const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1
 const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.0/Legado-Setup-1.1.0.exe';
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
 
-function handleHeroProClick(e) {
-  e.preventDefault();
-  window.open(isMac ? MAC_URL : WIN_URL, '_blank');
-  window.location.href = BUY_URL;
-}
 
 function Hero() {
   const s = {
@@ -109,7 +104,7 @@ function Hero() {
           <div style={s.ctaWrap}>
             <a
               href={BUY_URL}
-              onClick={handleHeroProClick}
+
               style={s.btnPri}
               onMouseEnter={hoverPri} onMouseLeave={leavePri}
             >
