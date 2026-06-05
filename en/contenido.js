@@ -32,14 +32,14 @@ window.C = {
   paso3_body:   "Sort and filter your coins however you like, then export or print whenever you need.\nYour collection, your rules.",
 
   paso4_titulo: "Rediscover your collection",
-  paso4_body:   "View your items on maps, compare examples side by side, keep notes, annotate images, create sticky notes, and explore detailed statistics.",
+  paso4_body:   "View your items on maps, compare examples, keep notes, plan future purchases, create labels, and explore metrics.",
 
   /* ── SHOWCASE ── */
   sc_h2:     "More context. More detail.\nMore perspective",
   sc_sub:    "A visual, practical, and intuitive experience\nfor enjoying numismatics",
 
   sc1_titulo: "Create detailed records in seconds",
-  sc1_desc:   "Import descriptions and technical data for your coins and banknotes from Numista, and add historical context using AI.",
+  sc1_desc:   "Import descriptions and technical data for your coins and banknotes from Numista, and add historical context with the help of artificial intelligence.",
 
   sc2_titulo: "Compare with\nmaximum detail",
   sc2_desc:   "View two pieces side by side and use the built-in magnifier to examine differences, varieties, and grades.",
@@ -67,7 +67,7 @@ window.C = {
   f3_desc:   "Add fields, arrange them as you like, and document each piece in depth, with help from Numista's database and AI. View your coins and banknotes together or separately.",
 
   f4_titulo: "Ideas, reminders, and notes",
-  f4_desc:   "Use digital sticky notes to track observations and to-dos. Annotate directly on photos and save independent versions for study or comparison.",
+  f4_desc:   "Use digital sticky notes to track observations and to-dos. Annotate photos. Keep a detailed list of the pieces you're looking for.",
 
   f5_titulo: "A fresh perspective on your collection",
   f5_desc:   "Analyze stats, identify trends, and view key data about your collection — including acquisition value, estimated current value, and intrinsic value, with live gold and silver prices.",
@@ -180,13 +180,14 @@ window.C = {
         { feat: "Statistics",                    basico: false,          pro: true          },
         { feat: "Photo annotations",             basico: false,          pro: true          },
         { feat: "Automatic Numista lookups *",   basico: false,          pro: "Unlimited"   },
-        { feat: "AI historical context",         basico: false,          pro: "500 queries included", cta: { label: "Need more?", url: "#pack-creditos" } },
+        { feat: "Historical context with artificial intelligence", basico: false, pro: "500 queries included", cta: { label: "Need more?", url: "#pack-creditos" } },
+        { feat: "Purchase plan",                 basico: false,          pro: true          },
       ],
     },
     {
       label: "Support & updates",
       rows: [
-        { feat: "Updates",           basico: false, pro: true },
+        { feat: "Access to new features", basico: false, pro: true },
         { feat: "Technical support", basico: false, pro: true },
       ],
     },
