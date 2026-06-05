@@ -7,8 +7,8 @@ const C = window.C;
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
 const isEU = Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('Europe/');
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
-const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.0/Legado-1.1.0-arm64.dmg';
-const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.0/Legado-Setup-1.1.0.exe';
+const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.1/Legado-1.1.1-arm64.dmg';
+const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.1/Legado-Setup-1.1.1.exe';
 
 
 const GROUPS = C.comp_groups;

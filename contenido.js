@@ -56,6 +56,9 @@ window.C = {
   sc4_titulo: "Pon tu colección en el mapa",
   sc4_desc:   "Consulta las cecas de tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
 
+  sc5_titulo: "Planifica tus próximas adquisiciones",
+  sc5_desc:   "Anota los ejemplares que quieres conseguir, con sus precios objetivo, conservaciones deseadas, referencias y cualquier otro detalle importante para tus futuras compras.",
+
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Herramientas que marcan la diferencia",
   feat_sub: "Todo lo que necesitas para organizar\ny apreciar tus monedas",
@@ -146,6 +149,7 @@ window.C = {
   asset_sc2:   "/assets/FichaCompara.mp4",
   asset_sc3:   "/assets/FichaEtiqueta.mp4",
   asset_sc4:   "/assets/FichaCecas.mp4",
+  asset_sc5:   "/assets/FichaNumista.mp4",
 
   /* ── TABLA COMPARATIVA ── */
   comp_groups: [

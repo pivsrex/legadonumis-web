@@ -50,6 +50,9 @@ window.C = {
   sc4_titulo: "Put your collection on the map",
   sc4_desc:   "Explore your coins' mints on both modern and ancient Roman Empire maps, in a visual and intuitive experience.",
 
+  sc5_titulo: "Plan your next acquisitions",
+  sc5_desc:   "Keep track of the pieces you want to add — with target prices, desired grades, references, and any other details that matter for your future purchases.",
+
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Tools that make the difference",
   feat_sub: "Everything you need to organize\nand appreciate your coins",
@@ -140,6 +143,7 @@ window.C = {
   asset_sc2:   "/assets/FichaCompara.mp4",
   asset_sc3:   "/assets/FichaEtiqueta.mp4",
   asset_sc4:   "/assets/FichaCecas.mp4",
+  asset_sc5:   "/assets/FichaNumista.mp4",
 
   /* ── TABLA COMPARATIVA ── */
   comp_groups: [
