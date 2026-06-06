@@ -73,7 +73,7 @@ window.C = {
   f3_desc:   "Añade campos, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.",
 
   f4_titulo: "Ideas, recordatorios y anotaciones",
-  f4_desc:   "Utiliza post-its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones sobre fotografías. Mantén una lista detallada de los ejemplares que buscas y recibe recordatorios de fechas importantes.",
+  f4_desc:   "Utiliza post-its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones sobre fotos. Mantén una lista detallada de los ejemplares que buscas y recibe recordatorios de fechas importantes.",
 
   f5_titulo: "Una perspectiva diferente de tu colección",
   f5_desc:   "Analiza estadísticas, identifica tendencias, y consulta datos clave sobre tu colección, incluyendo su valor de adquisición, valor actual estimado y valor intrínseco, con precios actualizados del oro y la plata.",
