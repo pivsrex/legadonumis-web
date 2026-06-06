@@ -32,7 +32,7 @@ window.C = {
   paso3_body:   "Sort and filter your coins however you like, then export or print whenever you need.\nYour collection, your rules.",
 
   paso4_titulo: "Rediscover your collection",
-  paso4_body:   "View your items on maps, compare examples, keep notes, plan future purchases, create labels, and explore metrics.",
+  paso4_body:   "View your items on maps, compare examples, keep notes, plan future acquisitions, create labels, and explore metrics.",
 
   /* ── SHOWCASE ── */
   sc_h2:     "More context. More detail.\nMore perspective",
@@ -51,7 +51,7 @@ window.C = {
   sc4_desc:   "Explore your coins' mints on both modern and ancient Roman Empire maps, in a visual and intuitive experience.",
 
   sc5_titulo: "Plan your next acquisitions",
-  sc5_desc:   "Keep track of the pieces you want to add — with target prices, desired grades, references, and any other details that matter for your future purchases.",
+  sc5_desc:   "Keep track of the pieces you want to acquire — with your budget, desired grades, and any other relevant details. Set reminders so you never miss an auction, fair, or convention.",
 
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Tools that make the difference",
@@ -67,7 +67,7 @@ window.C = {
   f3_desc:   "Add fields, arrange them as you like, and document each piece in depth, with help from Numista's database and AI. View your coins and banknotes together or separately.",
 
   f4_titulo: "Ideas, reminders, and notes",
-  f4_desc:   "Use digital sticky notes to track observations and to-dos. Annotate photos. Keep a detailed list of the pieces you're looking for.",
+  f4_desc:   "Use digital sticky notes to track observations and to-dos. Annotate photos. Keep a detailed list of the pieces you're looking for and get reminders for important dates.",
 
   f5_titulo: "A fresh perspective on your collection",
   f5_desc:   "Analyze stats, identify trends, and view key data about your collection — including acquisition value, estimated current value, and intrinsic value, with live gold and silver prices.",
@@ -181,7 +181,7 @@ window.C = {
         { feat: "Photo annotations",             basico: false,          pro: true          },
         { feat: "Automatic Numista lookups *",   basico: false,          pro: "Unlimited"   },
         { feat: "Historical context with artificial intelligence", basico: false, pro: "500 queries included", cta: { label: "Need more?", url: "#pack-creditos" } },
-        { feat: "Purchase plan",                 basico: false,          pro: true          },
+        { feat: "Acquisition plan & reminders",  basico: false,          pro: true          },
       ],
     },
     {

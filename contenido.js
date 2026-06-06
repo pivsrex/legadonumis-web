@@ -38,7 +38,7 @@ window.C = {
   paso3_body:   "Ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.",
 
   paso4_titulo: "Redescubre tu colección",
-  paso4_body:   "Visualiza tus piezas sobre mapas, compara ejemplares, guarda notas, planifica futuras compras, crea etiquetas y consulta métricas.",
+  paso4_body:   "Visualiza tus piezas sobre mapas, compara ejemplares, guarda notas, planifica futuras adquisiciones, crea etiquetas y consulta métricas.",
 
   /* ── SHOWCASE (tarjetas de producto) ── */
   sc_h2:     "Más contexto. Más detalle.\nMás perspectiva",
@@ -57,7 +57,7 @@ window.C = {
   sc4_desc:   "Consulta las cecas de tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
 
   sc5_titulo: "Planifica tus próximas adquisiciones",
-  sc5_desc:   "Anota los ejemplares que quieres conseguir, con sus precios objetivo, conservaciones deseadas, referencias y cualquier otro detalle importante para tus futuras compras.",
+  sc5_desc:   "Anota los ejemplares que quieres conseguir, con tu presupuesto, conservaciones deseadas y cualquier otro detalle relevante. Activa recordatorios para no olvidar fechas de subastas, convenciones, etc.",
 
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Herramientas que marcan la diferencia",
@@ -73,7 +73,7 @@ window.C = {
   f3_desc:   "Añade campos, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de la base de datos de Numista y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.",
 
   f4_titulo: "Ideas, recordatorios y anotaciones",
-  f4_desc:   "Utiliza post-its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones sobre fotografías. Mantén una lista detallada de los ejemplares que buscas.",
+  f4_desc:   "Utiliza post-its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones sobre fotografías. Mantén una lista detallada de los ejemplares que buscas y recibe recordatorios de fechas importantes.",
 
   f5_titulo: "Una perspectiva diferente de tu colección",
   f5_desc:   "Analiza estadísticas, identifica tendencias, y consulta datos clave sobre tu colección, incluyendo su valor de adquisición, valor actual estimado y valor intrínseco, con precios actualizados del oro y la plata.",
@@ -187,7 +187,7 @@ window.C = {
         { feat: "Anotaciones sobre imágenes",              basico: false,          pro: true          },
         { feat: "Consultas automáticas a Numista *",       basico: false,          pro: "Ilimitadas"  },
         { feat: "Contexto histórico con ayuda de inteligencia artificial", basico: false, pro: "500 consultas incluidas", cta: { label: "¿Necesitas más?", url: "#pack-creditos" } },
-        { feat: "Plan de compras",                         basico: false,          pro: true          },
+        { feat: "Plan de adquisiciones y recordatorios",   basico: false,          pro: true          },
       ],
     },
     {
