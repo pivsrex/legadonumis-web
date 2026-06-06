@@ -57,7 +57,7 @@ window.C = {
   sc4_desc:   "Consulta las cecas de tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
 
   sc5_titulo: "Planifica tus próximas adquisiciones",
-  sc5_desc:   "Anota los ejemplares que quieres conseguir, con tu presupuesto, conservaciones deseadas y cualquier otro detalle relevante. Activa recordatorios para no olvidar fechas de subastas, convenciones, etc.",
+  sc5_desc:   "Anota los ejemplares que quieres conseguir, con tu presupuesto, conservación deseada y cualquier otro detalle relevante. Activa recordatorios para no olvidar fechas de subastas, convenciones, etc.",
 
   /* ── CARACTERÍSTICAS ── */
   feat_h2:  "Herramientas que marcan la diferencia",
