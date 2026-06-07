@@ -50,6 +50,7 @@
     .lg-section-head   { grid-template-columns: 1fr !important; gap: 12px !important; }
     .lg-feature-grid   { grid-template-columns: 1fr !important; }
     .lg-workflow-track { grid-template-columns: 1fr !important; }
+    .tm-grid           { grid-template-columns: 1fr !important; }
     .lg-showcase-section { min-height: auto !important; margin-top: 24px !important; }
     .lg-showcase-sticky  { position: relative !important; top: auto !important; padding: 0 16px !important; }
     .lg-showcase-card    { height: auto !important; grid-template-columns: 1fr !important; }
@@ -116,6 +117,7 @@
 <script type="text/babel" src="src/Showcase.jsx?v=5"></script>
 <script type="text/babel" src="src/Features.jsx?v=4"></script>
 <script type="text/babel" src="src/Comparison.jsx?v=11"></script>
+<script type="text/babel" src="src/Testimonials.jsx?v=1"></script>
 <script type="text/babel" src="src/FAQ_CTA.jsx?v=4"></script>
 <script type="text/babel" src="src/Newsletter.jsx?v=1"></script>
 <script type="text/babel" src="src/Footer.jsx?v=4"></script>
@@ -131,6 +133,7 @@ function App() {
         <window.Showcase />
         <window.Features />
         <window.Comparison />
+        <window.Testimonials />
         <window.FAQ />
         <window.Newsletter />
         <window.FinalCTA />
@@ -145,7 +148,7 @@ window.LANG_ALT_URL = '/en/';
 
 /* Espera a que los fetch() asíncronos de Babel registren todos los componentes */
 (function waitAndRender() {
-  const needed = ['Navbar','Hero','Workflow','Showcase','Features','Comparison','FAQ','Newsletter','FinalCTA','Footer'];
+  const needed = ['Navbar','Hero','Workflow','Showcase','Features','Comparison','Testimonials','FAQ','Newsletter','FinalCTA','Footer'];
   if (needed.every(k => typeof window[k] === 'function')) {
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     if (window.location.hash) {

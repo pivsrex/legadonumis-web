@@ -232,4 +232,13 @@ window.C = {
     "Email support",
   ],
 
+  /* ── TESTIMONIALS ── */
+  tm_h2:      "What collectors are saying",
+  tm1_quote:  "I had more than ten years of data, notes and photographs scattered across different places. With Legado I managed to bring everything together in one single place.",
+  tm1_name:   "C. M.",
+  tm1_role:   "Coin collector",
+  tm2_quote:  "Thanks to the goals and reminders, I have a much clearer picture of which pieces I want to add and when a good opportunity comes along.",
+  tm2_name:   "A. G.",
+  tm2_role:   "Banknote collector",
+
 };
