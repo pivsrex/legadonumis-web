@@ -234,7 +234,9 @@ window.C = {
 
   /* ── TESTIMONIALS ── */
   tm1_quote: "My collection data was scattered across different files and notes. In no time I moved everything to Legado, and now I can find any detail in seconds.",
-  tm2_quote: "The reminders help me keep track of live auctions I care about. With Legado I can plan better and avoid impulse purchases.",
-  tm3_quote: "I've tried other apps, but something was always missing. Legado is designed to enjoy your collection, not just organise it.",
+  tm2_quote: "The reminders help me keep track of live auctions that interest me. With Legado I can plan better and avoid impulse purchases.",
+  tm3_quote: "I've tried other apps, but with Legado I found something different. It doesn't just help me keep my collection organised — it also helps me enjoy it.",
+  tm4_quote: "When I study a piece, I like to highlight legends, marks or small details. Having those notes directly on the photograph helps me analyse and refer back to them later.",
+  tm5_quote: "I used to prepare labels one by one. Now I generate them automatically without copying data over and over, and always with the layout I want.",
 
 };
