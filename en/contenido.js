@@ -58,7 +58,7 @@ window.C = {
   feat_sub: "Everything you need to organize\nand appreciate your coins",
 
   f1_titulo: "Import years of work in seconds",
-  f1_desc:   "Import your data and images automatically, edit multiple pieces at once, and pick up right where you left off.",
+  f1_desc:   "Import your data and images automatically, edit multiple pieces at once, and pick up right where you left off. Add a password for extra privacy.",
 
   f2_titulo: "A gallery worthy of your collection",
   f2_desc:   "Browse your coins and banknotes in six different view modes. Search by keyword, apply custom filters, and zoom in on any detail with the built-in magnifier while reading the full record.",

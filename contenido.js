@@ -64,7 +64,7 @@ window.C = {
   feat_sub: "Todo lo que necesitas para organizar\ny apreciar tus monedas",
 
   f1_titulo: "Importa años de trabajo en segundos",
-  f1_desc:   "Importa tus datos e imágenes de forma automatizada, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero.",
+  f1_desc:   "Importa tus datos e imágenes de forma automatizada, edita múltiples ejemplares a la vez y continúa trabajando sin empezar desde cero. Añade una contraseña para mayor privacidad.",
 
   f2_titulo: "Una galería digna de tu colección",
   f2_desc:   "Explora tus monedas y billetes en seis modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con lupa mientras consultas su ficha técnica.",
