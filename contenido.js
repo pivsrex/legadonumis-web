@@ -240,7 +240,7 @@ window.C = {
 
   /* ── TESTIMONIALS ── */
   tm1_quote: "Tenía la información de mi colección repartida entre distintos archivos y notas. En muy poco tiempo conseguí trasladarlo todo a Legado y ahora encuentro cualquier dato en cuestión de segundos.",
-  tm2_quote: "Los recordatorios me ayudan a seguir subastas y oportunidades de compra sin que se me escape nada importante. He conseguido incorporar piezas que probablemente habría pasado por alto.",
-  tm3_quote: "He probado otras aplicaciones de catalogación, pero siempre parecían una base de datos. Legado está pensado para admirar las piezas, no solo para catalogarlas.",
+  tm2_quote: "Los recordatorios me ayudan a no perderme subastas en vivo que me interesan. Con Legado puedo planificar mejor y evitar compras impulsivas.",
+  tm3_quote: "He probado otras aplicaciones, pero siempre me faltaba algo. Legado está pensado para disfrutar de la colección, no solo para organizarla.",
 
 };

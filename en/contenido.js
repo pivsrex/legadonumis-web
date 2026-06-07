@@ -234,7 +234,7 @@ window.C = {
 
   /* ── TESTIMONIALS ── */
   tm1_quote: "My collection data was scattered across different files and notes. In no time I moved everything to Legado, and now I can find any detail in seconds.",
-  tm2_quote: "The reminders help me follow auctions and buying opportunities without missing anything important. I've managed to add pieces I would probably have overlooked.",
-  tm3_quote: "I've tried other cataloguing apps, but they always felt like a database. Legado is designed to appreciate your pieces, not just catalogue them.",
+  tm2_quote: "The reminders help me keep track of live auctions I care about. With Legado I can plan better and avoid impulse purchases.",
+  tm3_quote: "I've tried other apps, but something was always missing. Legado is designed to enjoy your collection, not just organise it.",
 
 };

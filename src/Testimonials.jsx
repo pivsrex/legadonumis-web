@@ -45,13 +45,6 @@ function Testimonials() {
       overflow: 'hidden',
     }}>
 
-      {/* Línea de acento superior */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: 1,
-        background: 'linear-gradient(to right, transparent 0%, rgba(201,168,76,0.35) 20%, rgba(201,168,76,0.35) 80%, transparent 100%)',
-        pointerEvents: 'none',
-      }} />
-
       {/* Comilla decorativa de fondo */}
       <div aria-hidden="true" style={{
         position: 'absolute', top: '50%', right: '4%',
