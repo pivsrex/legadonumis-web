@@ -54,7 +54,7 @@ function Newsletter() {
 
   const s = {
     section:   { padding: '125px 0 0', background: 'var(--ds-bg-0)' },
-    container: { maxWidth: 1100, margin: '0 auto', padding: '0 32px' },
+    container: { maxWidth: 1200, margin: '0 auto', padding: '0 32px' },
     head: {
       display: 'grid', gridTemplateColumns: '1fr 1fr',
       gap: 64, alignItems: 'start', marginBottom: 48,

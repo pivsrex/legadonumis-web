@@ -73,7 +73,7 @@ function FAQ() {
 
   return (
     <section id="faq" style={{ padding: '125px 0 0', background: 'var(--ds-bg-0)' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 32px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
 
         <RevealWrapper>
           <div style={{
