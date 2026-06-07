@@ -239,12 +239,8 @@ window.C = {
   ],
 
   /* ── TESTIMONIALS ── */
-  tm_h2:      "Lo que dicen los coleccionistas",
-  tm1_quote:  "Tenía más de diez años de datos, notas y fotografías repartidos en distintos sitios. Con Legado conseguí reunirlo todo en un único lugar.",
-  tm1_name:   "C. M.",
-  tm1_role:   "Coleccionista de monedas",
-  tm2_quote:  "Gracias a los objetivos y recordatorios, tengo mucho más claro qué piezas quiero incorporar y cuándo surge una buena oportunidad.",
-  tm2_name:   "A. G.",
-  tm2_role:   "Coleccionista de billetes",
+  tm1_quote: "Tenía la información de mi colección repartida entre distintos archivos y notas. En muy poco tiempo conseguí trasladarlo todo a Legado y ahora encuentro cualquier dato en cuestión de segundos.",
+  tm2_quote: "Los recordatorios me ayudan a seguir subastas y oportunidades de compra sin que se me escape nada importante. He conseguido incorporar piezas que probablemente habría pasado por alto.",
+  tm3_quote: "He probado otras aplicaciones de catalogación, pero siempre parecían una base de datos. Legado está pensado para admirar las piezas, no solo para catalogarlas.",
 
 };

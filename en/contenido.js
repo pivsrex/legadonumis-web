@@ -233,12 +233,8 @@ window.C = {
   ],
 
   /* ── TESTIMONIALS ── */
-  tm_h2:      "What collectors are saying",
-  tm1_quote:  "I had more than ten years of data, notes and photographs scattered across different places. With Legado I managed to bring everything together in one single place.",
-  tm1_name:   "C. M.",
-  tm1_role:   "Coin collector",
-  tm2_quote:  "Thanks to the goals and reminders, I have a much clearer picture of which pieces I want to add and when a good opportunity comes along.",
-  tm2_name:   "A. G.",
-  tm2_role:   "Banknote collector",
+  tm1_quote: "My collection data was scattered across different files and notes. In no time I moved everything to Legado, and now I can find any detail in seconds.",
+  tm2_quote: "The reminders help me follow auctions and buying opportunities without missing anything important. I've managed to add pieces I would probably have overlooked.",
+  tm3_quote: "I've tried other cataloguing apps, but they always felt like a database. Legado is designed to appreciate your pieces, not just catalogue them.",
 
 };
