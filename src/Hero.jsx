@@ -32,17 +32,18 @@ function Hero() {
       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28,
     },
     h1: {
-      font: '700 clamp(28px, 3.6vw, 52px)/1.08 var(--font-display)',
-      letterSpacing: '-0.03em',
+      font: '700 clamp(32px, 5vw, 68px)/1.06 var(--font-display)',
+      letterSpacing: '-0.035em',
       color: 'var(--ds-text-high)',
-      maxWidth: 760,
+      whiteSpace: 'nowrap',
       textAlign: 'center',
       margin: 0,
     },
     sub: {
-      font: '400 18px/1.65 var(--font-body)',
+      font: '400 20px/1.65 var(--font-body)',
       color: 'var(--ds-text-mid)',
-      maxWidth: 560, textAlign: 'center', margin: 0,
+      maxWidth: 920, textAlign: 'center', margin: 0,
+      whiteSpace: 'nowrap',
     },
     ctaWrap: {
       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14,

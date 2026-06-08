@@ -45,7 +45,7 @@ function TestimonialCard({ quote }) {
 
 function Testimonials() {
   return (
-    <section id="testimonials" style={{ padding: '125px 0 0' }}>
+    <section id="testimonials" style={{ padding: '70px 0 0' }}>
       <style>{`
         @keyframes tmScroll {
           from { transform: translateX(0); }
