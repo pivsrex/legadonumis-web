@@ -97,6 +97,10 @@ function Hero() {
         @media (max-width: 819px) {
           .hero-br { display: initial; }
         }
+        .hero-mobile-notice { display: none; }
+        @media (max-width: 819px) {
+          .hero-mobile-notice { display: flex; }
+        }
       `}</style>
       <div style={s.glow} />
       <div style={s.container}>
@@ -108,6 +112,21 @@ function Hero() {
         <RevealWrapper delay={180}>
           <p style={s.sub} className="hero-sub">{br(C.hero_sub, 'hero-br')}</p>
         </RevealWrapper>
+
+        <div className="hero-mobile-notice" style={{
+          alignItems: 'flex-start', gap: 10,
+          background: 'rgba(201,168,76,0.07)',
+          border: '1px solid rgba(201,168,76,0.2)',
+          borderRadius: 12, padding: '12px 16px',
+          maxWidth: 380,
+        }}>
+          <span style={{ fontSize: 16, lineHeight: 1, flexShrink: 0, marginTop: 1 }}>💻</span>
+          <p style={{ font: '400 13px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0 }}>
+            {(window.LANG || 'es') === 'en'
+              ? 'Legado is a desktop app for Mac and Windows — not available for mobile.'
+              : 'Legado es una aplicación de escritorio para Mac y Windows, no para móvil.'}
+          </p>
+        </div>
 
         <RevealWrapper delay={280}>
           <div style={s.ctaWrap}>
