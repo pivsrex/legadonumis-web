@@ -14,7 +14,7 @@ window.C = {
 
   /* ── HERO ── */
   hero_h1:  "Your collection's\ndigital home",
-  hero_sub: "Catalog your coins and banknotes.\nLearn their history. Discover their value.",
+  hero_sub: "Organize your coins and banknotes. Learn their history. Discover their value.",
   hero_btn_mac: "Download",
   hero_btn_win: "Download",
 
@@ -23,7 +23,7 @@ window.C = {
   pasos_sub: "Four simple steps to manage it <br> easily and elegantly with Legado",
 
   paso1_titulo: "Add your pieces",
-  paso1_body:   "Catalog every item manually or import your collection from Excel or a CSV file with a single click—quickly and easily.",
+  paso1_body:   "Register every item manually or import your collection from Excel or a CSV file with a single click.",
 
   paso2_titulo: "Preserve their story",
   paso2_body:   "Automatically assign photos to each item and attach videos, documents, links, and references. Everything in one place, always accessible.",

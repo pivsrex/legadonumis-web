@@ -20,7 +20,7 @@ window.C = {
 
   /* ── HERO ── */
   hero_h1:  "El museo digital\nde tu colección",
-  hero_sub: "Cataloga tus monedas y billetes.\nConoce su historia. Descubre su valor.",
+  hero_sub: "Organiza tus monedas y billetes. Conoce su historia. Descubre su valor.",
   hero_btn_mac: "Descargar",
   hero_btn_win: "Descargar",
 
@@ -29,7 +29,7 @@ window.C = {
   pasos_sub: "Cuatro sencillos pasos para gestionarla <br> con Legado de forma elegante y flexible",
 
   paso1_titulo: "Añade tus piezas",
-  paso1_body:   "Cataloga cada ejemplar personalmente o importa tu colección desde Excel/CSV con un solo clic, de forma fácil y rápida.",
+  paso1_body:   "Registra cada ejemplar personalmente o importa tu colección desde Excel/CSV con un solo clic.",
 
   paso2_titulo: "Conserva su historia",
   paso2_body:   "Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.",
