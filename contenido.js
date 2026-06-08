@@ -95,7 +95,7 @@ window.C = {
   faq3_a: "La aplicación funciona offline para la gestión y consulta de datos. Algunas funciones como el mapa, el cálculo del valor intrínseco, la conversión entre divisas, el acceso a la base de datos de Numista y la generación de contenido mediante inteligencia artificial requieren conexión a Internet.",
 
   faq4_q: "¿Es seguro descargar Legado? ¿Dónde se guardan mis datos?",
-  faq4_a: "Sí. Puedes descargar Legado con tranquilidad. El programa se distribuye únicamente desde la web y no incluye publicidad ni software adicional. Además, los datos se almacenan localmente en tu dispositivo o en servicios externos de almacenamiento que tú configures. Legado no almacena ni procesa esos datos en sus propios servidores.",
+  faq4_a: "Sí. Puedes descargar Legado con tranquilidad. El programa se distribuye únicamente desde esta web oficial y no incluye publicidad ni software adicional. Además, los datos se almacenan localmente en tu dispositivo o en servicios externos de almacenamiento que tú configures. Legado no almacena ni procesa esos datos en sus propios servidores.",
 
   faq5_q: "¿El uso de Numista y la IA tiene algún coste adicional?",
   faq5_a: "El acceso a la base de datos de Numista (disponible en Legado Pro) requiere una clave API gratuita disponible en Numista.com. Cabe mencionar que Legado no está vinculado a Numista ni es responsable de sus condiciones, disponibilidad o precios. Además, Legado Pro incluye en su precio 500 créditos para generar información contextual histórica de monedas y billetes. Es posible adquirir paquetes de créditos adicionales.",

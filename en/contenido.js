@@ -89,7 +89,7 @@ window.C = {
   faq3_a: "The app works offline for managing and browsing your data. Some features — the map, live bullion prices, currency conversion, Numista integration, and AI content generation — require an internet connection.",
 
   faq4_q: "Is Legado safe to download? Where is my data stored?",
-  faq4_a: "Yes. You can download Legado with confidence. The app is distributed exclusively through this website and includes no ads or bundled software. Your data is stored locally on your device, or in an external storage service you configure yourself. Legado does not store or process your data on its own servers.",
+  faq4_a: "Yes. You can download Legado with confidence. The app is distributed exclusively through this official website and includes no ads or bundled software. Your data is stored locally on your device, or in an external storage service you configure yourself. Legado does not store or process your data on its own servers.",
 
   faq5_q: "Is there an extra cost for Numista and AI?",
   faq5_a: "Numista access (available in Legado Pro) requires a free API key from Numista.com. Note that Legado is not affiliated with Numista and is not responsible for their terms, availability, or pricing. In addition, Legado Pro includes 500 credits for generating historical context about coins and banknotes. Additional credit packs can be purchased.",
