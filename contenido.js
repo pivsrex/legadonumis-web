@@ -29,7 +29,7 @@ window.C = {
   pasos_sub: "Cuatro sencillos pasos para gestionarla <br> con Legado de forma elegante y flexible",
 
   paso1_titulo: "Añade tus piezas",
-  paso1_body:   "Registra cada ejemplar individualmente o importa los datos de tu colección desde Excel/CSV con un solo clic.",
+  paso1_body:   "Registra cada ejemplar individualmente o importa los datos de tu colección desde Excel o un archivo CSV con un solo clic.",
 
   paso2_titulo: "Conserva su historia",
   paso2_body:   "Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.",
