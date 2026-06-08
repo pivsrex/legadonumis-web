@@ -23,7 +23,7 @@ window.C = {
   pasos_sub: "Four simple steps to manage it <br> easily and elegantly with Legado",
 
   paso1_titulo: "Add your pieces",
-  paso1_body:   "Register every item manually or import your collection from Excel or a CSV file with a single click.",
+  paso1_body:   "Register every item individually or import your collection data from Excel or a CSV file with a single click.",
 
   paso2_titulo: "Preserve their story",
   paso2_body:   "Automatically assign photos to each item and attach videos, documents, links, and references. Everything in one place, always accessible.",
