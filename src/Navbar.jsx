@@ -45,11 +45,11 @@ function Navbar() {
     btn: {
       background: 'var(--ds-accent)', color: '#0a0908',
       border: 'none', borderRadius: 10,
-      padding: '10px 18px',
+      padding: '10px 22px',
       font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
-      display: 'inline-flex', alignItems: 'center', gap: 8,
+      display: 'inline-flex', alignItems: 'center', gap: 9,
       transition: 'transform 200ms ease, background 200ms ease',
-      textDecoration: 'none', height: 38, boxSizing: 'border-box',
+      textDecoration: 'none', height: 42, boxSizing: 'border-box',
     },
   };
 
@@ -99,6 +99,7 @@ function Navbar() {
               style={s.btn}
               onMouseEnter={hoverBtn} onMouseLeave={leaveBtn}
             >
+              {isMac ? <AppleIcon size={17} /> : <WindowsIcon size={17} />}
               {C.nav_btn_mac}
             </a>
           </div>

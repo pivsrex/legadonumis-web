@@ -83,18 +83,18 @@ function Comparison() {
     },
     tdVal: { padding: '9px 24px', textAlign: 'center', verticalAlign: 'middle' },
     btnPri: {
-      display: 'block', textAlign: 'center',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
       padding: '11px 16px', borderRadius: 10,
       background: 'var(--ds-accent)', color: '#0a0908',
       border: '1px solid transparent', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em',
-      textDecoration: 'none', transition: 'opacity 200ms ease', whiteSpace: 'pre-line',
+      textDecoration: 'none', transition: 'opacity 200ms ease', whiteSpace: 'pre-line', textAlign: 'center',
     },
     btnSec: {
-      display: 'block', textAlign: 'center',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
       padding: '11px 16px', borderRadius: 10,
       background: 'transparent', color: 'var(--ds-text-high)',
       border: '1px solid var(--ds-border-mid)', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em',
-      textDecoration: 'none', transition: 'border-color 200ms ease', whiteSpace: 'pre-line',
+      textDecoration: 'none', transition: 'border-color 200ms ease', whiteSpace: 'pre-line', textAlign: 'center',
     },
   };
 
@@ -148,6 +148,7 @@ function Comparison() {
                     <a href={isMac ? MAC_URL : WIN_URL} style={s.btnSec}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-high)'}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-mid)'}>
+                      {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
                       {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
@@ -162,6 +163,7 @@ function Comparison() {
                     <a href={BUY_URL} style={s.btnPri}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+                      {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
                       {C.comp_plan_pro_cta}
                     </a>
                   </th>
@@ -238,8 +240,10 @@ function Comparison() {
                     border: '1px solid transparent',
                     font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em',
                     textDecoration: 'none', whiteSpace: 'pre-line',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   }}
                 >
+                  {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
                   {C.comp_plan_pro_cta}
                 </a>
               )}

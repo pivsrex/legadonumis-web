@@ -138,6 +138,7 @@ function Hero() {
               style={s.btnPri}
               onMouseEnter={hoverPri} onMouseLeave={leavePri}
             >
+              {isMac ? <AppleIcon size={20} /> : <WindowsIcon size={20} />}
               {C.hero_btn_mac}
             </a>
           </div>
