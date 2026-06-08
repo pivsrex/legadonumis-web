@@ -100,6 +100,7 @@ function Hero() {
         .hero-mobile-notice { display: none; }
         @media (max-width: 819px) {
           .hero-mobile-notice { display: flex; }
+          .hero-other-os { display: none; }
         }
       `}</style>
       <div style={s.glow} />
@@ -114,17 +115,17 @@ function Hero() {
         </RevealWrapper>
 
         <div className="hero-mobile-notice" style={{
-          alignItems: 'flex-start', gap: 10,
+          alignItems: 'center', gap: 10,
           background: 'rgba(201,168,76,0.07)',
           border: '1px solid rgba(201,168,76,0.2)',
           borderRadius: 12, padding: '12px 16px',
           maxWidth: 380,
         }}>
-          <span style={{ fontSize: 16, lineHeight: 1, flexShrink: 0, marginTop: 1 }}>💻</span>
-          <p style={{ font: '400 13px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0 }}>
+          <span style={{ fontSize: 16, lineHeight: 1, flexShrink: 0 }}>💻</span>
+          <p style={{ font: '400 13px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, textAlign: 'center' }}>
             {(window.LANG || 'es') === 'en'
-              ? 'To download Legado, visit this page from your Mac or PC.'
-              : 'Para descargar Legado, visita esta página desde tu Mac o PC.'}
+              ? 'Legado is a desktop app. Visit this page from your Mac or PC to download it.'
+              : 'Legado es una aplicación de escritorio. Visita esta web desde tu Mac o PC para descargarla.'}
           </p>
         </div>
 
@@ -141,6 +142,7 @@ function Hero() {
             </a>
             <a
               href={isMac ? WIN_URL : MAC_URL}
+              className="hero-other-os"
               style={s.otherOs}
               onMouseEnter={hoverOther} onMouseLeave={leaveOther}
             >
