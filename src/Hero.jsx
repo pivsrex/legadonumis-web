@@ -2,7 +2,7 @@
 const { AppleIcon, WindowsIcon } = window.LegadoIcons;
 const { RevealWrapper } = window;
 const C = window.C;
-const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
+const br = (s, cls) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i, ...(cls?{className:cls}:{})}),l],[]);
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
 
@@ -93,16 +93,20 @@ function Hero() {
           .hero-h1  { white-space: nowrap; }
           .hero-sub { white-space: nowrap; }
         }
+        .hero-br { display: none; }
+        @media (max-width: 819px) {
+          .hero-br { display: initial; }
+        }
       `}</style>
       <div style={s.glow} />
       <div style={s.container}>
 
         <RevealWrapper delay={80}>
-          <h1 style={s.h1} className="hero-h1">{br(C.hero_h1)}</h1>
+          <h1 style={s.h1} className="hero-h1">{br(C.hero_h1, 'hero-br')}</h1>
         </RevealWrapper>
 
         <RevealWrapper delay={180}>
-          <p style={s.sub} className="hero-sub">{br(C.hero_sub)}</p>
+          <p style={s.sub} className="hero-sub">{br(C.hero_sub, 'hero-br')}</p>
         </RevealWrapper>
 
         <RevealWrapper delay={280}>

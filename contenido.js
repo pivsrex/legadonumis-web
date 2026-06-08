@@ -19,8 +19,8 @@ window.C = {
   nav_btn_win: "Descarga para Windows",
 
   /* ── HERO ── */
-  hero_h1:  "El museo digital de tu colección",
-  hero_sub: "Cataloga tus monedas y billetes. Conoce su historia. Descubre su valor.",
+  hero_h1:  "El museo digital\nde tu colección",
+  hero_sub: "Cataloga tus monedas y billetes.\nConoce su historia. Descubre su valor.",
   hero_btn_mac: "Descarga para Mac",
   hero_btn_win: "Descarga para Windows",
 
