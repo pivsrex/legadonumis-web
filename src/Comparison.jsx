@@ -2,6 +2,7 @@
 const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
 const { CheckIcon, AppleIcon, WindowsIcon } = window.LegadoIcons;
 const { RevealWrapper } = window;
+const { useState: compUseState } = React;
 const C = window.C;
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
@@ -9,7 +10,6 @@ const isEU = Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('Europe
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
 const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.3/Legado-1.1.3-arm64.dmg';
 const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.3/Legado-Setup-1.1.3.exe';
-
 
 const GROUPS = C.comp_groups;
 
@@ -20,6 +20,8 @@ function Cell({ value }) {
 }
 
 function Comparison() {
+  const [tab, setTab] = compUseState('pro');
+
   const s = {
     section: {
       padding: '125px 0 0',
@@ -96,8 +98,28 @@ function Comparison() {
     },
   };
 
+  const tabBtn = (plan) => ({
+    flex: 1,
+    padding: '10px 12px',
+    borderRadius: 8,
+    border: 'none',
+    background: tab === plan ? 'rgba(201,168,76,0.14)' : 'transparent',
+    color: tab === plan ? 'var(--ds-accent)' : 'var(--ds-text-mid)',
+    font: '600 14px/1 var(--font-display)',
+    letterSpacing: '-0.01em',
+    cursor: 'pointer',
+    transition: 'all 150ms ease',
+  });
+
   return (
     <section id="versiones" style={s.section}>
+      <style>{`
+        .comp-mobile { display: none; }
+        @media (max-width: 700px) {
+          .comp-desktop { display: none; }
+          .comp-mobile  { display: block; }
+        }
+      `}</style>
       <div style={s.container}>
 
         <RevealWrapper>
@@ -108,51 +130,38 @@ function Comparison() {
         </RevealWrapper>
 
         <RevealWrapper delay={100}>
-          <div className="lg-comparison-wrapper" style={{ maxWidth: 900, margin: '0 auto', background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
+
+          {/* ── DESKTOP TABLE ── */}
+          <div className="comp-desktop lg-comparison-wrapper" style={{ maxWidth: 900, margin: '0 auto', background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
             <table style={s.table} className="lg-comparison">
               <thead>
                 <tr>
                   <th style={s.thFeat}></th>
-
-                  {/* Legado Básico */}
                   <th style={s.thPlan}>
                     <span style={{ ...s.planName, color: 'var(--ds-text-mid)' }}>{C.comp_plan_basic}</span>
                     <span style={s.planSub}>{C.comp_plan_basic_sub}</span>
-                    {/* Mismo layout vertical que Pro para alinear precios */}
                     <div style={s.priceBlock}>
                       <span style={s.priceMain}>{C.comp_plan_basic_price}</span>
                       <span style={{ ...s.noteAccent, visibility: 'hidden' }}>—</span>
                       <span style={{ ...s.noteSec, visibility: 'hidden' }}>—</span>
                     </div>
-                    <a
-                      href={isMac ? MAC_URL : WIN_URL}
-                      style={s.btnSec}
+                    <a href={isMac ? MAC_URL : WIN_URL} style={s.btnSec}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-high)'}
-                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-mid)'}
-                    >
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--ds-border-mid)'}>
                       {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
-
-                  {/* Legado Pro */}
                   <th style={s.thPlan}>
                     <span style={{ ...s.planName, color: 'var(--ds-accent)' }}>{C.comp_plan_pro}</span>
                     <span style={s.planSub}>{C.comp_plan_pro_sub}</span>
                     <div style={s.priceBlock}>
-                      {isEU ? (
-                        <span style={s.priceMain}>79 €</span>
-                      ) : (
-                        <span style={s.priceMain}>79 US$</span>
-                      )}
+                      {isEU ? <span style={s.priceMain}>79 €</span> : <span style={s.priceMain}>79 US$</span>}
                       <span style={s.noteAccent}>{C.comp_price_launch}</span>
                       <span style={s.noteSec}>{C.comp_payment_note}</span>
                     </div>
-                    <a
-                      href={BUY_URL}
-                      style={s.btnPri}
+                    <a href={BUY_URL} style={s.btnPri}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
-                      onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
-                    >
+                      onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
                       {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
                     </a>
                   </th>
@@ -161,9 +170,7 @@ function Comparison() {
               <tbody>
                 {GROUPS.map((group, gi) => (
                   <React.Fragment key={gi}>
-                    <tr>
-                      <td colSpan={3} style={s.groupLabel}>{group.label}</td>
-                    </tr>
+                    <tr><td colSpan={3} style={s.groupLabel}>{group.label}</td></tr>
                     {group.rows.map((row, ri) => (
                       <tr key={ri} style={s.tr}>
                         <td style={s.tdFeat}>{row.feat}</td>
@@ -171,12 +178,9 @@ function Comparison() {
                         <td style={s.tdVal}>
                           <Cell value={row.pro} />
                           {row.cta && (
-                            <a
-                              href={row.cta.url}
-                              style={{ display: 'inline-block', marginTop: 6, font: '500 11px/1 var(--font-body)', color: 'var(--ds-accent)', textDecoration: 'none', opacity: 0.85 }}
+                            <a href={row.cta.url} style={{ display: 'inline-block', marginTop: 6, font: '500 11px/1 var(--font-body)', color: 'var(--ds-accent)', textDecoration: 'none', opacity: 0.85 }}
                               onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                              onMouseLeave={(e) => e.currentTarget.style.opacity = '0.85'}
-                            >
+                              onMouseLeave={(e) => e.currentTarget.style.opacity = '0.85'}>
                               {row.cta.label} →
                             </a>
                           )}
@@ -188,6 +192,83 @@ function Comparison() {
               </tbody>
             </table>
           </div>
+
+          {/* ── MOBILE TABS ── */}
+          <div className="comp-mobile" style={{ background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
+
+            {/* Tab switcher */}
+            <div style={{ display: 'flex', margin: '20px 16px 0', background: 'var(--ds-bg-2)', borderRadius: 10, padding: 3, gap: 3 }}>
+              <button onClick={() => setTab('basico')} style={tabBtn('basico')}>{C.comp_plan_basic}</button>
+              <button onClick={() => setTab('pro')}    style={tabBtn('pro')}>{C.comp_plan_pro}</button>
+            </div>
+
+            {/* Plan header */}
+            <div style={{ padding: '20px 20px 16px', borderBottom: '1px solid var(--ds-border-low)' }}>
+              <span style={{ display: 'block', font: '600 16px/1 var(--font-display)', letterSpacing: '-0.01em', color: tab === 'pro' ? 'var(--ds-accent)' : 'var(--ds-text-mid)', marginBottom: 4 }}>
+                {tab === 'basico' ? C.comp_plan_basic : C.comp_plan_pro}
+              </span>
+              <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginBottom: 16 }}>
+                {tab === 'basico' ? C.comp_plan_basic_sub : C.comp_plan_pro_sub}
+              </span>
+              {tab === 'basico' ? (
+                <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)', marginBottom: 16 }}>
+                  {C.comp_plan_basic_price}
+                </span>
+              ) : (
+                <div style={{ marginBottom: 16 }}>
+                  <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>
+                    {isEU ? '79 €' : '79 US$'}
+                  </span>
+                  <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', marginTop: 4, whiteSpace: 'pre-line' }}>
+                    {C.comp_price_launch}
+                  </span>
+                  <span style={{ display: 'block', font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 2 }}>
+                    {C.comp_payment_note}
+                  </span>
+                </div>
+              )}
+              <a
+                href={tab === 'basico' ? (isMac ? MAC_URL : WIN_URL) : BUY_URL}
+                style={{
+                  display: 'block', textAlign: 'center',
+                  padding: '12px 16px', borderRadius: 10,
+                  background: tab === 'pro' ? 'var(--ds-accent)' : 'transparent',
+                  color: tab === 'pro' ? '#0a0908' : 'var(--ds-text-high)',
+                  border: tab === 'pro' ? '1px solid transparent' : '1px solid var(--ds-border-mid)',
+                  font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
+                  textDecoration: 'none',
+                }}
+              >
+                {tab === 'basico' ? (isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win) : C.comp_plan_pro_cta}
+              </a>
+            </div>
+
+            {/* Feature rows */}
+            {GROUPS.map((group, gi) => (
+              <React.Fragment key={gi}>
+                <div style={{ padding: '16px 20px 6px', font: '500 11px/1 var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ds-accent)' }}>
+                  {group.label}
+                </div>
+                {group.rows.map((row, ri) => (
+                  <div key={ri} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px', borderBottom: '1px solid var(--ds-border-low)' }}>
+                    <span style={{ font: '400 14px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', flex: 1, paddingRight: 16 }}>
+                      {row.feat}
+                    </span>
+                    <span style={{ textAlign: 'right', flexShrink: 0 }}>
+                      <Cell value={row[tab]} />
+                      {row.cta && tab === 'pro' && (
+                        <a href={row.cta.url} style={{ display: 'block', marginTop: 4, font: '500 11px/1 var(--font-body)', color: 'var(--ds-accent)', textDecoration: 'none' }}>
+                          {row.cta.label} →
+                        </a>
+                      )}
+                    </span>
+                  </div>
+                ))}
+              </React.Fragment>
+            ))}
+
+          </div>
+
         </RevealWrapper>
 
         <RevealWrapper delay={200}>

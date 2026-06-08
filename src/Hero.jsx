@@ -35,15 +35,13 @@ function Hero() {
       font: '700 clamp(32px, 5vw, 68px)/1.06 var(--font-display)',
       letterSpacing: '-0.035em',
       color: 'var(--ds-text-high)',
-      whiteSpace: 'nowrap',
       textAlign: 'center',
       margin: 0,
     },
     sub: {
-      font: '400 20px/1.65 var(--font-body)',
+      font: '400 clamp(16px, 1.6vw, 20px)/1.65 var(--font-body)',
       color: 'var(--ds-text-mid)',
       maxWidth: 920, textAlign: 'center', margin: 0,
-      whiteSpace: 'nowrap',
     },
     ctaWrap: {
       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14,
@@ -90,15 +88,21 @@ function Hero() {
 
   return (
     <section style={s.section}>
+      <style>{`
+        @media (min-width: 820px) {
+          .hero-h1  { white-space: nowrap; }
+          .hero-sub { white-space: nowrap; }
+        }
+      `}</style>
       <div style={s.glow} />
       <div style={s.container}>
 
         <RevealWrapper delay={80}>
-          <h1 style={s.h1}>{br(C.hero_h1)}</h1>
+          <h1 style={s.h1} className="hero-h1">{br(C.hero_h1)}</h1>
         </RevealWrapper>
 
         <RevealWrapper delay={180}>
-          <p style={s.sub}>{br(C.hero_sub)}</p>
+          <p style={s.sub} className="hero-sub">{br(C.hero_sub)}</p>
         </RevealWrapper>
 
         <RevealWrapper delay={280}>
