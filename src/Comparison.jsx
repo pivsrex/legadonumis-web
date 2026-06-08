@@ -227,20 +227,22 @@ function Comparison() {
                   </span>
                 </div>
               )}
-              <a
-                href={tab === 'basico' ? (isMac ? MAC_URL : WIN_URL) : BUY_URL}
-                style={{
-                  display: 'block', textAlign: 'center',
-                  padding: '12px 16px', borderRadius: 10,
-                  background: tab === 'pro' ? 'var(--ds-accent)' : 'transparent',
-                  color: tab === 'pro' ? '#0a0908' : 'var(--ds-text-high)',
-                  border: tab === 'pro' ? '1px solid transparent' : '1px solid var(--ds-border-mid)',
-                  font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
-                  textDecoration: 'none',
-                }}
-              >
-                {tab === 'basico' ? (isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win) : C.comp_plan_pro_cta}
-              </a>
+              {tab === 'pro' && (
+                <a
+                  href={BUY_URL}
+                  style={{
+                    display: 'block', textAlign: 'center',
+                    padding: '12px 16px', borderRadius: 10,
+                    background: 'var(--ds-accent)',
+                    color: '#0a0908',
+                    border: '1px solid transparent',
+                    font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
+                    textDecoration: 'none',
+                  }}
+                >
+                  {C.comp_plan_pro_cta}
+                </a>
+              )}
             </div>
 
             {/* Feature rows */}

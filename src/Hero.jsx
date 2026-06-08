@@ -123,9 +123,11 @@ function Hero() {
         }}>
           <span style={{ fontSize: 16, lineHeight: 1, flexShrink: 0 }}>💻</span>
           <p style={{ font: '400 13px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, textAlign: 'center' }}>
-            {(window.LANG || 'es') === 'en'
-              ? 'Legado is a desktop app. Visit this page from your Mac or PC to download it.'
-              : 'Legado es una aplicación de escritorio. Visita esta web desde tu Mac o PC para descargarla.'}
+            {(window.LANG || 'es') === 'en' ? (
+              <>Legado is a desktop app.<br />Visit this page from your Mac or PC<br />to download it.</>
+            ) : (
+              <>Legado es una aplicación de escritorio.<br />Visita esta web desde tu Mac o PC<br />para descargarla.</>
+            )}
           </p>
         </div>
 
