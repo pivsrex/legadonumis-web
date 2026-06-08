@@ -21,8 +21,8 @@ window.C = {
   /* ── HERO ── */
   hero_h1:  "El museo digital\nde tu colección",
   hero_sub: "Cataloga tus monedas y billetes.\nConoce su historia. Descubre su valor.",
-  hero_btn_mac: "Descargar Legado Pro",
-  hero_btn_win: "Descargar Legado Pro",
+  hero_btn_mac: "Descargar",
+  hero_btn_win: "Descargar",
 
   /* ── PASOS (Workflow) ── */
   pasos_h2:  "Porque tu colección\nmerece mucho más que\nun simple inventario",
