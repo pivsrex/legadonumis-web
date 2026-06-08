@@ -241,8 +241,9 @@ window.C = {
   /* ── TESTIMONIALS ── */
   tm1_quote: "Tenía la información de mi colección repartida entre distintos archivos y notas. En muy poco tiempo conseguí trasladarlo todo a Legado y ahora encuentro cualquier dato en cuestión de segundos.",
   tm2_quote: "Los recordatorios me ayudan a no perderme las subastas en vivo que me interesan. Con Legado puedo planificar mejor y evitar compras impulsivas.",
-  tm3_quote: "He probado otras aplicaciones, pero con Legado encontré algo diferente. No solo me ayuda a tener mi colección organizada, sino también a disfrutarla.",
+  tm3_quote: "He probado otras aplicaciones, pero ninguna me daba ganas de abrirla. Con Legado tengo la colección organizada y, además, disfruto usándola.",
   tm4_quote: "Cuando estudio una pieza, suelo destacar leyendas, marcas o pequeños detalles. Tener esas anotaciones directamente sobre la fotografía me ayuda a analizarlas y consultarlas más adelante.",
   tm5_quote: "Antes preparaba las etiquetas una por una. Ahora las genero automáticamente sin tener que copiar datos una y otra vez, y siempre con el diseño que quiero.",
+  tm6_quote: "Cada coleccionista tiene su propia lógica. Legado me deja definir mis propios campos, mi propio orden y mi propio diseño. Por fin una app que se adapta a mí y no al revés.",
 
 };

@@ -22,10 +22,10 @@ function Navbar() {
     nav: {
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       height: 64,
-      background: scrolled ? 'rgba(10,9,8,0.82)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(16px) saturate(140%)' : 'none',
-      WebkitBackdropFilter: scrolled ? 'blur(16px) saturate(140%)' : 'none',
-      borderBottom: scrolled ? '1px solid var(--ds-border-low)' : '1px solid transparent',
+      background: scrolled ? 'rgba(10,9,8,0.92)' : 'rgba(10,9,8,0.55)',
+      backdropFilter: 'blur(18px) saturate(150%)',
+      WebkitBackdropFilter: 'blur(18px) saturate(150%)',
+      borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(255,255,255,0.04)',
       transition: 'background 300ms ease, border-color 300ms ease',
     },
     inner: {
