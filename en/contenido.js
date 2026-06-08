@@ -15,8 +15,8 @@ window.C = {
   /* ── HERO ── */
   hero_h1:  "Your collection's\ndigital home",
   hero_sub: "Catalog your coins and banknotes.\nLearn their history. Discover their value.",
-  hero_btn_mac: "Download for Mac",
-  hero_btn_win: "Download for Windows",
+  hero_btn_mac: "Download Legado Pro",
+  hero_btn_win: "Download Legado Pro",
 
   /* ── PASOS (Workflow) ── */
   pasos_h2:  "Because your collection\ndeserves much more than\na simple inventory",

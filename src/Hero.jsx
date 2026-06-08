@@ -135,21 +135,10 @@ function Hero() {
           <div style={s.ctaWrap}>
             <a
               href={BUY_URL}
-
               style={s.btnPri}
               onMouseEnter={hoverPri} onMouseLeave={leavePri}
             >
-              {isMac ? <AppleIcon size={18} /> : <WindowsIcon size={18} />}
-              {isMac ? C.hero_btn_mac : C.hero_btn_win}
-            </a>
-            <a
-              href={isMac ? WIN_URL : MAC_URL}
-              className="hero-other-os"
-              style={s.otherOs}
-              onMouseEnter={hoverOther} onMouseLeave={leaveOther}
-            >
-              {isMac ? <WindowsIcon size={13} /> : <AppleIcon size={13} />}
-              {isMac ? C.hero_btn_win : C.hero_btn_mac}
+              {C.hero_btn_mac}
             </a>
           </div>
         </RevealWrapper>
