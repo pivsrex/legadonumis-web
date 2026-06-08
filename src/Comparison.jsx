@@ -86,15 +86,15 @@ function Comparison() {
       display: 'block', textAlign: 'center',
       padding: '11px 16px', borderRadius: 10,
       background: 'var(--ds-accent)', color: '#0a0908',
-      border: '1px solid transparent', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
-      textDecoration: 'none', transition: 'opacity 200ms ease', whiteSpace: 'nowrap',
+      border: '1px solid transparent', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em',
+      textDecoration: 'none', transition: 'opacity 200ms ease', whiteSpace: 'pre-line',
     },
     btnSec: {
       display: 'block', textAlign: 'center',
       padding: '11px 16px', borderRadius: 10,
       background: 'transparent', color: 'var(--ds-text-high)',
-      border: '1px solid var(--ds-border-mid)', font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
-      textDecoration: 'none', transition: 'border-color 200ms ease', whiteSpace: 'nowrap',
+      border: '1px solid var(--ds-border-mid)', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em',
+      textDecoration: 'none', transition: 'border-color 200ms ease', whiteSpace: 'pre-line',
     },
   };
 
@@ -162,7 +162,7 @@ function Comparison() {
                     <a href={BUY_URL} style={s.btnPri}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
-                      {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
+                      {C.comp_plan_pro_cta}
                     </a>
                   </th>
                 </tr>
@@ -236,8 +236,8 @@ function Comparison() {
                     background: 'var(--ds-accent)',
                     color: '#0a0908',
                     border: '1px solid transparent',
-                    font: '600 14px/1 var(--font-display)', letterSpacing: '-0.01em',
-                    textDecoration: 'none',
+                    font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em',
+                    textDecoration: 'none', whiteSpace: 'pre-line',
                   }}
                 >
                   {C.comp_plan_pro_cta}

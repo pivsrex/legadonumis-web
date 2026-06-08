@@ -99,8 +99,7 @@ function Navbar() {
               style={s.btn}
               onMouseEnter={hoverBtn} onMouseLeave={leaveBtn}
             >
-              {isMac ? <AppleIcon size={14} /> : <WindowsIcon size={14} />}
-              {isMac ? C.nav_btn_mac : C.nav_btn_win}
+              {C.nav_btn_mac}
             </a>
           </div>
         </div>

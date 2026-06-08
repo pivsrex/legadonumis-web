@@ -9,8 +9,8 @@
 window.C = {
 
   /* ── NAV ── */
-  nav_btn_mac: "Download for Mac",
-  nav_btn_win: "Download for Windows",
+  nav_btn_mac: "Download",
+  nav_btn_win: "Download",
 
   /* ── HERO ── */
   hero_h1:  "Your collection's\ndigital home",
@@ -195,13 +195,13 @@ window.C = {
   comp_plan_basic:         "Legado Basic",
   comp_plan_basic_sub:     "Your digital museum, for free",
   comp_plan_basic_price:   "Free",
-  comp_plan_basic_cta_mac: "Download for Mac",
-  comp_plan_basic_cta_win: "Download for Windows",
+  comp_plan_basic_cta_mac: "Download\nLegado Basic",
+  comp_plan_basic_cta_win: "Download\nLegado Basic",
   comp_plan_pro:           "Legado Pro",
   comp_plan_pro_sub:       "Your digital museum, unlimited",
   comp_price_launch:       "One-time payment\nNo subscriptions",
   comp_payment_note:       "Secure payment via LemonSqueezy",
-  comp_plan_pro_cta:       "Activate the Pro Experience",
+  comp_plan_pro_cta:       "Download\nLegado Pro",
   comp_plan_pro_cta_sub:   "and Activate the Pro Experience",
   comp_footnote1:          "* Requires a free API key from Numista.",
 

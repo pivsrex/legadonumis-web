@@ -15,8 +15,8 @@
 window.C = {
 
   /* ── NAV ── */
-  nav_btn_mac: "Descarga para Mac",
-  nav_btn_win: "Descarga para Windows",
+  nav_btn_mac: "Descargar",
+  nav_btn_win: "Descargar",
 
   /* ── HERO ── */
   hero_h1:  "El museo digital\nde tu colección",
@@ -201,13 +201,13 @@ window.C = {
   comp_plan_basic:         "Legado Básico",
   comp_plan_basic_sub:     "El inicio de tu museo digital",
   comp_plan_basic_price:   "Gratis",
-  comp_plan_basic_cta_mac: "Descarga para Mac",
-  comp_plan_basic_cta_win: "Descarga para Windows",
+  comp_plan_basic_cta_mac: "Descargar\nLegado Básico",
+  comp_plan_basic_cta_win: "Descargar\nLegado Básico",
   comp_plan_pro:           "Legado Pro",
   comp_plan_pro_sub:       "Tu museo digital sin límites",
   comp_price_launch:       "Pago único · Sin suscripciones",
   comp_payment_note:       "Pago seguro vía LemonSqueezy",
-  comp_plan_pro_cta:       "Activa la experiencia Pro",
+  comp_plan_pro_cta:       "Descargar\nLegado Pro",
   comp_plan_pro_cta_sub:   "y Activa Experiencia Pro",
   comp_footnote1:          "* Requiere una clave API gratuita de Numista.",
 
