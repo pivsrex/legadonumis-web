@@ -6,8 +6,8 @@ const br = (s, cls) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[..
 
 const isMac = /Mac/.test(navigator.userAgent) || /Mac/.test(navigator.platform || '');
 
-const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.5/Legado-1.1.5-arm64.dmg';
-const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.5/Legado-Setup-1.1.5.exe';
+const MAC_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.6/Legado-1.1.6-arm64.dmg';
+const WIN_URL = 'https://github.com/pivsrex/Legado-releases/releases/download/v1.1.6/Legado-Setup-1.1.6.exe';
 const BUY_URL = 'https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa';
 
 
