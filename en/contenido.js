@@ -189,6 +189,7 @@ window.C = {
       rows: [
         { feat: "Access to new features", basico: false, pro: true },
         { feat: "Technical support", basico: false, pro: true },
+        { feat: "Available in Spanish and English", basico: true, pro: true },
       ],
     },
   ],
@@ -219,7 +220,7 @@ window.C = {
   trial_cta: "Download free",
   full_tag:    "Pro",
   full_badge:  "Most popular",
-  full_precio: "79",
+  full_precio: "89",
   full_divisa: "€",
   full_nota:   "One-time payment · no subscription",
   full_btn:    "Get Legado Pro",

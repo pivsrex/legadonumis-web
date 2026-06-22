@@ -195,6 +195,7 @@ window.C = {
       rows: [
         { feat: "Acceso a nuevas funciones", basico: false, pro: true },
         { feat: "Soporte técnico", basico: false, pro: true },
+        { feat: "Versiones en español e inglés", basico: true, pro: true },
       ],
     },
   ],
@@ -225,7 +226,7 @@ window.C = {
   trial_cta: "Descargar gratis",
   full_tag:    "Pro",
   full_badge:  "Más popular",
-  full_precio: "79",
+  full_precio: "89",
   full_divisa: "€",
   full_nota:   "Pago único · sin suscripción",
   full_btn:    "Obtener Legado Pro",
