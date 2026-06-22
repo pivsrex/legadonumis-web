@@ -156,7 +156,7 @@ function Comparison() {
                     <span style={{ ...s.planName, color: 'var(--ds-accent)' }}>{C.comp_plan_pro}</span>
                     <span style={s.planSub}>{C.comp_plan_pro_sub}</span>
                     <div style={s.priceBlock}>
-                      {isEU ? <span style={s.priceMain}>79 €</span> : <span style={s.priceMain}>79 US$</span>}
+                      {isEU ? <span style={s.priceMain}>{C.full_precio} €</span> : <span style={s.priceMain}>{C.full_precio} US$</span>}
                       <span style={s.noteAccent}>{C.comp_price_launch}</span>
                       <span style={s.noteSec}>{C.comp_payment_note}</span>
                     </div>
@@ -219,7 +219,7 @@ function Comparison() {
               ) : (
                 <div style={{ marginBottom: 16 }}>
                   <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>
-                    {isEU ? '79 €' : '79 US$'}
+                    {isEU ? `${C.full_precio} €` : `${C.full_precio} US$`}
                   </span>
                   <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', marginTop: 4, whiteSpace: 'pre-line' }}>
                     {C.comp_price_launch}
