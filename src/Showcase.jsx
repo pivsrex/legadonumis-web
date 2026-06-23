@@ -134,7 +134,7 @@ function Showcase() {
                     <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden' }}>
                       <video
                         autoPlay muted loop playsInline
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block' }}
+                        style={{ width: '100%', display: 'block' }}
                       >
                         <source src={card.src} type="video/mp4" />
                       </video>
@@ -156,7 +156,7 @@ function Showcase() {
                     <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden' }}>
                       <video
                         autoPlay muted loop playsInline
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top left', display: 'block' }}
+                        style={{ width: '100%', display: 'block' }}
                       >
                         <source src={card.src} type="video/mp4" />
                       </video>
