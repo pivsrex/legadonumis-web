@@ -149,7 +149,7 @@ window.C = {
   asset_sc2:   "/assets/FichaCompara.mp4",
   asset_sc3:   "/assets/FichaEtiqueta.mp4",
   asset_sc4:   "/assets/FichaCecas.mp4",
-  asset_sc5:   "/assets/FichaNumista.mp4",
+  asset_sc5:   "/assets/FichaMetas.mp4",
 
   /* ── TABLA COMPARATIVA ── */
   comp_groups: [
