@@ -2,6 +2,29 @@
 const C = window.C;
 const br = (s) => s.split(/\n|<br\s*\/?>/i).reduce((a,l,i) => i===0?[l]:[...a,React.createElement('br',{key:i}),l],[]);
 
+function LazyVideo({ src }) {
+  const ref = React.useRef(null);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) { el.play().catch(() => {}); }
+        else { el.pause(); }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [src]);
+  return (
+    <video ref={ref} muted loop playsInline preload="none"
+      style={{ width: '100%', display: 'block' }}>
+      <source src={src} type="video/mp4" />
+    </video>
+  );
+}
+
 /*
  * Cada card vive en su propia sección (position: sticky, top fijo).
  * Las secciones 2-4 tienen margin-top negativo, de modo que empiezan
@@ -132,12 +155,7 @@ function Showcase() {
                     }}
                   >
                     <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden' }}>
-                      <video
-                        autoPlay muted loop playsInline
-                        style={{ width: '100%', display: 'block' }}
-                      >
-                        <source src={card.src} type="video/mp4" />
-                      </video>
+                      <LazyVideo src={card.src} />
                     </div>
                   </div>
                 </>
@@ -154,12 +172,7 @@ function Showcase() {
                     }}
                   >
                     <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden' }}>
-                      <video
-                        autoPlay muted loop playsInline
-                        style={{ width: '100%', display: 'block' }}
-                      >
-                        <source src={card.src} type="video/mp4" />
-                      </video>
+                      <LazyVideo src={card.src} />
                     </div>
                   </div>
 
