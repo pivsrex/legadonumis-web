@@ -56,6 +56,9 @@ window.C = {
   sc4_titulo: "Pon tu colección en el mapa",
   sc4_desc:   "Consulta las cecas de tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.",
 
+  sc_anota_titulo: "Anota directamente sobre imágenes",
+  sc_anota_desc:   "Escribe y dibuja sobre las imágenes de tus monedas para identificar variantes, explicar elementos relevantes o documentar tus observaciones de forma visual.",
+
   sc5_titulo: "Planifica tus próximas adquisiciones",
   sc5_desc:   "Anota los ejemplares que quieres conseguir, con tu presupuesto, conservación deseada y cualquier otro detalle relevante. Activa recordatorios para no olvidar fechas de subastas, convenciones, etc.",
 

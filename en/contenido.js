@@ -50,6 +50,9 @@ window.C = {
   sc4_titulo: "Put your collection on the map",
   sc4_desc:   "Explore your coins' mints on both modern and ancient Roman Empire maps, in a visual and intuitive experience.",
 
+  sc_anota_titulo: "Annotate directly on images",
+  sc_anota_desc:   "Write and draw on your coin images to identify varieties, highlight relevant elements, or document your observations in a visual way.",
+
   sc5_titulo: "Plan your next acquisitions",
   sc5_desc:   "Keep track of the pieces you want to acquire — with your budget, desired grades, and any other relevant details. Set reminders so you never miss an auction, fair, or convention.",
 

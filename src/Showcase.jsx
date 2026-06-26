@@ -42,11 +42,12 @@ const CARD_H  = 580;
 const OVERLAP = CARD_H;
 
 const CARDS = [
-  { title: C.sc1_titulo, desc: C.sc1_desc, type: 'video', src: C.asset_sc1, reverse: false },
-  { title: C.sc2_titulo, desc: C.sc2_desc, type: 'video', src: C.asset_sc2, reverse: true  },
-  { title: C.sc3_titulo, desc: C.sc3_desc, type: 'video', src: C.asset_sc3, reverse: false },
-  { title: C.sc4_titulo, desc: C.sc4_desc, type: 'video', src: C.asset_sc4, reverse: true  },
-  { title: C.sc5_titulo, desc: C.sc5_desc, type: 'video', src: C.asset_sc5, reverse: false },
+  { title: C.sc1_titulo,       desc: C.sc1_desc,       type: 'video', src: C.asset_sc1, reverse: false },
+  { title: C.sc2_titulo,       desc: C.sc2_desc,       type: 'video', src: C.asset_sc2, reverse: true  },
+  { title: C.sc3_titulo,       desc: C.sc3_desc,       type: 'video', src: C.asset_sc3, reverse: false },
+  { title: C.sc4_titulo,       desc: C.sc4_desc,       type: 'video', src: C.asset_sc4, reverse: true  },
+  { title: C.sc_anota_titulo,  desc: C.sc_anota_desc,  type: 'empty',                   reverse: false },
+  { title: C.sc5_titulo,       desc: C.sc5_desc,       type: 'video', src: C.asset_sc5, reverse: true  },
 ];
 
 const N = CARDS.length;
@@ -155,7 +156,7 @@ function Showcase() {
                     }}
                   >
                     <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden' }}>
-                      <LazyVideo src={card.src} />
+                      {card.type === 'video' ? <LazyVideo src={card.src} /> : null}
                     </div>
                   </div>
                 </>
@@ -172,7 +173,7 @@ function Showcase() {
                     }}
                   >
                     <div style={{ flex: 1, borderRadius: 10, overflow: 'hidden' }}>
-                      <LazyVideo src={card.src} />
+                      {card.type === 'video' ? <LazyVideo src={card.src} /> : null}
                     </div>
                   </div>
 
