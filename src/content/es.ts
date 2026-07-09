@@ -5,29 +5,29 @@ export const es: Content = {
   nav_btn_win: 'Descargar',
 
   hero_h1:  'El museo digital\nde tu colección',
-  hero_sub: 'Organiza tus monedas y billetes. Conoce su historia. Descubre su valor.',
+  hero_sub: 'Una manera elegante, sencilla y flexible de\norganizar, documentar y disfrutar de tus monedas y billetes',
   hero_btn_mac: 'Descargar',
   hero_btn_win: 'Descargar',
   hero_mobile_notice: 'Legado es una aplicación de escritorio.\nVisita esta web desde tu Mac o PC\npara descargarla.',
 
-  pasos_h2:  'Porque tu colección\nmerece mucho más que\nun simple inventario',
-  pasos_sub: 'Cuatro sencillos pasos para gestionarla <br> con Legado de forma elegante y flexible',
+  pasos_h2:  'Porque tu colección\nmerece más que\nun simple inventario',
+  pasos_sub: 'Legado es la forma elegante, flexible y sencilla\nde documentar y visualizar tus piezas',
 
-  paso1_titulo: 'Añade tus piezas',
+  paso1_titulo: 'Diseñado por y para numismáticos',
   paso1_body:   'Registra cada ejemplar individualmente o importa los datos de tu colección desde Excel o un archivo CSV con un solo clic.',
-  paso2_titulo: 'Conserva su historia',
+  paso2_titulo: 'Con una estética a la altura\nde tus mejores piezas',
   paso2_body:   'Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.',
-  paso3_titulo: 'Organiza a tu manera',
+  paso3_titulo: 'Adaptable a tu forma de coleccionar',
   paso3_body:   'Ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.',
-  paso4_titulo: 'Redescubre tu colección',
+  paso4_titulo: 'Intuitivo y fácil de usar',
   paso4_body:   'Visualiza tus piezas sobre mapas, compara ejemplares, guarda notas, planifica futuras adquisiciones, crea etiquetas y consulta métricas.',
 
-  sc_h2:  'Más contexto. Más detalle.\nMás perspectiva',
+  sc_h2:  'Todo lo que necesitas,\nen un solo lugar',
   sc_sub: 'Una experiencia visual, práctica e intuitiva\npara disfrutar la numismática',
 
   sc1_titulo: 'Crea fichas detalladas en segundos',
   sc1_desc:   'Importa la descripción y la información técnica de tus monedas y billetes desde Numista y añade información de su contexto histórico con ayuda de inteligencia artificial.',
-  sc2_titulo: 'Compara con el\nmáximo detalle',
+  sc2_titulo: 'Amplía y\ncompara',
   sc2_desc:   'Visualiza dos ejemplares simultáneamente y utiliza una lupa integrada para examinar diferencias, variantes y estados de conservación.',
   sc3_titulo: 'Diseña etiquetas listas para imprimir',
   sc3_desc:   'Prepara etiquetas personalizadas para cada moneda en bandejas o expositores. Guarda plantillas y mantén una presentación uniforme en toda tu colección.',
@@ -38,7 +38,7 @@ export const es: Content = {
   sc5_titulo: 'Planifica tus próximas adquisiciones',
   sc5_desc:   'Registra los ejemplares que quieres conseguir, con tu presupuesto, conservación deseada y cualquier otro detalle relevante. Activa recordatorios para no olvidar fechas de subastas, convenciones, etc.',
 
-  feat_h2:  'Herramientas que marcan la diferencia',
+  feat_h2:  'La diferencia está\nen los detalles',
   feat_sub: 'Todo lo que necesitas para organizar\ny apreciar tus monedas',
 
   f1_titulo: 'Importa años de trabajo en segundos',

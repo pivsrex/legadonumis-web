@@ -52,17 +52,17 @@ export default function Hero({ content: C }: Props) {
   return (
     <section style={s.section}>
       <style>{`
-        @media (min-width: 820px) { .hero-h1 { white-space: nowrap; } .hero-sub { white-space: nowrap; } }
-        .hero-br { display: none; }
-        @media (max-width: 819px) { .hero-br { display: initial; } }
         .hero-mobile-notice { display: none; }
         @media (max-width: 819px) { .hero-mobile-notice { display: flex; } }
+        .hero-dl-mac, .hero-dl-win, .hero-dl-sep { display: inline-flex; align-items: center; }
+        html.is-mac .hero-dl-win, html.is-mac .hero-dl-sep,
+        html.is-win .hero-dl-mac, html.is-win .hero-dl-sep { display: none; }
       `}</style>
       <div style={s.glow} />
       <div style={s.container}>
 
         <RevealWrapper delay={80}>
-          <h1 style={s.h1} className="hero-h1">{br(C.hero_h1, 'hero-br')}</h1>
+          <h1 style={s.h1} className="hero-h1">{br(C.hero_h1)}</h1>
         </RevealWrapper>
 
         <RevealWrapper delay={180}>
@@ -83,9 +83,9 @@ export default function Hero({ content: C }: Props) {
         <RevealWrapper delay={280}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, marginTop: 4 }}>
             <a href={BUY_URL} style={s.btnPri}>
-              <AppleIcon size={20} />
-              <span style={{ font: '300 14px/1', opacity: 0.5 }}>/</span>
-              <WindowsIcon size={20} />
+              <span className="hero-dl-mac"><AppleIcon size={20} /></span>
+              <span className="hero-dl-sep" style={{ font: '300 14px/1', opacity: 0.5 }}>/</span>
+              <span className="hero-dl-win"><WindowsIcon size={20} /></span>
               {C.hero_btn_mac}
             </a>
           </div>
@@ -94,7 +94,11 @@ export default function Hero({ content: C }: Props) {
         <RevealWrapper delay={440} style={{ width: '100%' }}>
           <div style={s.videoWrap}>
             <div style={s.videoGradient} />
-            <video autoPlay muted loop playsInline style={{ width: '100%', display: 'block' }}>
+            <video
+              autoPlay muted loop playsInline
+              poster={C.asset_hero.replace(/\.mp4$/, '_poster.jpg')}
+              style={{ width: '100%', display: 'block', aspectRatio: '16 / 9' }}
+            >
               <source src={C.asset_hero} type="video/mp4" />
             </video>
           </div>

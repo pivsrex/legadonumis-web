@@ -53,14 +53,9 @@ export default function Features({ content: C }: Props) {
       `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
         <RevealWrapper>
-          <div className="lg-section-head" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start', marginBottom: 56 }}>
-            <h2 style={{ font: '600 clamp(24px, 3vw, 42px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-text-high)', margin: 0 }}>
-              {C.feat_h2}
-            </h2>
-            <p style={{ font: '400 17px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, paddingTop: 8 }}>
-              {br(C.feat_sub)}
-            </p>
-          </div>
+          <h2 style={{ font: '600 clamp(28px, 3.5vw, 48px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-heading)', margin: '0 auto 56px', textAlign: 'center', maxWidth: 760 }}>
+            {br(C.feat_h2)}
+          </h2>
         </RevealWrapper>
         <div className="lg-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, alignItems: 'stretch' }}>
           {FEATURES.map((f, i) => (

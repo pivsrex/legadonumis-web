@@ -21,10 +21,45 @@ function LazyVideo({ src }: { src: string }) {
     return () => obs.disconnect()
   }, [src])
 
+  const poster = src.replace(/\.mp4$/, '_poster.jpg')
+
   return (
-    <video ref={ref} muted loop playsInline preload="none" style={{ width: '100%', display: 'block' }}>
+    <video
+      ref={ref} muted loop playsInline preload="none" poster={poster}
+      style={{ width: '100%', display: 'block', aspectRatio: '16 / 9', objectFit: 'cover', background: '#181818' }}
+    >
       <source src={src} type="video/mp4" />
     </video>
+  )
+}
+
+function CoinLogo() {
+  const ref = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        // Gira al entrar en pantalla; se resetea al salir para repetir en el siguiente scroll
+        if (entry.isIntersecting) el.classList.add('lg-coin-flip')
+        else el.classList.remove('lg-coin-flip')
+      },
+      { threshold: 0.9 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <img
+      ref={ref}
+      src="/assets/LogoOscSoloTrans.png"
+      alt=""
+      width={22}
+      height={22}
+      style={{ display: 'block' }}
+    />
   )
 }
 
@@ -49,13 +84,13 @@ export default function Showcase({ content: C }: Props) {
       background: '#181818', padding: '48px 32px',
       display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20,
     }}>
-      <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
-        {CARDS.map((_, di) => (
-          <div key={di} style={{
-            height: 2, borderRadius: 1, width: di === i ? 20 : 5,
-            background: di === i ? 'var(--ds-accent)' : di < i ? 'rgba(201,168,76,0.22)' : 'rgba(255,255,255,0.12)',
-          }} />
-        ))}
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <CoinLogo />
+        <span style={{ font: '500 12px/1 var(--font-body)', letterSpacing: '0.1em', color: 'var(--ds-text-mid)' }}>
+          <span style={{ color: 'var(--ds-accent)' }}>{String(i + 1).padStart(2, '0')}</span>
+          {' / '}
+          {String(N).padStart(2, '0')}
+        </span>
       </div>
       <h3 style={{ font: '600 clamp(20px, 1.8vw, 26px)/1.25 var(--font-display)', letterSpacing: '-0.02em', color: 'var(--ds-text-high)', margin: 0 }}>
         {br(card.title)}
@@ -79,16 +114,21 @@ export default function Showcase({ content: C }: Props) {
 
   return (
     <section id="showcase" style={{ background: 'var(--ds-bg-0)' }}>
+      <style>{`
+        @keyframes lgCoinFlip {
+          from { transform: perspective(400px) rotateY(0deg); }
+          to   { transform: perspective(400px) rotateY(360deg); }
+        }
+        .lg-coin-flip { animation: lgCoinFlip 0.9s cubic-bezier(0.3, 0, 0.2, 1) 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .lg-coin-flip { animation: none; }
+        }
+      `}</style>
       <div className="lg-showcase-header" style={{ maxWidth: 1200, margin: '0 auto', padding: '125px 32px 48px' }}>
         <RevealWrapper>
-          <div className="lg-section-head" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
-            <h2 style={{ font: '600 clamp(24px, 3vw, 42px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-text-high)', margin: 0 }}>
-              {br(C.sc_h2)}
-            </h2>
-            <p style={{ font: '400 17px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, paddingTop: 8 }}>
-              {br(C.sc_sub)}
-            </p>
-          </div>
+          <h2 style={{ font: '600 clamp(28px, 3.5vw, 48px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-heading)', margin: '0 auto', textAlign: 'center', maxWidth: 760 }}>
+            {br(C.sc_h2)}
+          </h2>
         </RevealWrapper>
       </div>
 

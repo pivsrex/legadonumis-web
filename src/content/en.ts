@@ -5,29 +5,29 @@ export const en: Content = {
   nav_btn_win: 'Download',
 
   hero_h1:  "Your collection's\ndigital home",
-  hero_sub: 'Organize your coins and banknotes. Learn their history. Discover their value.',
+  hero_sub: 'An elegant, simple and flexible way to\norganize, document and enjoy your coins and banknotes',
   hero_btn_mac: 'Download',
   hero_btn_win: 'Download',
   hero_mobile_notice: 'Legado is a desktop app.\nVisit this page from your Mac or PC\nto download it.',
 
-  pasos_h2:  'Because your collection\ndeserves much more than\na simple inventory',
-  pasos_sub: 'Four simple steps to manage it <br> easily and elegantly with Legado',
+  pasos_h2:  'Because your collection\ndeserves more than\na simple inventory',
+  pasos_sub: 'Legado is the elegant, flexible, and simple way\nto document and showcase your pieces',
 
-  paso1_titulo: 'Add your pieces',
+  paso1_titulo: 'Built by and for numismatists',
   paso1_body:   'Register every item individually or import your collection data from Excel or a CSV file with a single click.',
-  paso2_titulo: 'Preserve their story',
+  paso2_titulo: 'An aesthetic worthy\nof your finest pieces',
   paso2_body:   'Automatically assign photos to each item and attach videos, documents, links, and references. Everything in one place, always accessible.',
-  paso3_titulo: 'Organize your way',
+  paso3_titulo: 'Adaptable to the way you collect',
   paso3_body:   'Sort and filter your coins however you like, then export or print whenever you need.\nYour collection, your rules.',
-  paso4_titulo: 'Rediscover your collection',
+  paso4_titulo: 'Intuitive and easy to use',
   paso4_body:   'View your items on maps, compare examples, keep notes, plan future acquisitions, create labels, and explore metrics.',
 
-  sc_h2:  'More context. More detail.\nMore perspective',
+  sc_h2:  'Everything you need,\nin one place',
   sc_sub: 'A visual, practical, and intuitive experience\nfor enjoying numismatics',
 
   sc1_titulo: 'Create detailed records in seconds',
   sc1_desc:   'Import descriptions and technical data for your coins and banknotes from Numista, and add historical context with the help of artificial intelligence.',
-  sc2_titulo: 'Compare with\nmaximum detail',
+  sc2_titulo: 'Zoom in and\ncompare',
   sc2_desc:   'View two pieces side by side and use the built-in magnifier to examine differences, varieties, and grades.',
   sc3_titulo: 'Design labels ready to print',
   sc3_desc:   'Create custom labels for trays and display cases. Save templates and keep a consistent look across your entire collection.',
@@ -38,7 +38,7 @@ export const en: Content = {
   sc5_titulo: 'Plan your next acquisitions',
   sc5_desc:   "Keep track of the pieces you want to acquire — with your budget, desired grades, and any other relevant details. Set reminders so you never miss an auction, fair, or convention.",
 
-  feat_h2:  'Tools that make the difference',
+  feat_h2:  'The difference is\nin the details',
   feat_sub: 'Everything you need to organize\nand appreciate your coins',
 
   f1_titulo: 'Import years of work in seconds',

@@ -41,10 +41,7 @@ export default function Comparison({ content: C }: Props) {
       `}</style>
       <div style={s.container}>
         <RevealWrapper>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start', marginBottom: 48 }} className="lg-section-head">
-            <h2 style={{ font: '600 clamp(24px, 3vw, 42px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-text-high)', margin: 0 }}>{br(C.comp_h2)}</h2>
-            <p style={{ font: '400 17px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, paddingTop: 8 }}>{br(C.comp_sub)}</p>
-          </div>
+          <h2 style={{ font: '600 clamp(28px, 3.5vw, 48px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-heading)', margin: '0 auto 48px', textAlign: 'center', maxWidth: 760 }}>{br(C.comp_h2)}</h2>
         </RevealWrapper>
 
         <RevealWrapper delay={100}>

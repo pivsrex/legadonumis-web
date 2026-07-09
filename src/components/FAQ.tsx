@@ -57,14 +57,9 @@ export default function FAQ({ content: C }: Props) {
     <section id="faq" style={{ padding: '125px 0 0', background: 'var(--ds-bg-0)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
         <RevealWrapper>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start', marginBottom: 56 }}>
-            <h2 style={{ font: '600 clamp(28px, 3.5vw, 44px)/1.1 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-text-high)', margin: 0 }}>
-              {C.faq_titulo}
-            </h2>
-            <p style={{ font: '400 17px/1.6 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, paddingTop: 8 }}>
-              {C.faq_sub}
-            </p>
-          </div>
+          <h2 style={{ font: '600 clamp(28px, 3.5vw, 48px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-heading)', margin: '0 auto 56px', textAlign: 'center', maxWidth: 760 }}>
+            {C.faq_titulo}
+          </h2>
         </RevealWrapper>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

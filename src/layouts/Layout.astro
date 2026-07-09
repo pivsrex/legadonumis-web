@@ -58,7 +58,10 @@ const schemaLang = lang
     ]
   })} />
 
-  <script is:inline>document.documentElement.classList.add('js')</script>
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    (function(){var u=navigator.userAgent;if(/Win/.test(u))document.documentElement.classList.add('is-win');else if(/Mac|Macintosh/.test(u))document.documentElement.classList.add('is-mac');})();
+  </script>
 
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; }
