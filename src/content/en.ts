@@ -121,9 +121,7 @@ export const en: Content = {
       rows: [
         { feat: 'Image gallery (6 modes)',             basico: true,      pro: true        },
         { feat: 'Side-by-side comparison',             basico: true,      pro: true        },
-        { feat: 'Mints on current map',                basico: 'Up to 5', pro: 'Unlimited' },
-        { feat: 'Pieces on world maps',                basico: 'Up to 5', pro: 'Unlimited' },
-        { feat: 'Mints on Roman Empire map (AD 125)',  basico: false,     pro: true        },
+        { feat: 'Maps: mints, world maps & Roman Empire (AD 125)', basico: true, pro: true },
       ],
     },
     {
@@ -131,7 +129,7 @@ export const en: Content = {
       rows: [
         { feat: 'Import from Excel & CSV',     basico: true,  pro: true },
         { feat: 'Automated photo import',      basico: true,  pro: true },
-        { feat: 'Export to Excel & CSV',       basico: false, pro: true },
+        { feat: 'Export to Excel & CSV',       basico: 'CSV only', pro: true },
         { feat: 'Export coin records to PDF',  basico: false, pro: true },
         { feat: 'Label designer',              basico: false, pro: true },
       ],
@@ -142,8 +140,7 @@ export const en: Content = {
         { feat: 'Sticky notes',                 basico: 'Up to 5', pro: 'Unlimited' },
         { feat: 'Statistics',                   basico: false, pro: true        },
         { feat: 'Photo annotations',            basico: false, pro: true        },
-        { feat: 'OCRE catalog (Roman coinage)', basico: true, pro: true },
-        { feat: 'Automatic Numista lookups *',  basico: false, pro: 'Unlimited' },
+        { feat: 'Automatic Numista & OCRE (Roman coinage) lookups *', basico: 'OCRE only', pro: 'Unlimited' },
         { feat: 'Historical context with artificial intelligence', basico: false, pro: '500 queries included', cta: { label: 'Need more?', url: '#pack-creditos' } },
         { feat: 'Acquisition plan & reminders', basico: 'Up to 5 goals', pro: 'Unlimited' },
       ],
@@ -168,7 +165,7 @@ export const en: Content = {
   comp_payment_note:       'Secure payment via LemonSqueezy',
   comp_plan_pro_cta:       'Download\nLegado Pro',
   comp_plan_pro_cta_sub:   'and Activate the Pro Experience',
-  comp_footnote1:          '* Requires a free API key from Numista.',
+  comp_footnote1:          '* Numista lookups require a free API key available at numista.com.',
 
   trial_badge:  'Basic',
   trial_precio: 'Free',

@@ -121,9 +121,7 @@ export const es: Content = {
       rows: [
         { feat: 'Galería de imágenes (6 modos)',                   basico: true,      pro: true         },
         { feat: 'Visor comparativo de ejemplares',                 basico: true,      pro: true         },
-        { feat: 'Cecas sobre mapa actual',                         basico: 'Hasta 5', pro: 'Ilimitadas' },
-        { feat: 'Ejemplares sobre mapas mundiales',                basico: 'Hasta 5', pro: 'Ilimitados' },
-        { feat: 'Cecas sobre mapa del Imperio Romano (125 d.C.)',  basico: false,     pro: true         },
+        { feat: 'Mapas: cecas, mundiales e Imperio Romano (125 d.C.)', basico: true, pro: true },
       ],
     },
     {
@@ -131,7 +129,7 @@ export const es: Content = {
       rows: [
         { feat: 'Importación desde Excel y CSV',            basico: true,  pro: true },
         { feat: 'Importación automatizada de fotografías',  basico: true,  pro: true },
-        { feat: 'Exportación a Excel y CSV',                basico: false, pro: true },
+        { feat: 'Exportación a Excel y CSV',                basico: 'Solo CSV', pro: true },
         { feat: 'Exportación de fichas en PDF',             basico: false, pro: true },
         { feat: 'Diseñador de etiquetas',                   basico: false, pro: true },
       ],
@@ -142,8 +140,7 @@ export const es: Content = {
         { feat: 'Post-Its',                                basico: 'Hasta 5',      pro: 'Ilimitados'  },
         { feat: 'Estadísticas',                            basico: false,          pro: true          },
         { feat: 'Anotaciones sobre imágenes',              basico: false,          pro: true          },
-        { feat: 'Catálogo OCRE (moneda romana)', basico: true,           pro: true          },
-        { feat: 'Consultas automáticas a Numista *',       basico: false,          pro: 'Ilimitadas'  },
+        { feat: 'Consultas automáticas a Numista y OCRE (moneda romana) *', basico: 'Solo OCRE', pro: 'Ilimitadas' },
         { feat: 'Contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas', cta: { label: '¿Necesitas más?', url: '#pack-creditos' } },
         { feat: 'Plan de adquisiciones y recordatorios',   basico: 'Hasta 5 objetivos', pro: 'Ilimitados' },
       ],
@@ -168,7 +165,7 @@ export const es: Content = {
   comp_payment_note:       'Pago seguro vía LemonSqueezy',
   comp_plan_pro_cta:       'Descargar\nLegado Pro',
   comp_plan_pro_cta_sub:   'y Activa Experiencia Pro',
-  comp_footnote1:          '* Requiere una clave API gratuita de Numista.',
+  comp_footnote1:          '* Las consultas a Numista requieren una clave API gratuita disponible en numista.com.',
 
   trial_badge:  'Básico',
   trial_precio: 'Gratis',
