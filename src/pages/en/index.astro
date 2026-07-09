@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { en as content } from '../../content/en'
+import Navbar       from '../../components/Navbar'
+import Hero         from '../../components/Hero'
+import Workflow     from '../../components/Workflow'
+import Showcase     from '../../components/Showcase'
+import Features     from '../../components/Features'
+import Comparison   from '../../components/Comparison'
+import Testimonials from '../../components/Testimonials'
+import FAQ          from '../../components/FAQ'
+import Newsletter   from '../../components/Newsletter'
+import FinalCTA     from '../../components/FinalCTA'
+import Footer       from '../../components/Footer'
+---
+<Layout
+  lang="en"
+  title="Legado — Your collection's digital home"
+  description="Desktop software to organize, document, and analyze your coin collection. Free download. Mac and Windows."
+  canonical="https://legadonumis.com/en/"
+  ogTitle="Legado — Your collection's digital home"
+  ogImage="https://legadonumis.com/assets/og-image.png"
+>
+  <Navbar content={content} lang="en" altUrl="/" client:load />
+  <main>
+    <Hero         content={content} />
+    <Workflow     content={content} />
+    <Showcase     content={content} client:visible />
+    <Features     content={content} />
+    <Comparison   content={content} client:visible />
+    <Testimonials content={content} />
+    <FAQ          content={content} client:visible />
+    <Newsletter   lang="en" client:visible />
+    <FinalCTA     content={content} />
+  </main>
+  <Footer content={content} />
+</Layout>

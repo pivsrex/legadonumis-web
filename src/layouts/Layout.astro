@@ -1,0 +1,133 @@
+---
+export interface Props {
+  lang: 'es' | 'en'
+  title: string
+  description: string
+  canonical: string
+  ogTitle: string
+  ogImage: string
+}
+
+const { lang, title, description, canonical, ogTitle, ogImage } = Astro.props
+const altLang   = lang === 'es' ? 'en' : 'es'
+const altCanon  = lang === 'es' ? 'https://legadonumis.com/en/' : 'https://legadonumis.com/'
+const ogLocale  = lang === 'es' ? 'es_ES' : 'en_US'
+const schemaLang = lang
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <title>{title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang={lang}    href={canonical} />
+  <link rel="alternate" hreflang={altLang} href={altCanon} />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:title"       content={ogTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:locale"      content={ogLocale} />
+  <meta property="og:site_name"   content="Legado" />
+
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content={ogTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={ogImage} />
+
+  <link rel="icon" type="image/svg+xml" href="/assets/LogoSoloClaroTrans.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/styles/tokens.css" />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Legado",
+    "description": description,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": ["macOS", "Windows"],
+    "inLanguage": schemaLang,
+    "url": "https://legadonumis.com",
+    "offers": [
+      { "@type": "Offer", "name": "Legado Basic", "price": "0", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Legado Pro",   "price": "89", "priceCurrency": "EUR" }
+    ]
+  })} />
+
+  <script is:inline>document.documentElement.classList.add('js')</script>
+
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { background: var(--ds-bg-0); color: var(--ds-text-high); margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    html { scroll-behavior: smooth; }
+
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: var(--ds-bg-0); }
+    ::-webkit-scrollbar-thumb { background: var(--ds-bg-3); border-radius: 6px; border: 3px solid var(--ds-bg-0); }
+
+    /* Scroll reveal — solo se oculta si hay JS (html.js), así el contenido
+       es visible sin JavaScript y para crawlers que no lo ejecutan */
+    html.js [data-reveal] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity 0.5s ease var(--reveal-delay, 0ms),
+        transform 0.5s cubic-bezier(0.4,0,0.2,1) var(--reveal-delay, 0ms);
+    }
+    html.js [data-reveal].is-revealed { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html.js [data-reveal] { opacity: 1; transform: none; transition: none; }
+    }
+
+    @media (max-width: 1024px) {
+      .lg-feature-grid   { grid-template-columns: repeat(2, 1fr) !important; }
+      .lg-workflow-track { grid-template-columns: repeat(2, 1fr) !important; }
+      .lg-footer-grid    { grid-template-columns: 1fr 1fr 1fr !important; gap: 32px !important; }
+    }
+    @media (max-width: 768px) {
+      .lg-nav-links      { display: none !important; }
+      .lg-nav-btns       { display: none !important; }
+      .lg-section-head   { grid-template-columns: 1fr !important; gap: 12px !important; }
+      .lg-feature-grid   { grid-template-columns: 1fr !important; }
+      .lg-workflow-track { grid-template-columns: 1fr !important; }
+      .lg-showcase-section { min-height: auto !important; margin-top: 24px !important; }
+      .lg-showcase-sticky  { position: relative !important; top: auto !important; padding: 0 16px !important; }
+      .lg-showcase-card    { height: auto !important; grid-template-columns: 1fr !important; }
+      .lg-showcase-media   { height: 220px !important; }
+      .lg-showcase-header  { padding-top: 80px !important; }
+      .lg-footer-grid    { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+      section { padding-top: 80px !important; }
+      #showcase { padding-top: 0 !important; }
+    }
+    @media (max-width: 480px) {
+      .lg-footer-grid { grid-template-columns: 1fr !important; }
+      .lg-showcase-header { padding-top: 64px !important; }
+      section { padding-top: 64px !important; }
+      #showcase { padding-top: 0 !important; }
+    }
+  </style>
+</head>
+<body>
+  <slot />
+  <script>
+    // Scroll reveal via vanilla JS (no React hydration needed)
+    (function () {
+      const els = document.querySelectorAll('[data-reveal]')
+      if (!els.length) return
+      const obs = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-revealed'); obs.unobserve(e.target) }
+        }),
+        { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
+      )
+      els.forEach(el => obs.observe(el))
+    })()
+  </script>
+</body>
+</html>

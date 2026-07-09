@@ -1,3 +1,6 @@
 Tabla.docx
 ~$Tabla.docx
 .DS_Store
+node_modules/
+dist/
+.astro/
