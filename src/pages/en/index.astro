@@ -12,6 +12,16 @@ import FAQ          from '../../components/FAQ'
 import Newsletter   from '../../components/Newsletter'
 import FinalCTA     from '../../components/FinalCTA'
 import Footer       from '../../components/Footer'
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: ([1, 2, 3, 4, 5, 6, 7, 8] as const).map((i) => ({
+    '@type': 'Question',
+    name: content[`faq${i}_q`],
+    acceptedAnswer: { '@type': 'Answer', text: content[`faq${i}_a`] },
+  })),
+}
 ---
 <Layout
   lang="en"
@@ -21,6 +31,7 @@ import Footer       from '../../components/Footer'
   ogTitle="Legado — Your collection's digital home"
   ogImage="https://legadonumis.com/assets/og-image.png"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Navbar content={content} lang="en" altUrl="/" client:load />
   <main>
     <Hero         content={content} />

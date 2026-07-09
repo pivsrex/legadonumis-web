@@ -86,8 +86,8 @@ export const en: Content = {
   legal_terminos:   'Terms of Use',
   legal_reembolso:  'Refund Policy',
 
-  nav_link_exp:       'Resources',
-  nav_link_ver:       'Experiences',
+  nav_link_exp:       'Why Legado',
+  nav_link_ver:       'Basic vs Pro',
   nav_link_faq:       'FAQ',
   nav_link_contact:   'Contact',
   nav_link_novedades: 'Updates',

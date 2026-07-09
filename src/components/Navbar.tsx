@@ -32,7 +32,11 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
       transition: 'padding 280ms ease, box-shadow 280ms ease',
     },
     logo: { height: 41, width: 'auto', display: 'block', objectFit: 'contain' as const },
-    links: { display: 'flex', alignItems: 'center', gap: 32 },
+    links: {
+      display: 'flex', alignItems: 'center', gap: 32,
+      // Centrado absoluto respecto al ancho de la página (alineado con el hero)
+      position: 'absolute' as const, left: '50%', transform: 'translateX(-50%)',
+    },
     link: { font: '400 14px/1 var(--font-body)', color: 'var(--ds-text-high)', textDecoration: 'none', transition: 'color 150ms ease' },
     langBtn: {
       display: 'inline-flex', alignItems: 'center', gap: 6,
@@ -76,7 +80,7 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
           .lg-nav-logo-shine::after { animation: none; }
         }
       `}</style>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: `${scrolled ? 12 : 16}px 32px`, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: `${scrolled ? 12 : 16}px 32px`, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
         <a href={lang === 'en' ? '/en/' : '/'}>
           <span className="lg-nav-logo-shine" style={{ position: 'relative', display: 'block' }}>
             <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />

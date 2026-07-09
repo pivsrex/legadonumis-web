@@ -86,8 +86,8 @@ export const es: Content = {
   legal_terminos:   'Términos de uso',
   legal_reembolso:  'Política de reembolso',
 
-  nav_link_exp:       'Recursos',
-  nav_link_ver:       'Experiencias',
+  nav_link_exp:       'Por qué Legado',
+  nav_link_ver:       'Básico vs Pro',
   nav_link_faq:       'Preguntas',
   nav_link_contact:   'Contacto',
   nav_link_novedades: 'Novedades',

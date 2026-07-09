@@ -4,7 +4,7 @@ interface Props { lang: 'es' | 'en' }
 
 const copy = {
   es: {
-    titulo:      'Mantente al día',
+    titulo:      'Descubre las últimas novedades',
     sub:         'Novedades, guías y actualizaciones de Legado. Sin spam.',
     placeholder: 'tu@email.com',
     consent:     'Acepto recibir comunicaciones de Legado. Puedo darme de baja en cualquier momento.',
@@ -15,7 +15,7 @@ const copy = {
     errConsent:  'Acepta las condiciones para continuar.',
   },
   en: {
-    titulo:      'Stay in the loop',
+    titulo:      'Stay up to date',
     sub:         'News, guides, and Legado updates. No spam.',
     placeholder: 'your@email.com',
     consent:     'I agree to receive communications from Legado. I can unsubscribe at any time.',
@@ -50,7 +50,7 @@ export default function Newsletter({ lang }: Props) {
   }
 
   return (
-    <section style={{ padding: '125px 32px 0', background: 'var(--ds-bg-0)' }}>
+    <section id="novedades" style={{ padding: '125px 32px 0', background: 'var(--ds-bg-0)' }}>
       <div style={{
         maxWidth: 640, margin: '0 auto',
         background: '#181818', border: '1px solid rgba(255,255,255,0.06)',

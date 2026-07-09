@@ -3,7 +3,7 @@
    Single source of truth. Import once at app root.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Allura&family=Inter:wght@400;500;600;700&family=Fragment+Mono&display=swap');
+
 
 :root {
   /* ── SURFACE HIERARCHY (4 layers, warm-dark) ──────────────────────────── */
