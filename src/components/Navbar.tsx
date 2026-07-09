@@ -52,9 +52,35 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
 
   return (
     <nav style={s.nav}>
+      <style>{`
+        /* Destello periódico sobre el logo del nav (cada 10 s) */
+        .lg-nav-logo-shine::after {
+          content: '';
+          position: absolute; inset: 0;
+          -webkit-mask-image: url('/LogoConTituloHorizontalTrans.svg');
+          mask-image: url('/LogoConTituloHorizontalTrans.svg');
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          background: linear-gradient(115deg, transparent 35%, rgba(255,248,222,0.85) 50%, transparent 65%) no-repeat;
+          background-size: 260% 100%;
+          background-position: 170% 0;
+          pointer-events: none;
+          animation: lgNavShine 10s ease-in-out 4s infinite;
+        }
+        @keyframes lgNavShine {
+          0%   { background-position: 170% 0; }
+          10%  { background-position: -90% 0; }
+          100% { background-position: -90% 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .lg-nav-logo-shine::after { animation: none; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: `${scrolled ? 12 : 16}px 32px`, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <a href={lang === 'en' ? '/en/' : '/'}>
-          <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
+          <span className="lg-nav-logo-shine" style={{ position: 'relative', display: 'block' }}>
+            <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
+          </span>
         </a>
 
         <div style={s.links} className="lg-nav-links">
@@ -74,7 +100,7 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
             </svg>
             {lang === 'es' ? 'EN' : 'ES'}
           </a>
-          <a href={isMac ? MAC_URL : WIN_URL} style={s.btnPri}
+          <a href={isMac ? MAC_URL : WIN_URL} className="lg-btn-shine" style={s.btnPri}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
             {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}

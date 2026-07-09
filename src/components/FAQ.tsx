@@ -7,7 +7,7 @@ interface Props { content: Content }
 
 function FAQCard({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
   return (
-    <div style={{
+    <div className="lg-faq-card" style={{
       background: '#181818', border: '1px solid rgba(255,255,255,0.06)',
       borderRadius: 14, boxShadow: '0 12px 40px rgba(0,0,0,0.45)', overflow: 'hidden',
     }}>
@@ -55,6 +55,28 @@ export default function FAQ({ content: C }: Props) {
 
   return (
     <section id="faq" style={{ padding: '125px 0 0', background: 'var(--ds-bg-0)' }}>
+      <style>{`
+        /* Resplandor dorado en el borde que sigue al cursor */
+        .lg-faq-card { position: relative; }
+        .lg-faq-card::before {
+          content: '';
+          position: absolute; inset: 0;
+          border-radius: 14px;
+          padding: 1px;
+          background: radial-gradient(190px circle at var(--mx, 50%) var(--my, 50%), rgba(201,168,76,0.45), transparent 70%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 250ms ease;
+          pointer-events: none;
+        }
+        .lg-faq-card:hover::before { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .lg-faq-card::before { display: none; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
         <RevealWrapper>
           <h2 style={{ font: '600 clamp(28px, 3.5vw, 48px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-heading)', margin: '0 auto 56px', textAlign: 'center', maxWidth: 760 }}>

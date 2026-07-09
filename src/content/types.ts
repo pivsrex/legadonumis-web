@@ -77,6 +77,8 @@ export interface Content {
   comp_h2: string
   comp_sub: string
   cta_titulo: string
+  cta_moneda_alt: string
+  cta_lupa_hint: string
   footer_tagline: string
   footer_email: string
   footer_copy: string

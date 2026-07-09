@@ -58,7 +58,7 @@ export default function Comparison({ content: C }: Props) {
                       <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{C.comp_plan_basic_price}</span>
                       <span style={{ visibility: 'hidden', font: '400 12px/1.4 var(--font-body)' }}>—</span>
                     </div>
-                    <a href={isMac ? MAC_URL : WIN_URL} style={s.btnSec}
+                    <a href={isMac ? MAC_URL : WIN_URL} className="lg-btn-shine" style={s.btnSec}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
                       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}>
                       {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
@@ -73,7 +73,7 @@ export default function Comparison({ content: C }: Props) {
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', whiteSpace: 'pre-line' }}>{C.comp_price_launch}</span>
                       <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)' }}>{C.comp_payment_note}</span>
                     </div>
-                    <a href={BUY_URL} style={s.btnPri}
+                    <a href={BUY_URL} className="lg-btn-shine" style={s.btnPri}
                       onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
                       onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
                       {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
@@ -145,7 +145,7 @@ export default function Comparison({ content: C }: Props) {
                 </div>
               )}
               {tab === 'pro' && (
-                <a href={BUY_URL} style={{ ...s.btnPri, display: 'flex' }}>
+                <a href={BUY_URL} className="lg-btn-shine" style={{ ...s.btnPri, display: 'flex' }}>
                   {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
                   {C.comp_plan_pro_cta}
                 </a>

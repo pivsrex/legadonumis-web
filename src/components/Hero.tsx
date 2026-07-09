@@ -82,7 +82,7 @@ export default function Hero({ content: C }: Props) {
 
         <RevealWrapper delay={280}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, marginTop: 4 }}>
-            <a href={BUY_URL} style={s.btnPri}>
+            <a href={BUY_URL} className="lg-btn-shine" style={s.btnPri}>
               <span className="hero-dl-mac"><AppleIcon size={20} /></span>
               <span className="hero-dl-sep" style={{ font: '300 14px/1', opacity: 0.5 }}>/</span>
               <span className="hero-dl-win"><WindowsIcon size={20} /></span>

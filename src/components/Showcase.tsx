@@ -34,16 +34,16 @@ function LazyVideo({ src }: { src: string }) {
 }
 
 function CoinLogo() {
-  const ref = useRef<HTMLImageElement>(null)
+  const ref = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const obs = new IntersectionObserver(
       ([entry]) => {
-        // Gira al entrar en pantalla; se resetea al salir para repetir en el siguiente scroll
-        if (entry.isIntersecting) el.classList.add('lg-coin-flip')
-        else el.classList.remove('lg-coin-flip')
+        // Destello al entrar en pantalla; se resetea al salir para repetir en el siguiente scroll
+        if (entry.isIntersecting) el.classList.add('is-shining')
+        else el.classList.remove('is-shining')
       },
       { threshold: 0.9 }
     )
@@ -52,14 +52,19 @@ function CoinLogo() {
   }, [])
 
   return (
-    <img
+    <span
       ref={ref}
-      src="/assets/LogoOscSoloTrans.png"
-      alt=""
-      width={22}
-      height={22}
-      style={{ display: 'block' }}
-    />
+      className="lg-coin-shine"
+      style={{ position: 'relative', display: 'block', width: 24, height: 24 }}
+    >
+      <img
+        src="/assets/LogoOscSoloTrans.png"
+        alt=""
+        width={24}
+        height={24}
+        style={{ display: 'block', width: '100%', height: '100%' }}
+      />
+    </span>
   )
 }
 
@@ -115,13 +120,25 @@ export default function Showcase({ content: C }: Props) {
   return (
     <section id="showcase" style={{ background: 'var(--ds-bg-0)' }}>
       <style>{`
-        @keyframes lgCoinFlip {
-          from { transform: perspective(400px) rotateY(0deg); }
-          to   { transform: perspective(400px) rotateY(360deg); }
+        /* Destello de luz sobre el logo, como un reflejo en el metal */
+        .lg-coin-shine::after {
+          content: '';
+          position: absolute; inset: 0;
+          -webkit-mask-image: url('/assets/LogoOscSoloTrans.png');
+          mask-image: url('/assets/LogoOscSoloTrans.png');
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          background: linear-gradient(115deg, transparent 32%, rgba(255,248,222,0.95) 50%, transparent 68%) no-repeat;
+          background-size: 260% 100%;
+          background-position: 170% 0;
+          pointer-events: none;
         }
-        .lg-coin-flip { animation: lgCoinFlip 0.9s cubic-bezier(0.3, 0, 0.2, 1) 1; }
+        .lg-coin-shine.is-shining::after {
+          animation: lgShineSweep 1.1s ease 250ms forwards;
+        }
+        @keyframes lgShineSweep { to { background-position: -70% 0; } }
         @media (prefers-reduced-motion: reduce) {
-          .lg-coin-flip { animation: none; }
+          .lg-coin-shine.is-shining::after { animation: none; }
         }
       `}</style>
       <div className="lg-showcase-header" style={{ maxWidth: 1200, margin: '0 auto', padding: '125px 32px 48px' }}>

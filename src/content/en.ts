@@ -17,7 +17,7 @@ export const en: Content = {
   paso1_body:   'Register every item individually or import your collection data from Excel or a CSV file with a single click.',
   paso2_titulo: 'An aesthetic worthy\nof your finest pieces',
   paso2_body:   'Automatically assign photos to each item and attach videos, documents, links, and references. Everything in one place, always accessible.',
-  paso3_titulo: 'Adaptable to the way you collect',
+  paso3_titulo: 'Adaptable to the way\nyou collect',
   paso3_body:   'Sort and filter your coins however you like, then export or print whenever you need.\nYour collection, your rules.',
   paso4_titulo: 'Intuitive and easy to use',
   paso4_body:   'View your items on maps, compare examples, keep notes, plan future acquisitions, create labels, and explore metrics.',
@@ -76,6 +76,8 @@ export const en: Content = {
   comp_h2:  'Take your collection\nto the next level',
   comp_sub: 'Start with the essentials or\nunlock the full experience',
   cta_titulo: 'Turn your collection\ninto a legacy',
+  cta_moneda_alt: 'Athenian tetradrachm with the owl of Athena',
+  cta_lupa_hint: 'Hover over the coin',
 
   footer_tagline: "Your collection's digital home",
   footer_email:   'contacto@legadonumis.com',

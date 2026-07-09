@@ -50,6 +50,27 @@ export default function Features({ content: C }: Props) {
           transform: translateY(-2px) !important;
         }
         .lg-feature-card:hover .lg-feature-icon { color: var(--ds-accent) !important; }
+
+        /* Resplandor dorado en el borde que sigue al cursor */
+        .lg-feature-card { position: relative; }
+        .lg-feature-card::before {
+          content: '';
+          position: absolute; inset: -1px;
+          border-radius: 14px;
+          padding: 1px;
+          background: radial-gradient(190px circle at var(--mx, 50%) var(--my, 50%), rgba(201,168,76,0.55), transparent 70%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 250ms ease;
+          pointer-events: none;
+        }
+        .lg-feature-card:hover::before { opacity: 1; }
+        @media (prefers-reduced-motion: reduce) {
+          .lg-feature-card::before { display: none; }
+        }
       `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
         <RevealWrapper>

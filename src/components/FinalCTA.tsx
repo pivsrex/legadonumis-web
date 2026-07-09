@@ -24,6 +24,24 @@ export default function FinalCTA({ content: C }: Props) {
               background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.22) 0%, transparent 70%)',
               animation: 'ctaGlow 9s ease-in-out infinite', pointerEvents: 'none',
             }} />
+            <div className="lg-coin-loupe" data-zoom="2.8" style={{
+              position: 'relative', width: 'min(380px, 64vw)', zIndex: 1,
+            }}>
+              <img
+                src="/assets/MonedaIconica.webp"
+                alt={C.cta_moneda_alt}
+                draggable={false}
+                style={{ width: '100%', display: 'block', filter: 'drop-shadow(0 18px 40px rgba(0,0,0,0.55))' }}
+              />
+              <div className="lg-coin-lens" aria-hidden="true" />
+            </div>
+            <p className="lg-coin-hint" style={{
+              font: '400 13px/1 var(--font-body)', letterSpacing: '0.06em',
+              color: 'var(--ds-text-mid)', margin: 0, position: 'relative', zIndex: 1,
+            }}>
+              {C.cta_lupa_hint}
+            </p>
+
             <h2 style={{
               font: '700 clamp(32px, 4.5vw, 60px)/1.05 var(--font-display)',
               letterSpacing: '-0.035em', color: 'var(--ds-text-high)', margin: 0,

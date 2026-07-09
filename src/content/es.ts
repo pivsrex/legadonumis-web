@@ -17,7 +17,7 @@ export const es: Content = {
   paso1_body:   'Registra cada ejemplar individualmente o importa los datos de tu colección desde Excel o un archivo CSV con un solo clic.',
   paso2_titulo: 'Con una estética a la altura\nde tus mejores piezas',
   paso2_body:   'Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.',
-  paso3_titulo: 'Adaptable a tu forma de coleccionar',
+  paso3_titulo: 'Adaptable a tu forma\nde coleccionar',
   paso3_body:   'Ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.',
   paso4_titulo: 'Intuitivo y fácil de usar',
   paso4_body:   'Visualiza tus piezas sobre mapas, compara ejemplares, guarda notas, planifica futuras adquisiciones, crea etiquetas y consulta métricas.',
@@ -76,6 +76,8 @@ export const es: Content = {
   comp_h2:  'Lleva tu colección\nal siguiente nivel',
   comp_sub: 'Comienza con lo esencial o\naccede a la experiencia completa',
   cta_titulo: 'Convierte tu colección\nen un legado',
+  cta_moneda_alt: 'Tetradracma de Atenas con la lechuza de Atenea',
+  cta_lupa_hint: 'Pasa el cursor sobre la moneda',
 
   footer_tagline: 'El museo digital de tu colección',
   footer_email:   'contacto@legadonumis.com',

@@ -88,6 +88,39 @@ const schemaLang = lang
       html.js [data-reveal] { opacity: 1; transform: none; transition: none; }
     }
 
+    /* Lupa interactiva sobre la moneda (CTA final) */
+    .lg-coin-loupe { touch-action: pan-y; }
+    .lg-coin-lens {
+      position: absolute; top: 0; left: 0;
+      width: 132px; height: 132px; border-radius: 50%;
+      border: 1px solid rgba(201, 168, 76, 0.55);
+      box-shadow: 0 10px 34px rgba(0,0,0,0.65), inset 0 0 14px rgba(0,0,0,0.4);
+      background-repeat: no-repeat;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 180ms ease;
+      transform: translate(-50%, -50%);
+    }
+    .lg-coin-loupe.is-active .lg-coin-lens { opacity: 1; }
+    .lg-coin-hint { transition: opacity 500ms ease; }
+    .lg-coin-hint.is-hidden { opacity: 0; }
+
+    /* Destello al pasar el ratón por los botones de descarga */
+    .lg-btn-shine { position: relative; overflow: hidden; }
+    .lg-btn-shine::after {
+      content: '';
+      position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.45) 50%, transparent 65%) no-repeat;
+      background-size: 250% 100%;
+      background-position: 180% 0;
+      pointer-events: none;
+    }
+    .lg-btn-shine:hover::after { animation: lgBtnShine 1.3s ease; }
+    @keyframes lgBtnShine { to { background-position: -80% 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      .lg-btn-shine:hover::after { animation: none; }
+    }
+
     @media (max-width: 1024px) {
       .lg-feature-grid   { grid-template-columns: repeat(2, 1fr) !important; }
       .lg-workflow-track { grid-template-columns: repeat(2, 1fr) !important; }
@@ -121,15 +154,71 @@ const schemaLang = lang
   <script>
     // Scroll reveal via vanilla JS (no React hydration needed)
     (function () {
-      const els = document.querySelectorAll('[data-reveal]')
-      if (!els.length) return
+      const seen = new WeakSet()
       const obs = new IntersectionObserver(
         (entries) => entries.forEach(e => {
           if (e.isIntersecting) { e.target.classList.add('is-revealed'); obs.unobserve(e.target) }
         }),
         { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
       )
-      els.forEach(el => obs.observe(el))
+      const watch = (el) => { if (!seen.has(el)) { seen.add(el); obs.observe(el) } }
+      const scan = (root) => {
+        if (root.nodeType !== 1 && root.nodeType !== 9) return
+        if (root.nodeType === 1 && root.hasAttribute('data-reveal')) watch(root)
+        root.querySelectorAll('[data-reveal]').forEach(watch)
+      }
+      scan(document)
+      // Las islas de Astro pueden recrear su DOM al hidratar (descartando los nodos
+      // SSR ya observados). Re-escaneamos cualquier nodo nuevo para no perder reveals.
+      new MutationObserver((muts) =>
+        muts.forEach(m => m.addedNodes.forEach(n => scan(n)))
+      ).observe(document.body, { childList: true, subtree: true })
+    })()
+
+    // Lupa interactiva (vanilla, sin hidratación React)
+    ;(function () {
+      document.querySelectorAll('.lg-coin-loupe').forEach((wrap) => {
+        const img = wrap.querySelector('img')
+        const lens = wrap.querySelector('.lg-coin-lens')
+        if (!img || !lens) return
+        const zoom = parseFloat(wrap.getAttribute('data-zoom') || '2.8')
+        const hint = wrap.parentElement ? wrap.parentElement.querySelector('.lg-coin-hint') : null
+
+        function move(e) {
+          const r = wrap.getBoundingClientRect()
+          const x = e.clientX - r.left
+          const y = e.clientY - r.top
+          if (x < 0 || y < 0 || x > r.width || y > r.height) return
+          if (!lens.style.backgroundImage) {
+            lens.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")'
+          }
+          lens.style.left = x + 'px'
+          lens.style.top = y + 'px'
+          lens.style.backgroundSize = (r.width * zoom) + 'px auto'
+          const half = lens.offsetWidth / 2
+          lens.style.backgroundPosition = (half - x * zoom) + 'px ' + (half - y * zoom) + 'px'
+          wrap.classList.add('is-active')
+          if (hint) hint.classList.add('is-hidden')
+        }
+
+        wrap.addEventListener('pointermove', move)
+        wrap.addEventListener('pointerdown', move)
+        wrap.addEventListener('pointerleave', () => wrap.classList.remove('is-active'))
+      })
+    })()
+
+    // Resplandor de borde que sigue al cursor (features y FAQ).
+    // Delegación en document: sobrevive a que las islas recreen su DOM al hidratar.
+    ;(function () {
+      document.addEventListener('pointermove', (e) => {
+        const t = e.target
+        if (!t || !(t instanceof Element)) return
+        const card = t.closest('.lg-feature-card, .lg-faq-card')
+        if (!card) return
+        const r = card.getBoundingClientRect()
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px')
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px')
+      }, { passive: true })
     })()
   </script>
 </body>
