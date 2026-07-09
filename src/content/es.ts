@@ -13,13 +13,13 @@ export const es: Content = {
   pasos_h2:  'Porque tu colección\nmerece más que\nun simple inventario',
   pasos_sub: 'Legado es la forma elegante, flexible y sencilla\nde documentar y visualizar tus piezas',
 
-  paso1_titulo: 'Diseñado por y para numismáticos',
+  paso1_titulo: 'Diseñado por y\npara numismáticos',
   paso1_body:   'Registra cada ejemplar individualmente o importa los datos de tu colección desde Excel o un archivo CSV con un solo clic.',
   paso2_titulo: 'Con una estética a la altura\nde tus mejores piezas',
   paso2_body:   'Asigna automáticamente fotos a cada ejemplar y adjunta vídeos, documentos, enlaces y referencias. Todo siempre accesible.',
   paso3_titulo: 'Adaptable a tu forma\nde coleccionar',
   paso3_body:   'Ordena tus monedas y billetes como prefieras, y exporta o imprime tus datos cuando lo necesites.\nTu colección, tus reglas.',
-  paso4_titulo: 'Intuitivo y fácil de usar',
+  paso4_titulo: 'Intuitivo\ny fácil de usar',
   paso4_body:   'Visualiza tus piezas sobre mapas, compara ejemplares, guarda notas, planifica futuras adquisiciones, crea etiquetas y consulta métricas.',
 
   sc_h2:  'Todo lo que necesitas,\nen un solo lugar',

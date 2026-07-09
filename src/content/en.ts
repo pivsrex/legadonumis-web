@@ -13,13 +13,13 @@ export const en: Content = {
   pasos_h2:  'Because your collection\ndeserves more than\na simple inventory',
   pasos_sub: 'Legado is the elegant, flexible, and simple way\nto document and showcase your pieces',
 
-  paso1_titulo: 'Built by and for numismatists',
+  paso1_titulo: 'Built by and\nfor numismatists',
   paso1_body:   'Register every item individually or import your collection data from Excel or a CSV file with a single click.',
   paso2_titulo: 'An aesthetic worthy\nof your finest pieces',
   paso2_body:   'Automatically assign photos to each item and attach videos, documents, links, and references. Everything in one place, always accessible.',
   paso3_titulo: 'Adaptable to the way\nyou collect',
   paso3_body:   'Sort and filter your coins however you like, then export or print whenever you need.\nYour collection, your rules.',
-  paso4_titulo: 'Intuitive and easy to use',
+  paso4_titulo: 'Intuitive\nand easy to use',
   paso4_body:   'View your items on maps, compare examples, keep notes, plan future acquisitions, create labels, and explore metrics.',
 
   sc_h2:  'Everything you need,\nin one place',
