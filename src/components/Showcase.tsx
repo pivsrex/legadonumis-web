@@ -24,7 +24,7 @@ function LazyVideo({ src }: { src: string }) {
     return () => obs.disconnect()
   }, [src])
 
-  const poster = src.replace(/\.mp4$/, '_poster.jpg')
+  const poster = src.replace(/\.mp4$/, '_poster.webp')
 
   return (
     <video
@@ -61,7 +61,7 @@ function CoinLogo() {
       style={{ position: 'relative', display: 'block', width: 24, height: 24 }}
     >
       <img
-        src="/assets/LogoOscSoloTrans.png"
+        src="/assets/LogoOscSolo96.webp"
         alt=""
         width={24}
         height={24}
@@ -127,8 +127,8 @@ export default function Showcase({ content: C }: Props) {
         .lg-coin-shine::after {
           content: '';
           position: absolute; inset: 0;
-          -webkit-mask-image: url('/assets/LogoOscSoloTrans.png');
-          mask-image: url('/assets/LogoOscSoloTrans.png');
+          -webkit-mask-image: url('/assets/LogoOscSolo96.webp');
+          mask-image: url('/assets/LogoOscSolo96.webp');
           -webkit-mask-size: 100% 100%;
           mask-size: 100% 100%;
           background: linear-gradient(115deg, transparent 32%, rgba(255,248,222,0.95) 50%, transparent 68%) no-repeat;

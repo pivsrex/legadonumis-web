@@ -1,5 +1,5 @@
 import { AppleIcon, WindowsIcon } from './icons'
-import { br, RevealWrapper } from '../utils/text'
+import { br } from '../utils/text'
 import DownloadMenu from './DownloadMenu'
 import type { Content } from '../content/types'
 
@@ -54,6 +54,16 @@ export default function Hero({ content: C }: Props) {
       <style>{`
         .hero-mobile-notice { display: none; }
         @media (max-width: 819px) { .hero-mobile-notice { display: flex; } }
+
+        /* Entrada del hero por CSS puro (sin depender del JS de reveal):
+           el LCP pinta de inmediato. El vídeo solo anima transform, no opacidad. */
+        .hero-intro { animation: heroIntro 0.55s cubic-bezier(0.4, 0, 0.2, 1) both; }
+        .hero-intro-media { animation: heroIntroUp 0.65s cubic-bezier(0.4, 0, 0.2, 1) both; }
+        @keyframes heroIntro { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+        @keyframes heroIntroUp { from { transform: translateY(26px); } to { transform: none; } }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-intro, .hero-intro-media { animation: none; }
+        }
         .hero-dl-mac, .hero-dl-win, .hero-dl-sep { display: inline-flex; align-items: center; }
         html.is-mac .hero-dl-win, html.is-mac .hero-dl-sep,
         html.is-win .hero-dl-mac, html.is-win .hero-dl-sep { display: none; }
@@ -61,13 +71,13 @@ export default function Hero({ content: C }: Props) {
       <div style={s.glow} />
       <div style={s.container}>
 
-        <RevealWrapper delay={80}>
+        <div className="hero-intro" style={{ animationDelay: '80ms' }}>
           <h1 style={s.h1} className="hero-h1">{br(C.hero_h1)}</h1>
-        </RevealWrapper>
+        </div>
 
-        <RevealWrapper delay={180}>
+        <div className="hero-intro" style={{ animationDelay: '180ms' }}>
           <p style={s.sub} className="hero-sub">{br(C.hero_sub, 'hero-br')}</p>
-        </RevealWrapper>
+        </div>
 
         <div className="hero-mobile-notice" style={{
           alignItems: 'center', gap: 10,
@@ -80,7 +90,7 @@ export default function Hero({ content: C }: Props) {
           </p>
         </div>
 
-        <RevealWrapper delay={280}>
+        <div className="hero-intro" style={{ animationDelay: '280ms' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, marginTop: 4 }}>
             <DownloadMenu
               labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
@@ -93,21 +103,21 @@ export default function Hero({ content: C }: Props) {
               {C.hero_btn_mac}
             </DownloadMenu>
           </div>
-        </RevealWrapper>
+        </div>
 
-        <RevealWrapper delay={440} style={{ width: '100%' }}>
+        <div className="hero-intro-media" style={{ width: '100%', animationDelay: '360ms' }}>
           <div style={s.videoWrap}>
             <div style={s.videoGradient} />
             {/* El vídeo solo se carga en escritorio (lo activa el script del Layout);
                 en móvil se muestra únicamente el poster: ahorra 3,6 MB al visitante */}
             <video
               muted loop playsInline
-              poster={C.asset_hero.replace(/\.mp4$/, '_poster.jpg')}
+              poster={C.asset_hero.replace(/\.mp4$/, '_poster.webp')}
               data-desktop-src={C.asset_hero}
               style={{ width: '100%', display: 'block', aspectRatio: '16 / 9' }}
             />
           </div>
-        </RevealWrapper>
+        </div>
 
       </div>
     </section>
