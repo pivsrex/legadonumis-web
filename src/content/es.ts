@@ -79,7 +79,7 @@ export const es: Content = {
   cta_moneda_alt: 'Tetradracma de Atenas con la lechuza de Atenea',
   cta_lupa_hint: 'Pasa el cursor sobre la moneda',
   cta_puzzle_hint: 'Reconstruye el tetradracma y desbloquea una sorpresa',
-  cta_puzzle_done: 'Ahora imagina tu colección, así de organizada.',
+  cta_puzzle_done: 'Ahora imagina tu colección así de organizada.',
   cta_discount_label: '10% de descuento en Legado Pro con el código',
   cta_code_copied: 'Código copiado',
   dl_pro_label: 'Legado Pro',
