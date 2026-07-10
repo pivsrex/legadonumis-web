@@ -118,39 +118,44 @@ export const es: Content = {
 
   comp_groups: [
     {
-      label: 'Colección',
+      label: 'Tu colección',
       rows: [
-        { feat: 'Ejemplares registrados',                  basico: 'Hasta 50',     pro: 'Ilimitado'  },
-        { feat: 'Imágenes, vídeos y documentos adjuntos',  basico: true,           pro: true         },
+        { feat: 'Ejemplares registrados',                  basico: 'Hasta 50', pro: 'Ilimitados' },
+        { feat: 'Importación desde Excel y CSV',           basico: true,       pro: true },
+        { feat: 'Importación automatizada de fotografías', basico: true,       pro: true },
+        { feat: 'Imágenes, vídeos y documentos adjuntos',  basico: true,       pro: true },
+      ],
+    },
+    {
+      label: 'Documentación y catálogos',
+      rows: [
+        { feat: 'Consultas a Numista y al catálogo online de monedas romanas OCRE *', basico: true, pro: true },
+        { feat: 'Generación de información sobre contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas', cta: { label: '¿Necesitas más?', url: '#pack-creditos' } },
+        { feat: 'Anotaciones sobre imágenes', basico: false,     pro: true },
+        { feat: 'Post-Its',                   basico: 'Hasta 5', pro: 'Ilimitados' },
       ],
     },
     {
       label: 'Visualización',
       rows: [
-        { feat: 'Galería de imágenes (6 modos)',                   basico: true,      pro: true         },
-        { feat: 'Visor comparativo de ejemplares',                 basico: true,      pro: true         },
-        { feat: 'Mapas: cecas, mundiales e Imperio Romano (125 d.C.)', basico: true, pro: true },
+        { feat: 'Galería de imágenes (6 modos)',         basico: true, pro: true },
+        { feat: 'Visor comparativo de ejemplares',       basico: true, pro: true },
+        { feat: 'Exploración de ejemplares sobre mapas', basico: true, pro: true },
       ],
     },
     {
-      label: 'Organización y exportación',
+      label: 'Análisis y planificación',
       rows: [
-        { feat: 'Importación desde Excel y CSV',            basico: true,  pro: true },
-        { feat: 'Importación automatizada de fotografías',  basico: true,  pro: true },
-        { feat: 'Exportación a Excel y CSV',                basico: 'Solo CSV', pro: true },
-        { feat: 'Exportación de fichas en PDF',             basico: false, pro: true },
-        { feat: 'Diseñador de etiquetas',                   basico: false, pro: true },
+        { feat: 'Estadísticas',                          basico: false, pro: true },
+        { feat: 'Plan de adquisiciones y recordatorios', basico: 'Hasta 5 ejemplares', pro: 'Ilimitados' },
       ],
     },
     {
-      label: 'Funciones avanzadas',
+      label: 'Exportación e impresión',
       rows: [
-        { feat: 'Post-Its',                                basico: 'Hasta 5',      pro: 'Ilimitados'  },
-        { feat: 'Estadísticas',                            basico: false,          pro: true          },
-        { feat: 'Anotaciones sobre imágenes',              basico: false,          pro: true          },
-        { feat: 'Consultas automáticas a Numista y OCRE (moneda romana) *', basico: true, pro: true },
-        { feat: 'Contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas', cta: { label: '¿Necesitas más?', url: '#pack-creditos' } },
-        { feat: 'Plan de adquisiciones y recordatorios',   basico: 'Hasta 5 objetivos', pro: 'Ilimitados' },
+        { feat: 'Exportación a Excel y CSV',    basico: 'Solo CSV', pro: true },
+        { feat: 'Exportación de fichas en PDF', basico: false,      pro: true },
+        { feat: 'Diseñador de etiquetas',       basico: false,      pro: true },
       ],
     },
     {

@@ -118,47 +118,52 @@ export const en: Content = {
 
   comp_groups: [
     {
-      label: 'Collection',
+      label: 'Your collection',
       rows: [
-        { feat: 'Registered pieces',            basico: 'Up to 50',   pro: 'Unlimited' },
-        { feat: 'Photos, videos & documents',   basico: true,         pro: true        },
+        { feat: 'Registered pieces',            basico: 'Up to 50', pro: 'Unlimited' },
+        { feat: 'Import from Excel & CSV',      basico: true,       pro: true },
+        { feat: 'Automated photo import',       basico: true,       pro: true },
+        { feat: 'Photos, videos & documents',   basico: true,       pro: true },
+      ],
+    },
+    {
+      label: 'Documentation & catalogs',
+      rows: [
+        { feat: 'Numista & OCRE Roman coinage catalog lookups *', basico: true, pro: true },
+        { feat: 'AI-generated historical context information', basico: false, pro: '500 queries included', cta: { label: 'Need more?', url: '#pack-creditos' } },
+        { feat: 'Photo annotations', basico: false,     pro: true },
+        { feat: 'Sticky notes',      basico: 'Up to 5', pro: 'Unlimited' },
       ],
     },
     {
       label: 'Views',
       rows: [
-        { feat: 'Image gallery (6 modes)',             basico: true,      pro: true        },
-        { feat: 'Side-by-side comparison',             basico: true,      pro: true        },
-        { feat: 'Maps: mints, world maps & Roman Empire (AD 125)', basico: true, pro: true },
+        { feat: 'Image gallery (6 modes)',   basico: true, pro: true },
+        { feat: 'Side-by-side comparison',   basico: true, pro: true },
+        { feat: 'Explore pieces on maps',    basico: true, pro: true },
       ],
     },
     {
-      label: 'Organization & export',
+      label: 'Analysis & planning',
       rows: [
-        { feat: 'Import from Excel & CSV',     basico: true,  pro: true },
-        { feat: 'Automated photo import',      basico: true,  pro: true },
+        { feat: 'Statistics',                   basico: false, pro: true },
+        { feat: 'Acquisition plan & reminders', basico: 'Up to 5 pieces', pro: 'Unlimited' },
+      ],
+    },
+    {
+      label: 'Export & printing',
+      rows: [
         { feat: 'Export to Excel & CSV',       basico: 'CSV only', pro: true },
-        { feat: 'Export coin records to PDF',  basico: false, pro: true },
-        { feat: 'Label designer',              basico: false, pro: true },
-      ],
-    },
-    {
-      label: 'Advanced features',
-      rows: [
-        { feat: 'Sticky notes',                 basico: 'Up to 5', pro: 'Unlimited' },
-        { feat: 'Statistics',                   basico: false, pro: true        },
-        { feat: 'Photo annotations',            basico: false, pro: true        },
-        { feat: 'Automatic Numista & OCRE (Roman coinage) lookups *', basico: true, pro: true },
-        { feat: 'Historical context with artificial intelligence', basico: false, pro: '500 queries included', cta: { label: 'Need more?', url: '#pack-creditos' } },
-        { feat: 'Acquisition plan & reminders', basico: 'Up to 5 goals', pro: 'Unlimited' },
+        { feat: 'Export coin records to PDF',  basico: false,      pro: true },
+        { feat: 'Label designer',              basico: false,      pro: true },
       ],
     },
     {
       label: 'Support & updates',
       rows: [
-        { feat: 'Access to new features',            basico: false, pro: true },
-        { feat: 'Technical support',                 basico: false, pro: true },
-        { feat: 'Available in Spanish and English',  basico: true,  pro: true },
+        { feat: 'Access to new features',           basico: false, pro: true },
+        { feat: 'Technical support',                basico: false, pro: true },
+        { feat: 'Available in Spanish and English', basico: true,  pro: true },
       ],
     },
   ],
