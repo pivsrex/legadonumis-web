@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+<Layout
+  lang="es"
+  title="404 — Legado"
+  description="Página no encontrada."
+  canonical="https://legadonumis.com/404"
+  ogTitle="Legado — El museo digital de tu colección"
+  ogImage="https://legadonumis.com/assets/og-image.png"
+>
+  <main style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 32px; text-align: center;">
+    <img
+      src="/assets/MonedaIconica.webp"
+      alt=""
+      width="210"
+      style="display: block; opacity: 0.35; filter: grayscale(35%);"
+    />
+    <p style="font: 600 13px/1 var(--font-mono); letter-spacing: 0.25em; color: var(--ds-accent); margin: 0;">404</p>
+    <h1 style="font: 700 clamp(28px, 4vw, 44px)/1.15 var(--font-display); letter-spacing: -0.025em; color: var(--ds-text-high); margin: 0;">
+      Esta pieza no está en la colección
+    </h1>
+    <p style="font: 400 15px/1.6 var(--font-body); color: var(--ds-text-mid); margin: 0;">
+      La página que buscas no existe o ha cambiado de vitrina.<br />
+      <span style="opacity: 0.75;">This page isn't in the collection.</span>
+    </p>
+    <a
+      href="/"
+      class="lg-btn-shine"
+      style="display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; background: var(--ds-accent); color: #0a0908; font: 600 14px/1 var(--font-display); letter-spacing: -0.01em; text-decoration: none;"
+    >
+      Volver al inicio · Back home
+    </a>
+  </main>
+</Layout>

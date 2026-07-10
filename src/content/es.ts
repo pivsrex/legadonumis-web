@@ -164,6 +164,7 @@ export const es: Content = {
         { feat: 'Acceso a nuevas funciones',     basico: false, pro: true },
         { feat: 'Soporte técnico',               basico: false, pro: true },
         { feat: 'Versiones en español e inglés', basico: true,  pro: true },
+        { feat: 'Requisitos: macOS 11+ (Apple Silicon) · Windows 10+ (64 bits)', basico: true, pro: true },
       ],
     },
   ],
