@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AppleIcon, WindowsIcon } from './icons'
-import { BUY_URL, MAC_URL, WIN_URL } from '../config'
+import DownloadMenu from './DownloadMenu'
 import type { Content } from '../content/types'
 
 interface Props {
@@ -88,11 +88,11 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
         </a>
 
         <div style={s.links} className="lg-nav-links">
-          <a href="#workflow"  style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_exp}</a>
+          <a href="#showcase"  style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_exp}</a>
           <a href="#versiones" style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_ver}</a>
           <a href="#faq"       style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_faq}</a>
           <a href="#novedades" style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_novedades}</a>
-          <a href={`mailto:${C.footer_email}`} style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_contact}</a>
+          <a href="#contacto" style={s.link} onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>{C.nav_link_contact}</a>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }} className="lg-nav-btns">
@@ -104,12 +104,13 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
             </svg>
             {lang === 'es' ? 'EN' : 'ES'}
           </a>
-          <a href={isMac ? MAC_URL : WIN_URL} className="lg-btn-shine" style={s.btnPri}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
+          <DownloadMenu
+            labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
+            btnStyle={s.btnPri}
+          >
             {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
             {isMac ? C.nav_btn_mac : C.nav_btn_win}
-          </a>
+          </DownloadMenu>
         </div>
       </div>
     </nav>

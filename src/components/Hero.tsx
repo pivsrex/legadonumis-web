@@ -1,6 +1,6 @@
 import { AppleIcon, WindowsIcon } from './icons'
 import { br, RevealWrapper } from '../utils/text'
-import { BUY_URL } from '../config'
+import DownloadMenu from './DownloadMenu'
 import type { Content } from '../content/types'
 
 interface Props { content: Content }
@@ -82,12 +82,16 @@ export default function Hero({ content: C }: Props) {
 
         <RevealWrapper delay={280}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, marginTop: 4 }}>
-            <a href={BUY_URL} className="lg-btn-shine" style={s.btnPri}>
+            <DownloadMenu
+              labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
+              btnStyle={s.btnPri}
+              center
+            >
               <span className="hero-dl-mac"><AppleIcon size={20} /></span>
               <span className="hero-dl-sep" style={{ font: '300 14px/1', opacity: 0.5 }}>/</span>
               <span className="hero-dl-win"><WindowsIcon size={20} /></span>
               {C.hero_btn_mac}
-            </a>
+            </DownloadMenu>
           </div>
         </RevealWrapper>
 

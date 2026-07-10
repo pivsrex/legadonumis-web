@@ -13,7 +13,7 @@ export default function Footer({ content: C }: Props) {
   }
 
   return (
-    <footer style={s.foot}>
+    <footer id="contacto" style={s.foot}>
       <style>{`
         .lg-footer-link:hover { color: var(--ds-text-high) !important; }
         .lg-footer-social:hover { color: var(--ds-text-high) !important; }

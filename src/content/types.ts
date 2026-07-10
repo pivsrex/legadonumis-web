@@ -79,6 +79,14 @@ export interface Content {
   cta_titulo: string
   cta_moneda_alt: string
   cta_lupa_hint: string
+  cta_puzzle_hint: string
+  cta_puzzle_done: string
+  cta_discount_label: string
+  cta_code_copied: string
+  dl_pro_label: string
+  dl_pro_sub: string
+  dl_basic_label: string
+  dl_basic_sub: string
   footer_tagline: string
   footer_email: string
   footer_copy: string
