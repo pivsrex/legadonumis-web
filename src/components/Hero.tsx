@@ -90,7 +90,9 @@ export default function Hero({ content: C }: Props) {
           </p>
         </div>
 
-        <div className="hero-intro" style={{ animationDelay: '280ms' }}>
+        {/* zIndex: el menú desplegable debe pintar por encima del vídeo,
+            que también es stacking context por su animación de entrada */}
+        <div className="hero-intro" style={{ animationDelay: '280ms', position: 'relative', zIndex: 5 }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, marginTop: 4 }}>
             <DownloadMenu
               labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
