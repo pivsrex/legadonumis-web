@@ -41,7 +41,7 @@ export default function Footer({ content: C }: Props) {
 
           <div>
             <span style={s.colLabel}>{C.footer_col_product}</span>
-            <a href="#workflow"  className="lg-footer-link" style={s.link}>{C.nav_link_exp}</a>
+            <a href="#showcase"  className="lg-footer-link" style={s.link}>{C.nav_link_exp}</a>
             <a href="#versiones" className="lg-footer-link" style={s.link}>{C.nav_link_ver}</a>
             <a href="#novedades" className="lg-footer-link" style={s.link}>{C.nav_link_novedades}</a>
           </div>
