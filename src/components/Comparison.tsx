@@ -6,7 +6,6 @@ import type { Content, CompRow } from '../content/types'
 
 interface Props { content: Content }
 
-const isMac = typeof navigator !== 'undefined' && (/Mac/.test(navigator.userAgent) || /Mac/.test((navigator as { platform?: string }).platform ?? ''))
 const isEU  = typeof Intl !== 'undefined' && Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('Europe/')
 
 function Cell({ value }: { value: CompRow['basico'] }) {
@@ -38,6 +37,8 @@ export default function Comparison({ content: C }: Props) {
       <style>{`
         .comp-mobile { display: none; }
         @media (max-width: 700px) { .comp-desktop { display: none; } .comp-mobile { display: block; } }
+        html.is-mac .comp-icon-win, html.is-win .comp-icon-mac { display: none; }
+        html.is-mac .comp-btn-win, html.is-win .comp-btn-mac { display: none !important; }
       `}</style>
       <div style={s.container}>
         <RevealWrapper>
@@ -58,11 +59,17 @@ export default function Comparison({ content: C }: Props) {
                       <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{C.comp_plan_basic_price}</span>
                       <span style={{ visibility: 'hidden', font: '400 12px/1.4 var(--font-body)' }}>—</span>
                     </div>
-                    <a href={isMac ? MAC_URL : WIN_URL} className="lg-btn-shine" style={s.btnSec}
+                    <a href={MAC_URL} className="comp-btn-mac lg-btn-shine" style={s.btnSec}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
                       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}>
-                      {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
-                      {isMac ? C.comp_plan_basic_cta_mac : C.comp_plan_basic_cta_win}
+                      <AppleIcon size={15} />
+                      {C.comp_plan_basic_cta_mac}
+                    </a>
+                    <a href={WIN_URL} className="comp-btn-win lg-btn-shine" style={s.btnSec}
+                      onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}>
+                      <WindowsIcon size={15} />
+                      {C.comp_plan_basic_cta_win}
                     </a>
                   </th>
                   <th style={s.thPlan}>
@@ -76,7 +83,8 @@ export default function Comparison({ content: C }: Props) {
                     <a href={BUY_URL} className="lg-btn-shine" style={s.btnPri}
                       onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
                       onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
-                      {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
+                      <span className="comp-icon-mac"><AppleIcon size={15} /></span>
+                      <span className="comp-icon-win"><WindowsIcon size={15} /></span>
                       {C.comp_plan_pro_cta}
                     </a>
                   </th>
@@ -146,7 +154,8 @@ export default function Comparison({ content: C }: Props) {
               )}
               {tab === 'pro' && (
                 <a href={BUY_URL} className="lg-btn-shine" style={{ ...s.btnPri, display: 'flex' }}>
-                  {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
+                  <span className="comp-icon-mac"><AppleIcon size={15} /></span>
+                  <span className="comp-icon-win"><WindowsIcon size={15} /></span>
                   {C.comp_plan_pro_cta}
                 </a>
               )}
