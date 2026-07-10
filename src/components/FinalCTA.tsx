@@ -258,9 +258,19 @@ export default function FinalCTA({ content: C }: Props) {
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3em',
               position: 'relative', zIndex: 1,
             }}>
-              {C.cta_titulo.split('\n').map((line, i) => (
-                <span key={i} style={{ whiteSpace: 'nowrap' }}>{line}</span>
-              ))}
+              {C.cta_titulo.split('\n').map((line, i, lines) => {
+                // La última palabra ("legado" / "legacy") en dorado: guiño a la marca
+                if (i < lines.length - 1) {
+                  return <span key={i} style={{ whiteSpace: 'nowrap' }}>{line}</span>
+                }
+                const corte = line.lastIndexOf(' ')
+                return (
+                  <span key={i} style={{ whiteSpace: 'nowrap' }}>
+                    {line.slice(0, corte + 1)}
+                    <span style={{ color: 'var(--ds-accent)' }}>{line.slice(corte + 1)}</span>
+                  </span>
+                )
+              })}
             </h2>
           </div>
         </RevealWrapper>
