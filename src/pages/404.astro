@@ -9,21 +9,57 @@ import Layout from '../layouts/Layout.astro'
   ogTitle="Legado — El museo digital de tu colección"
   ogImage="https://legadonumis.com/assets/og-image.png"
 >
+  <style>
+    /* La moneda entra rodando por la izquierda y sale por la derecha, en bucle.
+       La rotación (~2 vueltas por ancho de pantalla) va acompasada al avance
+       para que ruede de verdad en lugar de flotar girando. */
+    .lg-404-strip {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      height: 220px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .lg-404-coin {
+      position: absolute;
+      left: -240px;
+      top: 5px;
+      width: 210px;
+      display: block;
+      opacity: 0.35;
+      filter: grayscale(35%);
+      animation: lg404Roll 9s linear infinite;
+    }
+    @keyframes lg404Roll {
+      from { transform: translateX(0) rotate(0deg); }
+      to   { transform: translateX(calc(100vw + 480px)) rotate(760deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lg-404-coin { animation: none; left: 50%; transform: translateX(-50%); }
+    }
+  </style>
   <main style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 32px; text-align: center;">
-    <img
-      src="/assets/MonedaIconica.webp"
-      alt=""
-      width="210"
-      style="display: block; opacity: 0.35; filter: grayscale(35%);"
-    />
+    <div class="lg-404-strip" aria-hidden="true">
+      <img src="/assets/MonedaIconica.webp" alt="" class="lg-404-coin" />
+    </div>
     <p style="font: 600 13px/1 var(--font-mono); letter-spacing: 0.25em; color: var(--ds-accent); margin: 0;">404</p>
-    <h1 style="font: 700 clamp(28px, 4vw, 44px)/1.15 var(--font-display); letter-spacing: -0.025em; color: var(--ds-text-high); margin: 0;">
-      Esta pieza no está en la colección
-    </h1>
-    <p style="font: 400 15px/1.6 var(--font-body); color: var(--ds-text-mid); margin: 0;">
-      La página que buscas no existe o ha cambiado de vitrina.<br />
-      <span style="opacity: 0.75;">This page isn't in the collection.</span>
-    </p>
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <h1 style="font: 700 clamp(28px, 4vw, 44px)/1.15 var(--font-display); letter-spacing: -0.025em; color: var(--ds-text-high); margin: 0;">
+        Esta pieza no está en la colección
+      </h1>
+      <p style="font: 700 clamp(28px, 4vw, 44px)/1.15 var(--font-display); letter-spacing: -0.025em; color: #EAE0B0; margin: 0;">
+        This piece is not in the collection
+      </p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <p style="font: 400 15px/1.6 var(--font-body); color: var(--ds-text-mid); margin: 0;">
+        La página que buscas no existe o ha cambiado de vitrina.
+      </p>
+      <p style="font: 400 15px/1.6 var(--font-body); color: #EAE0B0; margin: 0;">
+        The page you are looking for does not exist or has moved to another display case.
+      </p>
+    </div>
     <a
       href="/"
       class="lg-btn-shine"
@@ -31,5 +67,10 @@ import Layout from '../layouts/Layout.astro'
     >
       Volver al inicio · Back home
     </a>
+    <img
+      src="/LogoConTituloHorizontalTrans.svg"
+      alt="Legado"
+      style="height: 40px; width: auto; display: block; margin-top: 18px; filter: drop-shadow(0 0 16px rgba(201,168,76,0.2));"
+    />
   </main>
 </Layout>
