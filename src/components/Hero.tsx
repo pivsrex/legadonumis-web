@@ -98,13 +98,14 @@ export default function Hero({ content: C }: Props) {
         <RevealWrapper delay={440} style={{ width: '100%' }}>
           <div style={s.videoWrap}>
             <div style={s.videoGradient} />
+            {/* El vídeo solo se carga en escritorio (lo activa el script del Layout);
+                en móvil se muestra únicamente el poster: ahorra 3,6 MB al visitante */}
             <video
-              autoPlay muted loop playsInline
+              muted loop playsInline
               poster={C.asset_hero.replace(/\.mp4$/, '_poster.jpg')}
+              data-desktop-src={C.asset_hero}
               style={{ width: '100%', display: 'block', aspectRatio: '16 / 9' }}
-            >
-              <source src={C.asset_hero} type="video/mp4" />
-            </video>
+            />
           </div>
         </RevealWrapper>
 

@@ -51,7 +51,15 @@ export default function Newsletter({ lang }: Props) {
 
   return (
     <section id="novedades" style={{ padding: '125px 32px 0', background: 'var(--ds-bg-0)' }}>
-      <div style={{
+      <style>{`
+        /* En móvil el formulario se apila para que el botón nunca quede fuera de pantalla */
+        @media (max-width: 600px) {
+          .lg-nl-card { padding: 32px 22px !important; }
+          .lg-nl-row { flex-direction: column !important; }
+          .lg-nl-row button { width: 100%; }
+        }
+      `}</style>
+      <div className="lg-nl-card" style={{
         maxWidth: 640, margin: '0 auto',
         background: '#181818', border: '1px solid rgba(255,255,255,0.06)',
         boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 20,
@@ -68,7 +76,7 @@ export default function Newsletter({ lang }: Props) {
           <p style={{ font: '400 15px/1.6 var(--font-body)', color: 'var(--ds-accent)', margin: 0 }}>{t.ok}</p>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex', gap: 10 }}>
+            <div className="lg-nl-row" style={{ display: 'flex', gap: 10 }}>
               <input
                 type="email"
                 required
@@ -76,7 +84,7 @@ export default function Newsletter({ lang }: Props) {
                 onChange={e => setEmail(e.target.value)}
                 placeholder={t.placeholder}
                 style={{
-                  flex: 1, padding: '11px 16px', borderRadius: 10,
+                  flex: 1, minWidth: 0, padding: '11px 16px', borderRadius: 10,
                   background: 'var(--ds-bg-2)', border: '1px solid var(--ds-border-mid)',
                   color: 'var(--ds-text-high)', font: '400 14px/1 var(--font-body)',
                   outline: 'none',

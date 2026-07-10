@@ -32,7 +32,7 @@ const faqSchema = {
   ogImage="https://legadonumis.com/assets/og-image.png"
 >
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <Navbar content={content} lang="es" altUrl="/en/" client:load />
+  <Navbar content={content} lang="es" altUrl="/en/" client:idle />
   <main>
     <Hero        content={content} />
     <Workflow    content={content} />

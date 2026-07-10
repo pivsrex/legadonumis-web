@@ -10,6 +10,9 @@ function LazyVideo({ src }: { src: string }) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    // En móvil no se reproducen los vídeos (queda el poster): el visitante móvil
+    // no puede usar la app y no debería pagar la descarga de 6 vídeos
+    if (!window.matchMedia('(min-width: 769px)').matches) return
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) el.play().catch(() => {})

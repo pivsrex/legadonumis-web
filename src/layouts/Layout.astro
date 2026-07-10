@@ -252,6 +252,17 @@ const schemaLang = lang
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrar() })
     })()
 
+    // Vídeos marcados como solo-escritorio: cargarlos únicamente en pantallas grandes
+    ;(function () {
+      if (!window.matchMedia('(min-width: 769px)').matches) return
+      document.querySelectorAll('video[data-desktop-src]').forEach((v) => {
+        if (!(v instanceof HTMLVideoElement)) return
+        v.src = v.getAttribute('data-desktop-src') || ''
+        v.autoplay = true
+        v.play().catch(() => {})
+      })
+    })()
+
     // Resplandor de borde que sigue al cursor (features y FAQ).
     // Delegación en document: sobrevive a que las islas recreen su DOM al hidratar.
     ;(function () {
