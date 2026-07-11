@@ -95,9 +95,10 @@ export default function FinalCTA({ content: C }: Props) {
     if (!d.moved || Math.hypot(v.x, v.y) < SNAP) colocar(d.i)
   }
 
-  // ── Lupa (activa en modo lupa y solved) ──
+  // ── Lupa: solo en escritorio tras resolver el puzle.
+  //    En móvil no tiene sentido: el dedo tapa la zona ampliada. ──
   function lensMove(e: React.PointerEvent<HTMLDivElement>) {
-    if (mode !== 'lupa' && mode !== 'solved') return
+    if (mode !== 'solved') return
     const wrap = wrapRef.current
     const lens = lensRef.current
     if (!wrap || !lens) return
@@ -212,7 +213,7 @@ export default function FinalCTA({ content: C }: Props) {
                   draggable={false}
                   style={{ width: '100%', display: 'block', filter: 'drop-shadow(0 18px 40px rgba(0,0,0,0.55))' }}
                 />
-                <div ref={lensRef} className="lg-coin-lens" aria-hidden="true" />
+                {mode === 'solved' && <div ref={lensRef} className="lg-coin-lens" aria-hidden="true" />}
               </div>
             )}
 
@@ -243,14 +244,14 @@ export default function FinalCTA({ content: C }: Props) {
                   {C.cta_lupa_hint}
                 </p>
               </div>
-            ) : (
+            ) : mode === 'puzzle' ? (
               <p className="lg-coin-hint" style={{
                 font: '400 13px/1 var(--font-body)', letterSpacing: '0.06em',
                 color: 'var(--ds-text-mid)', margin: 0, position: 'relative', zIndex: 1,
               }}>
-                {mode === 'puzzle' ? C.cta_puzzle_hint : C.cta_lupa_hint}
+                {C.cta_puzzle_hint}
               </p>
-            )}
+            ) : null}
 
             <h2 style={{
               font: '700 clamp(32px, 4.5vw, 60px)/1.05 var(--font-display)',
