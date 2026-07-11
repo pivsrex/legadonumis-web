@@ -175,7 +175,8 @@ const schemaLang = lang
       .lg-showcase-section { min-height: auto !important; margin-top: 24px !important; }
       .lg-showcase-sticky  { position: relative !important; top: auto !important; padding: 0 16px !important; }
       .lg-showcase-card    { height: auto !important; grid-template-columns: 1fr !important; }
-      .lg-showcase-media   { height: 220px !important; }
+      /* En móvil no hay vídeos: se ocultan también sus paneles con el fotograma estático */
+      .lg-showcase-media   { display: none !important; }
       .lg-showcase-header  { padding-top: 80px !important; }
       .lg-footer-grid    { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
       section { padding-top: 80px !important; }

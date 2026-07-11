@@ -10,9 +10,10 @@ function LazyVideo({ src }: { src: string }) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    // En móvil no se reproducen los vídeos (queda el poster): el visitante móvil
-    // no puede usar la app y no debería pagar la descarga de 6 vídeos
+    // En móvil no hay vídeos ni posters (los paneles van ocultos por CSS):
+    // el visitante móvil no paga ninguna descarga de esta sección
     if (!window.matchMedia('(min-width: 769px)').matches) return
+    el.poster = poster
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) el.play().catch(() => {})
@@ -28,7 +29,7 @@ function LazyVideo({ src }: { src: string }) {
 
   return (
     <video
-      ref={ref} muted loop playsInline preload="none" poster={poster}
+      ref={ref} muted loop playsInline preload="none"
       style={{ width: '100%', display: 'block', aspectRatio: '16 / 9', objectFit: 'cover', background: '#181818' }}
     >
       <source src={src} type="video/mp4" />
