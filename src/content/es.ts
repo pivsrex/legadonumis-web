@@ -67,9 +67,9 @@ export const es: Content = {
   faq5_q: '¿El uso de Numista y la IA tiene algún coste adicional?',
   faq5_a: 'El acceso a la base de datos de Numista requiere una clave API gratuita disponible en Numista.com. Cabe mencionar que Legado no está vinculado a Numista ni es responsable de sus condiciones, disponibilidad o precios. La consulta del catálogo OCRE es gratuita y no requiere clave. Además, Legado Pro incluye en su precio 500 créditos para generar información contextual histórica de monedas y billetes. Es posible adquirir paquetes de créditos adicionales.',
   faq6_q: '¿Cómo activo mi Legado Pro?',
-  faq6_a: 'Tras realizar el pago con tarjeta de crédito o a través de PayPal, recibirás un correo electrónico con un código de activación. Introdúcelo en la sección de configuración de la aplicación.',
+  faq6_a: 'Tras realizar el pago con tarjeta de crédito o a través de PayPal, recibirás un correo electrónico con un código de activación. Introdúcelo en la sección "Ajustes" de la aplicación.',
   faq7_q: '¿Tengo que pagar alguna suscripción periódica?',
-  faq7_a: 'No. Legado Básico es gratuito. La licencia de Legado Pro implica un pago único y no está sujeta a una suscripción periódica.',
+  faq7_a: 'No. Legado Básico es gratuito. En el caso de Legado Pro, la licencia implica un pago único y no está sujeta a una suscripción periódica.',
   faq8_q: '¿Es Legado solo para coleccionistas de monedas y billetes?',
   faq8_a: 'No. Aunque está diseñado específicamente para numismática (monedas, billetes, fichas y medallas), su sistema flexible permite adaptarse fácilmente a otros tipos de colecciones.',
 
