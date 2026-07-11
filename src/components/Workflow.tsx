@@ -158,14 +158,14 @@ export default function Workflow({ content: C }: Props) {
                 cobre carlista 30mm, dracma parto 20mm, dinar al-Hakam II 22mm, 8 reales 39mm */}
             {[
               // Anillo homogéneo: 8 posiciones equiespaciadas (N/S/E/O a r≈160, diagonales a r≈113)
-              { src: '/assets/Moneda2.webp', size: 130, left: 'calc(50% - 65px)',  top: 90,  opacity: 0.30, dur: '12s',   delay: '0.8s', rot: '-10deg', blur: 0 },   // N  trióbolo
-              { src: '/assets/Moneda7.webp', size: 66,  left: 'calc(50% + 80px)',  top: 164, opacity: 0.33, dur: '13s',   delay: '1.6s', rot: '14deg',  blur: 0 },   // NE dinar
-              { src: '/assets/Moneda4.webp', size: 90,  left: 'calc(50% + 125px)', top: 265, opacity: 0.33, dur: '13.5s', delay: '1.2s', rot: '10deg',  blur: 0 },   // E  4 escudos
-              { src: '/assets/Moneda3.webp', size: 63,  left: 'calc(50% + 82px)',  top: 392, opacity: 0.27, dur: '12.5s', delay: '2s',   rot: '8deg',   blur: 0 },   // SE rupia
-              { src: '/assets/Moneda8.webp', size: 117, left: 'calc(50% - 58px)',  top: 414, opacity: 0.33, dur: '14s',   delay: '0.4s', rot: '-5deg',  blur: 0 },   // S  8 reales
-              { src: '/assets/Moneda6.webp', size: 60,  left: 'calc(50% - 143px)', top: 393, opacity: 0.28, dur: '9.5s',  delay: '0.6s', rot: '-16deg', blur: 0.5 }, // SO dracma
-              { src: '/assets/Moneda5.webp', size: 90,  left: 'calc(50% - 215px)', top: 265, opacity: 0.22, dur: '10.5s', delay: '2.4s', rot: '18deg',  blur: 0.7 }, // O  carlista
-              { src: '/assets/Moneda1.webp', size: 57,  left: 'calc(50% - 142px)', top: 169, opacity: 0.34, dur: '11s',   delay: '0s',   rot: '-6deg',  blur: 0 },   // NO denario
+              { src: '/assets/Moneda2.webp', size: 130, left: 'calc(50% - 65px)',  top: 90,  opacity: 0.50, dur: '12s',   delay: '0.8s', rot: '-10deg', blur: 0 },   // N  trióbolo
+              { src: '/assets/Moneda7.webp', size: 66,  left: 'calc(50% + 80px)',  top: 164, opacity: 0.55, dur: '13s',   delay: '1.6s', rot: '14deg',  blur: 0 },   // NE dinar
+              { src: '/assets/Moneda4.webp', size: 90,  left: 'calc(50% + 125px)', top: 265, opacity: 0.55, dur: '13.5s', delay: '1.2s', rot: '10deg',  blur: 0 },   // E  4 escudos
+              { src: '/assets/Moneda3.webp', size: 63,  left: 'calc(50% + 82px)',  top: 392, opacity: 0.46, dur: '12.5s', delay: '2s',   rot: '8deg',   blur: 0 },   // SE rupia
+              { src: '/assets/Moneda8.webp', size: 117, left: 'calc(50% - 58px)',  top: 414, opacity: 0.55, dur: '14s',   delay: '0.4s', rot: '-5deg',  blur: 0 },   // S  8 reales
+              { src: '/assets/Moneda6.webp', size: 60,  left: 'calc(50% - 143px)', top: 393, opacity: 0.48, dur: '9.5s',  delay: '0.6s', rot: '-16deg', blur: 0 }, // SO dracma
+              { src: '/assets/Moneda5.webp', size: 90,  left: 'calc(50% - 215px)', top: 265, opacity: 0.42, dur: '10.5s', delay: '2.4s', rot: '18deg',  blur: 0 }, // O  carlista
+              { src: '/assets/Moneda1.webp', size: 57,  left: 'calc(50% - 142px)', top: 169, opacity: 0.58, dur: '11s',   delay: '0s',   rot: '-6deg',  blur: 0 },   // NO denario
             ].map((c, i) => (
               <img
                 key={i}
@@ -177,7 +177,7 @@ export default function Workflow({ content: C }: Props) {
                   position: 'absolute', left: c.left, top: c.top,
                   width: c.size, height: 'auto',
                   opacity: c.opacity,
-                  filter: `${c.blur ? `blur(${c.blur}px) ` : ''}contrast(1.18) brightness(1.08)`,
+                  filter: `${c.blur ? `blur(${c.blur}px) ` : ''}contrast(1.12) brightness(1.4)`,
                   pointerEvents: 'none',
                   ['--dur' as string]: c.dur,
                   ['--delay' as string]: c.delay,
