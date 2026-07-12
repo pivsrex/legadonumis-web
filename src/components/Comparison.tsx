@@ -78,7 +78,7 @@ export default function Comparison({ content: C }: Props) {
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 16, minHeight: 88 }}>
                       <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{priceMain}</span>
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', whiteSpace: 'pre-line' }}>{C.comp_price_launch}</span>
-                      <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)' }}>{C.comp_license_devices}</span>
+                      <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)' }}>{C.comp_license_devices}</span>
                       <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)' }}>{C.comp_payment_note}</span>
                     </div>
                     <a href={BUY_URL} className="lg-btn-shine" style={s.btnPri}
@@ -150,7 +150,7 @@ export default function Comparison({ content: C }: Props) {
                 <div style={{ marginBottom: 16 }}>
                   <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{priceMain}</span>
                   <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', marginTop: 4, whiteSpace: 'pre-line' }}>{C.comp_price_launch}</span>
-                  <span style={{ display: 'block', font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 2 }}>{C.comp_license_devices}</span>
+                  <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', marginTop: 2 }}>{C.comp_license_devices}</span>
                   <span style={{ display: 'block', font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 2 }}>{C.comp_payment_note}</span>
                 </div>
               )}
