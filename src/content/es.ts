@@ -69,7 +69,7 @@ export const es: Content = {
   faq6_q: '¿Cómo activo mi Legado Pro?',
   faq6_a: 'Tras realizar el pago con tarjeta de crédito o a través de PayPal, recibirás un correo electrónico con un código de activación. Introdúcelo en la sección "Ajustes" de la aplicación.',
   faq7_q: '¿Tengo que pagar alguna suscripción periódica?',
-  faq7_a: 'No. Legado Básico es gratuito. En el caso de Legado Pro, la licencia implica un pago único y no está sujeta a una suscripción periódica.',
+  faq7_a: 'No. Legado Básico es gratuito. En el caso de Legado Pro, la licencia, que permite el uso de la aplicación en dos dispositivos, implica un pago único y no está sujeta a una suscripción periódica.',
   faq8_q: '¿Es Legado solo para coleccionistas de monedas y billetes?',
   faq8_a: 'No. Aunque está diseñado específicamente para numismática (monedas, billetes, fichas y medallas), su sistema flexible permite adaptarse fácilmente a otros tipos de colecciones.',
 
@@ -176,6 +176,7 @@ export const es: Content = {
   comp_plan_pro:           'Legado Pro',
   comp_plan_pro_sub:       'Tu museo digital sin límites',
   comp_price_launch:       'Pago único · Sin suscripciones',
+  comp_license_devices:    'Licencia para dos dispositivos',
   comp_payment_note:       'Pago seguro vía LemonSqueezy',
   comp_plan_pro_cta:       'Descargar\nLegado Pro',
   comp_plan_pro_cta_sub:   'y Activa Experiencia Pro',

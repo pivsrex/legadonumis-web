@@ -69,7 +69,7 @@ export const en: Content = {
   faq6_q: 'How do I activate my Legado Pro?',
   faq6_a: "After completing your payment by credit card or PayPal, you'll receive an email with an activation code. Enter it in the Settings section of the app.",
   faq7_q: 'Is there a recurring subscription?',
-  faq7_a: 'No. Legado Basic is free. The Legado Pro license is a one-time purchase with no subscription.',
+  faq7_a: 'No. Legado Basic is free. The Legado Pro license — which allows use on two devices — is a one-time purchase with no subscription.',
   faq8_q: 'Is Legado only for coin and banknote collectors?',
   faq8_a: "No. While it's designed specifically for numismatics (coins, banknotes, tokens, and medals), its flexible system makes it easy to adapt to other types of collections.",
 
@@ -176,6 +176,7 @@ export const en: Content = {
   comp_plan_pro:           'Legado Pro',
   comp_plan_pro_sub:       'Your digital museum, unlimited',
   comp_price_launch:       'One-time payment\nNo subscriptions',
+  comp_license_devices:    'License for two devices',
   comp_payment_note:       'Secure payment via LemonSqueezy',
   comp_plan_pro_cta:       'Download\nLegado Pro',
   comp_plan_pro_cta_sub:   'and Activate the Pro Experience',
