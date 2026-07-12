@@ -72,6 +72,10 @@ export const en: Content = {
   faq7_a: 'No. Legado Basic is free. The Legado Pro license — which allows use on two devices — is a one-time purchase with no subscription.',
   faq8_q: 'Is Legado only for coin and banknote collectors?',
   faq8_a: "No. While it's designed specifically for numismatics (coins, banknotes, tokens, and medals), its flexible system makes it easy to adapt to other types of collections.",
+  faq9_q: 'Can I use Legado on my phone or tablet?',
+  faq9_a: 'No. Legado is a desktop-only application, available for macOS (Apple Silicon) and Windows (64-bit). It is designed for comfortable work on a large screen — detailed records, side-by-side comparison, maps, and labels. There is no mobile, tablet, or browser version.',
+  faq10_q: 'On how many computers can I use Legado Pro?',
+  faq10_a: 'A Legado Pro license lets you use the app on up to two devices at the same time. You can also deactivate the license on one computer from within the app to free it up and activate it on another — for example, when switching machines.',
 
   comp_h2:  'Take your collection\nto the next level',
   comp_sub: 'Start with the essentials or\nunlock the full experience',

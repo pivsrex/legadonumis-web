@@ -74,6 +74,10 @@ export interface Content {
   faq7_a: string
   faq8_q: string
   faq8_a: string
+  faq9_q: string
+  faq9_a: string
+  faq10_q: string
+  faq10_a: string
   comp_h2: string
   comp_sub: string
   cta_titulo: string
