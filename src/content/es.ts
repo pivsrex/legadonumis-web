@@ -73,7 +73,7 @@ export const es: Content = {
   faq8_q: '¿Es Legado solo para coleccionistas de monedas y billetes?',
   faq8_a: 'No. Aunque está diseñado específicamente para numismática (monedas, billetes, fichas y medallas), su sistema flexible permite adaptarse fácilmente a otros tipos de colecciones.',
   faq9_q: '¿Puedo usar Legado en el móvil o la tablet?',
-  faq9_a: 'No. Legado es una aplicación exclusivamente de escritorio, disponible para macOS (Apple Silicon) y Windows (64 bits). Está diseñada para trabajar con comodidad frente a una pantalla grande: fichas detalladas, comparación de ejemplares, mapas y etiquetas. No existe versión para móvil, tablet ni navegador.',
+  faq9_a: 'Por el momento, la aplicación es exclusivamente de escritorio, disponible para macOS (Apple Silicon) y Windows (64 bits). Está diseñada para trabajar con comodidad frente a una pantalla grande: fichas detalladas, comparación de ejemplares, mapas y etiquetas. Todavía no existe versión para móvil, tablet ni navegador.',
   faq10_q: '¿En cuántos ordenadores puedo usar Legado Pro?',
   faq10_a: 'La licencia de Legado Pro permite usar la aplicación en hasta dos dispositivos simultáneamente. Además, puedes desactivar la licencia en un equipo desde la propia aplicación para liberarla y activarla en otro, por ejemplo al cambiar de ordenador.',
 
@@ -134,7 +134,8 @@ export const es: Content = {
       label: 'Documentación y catálogos',
       rows: [
         { feat: 'Consultas a Numista y al catálogo online de monedas romanas OCRE *', basico: true, pro: true },
-        { feat: 'Generación de información sobre contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas', cta: { label: '¿Necesitas más?', url: '#pack-creditos' } },
+        // TODO: restaurar cta { label: '¿Necesitas más?', url: <landing de packs en LemonSqueezy> } cuando exista la landing
+        { feat: 'Generación de información sobre contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas' },
         { feat: 'Anotaciones sobre imágenes', basico: false,     pro: true },
         { feat: 'Post-Its',                   basico: 'Hasta 5', pro: 'Ilimitados' },
       ],

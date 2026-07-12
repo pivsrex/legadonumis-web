@@ -73,7 +73,7 @@ export const en: Content = {
   faq8_q: 'Is Legado only for coin and banknote collectors?',
   faq8_a: "No. While it's designed specifically for numismatics (coins, banknotes, tokens, and medals), its flexible system makes it easy to adapt to other types of collections.",
   faq9_q: 'Can I use Legado on my phone or tablet?',
-  faq9_a: 'No. Legado is a desktop-only application, available for macOS (Apple Silicon) and Windows (64-bit). It is designed for comfortable work on a large screen — detailed records, side-by-side comparison, maps, and labels. There is no mobile, tablet, or browser version.',
+  faq9_a: 'For now, the app is desktop-only, available for macOS (Apple Silicon) and Windows (64-bit). It is designed for comfortable work on a large screen — detailed records, side-by-side comparison, maps, and labels. There is no mobile, tablet, or browser version yet.',
   faq10_q: 'On how many computers can I use Legado Pro?',
   faq10_a: 'A Legado Pro license lets you use the app on up to two devices at the same time. You can also deactivate the license on one computer from within the app to free it up and activate it on another — for example, when switching machines.',
 
@@ -134,7 +134,8 @@ export const en: Content = {
       label: 'Documentation & catalogs',
       rows: [
         { feat: 'Numista & OCRE Roman coinage catalog lookups *', basico: true, pro: true },
-        { feat: 'AI-generated historical context information', basico: false, pro: '500 queries included', cta: { label: 'Need more?', url: '#pack-creditos' } },
+        // TODO: restaurar cta { label: 'Need more?', url: <landing de packs en LemonSqueezy> } cuando exista la landing
+        { feat: 'AI-generated historical context information', basico: false, pro: '500 queries included' },
         { feat: 'Photo annotations', basico: false,     pro: true },
         { feat: 'Sticky notes',      basico: 'Up to 5', pro: 'Unlimited' },
       ],
