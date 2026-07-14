@@ -117,7 +117,7 @@ export const es: Content = {
   asset_sc2:      '/assets/FichaCompara.mp4',
   asset_sc3:      '/assets/FichaEtiqueta2.mp4',
   asset_sc4:      '/assets/FichaCecas.mp4',
-  asset_sc_anota: '/assets/FichaAnota.mp4',
+  asset_sc_anota: '/assets/FichaAnota2.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
 
   comp_groups: [
