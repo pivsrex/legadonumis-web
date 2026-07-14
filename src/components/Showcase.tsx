@@ -80,10 +80,11 @@ export default function Showcase({ content: C }: Props) {
   const CARDS = [
     { title: C.sc1_titulo,       desc: C.sc1_desc,       src: C.asset_sc1,      reverse: false },
     { title: C.sc2_titulo,       desc: C.sc2_desc,       src: C.asset_sc2,      reverse: true  },
-    { title: C.sc3_titulo,       desc: C.sc3_desc,       src: C.asset_sc3,      reverse: false },
-    { title: C.sc4_titulo,       desc: C.sc4_desc,       src: C.asset_sc4,      reverse: true  },
     { title: C.sc_anota_titulo,  desc: C.sc_anota_desc,  src: C.asset_sc_anota, reverse: false },
-    { title: C.sc5_titulo,       desc: C.sc5_desc,       src: C.asset_sc5,      reverse: true  },
+    { title: C.sc4_titulo,       desc: C.sc4_desc,       src: C.asset_sc4,      reverse: true  },
+    { title: C.sc_stats_titulo,  desc: C.sc_stats_desc,  src: C.asset_sc_stats, reverse: false },
+    { title: C.sc3_titulo,       desc: C.sc3_desc,       src: C.asset_sc3,      reverse: true  },
+    { title: C.sc5_titulo,       desc: C.sc5_desc,       src: C.asset_sc5,      reverse: false },
   ]
 
   const N = CARDS.length

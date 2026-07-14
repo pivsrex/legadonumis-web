@@ -35,6 +35,8 @@ export const en: Content = {
   sc4_desc:   'View your pieces on modern and ancient Roman Empire maps, in a visual and intuitive experience.',
   sc_anota_titulo: 'Annotate directly on images',
   sc_anota_desc:   'Write and draw on your coin images to identify varieties, highlight relevant elements, or document your observations in a visual way.',
+  sc_stats_titulo: 'Visualize your data',
+  sc_stats_desc:   'Generate custom charts and statistics by issuer, mint, and other criteria, and explore the key indicators of your collection.',
   sc5_titulo: 'Plan your next acquisitions',
   sc5_desc:   "Keep track of the pieces you want to acquire — with your budget, desired grades, and any other relevant details. Set reminders so you never miss an auction, fair, or convention.",
 
@@ -118,6 +120,7 @@ export const en: Content = {
   asset_sc3:      '/assets/FichaEtiqueta2.mp4',
   asset_sc4:      '/assets/FichaCecas.mp4',
   asset_sc_anota: '/assets/FichaAnota2.mp4',
+  asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
 
   comp_groups: [

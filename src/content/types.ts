@@ -40,6 +40,8 @@ export interface Content {
   sc4_desc: string
   sc_anota_titulo: string
   sc_anota_desc: string
+  sc_stats_titulo: string
+  sc_stats_desc: string
   sc5_titulo: string
   sc5_desc: string
   feat_h2: string
@@ -115,6 +117,7 @@ export interface Content {
   asset_sc3: string
   asset_sc4: string
   asset_sc_anota: string
+  asset_sc_stats: string
   asset_sc5: string
   comp_groups: CompGroup[]
   comp_plan_basic: string

@@ -35,6 +35,8 @@ export const es: Content = {
   sc4_desc:   'Visualiza tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.',
   sc_anota_titulo: 'Anota directamente sobre imágenes',
   sc_anota_desc:   'Escribe y dibuja sobre las imágenes de tus monedas para identificar variantes, explicar elementos relevantes o documentar tus observaciones de forma visual.',
+  sc_stats_titulo: 'Visualiza tus datos',
+  sc_stats_desc:   'Genera gráficos y estadísticas personalizadas sobre emisores, cecas y otros criterios, y consulta los principales indicadores de tu colección.',
   sc5_titulo: 'Planifica tus próximas adquisiciones',
   sc5_desc:   'Registra los ejemplares que quieres conseguir, con tu presupuesto, conservación deseada y cualquier otro detalle relevante. Activa recordatorios para no olvidar fechas de subastas, convenciones, etc.',
 
@@ -118,6 +120,7 @@ export const es: Content = {
   asset_sc3:      '/assets/FichaEtiqueta2.mp4',
   asset_sc4:      '/assets/FichaCecas.mp4',
   asset_sc_anota: '/assets/FichaAnota2.mp4',
+  asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
 
   comp_groups: [
