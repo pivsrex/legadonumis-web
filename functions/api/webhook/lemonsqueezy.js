@@ -8,9 +8,8 @@
 // Para packs de créditos el checkout URL debe incluir:
 //   ?checkout[custom][license_key]={license_key_del_usuario}
 
-const CREDITOS_INICIALES = 500
-// PACK_200 y PACK_600 se leen de variables de entorno de Cloudflare (LS_VARIANT_PACK_200 y LS_VARIANT_PACK_600).
-// Configurar en el dashboard de Cloudflare Pages → Settings → Environment variables.
+const CREDITOS_INICIALES  = 500
+const VARIANT_PACK_200    = '1913239'
 
 export async function onRequestPost(context) {
   const rawBody  = await context.request.text()
@@ -46,20 +45,15 @@ export async function onRequestPost(context) {
 
     if (!licenseKey) return new Response('ok') // Pack sin licencia vinculada: ignorar
 
-    const PACK_200 = context.env.LS_VARIANT_PACK_200 ?? ''
-    const PACK_600 = context.env.LS_VARIANT_PACK_600 ?? ''
-
     let addCredits = 0
-    if (PACK_200 && variantId === PACK_200) addCredits = 200
-    if (PACK_600 && variantId === PACK_600) addCredits = 600
+    if (variantId === VARIANT_PACK_200) addCredits = 200
 
     if (addCredits > 0) {
       const current = parseInt(await kv.get(licenseKey) || '0') || 0
       await kv.put(licenseKey, String(current + addCredits))
-      return new Response(`ok:added:${addCredits}`)
     }
 
-    return new Response(`ok:no_match:variant=${variantId}:pack200=${PACK_200}:pack200len=${PACK_200.length}`)
+    return new Response('ok')
   }
 
   // Otros eventos: ignorar
