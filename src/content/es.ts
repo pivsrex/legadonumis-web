@@ -138,7 +138,7 @@ export const es: Content = {
       rows: [
         { feat: 'Consultas a Numista y al catálogo online de monedas romanas OCRE *', basico: true, pro: true },
         // TODO: restaurar cta { label: '¿Necesitas más?', url: <landing de packs en LemonSqueezy> } cuando exista la landing
-        { feat: 'Generación de información sobre contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas (ampliables desde la app)' },
+        { feat: 'Generación de información sobre contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas (puedes adquirir más desde la app)' },
         { feat: 'Anotaciones sobre imágenes', basico: false,     pro: true },
         { feat: 'Post-Its',                   basico: 'Hasta 5', pro: 'Ilimitados' },
       ],

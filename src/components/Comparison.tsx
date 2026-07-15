@@ -11,7 +11,7 @@ const isEU  = typeof Intl !== 'undefined' && Intl.DateTimeFormat().resolvedOptio
 function Cell({ value }: { value: CompRow['basico'] }) {
   if (value === true)  return <CheckIcon size={15} style={{ color: 'var(--ds-accent)', display: 'block', margin: '0 auto' }} />
   if (value === false) return <span style={{ font: '400 13px/1 var(--font-mono)', color: 'var(--ds-text-low)' }}>—</span>
-  return <span style={{ font: '500 13px/1.4 var(--font-body)', color: 'var(--ds-text-high)' }}>{value}</span>
+  return <span style={{ font: '500 13px/1.4 var(--font-body)', color: 'var(--ds-text-high)', whiteSpace: 'nowrap' }}>{value}</span>
 }
 
 export default function Comparison({ content: C }: Props) {
@@ -47,8 +47,8 @@ export default function Comparison({ content: C }: Props) {
 
         <RevealWrapper delay={100}>
           {/* DESKTOP TABLE */}
-          <div className="comp-desktop lg-comparison-wrapper" style={{ maxWidth: 900, margin: '0 auto', background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }} className="lg-comparison">
+          <div className="comp-desktop lg-comparison-wrapper" style={{ maxWidth: 1060, margin: '0 auto', background: '#181818', border: '1px solid rgba(255,255,255,0.06)', boxShadow: '0 12px 40px rgba(0,0,0,0.45)', borderRadius: 16, overflow: 'hidden' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'auto' }} className="lg-comparison">
               <thead>
                 <tr>
                   <th style={s.thFeat}></th>
