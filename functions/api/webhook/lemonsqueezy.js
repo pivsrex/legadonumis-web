@@ -56,9 +56,10 @@ export async function onRequestPost(context) {
     if (addCredits > 0) {
       const current = parseInt(await kv.get(licenseKey) || '0') || 0
       await kv.put(licenseKey, String(current + addCredits))
+      return new Response(`ok:added:${addCredits}`)
     }
 
-    return new Response('ok')
+    return new Response(`ok:no_match:variant=${variantId}:pack200=${PACK_200}:pack200len=${PACK_200.length}`)
   }
 
   // Otros eventos: ignorar
