@@ -138,7 +138,7 @@ export const en: Content = {
       rows: [
         { feat: 'Numista & OCRE Roman coinage catalog lookups *', basico: true, pro: true },
         // TODO: restaurar cta { label: 'Need more?', url: <landing de packs en LemonSqueezy> } cuando exista la landing
-        { feat: 'AI-generated historical context information', basico: false, pro: '500 queries included (buy more from the app)' },
+        { feat: 'AI-generated historical context information', basico: false, pro: '500 queries included\n(buy more from the app)' },
         { feat: 'Photo annotations', basico: false,     pro: true },
         { feat: 'Sticky notes',      basico: 'Up to 5', pro: 'Unlimited' },
       ],
