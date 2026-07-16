@@ -5,7 +5,7 @@ export const es: Content = {
   nav_btn_win: 'Descargar',
 
   hero_h1:  'El museo digital\nde tu colección',
-  hero_sub: 'Una manera elegante, sencilla y flexible de\norganizar, documentar y disfrutar tus monedas y billetes',
+  hero_sub: 'La manera elegante, sencilla y flexible de\norganizar, documentar y disfrutar tus monedas y billetes',
   hero_btn_mac: 'Descargar',
   hero_btn_win: 'Descargar',
   hero_mobile_notice: 'Legado es una aplicación de escritorio.\nVisita esta web desde tu Mac o PC\npara descargarla.',
