@@ -248,7 +248,11 @@ const schemaLang = lang
         if (basic) {
           e.preventDefault()
           const url = basic.getAttribute(isMac ? 'data-mac' : 'data-win')
-          if (url) window.location.href = url
+          if (url) {
+            window.open(url, '_blank')
+            const isEn = document.documentElement.lang === 'en'
+            window.location.href = isEn ? '/en/download.html' : '/descarga.html'
+          }
           return
         }
 
