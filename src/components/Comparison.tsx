@@ -70,13 +70,15 @@ export default function Comparison({ content: C }: Props) {
                     </div>
                     <a href={MAC_URL} className="comp-btn-mac lg-btn-shine" style={s.btnSec}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
-                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}>
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
+                      onClick={e => { e.preventDefault(); window.open(MAC_URL, '_blank'); window.location.href = document.documentElement.lang === 'en' ? '/en/download.html' : '/descarga.html' }}>
                       <AppleIcon size={15} />
                       {C.comp_plan_basic_cta_mac}
                     </a>
                     <a href={WIN_URL} className="comp-btn-win lg-btn-shine" style={s.btnSec}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
-                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}>
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
+                      onClick={e => { e.preventDefault(); window.open(WIN_URL, '_blank'); window.location.href = document.documentElement.lang === 'en' ? '/en/download.html' : '/descarga.html' }}>
                       <WindowsIcon size={15} />
                       {C.comp_plan_basic_cta_win}
                     </a>
