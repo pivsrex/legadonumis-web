@@ -149,6 +149,7 @@ export const en: Content = {
         { feat: 'Image gallery (6 modes)',   basico: true, pro: true },
         { feat: 'Side-by-side comparison',   basico: true, pro: true },
         { feat: 'Explore pieces on maps',    basico: true, pro: true },
+        { feat: 'Light mode / Dark mode',    basico: true, pro: true },
       ],
     },
     {

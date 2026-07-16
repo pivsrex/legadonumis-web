@@ -149,6 +149,7 @@ export const es: Content = {
         { feat: 'Galería de imágenes (6 modos)',         basico: true, pro: true },
         { feat: 'Visor comparativo de ejemplares',       basico: true, pro: true },
         { feat: 'Exploración de ejemplares sobre mapas', basico: true, pro: true },
+        { feat: 'Modo claro / Modo oscuro',              basico: true, pro: true },
       ],
     },
     {
