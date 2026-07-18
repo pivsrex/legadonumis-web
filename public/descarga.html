@@ -54,14 +54,14 @@
       padding: 0;
     }
     .dl-content {
-      max-width: 660px;
+      max-width: 1040px;
       margin: 0 auto;
       width: 100%;
       padding: 0 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 22px;
+      gap: 20px;
     }
     .dl-block {
       width: 100%;
@@ -78,9 +78,67 @@
       text-align: center;
     }
 
+    /* ── TARJETAS DE SIGUIENTES PASOS ────────────────────────────── */
+    .dl-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: 100%;
+      align-items: stretch;
+    }
+    .dl-card {
+      border: 1px solid var(--ds-border-low);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      background: rgba(255,255,255,0.015);
+    }
+    .dl-card--guia {
+      border-color: rgba(201,168,76,0.55);
+      background: rgba(201,168,76,0.05);
+    }
+    .dl-card-icon { color: var(--ds-accent); }
+    .dl-card-h {
+      font: 600 16px/1.3 var(--font-display);
+      letter-spacing: -0.01em;
+      color: var(--ds-text-high);
+      margin: 0;
+    }
+    .dl-card-desc {
+      font: 400 13px/1.55 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0;
+      flex: 1;
+    }
+    .dl-card-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      align-self: flex-start;
+      border-radius: 10px;
+      padding: 11px 18px;
+      font: 600 13px/1 var(--font-display);
+      letter-spacing: -0.01em;
+      transition: transform 200ms ease, background 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+    .dl-card-btn--gold {
+      background: var(--ds-accent);
+      color: #0a0908;
+      border: none;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.18);
+    }
+    .dl-card-btn--gold:hover { background: var(--ds-accent-hi); transform: translateY(-1px); }
+    .dl-card-btn--outline {
+      background: transparent;
+      border: 1px solid var(--ds-accent-deep);
+      color: var(--ds-accent);
+    }
+    .dl-card-btn--outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-1px); }
+
     /* ── IMAGEN DE BIENVENIDA ────────────────────────────────────── */
     .dl-welcome-img {
-      max-height: 30vh;
+      max-height: 26vh;
       width: auto;
       max-width: 100%;
       border-radius: 10px;
@@ -331,6 +389,10 @@
     }
 
     /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .dl-cards { grid-template-columns: 1fr; }
+      .dl-main { min-height: 0; padding: 24px 0 40px; }
+    }
     @media (max-width: 768px) {
       .dl-content { gap: 14px; }
       .dl-form-row { flex-direction: column; }
@@ -411,58 +473,72 @@
           <p class="dl-welcome-sub">La manera elegante, sencilla y flexible de organizar, documentar y disfrutar tus monedas y billetes</p>
         </div>
 
-        <!-- Pro CTA -->
-        <div class="dl-block">
-          <p class="dl-section-h">¿Quieres ir más allá?</p>
-          <a href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa"
-             class="dl-btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        <!-- Siguientes pasos: guía · Pro · novedades -->
+        <div class="dl-cards">
+
+          <!-- Guía rápida -->
+          <div class="dl-card dl-card--guia">
+            <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6v13"/><path d="M12 6v13"/><path d="M21 6v13"/>
             </svg>
-            Activa la experiencia completa
-          </a>
-        </div>
-
-        <!-- Newsletter -->
-        <div class="dl-block">
-          <h2 class="dl-section-h">Descubre las últimas novedades</h2>
-
-          <form class="dl-form" id="dl-sub-form" novalidate style="width:100%;">
-            <div class="dl-form-row">
-              <input
-                type="email"
-                id="dl-email"
-                class="dl-input"
-                placeholder="tu@correo.com"
-                autocomplete="email"
-                required
-              />
-              <button type="submit" class="dl-btn-sub" id="dl-submit-btn">Suscribirme</button>
-            </div>
-
-            <label class="dl-check-wrap">
-              <input type="checkbox" id="dl-consent" />
-              <span class="dl-check-text">
-                Quiero recibir novedades y actualizaciones relacionadas con Legado.
-              </span>
-            </label>
-
-            <div class="dl-msg dl-msg-err" id="dl-msg-err">
-              Algo no ha funcionado. Comprueba el correo e inténtalo de nuevo.
-            </div>
-          </form>
-
-          <div class="dl-msg dl-msg-ok" id="dl-msg-ok" style="width:100%;">
-            Suscripción confirmada. Te mantendremos al tanto.
+            <h2 class="dl-card-h">Lee la guía rápida</h2>
+            <p class="dl-card-desc">Primeros pasos, importación desde Excel y copias de seguridad, en diez páginas.</p>
+            <a class="dl-card-btn dl-card-btn--gold" href="assets/guia-rapida.pdf" target="_blank" rel="noopener">Abrir la guía (PDF)</a>
           </div>
 
-          <p class="dl-legal-note" style="text-align:left;">
-            Usaremos tu correo exclusivamente para enviarte novedades, mejoras y actualizaciones
-            relacionadas con Legado. Nunca compartiremos tu información con terceros ni
-            enviaremos spam. Puedes darte de baja en cualquier momento.
-            <br /><br />
-            <a href="privacidad.html">Política de privacidad</a>
-          </p>
+          <!-- Legado Pro -->
+          <div class="dl-card">
+            <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <h2 class="dl-card-h">Activa la experiencia completa</h2>
+            <p class="dl-card-desc">Legado Pro: pago único, sin suscripciones, licencia para dos dispositivos.</p>
+            <a class="dl-card-btn dl-card-btn--outline"
+               href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa">Descubrir Legado Pro</a>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="dl-card">
+            <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6l9 -6"/>
+            </svg>
+            <h2 class="dl-card-h">Descubre las últimas novedades</h2>
+
+            <form class="dl-form" id="dl-sub-form" novalidate style="width:100%;">
+              <div class="dl-form-row">
+                <input
+                  type="email"
+                  id="dl-email"
+                  class="dl-input"
+                  placeholder="tu@correo.com"
+                  autocomplete="email"
+                  required
+                  style="padding: 11px 14px;"
+                />
+                <button type="submit" class="dl-btn-sub" id="dl-submit-btn" style="padding: 11px 16px;">Suscribirme</button>
+              </div>
+
+              <label class="dl-check-wrap">
+                <input type="checkbox" id="dl-consent" />
+                <span class="dl-check-text" style="font-size:12px;">
+                  Quiero recibir novedades y actualizaciones relacionadas con Legado.
+                </span>
+              </label>
+
+              <div class="dl-msg dl-msg-err" id="dl-msg-err">
+                Algo no ha funcionado. Comprueba el correo e inténtalo de nuevo.
+              </div>
+            </form>
+
+            <div class="dl-msg dl-msg-ok" id="dl-msg-ok" style="width:100%;">
+              Suscripción confirmada. Te mantendremos al tanto.
+            </div>
+
+            <p class="dl-legal-note" style="margin-top:4px; font-size:11px;">
+              Sin spam ni cesión de datos a terceros. Baja cuando quieras.
+              <a href="privacidad.html">Política de privacidad</a>
+            </p>
+          </div>
         </div>
 
       </div>
