@@ -170,6 +170,7 @@ export const en: Content = {
     {
       label: 'Support & updates',
       rows: [
+        { feat: 'Updates',                          basico: true,  pro: true },
         { feat: 'Access to new features',           basico: false, pro: true },
         { feat: 'Technical support',                basico: false, pro: true },
         { feat: 'Available in Spanish and English', basico: true,  pro: true },

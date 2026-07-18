@@ -170,6 +170,7 @@ export const es: Content = {
     {
       label: 'Soporte y actualizaciones',
       rows: [
+        { feat: 'Actualizaciones',               basico: true,  pro: true },
         { feat: 'Acceso a nuevas funciones',     basico: false, pro: true },
         { feat: 'Soporte técnico',               basico: false, pro: true },
         { feat: 'Versiones en español e inglés', basico: true,  pro: true },
