@@ -50,8 +50,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: calc(100dvh - 64px);
-      padding: 0;
+      min-height: calc(100dvh - 88px);
+      padding: 10px 0 14px;
     }
     .dl-content {
       max-width: 1040px;
@@ -87,18 +87,21 @@
       align-items: stretch;
     }
     .dl-card {
-      border: 1px solid var(--ds-border-low);
+      border: 1px solid rgba(201,168,76,0.55);
       border-radius: 14px;
-      padding: 20px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       text-align: left;
-      background: rgba(255,255,255,0.015);
-    }
-    .dl-card--guia {
-      border-color: rgba(201,168,76,0.55);
       background: rgba(201,168,76,0.05);
+      transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease, background 250ms ease;
+    }
+    .dl-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(201,168,76,0.9);
+      background: rgba(201,168,76,0.08);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.45), 0 0 28px rgba(201,168,76,0.10);
     }
     .dl-card-icon { color: var(--ds-accent); }
     .dl-card-h {
@@ -115,7 +118,7 @@
     }
     .dl-card-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      align-self: flex-start;
+      align-self: center;
       border-radius: 10px;
       padding: 11px 18px;
       font: 600 13px/1 var(--font-display);
@@ -137,7 +140,7 @@
     .dl-card-btn--outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-1px); }
 
     .dl-welcome-img {
-      max-height: 26vh;
+      max-height: 36vh;
       width: auto;
       max-width: 100%;
       border-radius: 10px;
@@ -146,14 +149,14 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.45);
     }
     .dl-welcome-h1 {
-      font: 700 clamp(24px, 2.8vw, 32px)/1.15 var(--font-display);
+      font: 700 clamp(30px, 3.6vw, 42px)/1.12 var(--font-display);
       letter-spacing: -0.03em;
       color: var(--ds-text-high);
       margin: 0;
       text-align: center;
     }
     .dl-welcome-sub {
-      font: 400 13px/1.6 var(--font-body);
+      font: 400 16px/1.6 var(--font-body);
       color: var(--ds-text-mid);
       margin: 0;
       text-align: center;
@@ -369,12 +372,12 @@
     /* ── FOOTER ──────────────────────────────────────────────────── */
     .dl-footer {
       border-top: 1px solid var(--ds-border-low);
-      padding: 32px 0;
+      padding: 18px 0 14px;
       text-align: center;
     }
     .dl-footer-links {
       display: flex; gap: 24px; justify-content: center;
-      margin-bottom: 14px; flex-wrap: wrap;
+      margin-bottom: 10px; flex-wrap: wrap;
     }
     .dl-footer-link {
       font: 400 13px/1 var(--font-body);
@@ -476,12 +479,12 @@
         <div class="dl-cards">
 
           <!-- Quick start guide -->
-          <div class="dl-card dl-card--guia">
+          <div class="dl-card">
             <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6v13"/><path d="M12 6v13"/><path d="M21 6v13"/>
             </svg>
             <h2 class="dl-card-h">Read the quick start guide</h2>
-            <p class="dl-card-desc">First steps, importing from Excel and backups — in ten pages.</p>
+            <p class="dl-card-desc">Up and running in five minutes: create your first piece, import your collection from Excel, add photographs and protect your data with backups. Ten pages to get off to a good start.</p>
             <a class="dl-card-btn dl-card-btn--gold" href="/assets/quick-start-guide.pdf" target="_blank" rel="noopener">Open the guide (PDF)</a>
           </div>
 
@@ -491,7 +494,7 @@
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
             <h2 class="dl-card-h">Activate the full experience</h2>
-            <p class="dl-card-desc">Legado Pro: one-time payment, no subscriptions, license for two devices.</p>
+            <p class="dl-card-desc">Unlimited pieces, statistics, PDF and Excel export, tray labels and the artificial intelligence assistant. One-time payment, no subscriptions, license for two devices.</p>
             <a class="dl-card-btn dl-card-btn--outline"
                href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa">Discover Legado Pro</a>
           </div>
@@ -502,6 +505,7 @@
               <rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6l9 -6"/>
             </svg>
             <h2 class="dl-card-h">Stay in the loop</h2>
+            <p class="dl-card-desc" style="flex: 0 0 auto;">Improvements, new features and tips about Legado, straight to your inbox.</p>
 
             <form class="dl-form" id="dl-sub-form" novalidate style="width:100%;">
               <div class="dl-form-row">
