@@ -32,7 +32,7 @@ export const es: Content = {
   sc3_titulo: 'Diseña etiquetas listas para imprimir',
   sc3_desc:   'Genera etiquetas personalizadas para colocar junto a cada moneda en bandejas o expositores. Guarda plantillas y mantén una presentación uniforme en toda tu colección.',
   sc4_titulo: 'Pon tu colección en el mapa',
-  sc4_desc:   'Visualiza tus piezas sobre mapas actuales y del Imperio romano en una experiencia visual e intuitiva.',
+  sc4_desc:   'Visualiza tus piezas sobre mapas actuales e históricos, según el lugar de la ceca o el país de emisión.',
   sc_anota_titulo: 'Anota directamente sobre imágenes',
   sc_anota_desc:   'Escribe y dibuja sobre las imágenes de tus monedas para identificar variantes, explicar elementos relevantes o documentar tus observaciones de forma visual.',
   sc_stats_titulo: 'Visualiza tus datos',
