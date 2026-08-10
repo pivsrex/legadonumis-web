@@ -44,20 +44,63 @@ npx wrangler d1 execute legado-creditos --remote \
   --command="SELECT name FROM sqlite_master WHERE type='table'"
 ```
 
-Después, en el panel de Cloudflare Pages → el proyecto → **Settings → Functions
-→ D1 database bindings**, añadir el binding en Production y en Preview:
+Después, en el panel de Cloudflare Pages → el proyecto → **Settings → Bindings**,
+añadir el binding en los dos entornos. **Cada entorno apunta a una base de datos
+distinta**, para que las pruebas no toquen los saldos de clientes reales:
 
-| Variable | Base de datos     |
-| -------- | ----------------- |
-| `DB`     | `legado-creditos` |
+| Entorno    | Variable | Base de datos             |
+| ---------- | -------- | ------------------------- |
+| Production | `DB`     | `legado-creditos`         |
+| Preview    | `DB`     | `legado-creditos-preview` |
 
-El nombre de la variable tiene que ser exactamente `DB`: es el que leen
+La de preview se crea igual que la de producción y con el mismo `schema.sql`.
+
+El nombre de la variable tiene que ser exactamente `DB` en ambos: es el que leen
 `ai.js`, `balance.js` y `webhook/lemonsqueezy.js` (`context.env.DB`). Si falta,
 los endpoints responden `503 db_no_configurada` en vez de fallar de forma
 silenciosa.
 
 El binding KV `CREDITS` **se mantiene**, porque `subscribe.js` lo sigue usando
 para rate limiting.
+
+### Aviso sobre el desplegable del panel
+
+Al elegir la base de datos en el formulario de binding, seleccionarla con el
+ratón puede mostrarla en el campo sin registrarla por dentro: al guardar
+aparece "Required" y el cambio se descarta en silencio. Seleccionarla con las
+flechas del teclado y confirmar con Enter sí la registra. Conviene recargar la
+página después para comprobar que ha quedado guardada.
+
+### Secretos por entorno
+
+Los secretos **no se heredan** de Production a Preview: son listas separadas.
+Para poder probar la IA en despliegues de preview hay que añadir en Preview,
+como mínimo, `ANTHROPIC_API_KEY` y `LS_API_KEY`. Lo recomendable es usar una
+clave de Anthropic distinta de la de producción, para poder revocarla o
+limitar su gasto sin tocar el servicio real.
+
+### Apuntar la app al entorno de pruebas
+
+Legado resuelve el origen del servidor en `electron/lib/api-base.ts`. Por
+defecto es producción; se redirige exportando `LEGADO_API_BASE` al arrancar:
+
+```bash
+LEGADO_API_BASE=https://abc123.legadonumis-web.pages.dev npm run dev
+LEGADO_API_BASE=http://localhost:8788 npm run dev   # wrangler pages dev
+```
+
+Solo se aceptan orígenes https, o http contra localhost. Cualquier otro valor
+se ignora y se usa producción.
+
+La base de datos de preview arranca vacía, así que ninguna licencia tendrá
+saldo. Para poder probar hay que sembrar una:
+
+```sql
+INSERT INTO licencias (license_key, creditos) VALUES ('LA-CLAVE-DE-PRUEBA', 500);
+```
+
+La validación de licencia sigue yendo contra LemonSqueezy real, así que la
+clave tiene que ser una válida y activa.
 
 ## Migración de saldos existentes
 
