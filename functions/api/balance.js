@@ -1,6 +1,8 @@
 // POST /api/balance  { license_key, instance_id }
 // GET  /api/balance?license_key=...&instance_id=...  (compatibilidad versiones anteriores)
 // Devuelve el saldo de créditos de una licencia activa.
+//
+// Fuente de verdad: D1 (tabla `licencias`). Ver d1/README.md.
 
 export async function onRequestPost(context) {
   let license_key, instance_id
@@ -16,8 +18,7 @@ export async function onRequestPost(context) {
     return json({ error: 'missing_params' }, 400)
   }
 
-  const credits = await getCredits(license_key, context.env.CREDITS)
-  return json({ credits })
+  return responderSaldo(context.env.DB, license_key)
 }
 
 export async function onRequestGet(context) {
@@ -29,15 +30,27 @@ export async function onRequestGet(context) {
     return json({ error: 'missing_params' }, 400)
   }
 
-  const credits = await getCredits(license_key, context.env.CREDITS)
-  return json({ credits })
+  return responderSaldo(context.env.DB, license_key)
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
-async function getCredits(licenseKey, kv) {
-  const stored = await kv.get(licenseKey)
-  return stored !== null ? parseInt(stored) || 0 : 0
+async function responderSaldo(db, licenseKey) {
+  if (!db) return json({ error: 'db_no_configurada' }, 503)
+  const credits = await getCredits(db, licenseKey)
+  return json({ credits })
+}
+
+async function getCredits(db, licenseKey) {
+  try {
+    const row = await db
+      .prepare('SELECT creditos FROM licencias WHERE license_key = ?1')
+      .bind(licenseKey)
+      .first()
+    return row?.creditos ?? 0
+  } catch {
+    return 0
+  }
 }
 
 function json(body, status = 200) {

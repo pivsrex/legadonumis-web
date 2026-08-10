@@ -1,5 +1,5 @@
 // POST /api/webhook/lemonsqueezy
-// Recibe eventos de LemonSqueezy y gestiona créditos en KV.
+// Recibe eventos de LemonSqueezy y gestiona créditos en D1.
 //
 // Eventos gestionados:
 //   license_key.created  → Inicializa 500 créditos para la nueva licencia
@@ -7,6 +7,11 @@
 //
 // Para packs de créditos el checkout URL debe incluir:
 //   ?checkout[custom][license_key]={license_key_del_usuario}
+//
+// Ambas operaciones son UPSERT atómicos. LemonSqueezy reintenta los webhooks que
+// no responden 2xx, así que la inicialización tiene que ser idempotente: un
+// segundo `license_key.created` para la misma licencia no debe reponer el saldo
+// ni pisar lo que el usuario ya haya consumido.
 
 const CREDITOS_INICIALES  = 500
 const VARIANT_PACK_200    = '1913239'
@@ -23,16 +28,25 @@ export async function onRequestPost(context) {
   try { payload = JSON.parse(rawBody) } catch { return new Response('Bad JSON', { status: 400 }) }
 
   const eventName = payload.meta?.event_name ?? ''
-  const kv        = context.env.CREDITS
+  const db        = context.env.DB
+
+  if (!db) return new Response('DB not configured', { status: 503 })
 
   // ── Licencia nueva: inicializar créditos ─────────────────────────────
   if (eventName === 'license_key.created') {
     const licenseKey = payload.data?.attributes?.key
     if (licenseKey) {
-      const existing = await kv.get(licenseKey)
-      // Solo inicializar si aún no tiene créditos (evitar reinicios accidentales)
-      if (existing === null) {
-        await kv.put(licenseKey, String(CREDITOS_INICIALES))
+      try {
+        // DO NOTHING en conflicto: si la licencia ya existe se respeta su saldo.
+        await db
+          .prepare(`INSERT INTO licencias (license_key, creditos)
+                    VALUES (?1, ?2)
+                    ON CONFLICT (license_key) DO NOTHING`)
+          .bind(licenseKey, CREDITOS_INICIALES)
+          .run()
+      } catch {
+        // Devolver 500 para que LemonSqueezy reintente en vez de perder el alta.
+        return new Response('DB error', { status: 500 })
       }
     }
     return new Response('ok')
@@ -49,8 +63,18 @@ export async function onRequestPost(context) {
     if (variantId === VARIANT_PACK_200) addCredits = 200
 
     if (addCredits > 0) {
-      const current = parseInt(await kv.get(licenseKey) || '0') || 0
-      await kv.put(licenseKey, String(current + addCredits))
+      try {
+        await db
+          .prepare(`INSERT INTO licencias (license_key, creditos)
+                    VALUES (?1, ?2)
+                    ON CONFLICT (license_key) DO UPDATE
+                      SET creditos = creditos + ?2,
+                          actualizada_en = strftime('%s','now')`)
+          .bind(licenseKey, addCredits)
+          .run()
+      } catch {
+        return new Response('DB error', { status: 500 })
+      }
     }
 
     return new Response('ok')
