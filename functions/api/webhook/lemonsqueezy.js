@@ -2,7 +2,7 @@
 // Recibe eventos de LemonSqueezy y gestiona créditos en D1.
 //
 // Eventos gestionados:
-//   license_key.created  → Inicializa créditos para la nueva licencia
+//   license_key_created  → Inicializa créditos para la nueva licencia
 //   order_created        → Si es un pack de créditos, añade créditos a la licencia indicada
 //
 // Para packs de créditos el checkout URL debe incluir:
@@ -39,8 +39,8 @@ export async function onRequestPost(context) {
   const VARIANT_PACK_200 = variantPackId ?? VARIANT_PACK_200_DEFECTO
 
   // ── Licencia nueva: inicializar créditos ─────────────────────────────────
-  if (eventName === 'license_key.created') {
-    const licenseKey = payload.data?.attributes?.key
+  if (eventName === 'license_key_created') {
+    const licenseKey = payload.data?.attributes?.key?.trim().toUpperCase()
     if (licenseKey) {
       try {
         // 1. Asegurar que existe la fila (sin créditos aún).
@@ -70,7 +70,7 @@ export async function onRequestPost(context) {
   // ── Compra de pack de créditos ────────────────────────────────────────────
   if (eventName === 'order_created') {
     const variantId  = String(payload.data?.attributes?.first_order_item?.variant_id ?? '')
-    const licenseKey = payload.meta?.custom_data?.license_key
+    const licenseKey = payload.meta?.custom_data?.license_key?.trim().toUpperCase()
 
     if (!licenseKey) return new Response('ok') // Pack sin licencia vinculada: ignorar
 
@@ -114,7 +114,8 @@ export async function onRequestPost(context) {
     return new Response('ok')
   }
 
-  // Otros eventos: ignorar
+  // Evento no gestionado: responder ok para evitar reintentos, pero dejar rastro.
+  console.warn('[webhook] evento no gestionado:', eventName)
   return new Response('ok')
 }
 

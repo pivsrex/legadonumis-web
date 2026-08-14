@@ -5,8 +5,8 @@
 //
 // Tras confirmar con LemonSqueezy que la licencia es válida, garantiza que
 // exista la fila en D1 y abona los 500 créditos iniciales si aún no se han
-// otorgado. Es la red de seguridad por si el webhook license_key.created no
-// llegó a procesarse (caída, configuración incompleta, etc.).
+// otorgado. Es la red de seguridad por si el webhook license_key_created no
+// llegó a procesarse (caída, configuración incompleta, nombre de evento erróneo, etc.).
 
 import { CREDITOS_INICIALES } from '../_shared/creditos.js'
 
