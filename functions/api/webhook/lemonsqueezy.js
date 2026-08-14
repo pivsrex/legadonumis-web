@@ -2,18 +2,17 @@
 // Recibe eventos de LemonSqueezy y gestiona créditos en D1.
 //
 // Eventos gestionados:
-//   license_key.created  → Inicializa 500 créditos para la nueva licencia
+//   license_key_created  → Inicializa créditos para la nueva licencia
 //   order_created        → Si es un pack de créditos, añade créditos a la licencia indicada
 //
 // Para packs de créditos el checkout URL debe incluir:
 //   ?checkout[custom][license_key]={license_key_del_usuario}
 //
-// Ambas operaciones son UPSERT atómicos. LemonSqueezy reintenta los webhooks que
-// no responden 2xx, así que la inicialización tiene que ser idempotente: un
-// segundo `license_key.created` para la misma licencia no debe reponer el saldo
-// ni pisar lo que el usuario ya haya consumido.
+// Las operaciones sobre licencias usan una guarda atómica para que dos llamadas
+// simultáneas no puedan otorgar los créditos iniciales dos veces.
 
-const CREDITOS_INICIALES       = 500
+import { CREDITOS_INICIALES } from '../_shared/creditos.js'
+
 const VARIANT_PACK_200_DEFECTO = '1913239'
 
 export async function onRequestPost(context) {
@@ -33,8 +32,6 @@ export async function onRequestPost(context) {
   if (!db) return new Response('DB not configured', { status: 503 })
 
   // ── Identificador de variante del pack: env o respaldo ───────────────────
-  // LS_VARIANT_PACK_200 debe estar definido como secreto en Cloudflare Pages.
-  // Si falta, se usa el valor de referencia y se deja constancia en el log.
   const variantPackId = context.env.LS_VARIANT_PACK_200
   if (!variantPackId) {
     console.warn('[webhook] LS_VARIANT_PACK_200 no definido en env — usando respaldo:', VARIANT_PACK_200_DEFECTO)
@@ -42,15 +39,24 @@ export async function onRequestPost(context) {
   const VARIANT_PACK_200 = variantPackId ?? VARIANT_PACK_200_DEFECTO
 
   // ── Licencia nueva: inicializar créditos ─────────────────────────────────
-  if (eventName === 'license_key.created') {
-    const licenseKey = payload.data?.attributes?.key
+  if (eventName === 'license_key_created') {
+    const licenseKey = payload.data?.attributes?.key?.trim().toUpperCase()
     if (licenseKey) {
       try {
-        // DO NOTHING en conflicto: si la licencia ya existe se respeta su saldo.
+        // 1. Asegurar que existe la fila (sin créditos aún).
         await db
-          .prepare(`INSERT INTO licencias (license_key, creditos)
-                    VALUES (?1, ?2)
+          .prepare(`INSERT INTO licencias (license_key, creditos, iniciales_otorgados)
+                    VALUES (?1, 0, 0)
                     ON CONFLICT (license_key) DO NOTHING`)
+          .bind(licenseKey)
+          .run()
+        // 2. Abonar créditos iniciales si aún no se han otorgado (guarda atómica).
+        //    Si la fila ya tenía iniciales_otorgados = 1 (p. ej. por una activación
+        //    previa o por un segundo disparo del webhook), esta sentencia no hace nada.
+        await db
+          .prepare(`UPDATE licencias
+                       SET creditos = creditos + ?2, iniciales_otorgados = 1
+                     WHERE license_key = ?1 AND iniciales_otorgados = 0`)
           .bind(licenseKey, CREDITOS_INICIALES)
           .run()
       } catch {
@@ -64,7 +70,7 @@ export async function onRequestPost(context) {
   // ── Compra de pack de créditos ────────────────────────────────────────────
   if (eventName === 'order_created') {
     const variantId  = String(payload.data?.attributes?.first_order_item?.variant_id ?? '')
-    const licenseKey = payload.meta?.custom_data?.license_key
+    const licenseKey = payload.meta?.custom_data?.license_key?.trim().toUpperCase()
 
     if (!licenseKey) return new Response('ok') // Pack sin licencia vinculada: ignorar
 
@@ -86,8 +92,6 @@ export async function onRequestPost(context) {
       }
     } else {
       // Variante no reconocida: registrar para poder reconciliar manualmente.
-      // Llegamos aquí porque había license_key en custom_data, señal de que
-      // era una compra de créditos que debería haberse abonado.
       console.warn(
         `[webhook] order_created con variante no reconocida — variant_id: ${variantId}, esperado: ${VARIANT_PACK_200}, license_key: …${licenseKey.slice(-4)}`
       )
@@ -104,14 +108,14 @@ export async function onRequestPost(context) {
           .run()
       } catch {
         // Best-effort: si falla el registro la respuesta sigue siendo ok.
-        // LemonSqueezy no debe reintentar por un problema de auditoría.
       }
     }
 
     return new Response('ok')
   }
 
-  // Otros eventos: ignorar
+  // Evento no gestionado: responder ok para evitar reintentos, pero dejar rastro.
+  console.warn('[webhook] evento no gestionado:', eventName)
   return new Response('ok')
 }
 
