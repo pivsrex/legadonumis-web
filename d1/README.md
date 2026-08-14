@@ -134,6 +134,38 @@ npx wrangler d1 execute legado-creditos-preview --remote --file=./d1/schema.sql
 `CREATE TABLE IF NOT EXISTS` hace que el comando sea seguro de relanzar: las
 tablas que ya existen no se tocan.
 
+### Columna `iniciales_otorgados` en `licencias` (añadida agosto 2026)
+
+Registra si ya se otorgaron los 500 créditos de bienvenida a una licencia.
+Impide que el webhook y el endpoint de activación los abonen dos veces.
+
+**Antes de desplegar**, ejecutar el ALTER TABLE en ambas bases de datos:
+
+```bash
+npx wrangler d1 execute legado-creditos --remote \
+  --command="ALTER TABLE licencias ADD COLUMN iniciales_otorgados INTEGER NOT NULL DEFAULT 0"
+
+npx wrangler d1 execute legado-creditos-preview --remote \
+  --command="ALTER TABLE licencias ADD COLUMN iniciales_otorgados INTEGER NOT NULL DEFAULT 0"
+```
+
+Las filas ya existentes quedan con `iniciales_otorgados = 0`, lo que haría que
+la próxima activación de cada licencia les abonase 500 créditos. **Ajustar a mano
+las filas que ya los tienen antes de desplegar**:
+
+| license_key | Estado real | Acción |
+|---|---|---|
+| `ECF4D918-…` | 500 otorgados por el webhook, 1 consumido (499 actuales) | Marcar como otorgados |
+| `B80D4E29-…` | 500 otorgados manualmente, 200 del pack (700 actuales) | Marcar como otorgados |
+
+```bash
+npx wrangler d1 execute legado-creditos --remote --command="UPDATE licencias SET iniciales_otorgados = 1"
+```
+
+Este UPDATE afecta a todas las filas presentes. Si en ese momento existe alguna
+licencia que aún no haya recibido sus 500 (caso poco probable pero posible),
+habría que abonárselos a mano. Verificar con `SELECT * FROM licencias` antes.
+
 ### Tabla `compras_sin_procesar` (añadida agosto 2026)
 
 Registra compras de packs cuyo `variant_id` no coincidió con ningún pack

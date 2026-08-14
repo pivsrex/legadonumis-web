@@ -11,11 +11,17 @@
 -- legítimo: claves efímeras con TTL donde una carrera no tiene consecuencias.
 
 CREATE TABLE IF NOT EXISTS licencias (
-  license_key    TEXT    PRIMARY KEY,
-  creditos       INTEGER NOT NULL DEFAULT 0 CHECK (creditos >= 0),
-  creada_en      INTEGER NOT NULL DEFAULT (strftime('%s','now')),
-  actualizada_en INTEGER NOT NULL DEFAULT (strftime('%s','now'))
+  license_key          TEXT    PRIMARY KEY,
+  creditos             INTEGER NOT NULL DEFAULT 0 CHECK (creditos >= 0),
+  creada_en            INTEGER NOT NULL DEFAULT (strftime('%s','now')),
+  actualizada_en       INTEGER NOT NULL DEFAULT (strftime('%s','now'))
 );
+
+-- Columna añadida agosto 2026. En bases de datos ya existentes hay que ejecutar
+-- el ALTER TABLE manualmente (ver d1/README.md → Migración de esquema).
+-- Las filas existentes quedan con iniciales_otorgados = 0: la próxima activación
+-- de cada licencia les abonará 500 créditos. Ajustar a mano antes de desplegar.
+ALTER TABLE licencias ADD COLUMN iniciales_otorgados INTEGER NOT NULL DEFAULT 0;
 
 -- Registro de consumo. No es imprescindible para el funcionamiento, pero en un
 -- producto de pago las reclamaciones por créditos son inevitables y sin esta
