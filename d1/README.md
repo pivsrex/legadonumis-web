@@ -118,6 +118,39 @@ npx wrangler d1 execute legado-creditos --remote \
              ON CONFLICT (license_key) DO UPDATE SET creditos = excluded.creditos"
 ```
 
+## Migración de esquema
+
+Cuando se añade una tabla nueva a `schema.sql`, **hay que aplicarla manualmente**
+a la base de datos ya existente. El esquema no se ejecuta solo al desplegar.
+
+```bash
+# Producción
+npx wrangler d1 execute legado-creditos --remote --file=./d1/schema.sql
+
+# Preview (si procede)
+npx wrangler d1 execute legado-creditos-preview --remote --file=./d1/schema.sql
+```
+
+`CREATE TABLE IF NOT EXISTS` hace que el comando sea seguro de relanzar: las
+tablas que ya existen no se tocan.
+
+### Tabla `compras_sin_procesar` (añadida agosto 2026)
+
+Registra compras de packs cuyo `variant_id` no coincidió con ningún pack
+conocido pero traían una `license_key` en los `custom_data`. Permite
+reconciliar manualmente el cobro y abonar los créditos con:
+
+```bash
+npx wrangler d1 execute legado-creditos --remote \
+  --command="SELECT * FROM compras_sin_procesar ORDER BY creado_en DESC LIMIT 20"
+
+# Una vez identificado el problema, abonar manualmente:
+npx wrangler d1 execute legado-creditos --remote \
+  --command="UPDATE licencias SET creditos = creditos + 200 WHERE license_key = 'XXX'"
+```
+
+---
+
 ## Consultas útiles
 
 ```bash

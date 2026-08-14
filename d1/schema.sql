@@ -32,3 +32,18 @@ CREATE TABLE IF NOT EXISTS consumos (
 
 CREATE INDEX IF NOT EXISTS idx_consumos_licencia
   ON consumos (license_key, creado_en);
+
+-- Compras no procesadas: packs con variante no reconocida.
+-- Si llega un order_created con variant_id desconocido y hay una license_key
+-- en los custom_data, se registra aquí para permitir la reconciliación manual.
+-- El campo payload contiene solo lo necesario: order_id, importe y email.
+-- ⚠️  Esta tabla no se crea sola: hay que ejecutar el schema en la base de datos
+--     ya existente (ver d1/README.md → Migración de esquema).
+CREATE TABLE IF NOT EXISTS compras_sin_procesar (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  license_key TEXT,
+  variant_id  TEXT,
+  evento      TEXT NOT NULL,
+  payload     TEXT,
+  creado_en   INTEGER NOT NULL DEFAULT (strftime('%s','now'))
+);

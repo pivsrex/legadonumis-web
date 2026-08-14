@@ -13,11 +13,11 @@
 // segundo `license_key.created` para la misma licencia no debe reponer el saldo
 // ni pisar lo que el usuario ya haya consumido.
 
-const CREDITOS_INICIALES  = 500
-const VARIANT_PACK_200    = '1913239'
+const CREDITOS_INICIALES       = 500
+const VARIANT_PACK_200_DEFECTO = '1913239'
 
 export async function onRequestPost(context) {
-  const rawBody  = await context.request.text()
+  const rawBody   = await context.request.text()
   const signature = context.request.headers.get('X-Signature') ?? ''
 
   // Verificar firma HMAC-SHA256
@@ -32,7 +32,16 @@ export async function onRequestPost(context) {
 
   if (!db) return new Response('DB not configured', { status: 503 })
 
-  // ── Licencia nueva: inicializar créditos ─────────────────────────────
+  // ── Identificador de variante del pack: env o respaldo ───────────────────
+  // LS_VARIANT_PACK_200 debe estar definido como secreto en Cloudflare Pages.
+  // Si falta, se usa el valor de referencia y se deja constancia en el log.
+  const variantPackId = context.env.LS_VARIANT_PACK_200
+  if (!variantPackId) {
+    console.warn('[webhook] LS_VARIANT_PACK_200 no definido en env — usando respaldo:', VARIANT_PACK_200_DEFECTO)
+  }
+  const VARIANT_PACK_200 = variantPackId ?? VARIANT_PACK_200_DEFECTO
+
+  // ── Licencia nueva: inicializar créditos ─────────────────────────────────
   if (eventName === 'license_key.created') {
     const licenseKey = payload.data?.attributes?.key
     if (licenseKey) {
@@ -52,7 +61,7 @@ export async function onRequestPost(context) {
     return new Response('ok')
   }
 
-  // ── Compra de pack de créditos ────────────────────────────────────────
+  // ── Compra de pack de créditos ────────────────────────────────────────────
   if (eventName === 'order_created') {
     const variantId  = String(payload.data?.attributes?.first_order_item?.variant_id ?? '')
     const licenseKey = payload.meta?.custom_data?.license_key
@@ -75,6 +84,28 @@ export async function onRequestPost(context) {
       } catch {
         return new Response('DB error', { status: 500 })
       }
+    } else {
+      // Variante no reconocida: registrar para poder reconciliar manualmente.
+      // Llegamos aquí porque había license_key en custom_data, señal de que
+      // era una compra de créditos que debería haberse abonado.
+      console.warn(
+        `[webhook] order_created con variante no reconocida — variant_id: ${variantId}, esperado: ${VARIANT_PACK_200}, license_key: …${licenseKey.slice(-4)}`
+      )
+      try {
+        const resumen = JSON.stringify({
+          order_id: payload.data?.id,
+          total:    payload.data?.attributes?.total,
+          email:    payload.data?.attributes?.user_email,
+        })
+        await db
+          .prepare(`INSERT INTO compras_sin_procesar (license_key, variant_id, evento, payload)
+                    VALUES (?1, ?2, ?3, ?4)`)
+          .bind(licenseKey, variantId, eventName, resumen)
+          .run()
+      } catch {
+        // Best-effort: si falla el registro la respuesta sigue siendo ok.
+        // LemonSqueezy no debe reintentar por un problema de auditoría.
+      }
     }
 
     return new Response('ok')
@@ -89,8 +120,8 @@ export async function onRequestPost(context) {
 async function verifySignature(body, signature, secret) {
   if (!secret || !signature) return false
   try {
-    const enc     = new TextEncoder()
-    const key     = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify'])
+    const enc      = new TextEncoder()
+    const key      = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify'])
     const sigBytes = hexToBytes(signature)
     return await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(body))
   } catch {
