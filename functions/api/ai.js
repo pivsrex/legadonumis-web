@@ -365,7 +365,13 @@ export async function onRequestPost(context) {
   if (def.esJson) {
     let resultado
     try {
-      resultado = JSON.parse(texto)
+      // Algunos modelos envuelven la respuesta en ```json…```. Se extrae el
+      // primer objeto JSON visible antes de parsear.
+      let textoJson = texto.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '')
+      const ini = textoJson.indexOf('{')
+      const fin = textoJson.lastIndexOf('}')
+      if (ini !== -1 && fin > ini) textoJson = textoJson.slice(ini, fin + 1)
+      resultado = JSON.parse(textoJson)
     } catch {
       await reembolsarCreditos(db, license_key, def.coste)
       await registrarConsumo(db, license_key, tarea, def.coste, 'reembolsado')
