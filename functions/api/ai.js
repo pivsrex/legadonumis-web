@@ -141,7 +141,7 @@ const BASE64_REGEX            = /^[A-Za-z0-9+/]+=*$/
 
 // Validado en banco de regresión de 167 monedas (Fase 5 pendiente de repejar).
 // Si se cambia el modelo, re-ejecutar el banco de regresión (Fase 5) antes de desplegar.
-const MODELO_IDENTIFICACION = 'claude-sonnet-4-6'
+const MODELO_IDENTIFICACION = 'claude-sonnet-5'
 
 // ── Registro de tareas ───────────────────────────────────────────────────────
 // Añadir una tarea nueva es añadir una entrada aquí: modelo, coste en créditos,
