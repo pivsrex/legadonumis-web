@@ -149,11 +149,12 @@ function mockFetch(modelResponse) {
         json: async () => ({ valid: true, license_key: { status: 'active' } }),
       }
     }
-    // Anthropic
+    // Anthropic — el content real incluye "type" por bloque (ai.js filtra por
+    // type === 'text' desde 2014132 para saltar bloques 'thinking').
     return {
       ok: true,
       json: async () => ({
-        content: [{ text: typeof modelResponse === 'string'
+        content: [{ type: 'text', text: typeof modelResponse === 'string'
           ? modelResponse
           : JSON.stringify(modelResponse) }],
       }),
@@ -322,7 +323,7 @@ describe('regresión: tarea contexto — comportamiento inalterado', () => {
       }
       return {
         ok: true,
-        json: async () => ({ content: [{ text: 'Texto histórico generado.' }] }),
+        json: async () => ({ content: [{ type: 'text', text: 'Texto histórico generado.' }] }),
       }
     }))
 
@@ -394,7 +395,7 @@ describe('regresión: tarea contexto — comportamiento inalterado', () => {
       if (url.includes('lemonsqueezy')) {
         return { ok: true, json: async () => ({ valid: true, license_key: { status: 'active' } }) }
       }
-      return { ok: true, json: async () => ({ content: [{ text: 'ok' }] }) }
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: 'ok' }] }) }
     }))
 
     const bodyObj = {
