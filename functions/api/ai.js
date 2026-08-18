@@ -188,7 +188,7 @@ const TAREAS = {
 
   identificacion_moneda: {
     modelo:    MODELO_IDENTIFICACION,
-    maxTokens: 800,
+    maxTokens: 1500,
     coste:     5,
     esJson:    true,
     prompts:   { es: SYSTEM_IDENTIFICACION_ES, en: SYSTEM_IDENTIFICACION_EN },
@@ -359,7 +359,10 @@ export async function onRequestPost(context) {
     return json({ error: msg }, antRes.status)
   }
 
-  const texto = data?.content?.[0]?.text ?? ''
+  // Buscar el bloque de texto explícitamente: algunos modelos (p.ej. con
+  // extended thinking) anteponen bloques tipo 'thinking' antes del texto.
+  const textoBlock = data?.content?.find(b => b.type === 'text')
+  const texto = textoBlock?.text ?? ''
 
   // ── Tareas JSON: parsear, validar estructura y aplicar reembolso condicional ─
   if (def.esJson) {
