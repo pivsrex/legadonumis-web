@@ -73,7 +73,7 @@ export const es: Content = {
   faq7_q: '¿Tengo que pagar alguna suscripción periódica?',
   faq7_a: 'No. Legado Básico es gratuito. La licencia de Legado Pro implica un pago único y no está sujeta a una suscripción periódica.',
   faq8_q: '¿El uso de Numista y la IA tiene algún coste adicional?',
-  faq8_a: 'El acceso a la base de datos de Numista requiere una clave API gratuita disponible en Numista.com. Cabe mencionar que Legado no está vinculado a Numista ni es responsable de sus condiciones, disponibilidad o precios. La consulta del catálogo OCRE es gratuita y no requiere clave. Además, Legado Pro incluye en su precio 500 créditos para generar información contextual histórica de monedas y billetes. Es posible adquirir paquetes de créditos adicionales.',
+  faq8_a: 'El acceso a la base de datos de Numista requiere una clave API gratuita disponible en Numista.com. Cabe mencionar que Legado no está vinculado a Numista ni es responsable de sus condiciones, disponibilidad o precios. La consulta del catálogo OCRE es gratuita y no requiere clave. Además, Legado Pro incluye en su precio 500 créditos, compartidos entre las dos funciones de inteligencia artificial: la generación de contexto histórico y la identificación de ejemplares desconocidos en la sección Consultas. Es posible adquirir paquetes adicionales de 200 créditos desde la propia aplicación.',
   faq9_q: '¿En cuántos ordenadores puedo usar Legado Pro?',
   faq9_a: 'La licencia de Legado Pro permite usar la aplicación en hasta dos dispositivos simultáneamente. Además, puedes desactivar la licencia en un equipo desde la propia aplicación para liberarla y activarla en otro, por ejemplo al cambiar de ordenador.',
   faq10_q: '¿Cómo activo mi Legado Pro?',
@@ -122,6 +122,13 @@ export const es: Content = {
   asset_sc_anota: '/assets/FichaAnota2.mp4',
   asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
+  sc_consultas_titulo: 'Identifica piezas desconocidas con IA',
+  sc_consultas_desc:   'Sube una foto de una moneda, medalla, ficha o billete sin catalogar. Legado la compara con Numista y OCRE y, con ayuda de inteligencia artificial, te propone la identificación más probable.',
+  asset_sc_consultas:  '/assets/FichaConsultas.mp4',
+
+  feat_new_badge:      'Nuevo',
+  f_consultas_titulo:  'Identifica lo que no sabes catalogar',
+  f_consultas_desc:    'Sube una foto de una moneda, medalla, ficha o billete desconocido. Legado la compara con Numista y OCRE y te propone la identificación más probable, con ayuda de inteligencia artificial.',
 
   comp_groups: [
     {
@@ -137,10 +144,10 @@ export const es: Content = {
       label: 'Documentación y catálogos',
       rows: [
         { feat: 'Consultas a Numista y al catálogo online de monedas romanas OCRE *', basico: true, pro: true },
-        // TODO: restaurar cta { label: '¿Necesitas más?', url: <landing de packs en LemonSqueezy> } cuando exista la landing
-        { feat: 'Generación de información sobre contexto histórico con ayuda de inteligencia artificial', basico: false, pro: '500 consultas incluidas\n(puedes adquirir más desde la app)' },
+        { feat: 'Generación de información sobre el contexto histórico de los ejemplares, con asistencia de inteligencia artificial', basico: false, pro: true },
+        { feat: 'Identificación y catalogación de ejemplares, con asistencia de inteligencia artificial', basico: false, pro: true },
         { feat: 'Anotaciones sobre imágenes', basico: false,     pro: true },
-        { feat: 'Post-Its',                   basico: 'Hasta 5', pro: 'Ilimitados' },
+        { feat: 'Notas (Post-Its)',           basico: 'Hasta 5', pro: 'Ilimitados' },
       ],
     },
     {
@@ -192,31 +199,7 @@ export const es: Content = {
   comp_plan_pro_cta_sub:   'y Activa Experiencia Pro',
   comp_footnote1:          '* Las consultas a Numista requieren una clave API gratuita disponible en numista.com.',
 
-  trial_badge:  'Básico',
-  trial_precio: 'Gratis',
-  trial_nota:   'Sin límite de tiempo',
-  trial_items: [
-    'Hasta 50 ejemplares catalogados',
-    '5 usos del asistente IA',
-    'Galería fotográfica completa',
-    'Mapa de cecas interactivo',
-    'Sin límite de tiempo',
-  ],
-  trial_cta: 'Descargar gratis',
-  full_tag:    'Pro',
-  full_badge:  'Más popular',
   full_precio: '89',
-  full_divisa: '€',
-  full_nota:   'Pago único · sin suscripción',
-  full_btn:    'Obtener Legado Pro',
-  full_items: [
-    'Ejemplares ilimitados',
-    'Asistente IA ilimitado',
-    'Exportar a Excel, CSV y PDF',
-    'Etiquetador de bandejas',
-    'Actualizaciones durante dos años',
-    'Soporte técnico por correo',
-  ],
 
   tm1_quote: 'Tenía la información de mi colección repartida entre distintos archivos y notas. En muy poco tiempo conseguí trasladarlo todo a Legado y ahora encuentro cualquier dato en cuestión de segundos.',
   tm2_quote: 'Los recordatorios me ayudan a no perderme las subastas en vivo que me interesan. Con Legado puedo planificar mejor y evitar compras impulsivas.',

@@ -1,4 +1,4 @@
-import { GridIcon, FrameIcon, ImportIcon, BookmarkIcon, ChartIcon, TagIcon } from './numismaticIcons'
+import { GridIcon, FrameIcon, ImportIcon, BookmarkIcon, ChartIcon, TagIcon, SparkIcon } from './numismaticIcons'
 import { br, RevealWrapper } from '../utils/text'
 import type { Content } from '../content/types'
 import type { ComponentType, SVGProps } from 'react'
@@ -24,6 +24,49 @@ function FeatureCard({ icon: Icon, title, desc }: FeatureData) {
         <h3 style={{ font: '600 15px/1.25 var(--font-display)', letterSpacing: '-0.01em', color: 'var(--ds-accent)', margin: 0 }}>
           {title}
         </h3>
+        <p style={{ font: '400 15px/1.7 var(--font-body)', color: '#ffffff', margin: 0 }}>
+          {desc}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function FeaturedCard({ badge, title, desc }: { badge: string; title: string; desc: string }) {
+  return (
+    <div className="lg-feature-card lg-feature-card--featured" style={{
+      display: 'grid',
+      gridTemplateColumns: 'auto 1fr',
+      gap: '0 28px',
+      padding: '28px 32px',
+      borderRadius: 14,
+      background: '#181818',
+      border: '1px solid rgba(255,255,255,0.06)',
+      boxShadow: '0 12px 40px rgba(0,0,0,0.45)',
+      boxSizing: 'border-box',
+      alignItems: 'center',
+    }}>
+      <div className="lg-feature-icon" style={{
+        color: 'var(--ds-accent)',
+        flexShrink: 0,
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        <SparkIcon size={28} />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <h3 style={{ font: '600 15px/1.25 var(--font-display)', letterSpacing: '-0.01em', color: 'var(--ds-accent)', margin: 0 }}>
+            {title}
+          </h3>
+          <span style={{
+            font: '600 11px/1 var(--font-body)', letterSpacing: '0.06em',
+            color: 'var(--ds-bg-0)', background: 'var(--ds-accent)',
+            padding: '3px 8px', borderRadius: 4, flexShrink: 0,
+          }}>
+            {badge}
+          </span>
+        </div>
         <p style={{ font: '400 15px/1.7 var(--font-body)', color: '#ffffff', margin: 0 }}>
           {desc}
         </p>
@@ -77,6 +120,11 @@ export default function Features({ content: C }: Props) {
           <h2 style={{ font: '600 clamp(28px, 3.5vw, 48px)/1.12 var(--font-display)', letterSpacing: '-0.025em', color: 'var(--ds-heading)', margin: '0 auto 56px', textAlign: 'center', maxWidth: 760 }}>
             {br(C.feat_h2)}
           </h2>
+        </RevealWrapper>
+        <RevealWrapper>
+          <div style={{ marginBottom: 16 }}>
+            <FeaturedCard badge={C.feat_new_badge} title={C.f_consultas_titulo} desc={C.f_consultas_desc} />
+          </div>
         </RevealWrapper>
         <div className="lg-feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, alignItems: 'stretch' }}>
           {FEATURES.map((f, i) => (

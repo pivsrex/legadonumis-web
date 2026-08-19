@@ -73,7 +73,7 @@ export const en: Content = {
   faq7_q: 'Is there a recurring subscription?',
   faq7_a: 'No. Legado Basic is free. The Legado Pro license is a one-time purchase with no subscription.',
   faq8_q: 'Is there an extra cost for Numista and AI?',
-  faq8_a: 'Numista access requires a free API key from Numista.com. Note that Legado is not affiliated with Numista and is not responsible for their terms, availability, or pricing. The OCRE catalog is free to query and requires no key. In addition, Legado Pro includes 500 credits for generating historical context about coins and banknotes. Additional credit packs can be purchased.',
+  faq8_a: 'Numista access requires a free API key from Numista.com. Note that Legado is not affiliated with Numista and is not responsible for their terms, availability, or pricing. The OCRE catalog is free to query and requires no key. In addition, Legado Pro includes 500 credits, shared between the two AI features: historical context generation and identifying unknown items in the Queries section. Additional 200-credit packs can be purchased from within the app.',
   faq9_q: 'On how many computers can I use Legado Pro?',
   faq9_a: 'A Legado Pro license lets you use the app on up to two devices at the same time. You can also deactivate the license on one computer from within the app to free it up and activate it on another — for example, when switching machines.',
   faq10_q: 'How do I activate my Legado Pro?',
@@ -122,6 +122,13 @@ export const en: Content = {
   asset_sc_anota: '/assets/FichaAnota2.mp4',
   asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
+  sc_consultas_titulo: 'Identify unknown pieces with AI',
+  sc_consultas_desc:   'Upload a photo of an uncatalogued coin, medal, token or banknote. Legado compares it against Numista and OCRE and, with the help of artificial intelligence, suggests the most likely match.',
+  asset_sc_consultas:  '/assets/FichaConsultas.mp4',
+
+  feat_new_badge:      'New',
+  f_consultas_titulo:  "Identify what you can't catalogue",
+  f_consultas_desc:    'Upload a photo of an unidentified coin, medal, token or banknote. Legado compares it against Numista and OCRE and suggests the most likely match, with the help of artificial intelligence.',
 
   comp_groups: [
     {
@@ -137,10 +144,10 @@ export const en: Content = {
       label: 'Documentation & catalogs',
       rows: [
         { feat: 'Numista & OCRE Roman coinage catalog lookups *', basico: true, pro: true },
-        // TODO: restaurar cta { label: 'Need more?', url: <landing de packs en LemonSqueezy> } cuando exista la landing
-        { feat: 'AI-generated historical context information', basico: false, pro: '500 queries included\n(buy more from the app)' },
-        { feat: 'Photo annotations', basico: false,     pro: true },
-        { feat: 'Sticky notes',      basico: 'Up to 5', pro: 'Unlimited' },
+        { feat: 'AI-assisted historical context generation for items', basico: false, pro: true },
+        { feat: 'AI-assisted item identification and cataloguing', basico: false, pro: true },
+        { feat: 'Photo annotations',    basico: false,     pro: true },
+        { feat: 'Notes (Sticky notes)', basico: 'Up to 5', pro: 'Unlimited' },
       ],
     },
     {
@@ -192,31 +199,7 @@ export const en: Content = {
   comp_plan_pro_cta_sub:   'and Activate the Pro Experience',
   comp_footnote1:          '* Numista lookups require a free API key available at numista.com.',
 
-  trial_badge:  'Basic',
-  trial_precio: 'Free',
-  trial_nota:   'No time limit',
-  trial_items: [
-    'Up to 50 cataloged pieces',
-    '5 AI assistant uses',
-    'Full photo gallery',
-    'Interactive mint map',
-    'No time limit',
-  ],
-  trial_cta: 'Download free',
-  full_tag:    'Pro',
-  full_badge:  'Most popular',
   full_precio: '89',
-  full_divisa: '€',
-  full_nota:   'One-time payment · no subscription',
-  full_btn:    'Get Legado Pro',
-  full_items: [
-    'Unlimited pieces',
-    'Unlimited AI assistant',
-    'Export to Excel, CSV & PDF',
-    'Tray label designer',
-    'Two years of updates',
-    'Email support',
-  ],
 
   tm1_quote: 'My collection data was scattered across different files and notes. In no time I moved everything to Legado, and now I can find any detail in seconds.',
   tm2_quote: 'The reminders help me keep track of live auctions that interest me. With Legado I can plan better and avoid impulse purchases.',

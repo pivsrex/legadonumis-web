@@ -119,6 +119,12 @@ export interface Content {
   asset_sc_anota: string
   asset_sc_stats: string
   asset_sc5: string
+  sc_consultas_titulo: string
+  sc_consultas_desc: string
+  asset_sc_consultas: string
+  feat_new_badge: string
+  f_consultas_titulo: string
+  f_consultas_desc: string
   comp_groups: CompGroup[]
   comp_plan_basic: string
   comp_plan_basic_sub: string
@@ -134,18 +140,7 @@ export interface Content {
   comp_plan_pro_cta_sub: string
   comp_footnote1: string
   comp_footnote2?: string
-  trial_badge: string
-  trial_precio: string
-  trial_nota: string
-  trial_items: string[]
-  trial_cta: string
-  full_tag: string
-  full_badge: string
   full_precio: string
-  full_divisa: string
-  full_nota: string
-  full_btn: string
-  full_items: string[]
   tm1_quote: string
   tm2_quote: string
   tm3_quote: string

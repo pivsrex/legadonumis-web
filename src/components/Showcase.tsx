@@ -84,7 +84,8 @@ export default function Showcase({ content: C }: Props) {
     { title: C.sc4_titulo,       desc: C.sc4_desc,       src: C.asset_sc4,      reverse: true  },
     { title: C.sc_stats_titulo,  desc: C.sc_stats_desc,  src: C.asset_sc_stats, reverse: false },
     { title: C.sc3_titulo,       desc: C.sc3_desc,       src: C.asset_sc3,      reverse: true  },
-    { title: C.sc5_titulo,       desc: C.sc5_desc,       src: C.asset_sc5,      reverse: false },
+    { title: C.sc5_titulo,          desc: C.sc5_desc,          src: C.asset_sc5,         reverse: false },
+    { title: C.sc_consultas_titulo, desc: C.sc_consultas_desc, src: C.asset_sc_consultas, reverse: true  },
   ]
 
   const N = CARDS.length
