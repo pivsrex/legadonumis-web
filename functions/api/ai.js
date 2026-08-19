@@ -279,6 +279,7 @@ const TAREAS = {
       const ancho_mm    = body.ancho_mm    ?? null
       const alto_mm     = body.alto_mm     ?? null
       const material    = body.material    ?? null
+      const otros_datos = body.otros_datos ?? null
 
       // tipo_objeto: si falta o no es válido, se asume 'Moneda' por compatibilidad
       // con clientes anteriores a este campo.
@@ -302,18 +303,22 @@ const TAREAS = {
       if (material !== null && (typeof material !== 'string' || material.length > 30)) {
         return { error: 'material_invalido' }
       }
+      if (otros_datos !== null && (typeof otros_datos !== 'string' || otros_datos.length > 200)) {
+        return { error: 'otros_datos_invalido' }
+      }
 
-      return { ok: { imagenes, peso_g, diametro_mm, metal, ancho_mm, alto_mm, material, tipo_objeto } }
+      return { ok: { imagenes, peso_g, diametro_mm, metal, ancho_mm, alto_mm, material, tipo_objeto, otros_datos } }
     },
 
-    construir({ imagenes, peso_g, diametro_mm, metal, ancho_mm, alto_mm, material, tipo_objeto }, lang) {
+    construir({ imagenes, peso_g, diametro_mm, metal, ancho_mm, alto_mm, material, tipo_objeto, otros_datos }, lang) {
       const partes = []
-      if (peso_g      != null) partes.push(lang === 'en' ? `Weight: ${peso_g} g`       : `Peso: ${peso_g} g`)
+      if (peso_g      != null) partes.push(lang === 'en' ? `Weight: ${peso_g} g`         : `Peso: ${peso_g} g`)
       if (diametro_mm != null) partes.push(lang === 'en' ? `Diameter: ${diametro_mm} mm` : `Diámetro: ${diametro_mm} mm`)
-      if (metal)               partes.push(lang === 'en' ? `Metal: ${metal}`            : `Metal: ${metal}`)
-      if (ancho_mm    != null) partes.push(lang === 'en' ? `Width: ${ancho_mm} mm`      : `Ancho: ${ancho_mm} mm`)
-      if (alto_mm     != null) partes.push(lang === 'en' ? `Height: ${alto_mm} mm`      : `Alto: ${alto_mm} mm`)
-      if (material)             partes.push(lang === 'en' ? `Material: ${material}`      : `Material: ${material}`)
+      if (metal)               partes.push(lang === 'en' ? `Metal: ${metal}`              : `Metal: ${metal}`)
+      if (ancho_mm    != null) partes.push(lang === 'en' ? `Width: ${ancho_mm} mm`        : `Ancho: ${ancho_mm} mm`)
+      if (alto_mm     != null) partes.push(lang === 'en' ? `Height: ${alto_mm} mm`        : `Alto: ${alto_mm} mm`)
+      if (material)            partes.push(lang === 'en' ? `Material: ${material}`        : `Material: ${material}`)
+      if (otros_datos)         partes.push(lang === 'en' ? `Additional info: ${otros_datos}` : `Otros datos: ${otros_datos}`)
 
       const textoBase = TEXTO_BASE_POR_TIPO[tipo_objeto]?.[lang === 'en' ? 'en' : 'es']
         ?? TEXTO_BASE_POR_TIPO.Moneda[lang === 'en' ? 'en' : 'es']
