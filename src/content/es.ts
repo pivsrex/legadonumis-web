@@ -122,7 +122,7 @@ export const es: Content = {
   asset_sc_anota: '/assets/FichaAnota2.mp4',
   asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
-  sc_consultas_titulo: 'Identifica y cataloga con asistencia de la IA',
+  sc_consultas_titulo: 'Identifica y cataloga con asistencia de IA',
   sc_consultas_desc:   'Sube una foto de una moneda o billete que quieras identificar. Legado la compara con catálogos en línea, y mediante inteligencia artificial te propone la identificación más probable.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
 
