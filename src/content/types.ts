@@ -122,9 +122,6 @@ export interface Content {
   sc_consultas_titulo: string
   sc_consultas_desc: string
   asset_sc_consultas: string
-  feat_new_badge: string
-  f_consultas_titulo: string
-  f_consultas_desc: string
   comp_groups: CompGroup[]
   comp_plan_basic: string
   comp_plan_basic_sub: string

@@ -48,7 +48,7 @@ export const es: Content = {
   f2_titulo: 'Una galería digna de tu colección',
   f2_desc:   'Explora tus monedas y billetes en seis modos de visualización distintos. Busca por palabras clave, aplica filtros personalizados y examina cada detalle con lupa mientras consultas su ficha técnica.',
   f3_titulo: 'Cada ejemplar, en su contexto',
-  f3_desc:   'Añade campos, ordénalos a tu gusto y documenta cada pieza en profundidad, con ayuda de las bases de datos de Numista y OCRE (moneda romana) y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.',
+  f3_desc:   'Añade atributos y ordénalos a tu gusto. Identifica y documenta cada pieza en profundidad, con ayuda de las bases de datos de Numista y OCRE (moneda romana) y de la inteligencia artificial. Visualiza tus monedas y billetes, juntos o por separado.',
   f4_titulo: 'Ideas, recordatorios y anotaciones',
   f4_desc:   'Utiliza post-its digitales para guardar observaciones y tareas pendientes. Realiza anotaciones sobre fotos. Mantén una lista detallada de los ejemplares que buscas y recibe recordatorios de fechas importantes.',
   f5_titulo: 'Una perspectiva diferente de tu colección',
@@ -73,7 +73,7 @@ export const es: Content = {
   faq7_q: '¿Tengo que pagar alguna suscripción periódica?',
   faq7_a: 'No. Legado Básico es gratuito. La licencia de Legado Pro implica un pago único y no está sujeta a una suscripción periódica.',
   faq8_q: '¿El uso de Numista y la IA tiene algún coste adicional?',
-  faq8_a: 'El acceso a la base de datos de Numista requiere una clave API gratuita disponible en Numista.com. Cabe mencionar que Legado no está vinculado a Numista ni es responsable de sus condiciones, disponibilidad o precios. La consulta del catálogo OCRE es gratuita y no requiere clave. Además, Legado Pro incluye en su precio 500 créditos, compartidos entre las dos funciones de inteligencia artificial: la generación de contexto histórico y la identificación de ejemplares desconocidos en la sección Consultas. Es posible adquirir paquetes adicionales de 200 créditos desde la propia aplicación.',
+  faq8_a: 'El acceso a la base de datos de Numista requiere una clave API gratuita disponible en Numista.com. La consulta del catálogo OCRE es gratuita y no requiere clave. Cabe mencionar que Legado no está vinculado a Numista u OCRE, ni es responsable de sus condiciones, disponibilidad o precios.\n\nPara el uso de las funciones de inteligencia artificial (generación de información de contexto histórico e identificación de ejemplares mediante fotografía), Legado Pro incluye 500 créditos, compartidos entre las dos funciones de inteligencia artificial. Es posible adquirir paquetes adicionales de 250 créditos desde la propia aplicación. El coste de cada generación de información contextual histórica es 1 crédito. Las consultas para la identificación de ejemplares con imágenes cuesta entre 1 y 5 créditos, dependiendo de la confiabilidad del resultado.',
   faq9_q: '¿En cuántos ordenadores puedo usar Legado Pro?',
   faq9_a: 'La licencia de Legado Pro permite usar la aplicación en hasta dos dispositivos simultáneamente. Además, puedes desactivar la licencia en un equipo desde la propia aplicación para liberarla y activarla en otro, por ejemplo al cambiar de ordenador.',
   faq10_q: '¿Cómo activo mi Legado Pro?',
@@ -86,7 +86,7 @@ export const es: Content = {
   cta_lupa_hint: 'Pasa el cursor sobre la moneda',
   cta_puzzle_hint: 'Reconstruye el tetradracma y desbloquea una sorpresa',
   cta_puzzle_done: 'Ahora imagina tu colección así de organizada.',
-  cta_discount_label: '10% de descuento en Legado Pro con el código',
+  cta_discount_label: '5% de descuento en Legado Pro con el código',
   cta_code_copied: 'Código copiado',
   dl_pro_label: 'Legado Pro',
   dl_pro_sub: 'Pago único · Experiencia completa',
@@ -122,13 +122,10 @@ export const es: Content = {
   asset_sc_anota: '/assets/FichaAnota2.mp4',
   asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
-  sc_consultas_titulo: 'Identifica piezas desconocidas con IA',
-  sc_consultas_desc:   'Sube una foto de una moneda, medalla, ficha o billete sin catalogar. Legado la compara con Numista y OCRE y, con ayuda de inteligencia artificial, te propone la identificación más probable.',
+  sc_consultas_titulo: 'Identifica y cataloga con asistencia de la IA',
+  sc_consultas_desc:   'Sube una foto de una moneda o billete que quieras identificar. Legado la compara con catálogos en línea, y mediante inteligencia artificial te propone la identificación más probable.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
 
-  feat_new_badge:      'Nuevo',
-  f_consultas_titulo:  'Identifica lo que no sabes catalogar',
-  f_consultas_desc:    'Sube una foto de una moneda, medalla, ficha o billete desconocido. Legado la compara con Numista y OCRE y te propone la identificación más probable, con ayuda de inteligencia artificial.',
 
   comp_groups: [
     {

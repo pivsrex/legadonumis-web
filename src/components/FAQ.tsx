@@ -29,7 +29,11 @@ function FAQCard({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         opacity: open ? 1 : 0,
         transition: 'max-height 320ms cubic-bezier(0.4,0,0.2,1), opacity 220ms ease',
       }}>
-        <p style={{ font: '400 14px/1.75 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0, padding: '0 24px 22px' }}>{a}</p>
+        <div style={{ padding: '0 24px 22px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {a.split('\n\n').map((para, i) => (
+            <p key={i} style={{ font: '400 14px/1.75 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0 }}>{para}</p>
+          ))}
+        </div>
       </div>
     </div>
   )

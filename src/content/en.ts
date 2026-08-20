@@ -48,7 +48,7 @@ export const en: Content = {
   f2_titulo: 'A gallery worthy of your collection',
   f2_desc:   'Browse your coins and banknotes in six different view modes. Search by keyword, apply custom filters, and zoom in on any detail with the built-in magnifier while reading the full record.',
   f3_titulo: 'Every piece, in context',
-  f3_desc:   'Add fields, arrange them as you like, and document each piece in depth, with help from the Numista and OCRE (Roman coinage) databases and AI. View your coins and banknotes together or separately.',
+  f3_desc:   'Add attributes and arrange them as you like. Identify and document each piece in depth, with help from the Numista and OCRE (Roman coinage) databases and AI. View your coins and banknotes together or separately.',
   f4_titulo: 'Ideas, reminders, and notes',
   f4_desc:   "Use digital sticky notes to track observations and to-dos. Annotate photos. Keep a detailed list of the pieces you're looking for and get reminders for important dates.",
   f5_titulo: 'A fresh perspective on your collection',
@@ -73,7 +73,7 @@ export const en: Content = {
   faq7_q: 'Is there a recurring subscription?',
   faq7_a: 'No. Legado Basic is free. The Legado Pro license is a one-time purchase with no subscription.',
   faq8_q: 'Is there an extra cost for Numista and AI?',
-  faq8_a: 'Numista access requires a free API key from Numista.com. Note that Legado is not affiliated with Numista and is not responsible for their terms, availability, or pricing. The OCRE catalog is free to query and requires no key. In addition, Legado Pro includes 500 credits, shared between the two AI features: historical context generation and identifying unknown items in the Queries section. Additional 200-credit packs can be purchased from within the app.',
+  faq8_a: 'Access to the Numista database requires a free API key available at Numista.com. The OCRE catalog is free to query and requires no key. Note that Legado is not affiliated with Numista or OCRE and is not responsible for their terms, availability, or pricing.\n\nFor AI features (historical context generation and item identification via photo), Legado Pro includes 500 credits, shared between both AI functions. Additional 250-credit packs can be purchased from within the app. Each historical context generation costs 1 credit. Item identification queries cost between 1 and 5 credits, depending on the confidence of the result.',
   faq9_q: 'On how many computers can I use Legado Pro?',
   faq9_a: 'A Legado Pro license lets you use the app on up to two devices at the same time. You can also deactivate the license on one computer from within the app to free it up and activate it on another — for example, when switching machines.',
   faq10_q: 'How do I activate my Legado Pro?',
@@ -86,7 +86,7 @@ export const en: Content = {
   cta_lupa_hint: 'Hover over the coin',
   cta_puzzle_hint: 'Rebuild the tetradrachm and unlock a surprise',
   cta_puzzle_done: 'Now picture your collection, this organized.',
-  cta_discount_label: '10% off Legado Pro with code',
+  cta_discount_label: '5% off Legado Pro with code',
   cta_code_copied: 'Code copied',
   dl_pro_label: 'Legado Pro',
   dl_pro_sub: 'One-time payment · Full experience',
@@ -122,13 +122,10 @@ export const en: Content = {
   asset_sc_anota: '/assets/FichaAnota2.mp4',
   asset_sc_stats: '/assets/FichaStats.mp4',
   asset_sc5:      '/assets/FichaMetas.mp4',
-  sc_consultas_titulo: 'Identify unknown pieces with AI',
-  sc_consultas_desc:   'Upload a photo of an uncatalogued coin, medal, token or banknote. Legado compares it against Numista and OCRE and, with the help of artificial intelligence, suggests the most likely match.',
+  sc_consultas_titulo: 'Identify and catalogue with AI assistance',
+  sc_consultas_desc:   'Upload a photo of a coin or banknote you want to identify. Legado compares it against online catalogues and, using artificial intelligence, suggests the most likely match.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
 
-  feat_new_badge:      'New',
-  f_consultas_titulo:  "Identify what you can't catalogue",
-  f_consultas_desc:    'Upload a photo of an unidentified coin, medal, token or banknote. Legado compares it against Numista and OCRE and suggests the most likely match, with the help of artificial intelligence.',
 
   comp_groups: [
     {
