@@ -57,12 +57,18 @@ function base64urlDesdeTexto(texto) {
 }
 
 /**
- * Firma un token de licencia para (licenseKey, instanceId).
+ * Firma un token de licencia para (licenseKey, instanceId, deviceFingerprint).
  * Devuelve `null` si falta el secreto `LICENSE_SIGNING_PRIVATE_KEY` en el
  * entorno — los llamadores deben tratar eso como "no se pudo emitir token"
  * y no como error fatal (el cliente conserva su token anterior).
+ *
+ * `deviceFingerprint` puede ser `null` (p. ej. si D1 no está configurado y no
+ * se pudo consultar la huella grabada en `activate.js`). El cliente exige
+ * que `dev` sea un string — un token con `dev: null` simplemente no
+ * verificará en ningún equipo, lo cual es el fallo seguro: preferible a
+ * emitir un token que no ata nada.
  */
-export async function firmarTokenLicencia(licenseKey, instanceId, env) {
+export async function firmarTokenLicencia(licenseKey, instanceId, deviceFingerprint, env) {
   const pem = env.LICENSE_SIGNING_PRIVATE_KEY
   if (!pem) {
     console.error('[license-token] Falta el secreto LICENSE_SIGNING_PRIVATE_KEY — no se emite token')
@@ -73,6 +79,7 @@ export async function firmarTokenLicencia(licenseKey, instanceId, env) {
   const payload = {
     lk:  licenseKey,
     iid: instanceId,
+    dev: deviceFingerprint,
     iat: ahora,
     exp: ahora + TOKEN_TTL_DIAS * 86400,
   }

@@ -231,6 +231,45 @@ npx wrangler d1 execute legado-creditos --remote \
   --command="UPDATE licencias SET creditos = creditos + 200 WHERE license_key = 'XXX'"
 ```
 
+### Tabla `activaciones` (añadida agosto 2026 — blindaje por hardware, punto 5)
+
+Guarda la huella del equipo (`device_fingerprint`) que activó cada `instance_id`
+de LemonSqueezy. `activate.js` la graba una sola vez, en el momento de la
+activación real; `validate.js` la lee de aquí para firmar cada token nuevo —
+**nunca** acepta una huella que venga en el cuerpo de la petición. Así, un
+`license.json` copiado de otro Mac sigue teniendo un token con la firma
+íntegra, pero con `dev` distinto de la huella del equipo nuevo, y
+`tokenVigente()` (cliente) lo rechaza. Ver el comentario extenso en
+`d1/schema.sql` y en `electron/lib/device-fingerprint.ts` (repo de Legado).
+
+**Antes de desplegar**, crear la tabla en ambas bases de datos (usa
+`CREATE TABLE IF NOT EXISTS`, así que relanzar el `schema.sql` completo es
+seguro y no toca las tablas existentes):
+
+```bash
+npx wrangler d1 execute legado-creditos --remote --file=./d1/schema.sql
+npx wrangler d1 execute legado-creditos-preview --remote --file=./d1/schema.sql
+```
+
+No hace falta backfill: las activaciones ya existentes (hechas antes de este
+cambio) simplemente no tienen fila en `activaciones`, así que `validate.js`
+lee `device_fingerprint = null` para ellas y firma `dev: null` — un token que
+no verifica en ningún equipo. Como no hay usuarios en producción todavía
+(ver el aviso al principio de este documento), esto no afecta a nadie: la
+próxima activación de cada instalación (o la reactivación tras un
+`license.json` borrado) graba la huella correcta y el token vuelve a atar
+normalmente. Si en el futuro sí hubiera usuarios con activaciones antiguas
+sin fila, revisar antes de desplegar si conviene una migración de gracia
+(p. ej. no exigir `dev` para tokens emitidos antes de una fecha de corte)
+en vez de dejar que se corte en seco.
+
+Comprobar tras el despliegue:
+
+```bash
+npx wrangler d1 execute legado-creditos --remote \
+  --command="SELECT instance_id, license_key, device_fingerprint FROM activaciones ORDER BY creada_en DESC LIMIT 20"
+```
+
 ---
 
 ## Consultas útiles

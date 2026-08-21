@@ -12,6 +12,15 @@
 // sigue usando su token anterior, que todavía no habrá expirado (TTL 45
 // días). No se firma aquí un token para una licencia que este servidor no
 // ha podido confirmar — eso sí sería fabricar una credencial de la nada.
+//
+// La huella del equipo que se firma dentro del token se lee de D1 (tabla
+// `activaciones`, grabada por `activate.js`) — este endpoint NO acepta una
+// huella del cuerpo de la petición ni la usa aunque venga. Si lo hiciera,
+// una instalación con un license.json copiado de otra máquina "sanaría" su
+// copia en la primera revalidación con red: bastaría con dejar que este
+// endpoint firmara la huella del equipo nuevo. Al firmar siempre la huella
+// grabada en la activación original, una copia sigue sin verificar en el
+// equipo nuevo pase lo que pase con la red.
 
 import { firmarTokenLicencia } from '../_shared/license-token.js'
 
@@ -41,12 +50,33 @@ export async function onRequestPost(context) {
     const valid = data.valid === true && data.license_key?.status === 'active'
     if (!valid) return json({ valid: false })
 
-    const token = await firmarTokenLicencia(license_key, instance_id, context.env)
+    const deviceFingerprint = await leerHuellaGrabada(instance_id, context.env)
+    const token = await firmarTokenLicencia(license_key, instance_id, deviceFingerprint, context.env)
     return json({ valid: true, token: token ?? undefined })
   } catch {
     // Sin red hacia LemonSqueezy → no invalidar (misma política que antes).
     // Sin token nuevo: el cliente conserva el que ya tenía.
     return json({ valid: true })
+  }
+}
+
+// Lee la huella grabada en la activación original de esta instancia. `null`
+// si D1 no está configurado, la fila no existe (BD antigua sin migrar,
+// instancia activada antes de este cambio) o la consulta falla — en
+// cualquiera de esos casos firmarTokenLicencia() emitirá un token con
+// `dev: null`, que el cliente rechaza en cualquier equipo. Es el fallo
+// seguro: preferible a atar el token a un equipo por error.
+async function leerHuellaGrabada(instanceId, env) {
+  const db = env.DB
+  if (!db) return null
+  try {
+    const row = await db
+      .prepare('SELECT device_fingerprint FROM activaciones WHERE instance_id = ?1')
+      .bind(instanceId)
+      .first()
+    return row?.device_fingerprint ?? null
+  } catch {
+    return null
   }
 }
 

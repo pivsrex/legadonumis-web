@@ -1,6 +1,6 @@
 // POST /api/license/activate
 // Registra un equipo en LemonSqueezy. La API key nunca sale del servidor.
-// Body: { license_key }
+// Body: { license_key, device_fingerprint }
 // Returns: { ok: boolean, instanceId?: string, token?: string, error?: string }
 //
 // Tras confirmar con LemonSqueezy que la licencia es válida, garantiza que
@@ -23,10 +23,11 @@ export async function onRequestPost(context) {
   try { body = await context.request.json() }
   catch { return json({ ok: false, error: 'invalid_body' }, 400) }
 
-  const { license_key } = body
+  const { license_key, device_fingerprint } = body
   if (!license_key || typeof license_key !== 'string') {
     return json({ ok: false, error: 'missing_license_key' }, 400)
   }
+  const deviceFingerprint = typeof device_fingerprint === 'string' && device_fingerprint ? device_fingerprint : null
 
   const keyNorm = license_key.trim().toUpperCase()
 
@@ -68,8 +69,23 @@ export async function onRequestPost(context) {
         } catch {
           console.error('[activate] Error al abonar créditos iniciales — se reintentará en la próxima activación')
         }
+
+        // Graba la huella de este equipo contra el instance_id nuevo que
+        // acaba de dar LemonSqueezy. validate.js la lee de aquí y nunca de
+        // lo que mande el cliente — ver el comentario en d1/schema.sql sobre
+        // por qué la huella no puede actualizarse fuera de una activación real.
+        try {
+          await db
+            .prepare(`INSERT INTO activaciones (instance_id, license_key, device_fingerprint)
+                      VALUES (?1, ?2, ?3)
+                      ON CONFLICT (instance_id) DO UPDATE SET device_fingerprint = excluded.device_fingerprint`)
+            .bind(data.instance.id, keyNorm, deviceFingerprint)
+            .run()
+        } catch (e) {
+          console.error('[activate] Error al grabar la huella del equipo — el token no atará a ningún dispositivo hasta la próxima activación', e)
+        }
       }
-      const token = await firmarTokenLicencia(keyNorm, data.instance.id, context.env)
+      const token = await firmarTokenLicencia(keyNorm, data.instance.id, deviceFingerprint, context.env)
       return json({ ok: true, instanceId: data.instance.id, token: token ?? undefined })
     }
 

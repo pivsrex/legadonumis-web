@@ -53,3 +53,25 @@ CREATE TABLE IF NOT EXISTS compras_sin_procesar (
   payload     TEXT,
   creado_en   INTEGER NOT NULL DEFAULT (strftime('%s','now'))
 );
+
+-- Huella del equipo por activación (instance_id de LemonSqueezy), para atar
+-- el token de licencia firmado a la máquina que activó (ver
+-- electron/lib/device-fingerprint.ts y electron/lib/license-token.ts en el
+-- repo de Legado). Se fija una sola vez en activate.js y nunca se actualiza
+-- desde validate.js — si se actualizara con lo que mande el cliente en cada
+-- revalidación, copiar license.json a otro equipo "sanaría" la copia la
+-- siguiente vez que esa instalación tuviera red, porque el servidor le
+-- firmaría un token nuevo atado a la máquina copiada sin darse cuenta. Solo
+-- una activación real (con su propio instance_id nuevo) puede fijar una
+-- huella nueva.
+-- ⚠️  Esta tabla no se crea sola: hay que ejecutar el schema en la base de
+--     datos ya existente (ver d1/README.md → Migración de esquema).
+CREATE TABLE IF NOT EXISTS activaciones (
+  instance_id        TEXT    PRIMARY KEY,
+  license_key        TEXT    NOT NULL,
+  device_fingerprint TEXT,
+  creada_en          INTEGER NOT NULL DEFAULT (strftime('%s','now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_activaciones_licencia
+  ON activaciones (license_key);
