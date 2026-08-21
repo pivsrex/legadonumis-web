@@ -63,6 +63,56 @@ silenciosa.
 El binding KV `CREDITS` **se mantiene**, porque `subscribe.js` lo sigue usando
 para rate limiting.
 
+## Firma de tokens de licencia (secreto `LICENSE_SIGNING_PRIVATE_KEY`)
+
+`functions/api/license/{activate,validate}.js` firman un token offline-verificable
+cada vez que confirman una licencia real contra LemonSqueezy (ver
+`functions/api/_shared/license-token.js`). El cliente (Electron) verifica ese
+token con `node:crypto` contra una clave PÚBLICA embebida en
+`electron/lib/license-token.ts`, en vez de confiar en un booleano local sin
+firmar — así un `license.json` editado a mano ya no basta para desbloquear el
+Pro.
+
+**Puesta en marcha (una sola vez, no se repite en cada deploy):**
+
+1. Generar el par de claves ECDSA P-256 (guardar ambas en un sitio seguro,
+   fuera del repo):
+   ```bash
+   node -e "
+   const { publicKey, privateKey } = require('crypto').generateKeyPairSync('ec', {
+     namedCurve: 'P-256',
+     publicKeyEncoding:  { type: 'spki',  format: 'pem' },
+     privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+   });
+   console.log(publicKey, privateKey);
+   "
+   ```
+2. Clave **privada** → Cloudflare Pages → proyecto → Settings → Variables and
+   Secrets → `LICENSE_SIGNING_PRIVATE_KEY`, pegada tal cual (con las líneas
+   `-----BEGIN/END PRIVATE KEY-----`). **En los dos entornos** (Production y
+   Preview) — los secretos no se heredan entre entornos, igual que `LS_API_KEY`.
+   Usar pares de claves distintos en Production y Preview si se quiere poder
+   probar sin arriesgar la clave real.
+3. Clave **pública** → pegar en la constante `LICENSE_PUBLIC_KEY_PEM` de
+   `electron/lib/license-token.ts` (repo de Legado) y hacer un release nuevo
+   del cliente. Publicarla no es un riesgo — solo sirve para verificar firmas,
+   nunca para crearlas.
+4. Volver a desplegar el sitio para que el Worker recoja el secreto nuevo.
+
+**Si `LICENSE_SIGNING_PRIVATE_KEY` falta o está mal formada**: `firmarTokenLicencia()`
+registra un error y devuelve `null`; `validate.js`/`activate.js` responden sin
+`token`. El cliente entonces no puede renovar su token — los usuarios con uno
+vigente siguen funcionando hasta que expire (TTL 45 días), pero nadie nuevo
+puede activarse como Pro hasta que se corrija. Comprobar en los logs de Pages
+Functions si hay quejas de activación.
+
+**Rotar la clave** (si se sospecha que la privada se filtró): generar un par
+nuevo, actualizar el secreto en Cloudflare y publicar un release del cliente
+con la nueva clave pública. Los tokens ya emitidos con la clave vieja seguirán
+verificando hasta su expiración (máx. 45 días) en clientes que no se hayan
+actualizado — no hay forma de revocarlos antes sin lista de revocación, que
+no existe todavía.
+
 ### Aviso sobre el desplegable del panel
 
 Al elegir la base de datos en el formulario de binding, seleccionarla con el
