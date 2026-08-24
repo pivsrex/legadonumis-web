@@ -82,6 +82,9 @@ export default function FAQ({ content: C }: Props) {
         @media (prefers-reduced-motion: reduce) {
           .lg-faq-card::before { display: none; }
         }
+        @media (max-width: 768px) {
+          .lg-faq-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px' }}>
         <RevealWrapper>
@@ -89,7 +92,7 @@ export default function FAQ({ content: C }: Props) {
             {C.faq_titulo}
           </h2>
         </RevealWrapper>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+        <div className="lg-faq-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {left.map((item, i) => (
               <RevealWrapper key={i * 2} delay={i * 60}>

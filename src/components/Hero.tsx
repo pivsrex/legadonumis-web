@@ -50,7 +50,7 @@ export default function Hero({ content: C }: Props) {
   }
 
   return (
-    <section style={s.section}>
+    <section style={s.section} className="hero-section">
       <style>{`
         .hero-mobile-notice { display: none; }
         @media (max-width: 819px) { .hero-mobile-notice { display: flex; } }
@@ -67,6 +67,7 @@ export default function Hero({ content: C }: Props) {
         .hero-dl-mac, .hero-dl-win, .hero-dl-sep { display: inline-flex; align-items: center; }
         html.is-mac .hero-dl-win, html.is-mac .hero-dl-sep,
         html.is-win .hero-dl-mac, html.is-win .hero-dl-sep { display: none; }
+        @media (max-width: 768px) { section.hero-section { padding-top: 90px !important; } }
       `}</style>
       <div style={s.glow} />
       <div style={s.container}>
