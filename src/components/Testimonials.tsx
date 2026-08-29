@@ -24,7 +24,7 @@ function TestimonialCard({ quote }: { quote: string }) {
 }
 
 export default function Testimonials({ content: C }: Props) {
-  const quotes = [C.tm1_quote, C.tm2_quote, C.tm3_quote, C.tm4_quote, C.tm5_quote, C.tm6_quote]
+  const quotes = [C.tm1_quote, C.tm2_quote, C.tm3_quote, C.tm4_quote, C.tm5_quote, C.tm6_quote, C.tm7_quote]
 
   return (
     <section id="testimonials" style={{ padding: '70px 0 0' }}>

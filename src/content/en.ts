@@ -125,8 +125,8 @@ export const en: Content = {
   sc_consultas_titulo: 'Identify and catalogue with AI assistance',
   sc_consultas_desc:   'Upload a photo of a coin or banknote you want to identify. Legado compares it against online catalogues and, using artificial intelligence, suggests the most likely match.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
-  sc_biblioteca_titulo: 'Build your own\nreference library',
-  sc_biblioteca_desc:   'Keep books, catalogues, articles and other reference documents, and link them directly to the pieces in your collection so they are always within reach.',
+  sc_biblioteca_titulo: 'Connect your collection\nwith your library',
+  sc_biblioteca_desc:   'Organise books, catalogues, articles and other documents, and link them directly to your coins and banknotes so they are always within reach.',
   asset_sc_biblioteca:  '/assets/FichaBiblioteca.mp4',
 
 
@@ -208,4 +208,5 @@ export const en: Content = {
   tm4_quote: 'When I study a piece, I like to highlight legends, marks or small details. Having those notes directly on the photograph helps me analyse and refer back to them later.',
   tm5_quote: 'I used to prepare labels one by one. Now I generate them automatically without copying data over and over, and always with the layout I want.',
   tm6_quote: "Every collector has their own logic. Legado lets me define my own fields, my own order, and my own design. Finally an app that adapts to me — not the other way round.",
+  tm7_quote: 'Now I can have all my reference documentation linked to each piece, and access it right when I need it.',
 }

@@ -125,8 +125,8 @@ export const es: Content = {
   sc_consultas_titulo: 'Identifica y cataloga con asistencia de IA',
   sc_consultas_desc:   'Sube una foto de una moneda o billete que quieras identificar. Legado la compara con catálogos en línea, y mediante inteligencia artificial te propone la identificación más probable.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
-  sc_biblioteca_titulo: 'Organiza tu\nbiblioteca de referencia',
-  sc_biblioteca_desc:   'Guarda libros, catálogos, artículos y otras referencias documentales, y vincúlalas directamente a los ejemplares de tu colección para tenerlas siempre a mano.',
+  sc_biblioteca_titulo: 'Conecta tu colección\ncon tu biblioteca',
+  sc_biblioteca_desc:   'Organiza libros, catálogos, artículos y otros documentos, y vincúlalos directamente con tus monedas y billetes para tenerlos siempre a mano.',
   asset_sc_biblioteca:  '/assets/FichaBiblioteca.mp4',
 
 
@@ -208,4 +208,5 @@ export const es: Content = {
   tm4_quote: 'Cuando estudio una pieza, suelo destacar leyendas, marcas o pequeños detalles. Tener esas anotaciones directamente sobre la fotografía me ayuda a analizarlas y consultarlas más adelante.',
   tm5_quote: 'Antes preparaba las etiquetas una por una. Ahora las genero automáticamente sin tener que copiar datos una y otra vez, y siempre con el diseño que quiero.',
   tm6_quote: 'Cada coleccionista tiene su propia lógica. Legado me deja definir mis propios campos, mi propio orden y mi propio diseño. Por fin una app que se adapta a mí y no al revés.',
+  tm7_quote: 'Ahora puedo tener toda mi documentación de referencia vinculada a cada pieza, y acceder a ella justo cuando la necesito.',
 }
