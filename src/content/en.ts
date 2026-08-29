@@ -125,6 +125,9 @@ export const en: Content = {
   sc_consultas_titulo: 'Identify and catalogue with AI assistance',
   sc_consultas_desc:   'Upload a photo of a coin or banknote you want to identify. Legado compares it against online catalogues and, using artificial intelligence, suggests the most likely match.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
+  sc_biblioteca_titulo: 'Build your own\nreference library',
+  sc_biblioteca_desc:   'Keep books, catalogues, articles and other reference documents, and link them directly to the pieces in your collection so they are always within reach.',
+  asset_sc_biblioteca:  '/assets/FichaBiblioteca.mp4',
 
 
   comp_groups: [
@@ -145,6 +148,7 @@ export const en: Content = {
         { feat: 'AI-assisted item identification and cataloguing', basico: false, pro: true },
         { feat: 'Photo annotations',    basico: false,     pro: true },
         { feat: 'Notes (Sticky notes)', basico: 'Up to 5', pro: 'Unlimited' },
+        { feat: 'Bibliography reference library with direct linking to items', basico: false, pro: true },
       ],
     },
     {

@@ -86,6 +86,7 @@ export default function Showcase({ content: C }: Props) {
     { title: C.sc3_titulo,       desc: C.sc3_desc,       src: C.asset_sc3,      reverse: true  },
     { title: C.sc5_titulo,          desc: C.sc5_desc,          src: C.asset_sc5,         reverse: false },
     { title: C.sc_consultas_titulo, desc: C.sc_consultas_desc, src: C.asset_sc_consultas, reverse: true  },
+    { title: C.sc_biblioteca_titulo, desc: C.sc_biblioteca_desc, src: C.asset_sc_biblioteca, reverse: false },
   ]
 
   const N = CARDS.length

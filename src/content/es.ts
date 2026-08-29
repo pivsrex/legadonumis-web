@@ -125,6 +125,9 @@ export const es: Content = {
   sc_consultas_titulo: 'Identifica y cataloga con asistencia de IA',
   sc_consultas_desc:   'Sube una foto de una moneda o billete que quieras identificar. Legado la compara con catálogos en línea, y mediante inteligencia artificial te propone la identificación más probable.',
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
+  sc_biblioteca_titulo: 'Organiza tu\nbiblioteca de referencia',
+  sc_biblioteca_desc:   'Guarda libros, catálogos, artículos y otras referencias documentales, y vincúlalas directamente a los ejemplares de tu colección para tenerlas siempre a mano.',
+  asset_sc_biblioteca:  '/assets/FichaBiblioteca.mp4',
 
 
   comp_groups: [
@@ -145,6 +148,7 @@ export const es: Content = {
         { feat: 'Identificación y catalogación de ejemplares, con asistencia de inteligencia artificial', basico: false, pro: true },
         { feat: 'Anotaciones sobre imágenes', basico: false,     pro: true },
         { feat: 'Notas (Post-Its)',           basico: 'Hasta 5', pro: 'Ilimitados' },
+        { feat: 'Biblioteca de referencias bibliográficas con vinculación directa a los ejemplares', basico: false, pro: true },
       ],
     },
     {

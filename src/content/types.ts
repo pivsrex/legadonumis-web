@@ -122,6 +122,9 @@ export interface Content {
   sc_consultas_titulo: string
   sc_consultas_desc: string
   asset_sc_consultas: string
+  sc_biblioteca_titulo: string
+  sc_biblioteca_desc: string
+  asset_sc_biblioteca: string
   comp_groups: CompGroup[]
   comp_plan_basic: string
   comp_plan_basic_sub: string
