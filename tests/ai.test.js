@@ -14,6 +14,7 @@ import {
   validarRespuesta,
   COSTE_IDENTIFICACION,
   CONFIANZAS_VALIDAS,
+  CLAVES_IDENTIFICACION,
 } from '../functions/api/_shared/identificacion-logica.js'
 import { onRequestPost, TAREAS, TEXTO_BASE_POR_TIPO, IDIOMAS_IA } from '../functions/api/ai.js'
 
@@ -47,6 +48,20 @@ describe('calcularReembolso()', () => {
   })
 })
 
+// Objeto base completo y válido reutilizado en los tests de validarRespuesta
+const RESP_COMPLETA = {
+  leyenda_anverso: 'PHILIPP IIII D G',
+  leyenda_reverso: 'HISPAN',
+  emisor: 'España',
+  autoridad: 'Felipe IV',
+  denominacion: '8 reales',
+  ceca: 'Sevilla',
+  fecha: '1625',
+  referencia_catalogo: 'KM#139.3',
+  confianza: 'ALTA',
+  alternativas: [],
+}
+
 describe('validarRespuesta()', () => {
   it('null → respuesta_estructura_invalida', () => {
     expect(validarRespuesta(null)).toBe('respuesta_estructura_invalida')
@@ -54,19 +69,21 @@ describe('validarRespuesta()', () => {
   it('array → respuesta_estructura_invalida', () => {
     expect(validarRespuesta([])).toBe('respuesta_estructura_invalida')
   })
-  it('objeto sin confianza → confianza_invalida', () => {
-    expect(validarRespuesta({ denominacion: '8 reales' })).toBe('confianza_invalida')
+  it('objeto sin confianza (ni otras claves) → claves_ausentes', () => {
+    const err = validarRespuesta({ denominacion: '8 reales' })
+    expect(err).toMatch(/^claves_ausentes:/)
+    expect(err).toContain('confianza')
   })
-  it('confianza no reconocida → confianza_invalida', () => {
-    expect(validarRespuesta({ confianza: 'PROBABLE' })).toBe('confianza_invalida')
+  it('objeto completo con confianza no reconocida → confianza_invalida', () => {
+    expect(validarRespuesta({ ...RESP_COMPLETA, confianza: 'PROBABLE' })).toBe('confianza_invalida')
   })
-  it('confianza en minúsculas → confianza_invalida', () => {
-    expect(validarRespuesta({ confianza: 'alta' })).toBe('confianza_invalida')
+  it('objeto completo con confianza en minúsculas → confianza_invalida', () => {
+    expect(validarRespuesta({ ...RESP_COMPLETA, confianza: 'alta' })).toBe('confianza_invalida')
   })
-  it('ALTA → null (válido)', () => expect(validarRespuesta({ confianza: 'ALTA' })).toBeNull())
-  it('MEDIA → null', () => expect(validarRespuesta({ confianza: 'MEDIA' })).toBeNull())
-  it('BAJA → null',  () => expect(validarRespuesta({ confianza: 'BAJA' })).toBeNull())
-  it('NINGUNA → null', () => expect(validarRespuesta({ confianza: 'NINGUNA' })).toBeNull())
+  it('ALTA → null (válido)', () => expect(validarRespuesta({ ...RESP_COMPLETA, confianza: 'ALTA' })).toBeNull())
+  it('MEDIA → null', () => expect(validarRespuesta({ ...RESP_COMPLETA, confianza: 'MEDIA' })).toBeNull())
+  it('BAJA → null',  () => expect(validarRespuesta({ ...RESP_COMPLETA, confianza: 'BAJA' })).toBeNull())
+  it('NINGUNA → null', () => expect(validarRespuesta({ ...RESP_COMPLETA, confianza: 'NINGUNA' })).toBeNull())
 })
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -426,14 +443,66 @@ describe('regresión: tarea contexto — comportamiento inalterado', () => {
 // identificación contienen el esquema JSON completo en español.
 // ═══════════════════════════════════════════════════════════════════════════
 
-const CLAVES_JSON = [
-  'leyenda_anverso', 'leyenda_reverso', 'emisor', 'autoridad',
-  'denominacion', 'ceca', 'fecha', 'referencia_catalogo',
-  'confianza', 'alternativas',
-]
+// CLAVES_IDENTIFICACION importado de identificacion-logica.js — fuente única compartida
+// con la validación real. Si divergen, el test falla.
 const ENUM_CONFIANZA = 'ALTA|MEDIA|BAJA|NINGUNA'
 const IDIOMAS = ['es', 'en', 'fr', 'de']
 const TIPOS = ['Moneda', 'Medalla', 'Ficha', 'Billete']
+
+// ── validarRespuesta — casos nuevos ────────────────────────────────────────
+describe('validarRespuesta() — juego completo de claves', () => {
+  // Respuesta completa y válida — incluyendo nulls y alternativas vacías,
+  // que son respuestas legítimas (moneda sin leyenda visible, etc.)
+  const RESPUESTA_VALIDA_CON_NULLS = {
+    leyenda_anverso: null,
+    leyenda_reverso: null,
+    emisor: 'España',
+    autoridad: 'Felipe IV',
+    denominacion: '8 reales',
+    ceca: null,
+    fecha: null,
+    referencia_catalogo: null,
+    confianza: 'ALTA',
+    alternativas: [],
+  }
+
+  it('respuesta completa con nulls y alternativas vacías → null (no se rechaza)', () => {
+    expect(validarRespuesta(RESPUESTA_VALIDA_CON_NULLS)).toBeNull()
+  })
+
+  // EL TEST CENTRAL: reproduce el bug. El modelo obedece la instrucción de
+  // conservar 'confianza' en español pero traduce el resto de las claves.
+  // Con el código antiguo este test FALLA (validarRespuesta devuelve null).
+  it('respuesta parcialmente traducida (Emittent/Nennwert) → claves_ausentes con emisor y denominacion', () => {
+    const traducida = {
+      Zeichenseite: null,     // leyenda_anverso traducido
+      Rückseite: null,        // leyenda_reverso traducido
+      Emittent: 'Spanien',    // emisor traducido
+      Autorität: 'Felipe IV',
+      Nennwert: '8 Reales',   // denominacion traducido
+      Münzstätte: 'Sevilla',  // ceca traducido
+      Datum: '1625',          // fecha traducido
+      Katalog: 'KM#139',      // referencia_catalogo traducido
+      confianza: 'ALTA',      // éste sí en español — el modelo obedeció esa instrucción
+      Alternativen: [],       // alternativas traducido
+    }
+    const err = validarRespuesta(traducida)
+    expect(err).not.toBeNull()
+    expect(err).toMatch(/^claves_ausentes:/)
+    expect(err).toContain('emisor')
+    expect(err).toContain('denominacion')
+  })
+
+  // Quitar cada clave por separado produce un error que la nombra
+  for (const clave of CLAVES_IDENTIFICACION) {
+    it(`ausencia de '${clave}' → error que la nombra`, () => {
+      const { [clave]: _omitida, ...sinClave } = RESPUESTA_VALIDA_CON_NULLS
+      const err = validarRespuesta(sinClave)
+      expect(err).toMatch(/^claves_ausentes:/)
+      expect(err).toContain(clave)
+    })
+  }
+})
 
 describe('integridad del esquema JSON en prompts de identificación', () => {
   const prompts = TAREAS.identificacion_moneda.prompts
@@ -445,7 +514,9 @@ describe('integridad del esquema JSON en prompts de identificación', () => {
         expect(prompts[lang].length).toBeGreaterThan(100)
       })
 
-      for (const clave of CLAVES_JSON) {
+      // Usa CLAVES_IDENTIFICACION importado — la misma fuente que la validación real.
+      // Si alguien cambia las claves en el prompt sin actualizar la constante, este test falla.
+      for (const clave of CLAVES_IDENTIFICACION) {
         it(`contiene la clave JSON '${clave}'`, () => {
           expect(prompts[lang]).toContain(`"${clave}"`)
         })
@@ -487,6 +558,43 @@ describe('TEXTO_BASE_POR_TIPO: 4 tipos × 4 idiomas sin huecos', () => {
       })
     }
   }
+})
+
+describe('handler identificacion_moneda — respuesta con claves traducidas', () => {
+  beforeEach(() => { vi.restoreAllMocks() })
+
+  it('claves traducidas: reembolso íntegro de 5 créditos y 500, en lugar de cobrar', async () => {
+    const db = crearDbMock(100)
+
+    // El modelo obedece la instrucción de conservar 'confianza' pero traduce el resto
+    const respuestaTraducida = {
+      Zeichenseite: null,
+      Rückseite: null,
+      Emittent: 'Spanien',
+      Autorität: 'Felipe IV',
+      Nennwert: '8 Reales',
+      Münzstätte: 'Sevilla',
+      Datum: '1625',
+      Katalog: 'KM#139.3',
+      confianza: 'ALTA',
+      Alternativen: [],
+    }
+    vi.stubGlobal('fetch', mockFetch(respuestaTraducida))
+
+    const ctx = crearContexto({
+      license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG],
+      lang: 'de',
+    }, db)
+
+    const res = await onRequestPost(ctx)
+    const body = await res.json()
+
+    expect(res.status).toBe(500)
+    expect(body.error).toMatch(/^claves_ausentes:/)
+    expect(db.saldo).toBe(100)   // 100 - 5 + 5: reembolso íntegro
+    expect(db.consumos[0]).toMatchObject({ coste: 5, resultado: 'reembolsado' })
+  })
 })
 
 // ═══════════════════════════════════════════════════════════════════════════
