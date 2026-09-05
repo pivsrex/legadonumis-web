@@ -673,3 +673,6 @@ function json(body, status = 200) {
     },
   })
 }
+
+// ── Exports de tests (no usados en producción) ────────────────────────────────
+export { TAREAS, TEXTO_BASE_POR_TIPO, IDIOMAS_IA }

@@ -15,7 +15,7 @@ import {
   COSTE_IDENTIFICACION,
   CONFIANZAS_VALIDAS,
 } from '../functions/api/_shared/identificacion-logica.js'
-import { onRequestPost } from '../functions/api/ai.js'
+import { onRequestPost, TAREAS, TEXTO_BASE_POR_TIPO, IDIOMAS_IA } from '../functions/api/ai.js'
 
 // ═══════════════════════════════════════════════════════════════════════════
 // SECCIÓN 1 — UNIDAD: funciones puras de identificacion-logica.js
@@ -417,5 +417,168 @@ describe('regresión: tarea contexto — comportamiento inalterado', () => {
 
     const res = await onRequestPost(ctx)
     expect(res.status).toBe(200)
+  })
+})
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SECCIÓN 4 — INTEGRIDAD DE PROMPTS i18n
+// Verifica que los prompts cubren los cuatro idiomas y que los de
+// identificación contienen el esquema JSON completo en español.
+// ═══════════════════════════════════════════════════════════════════════════
+
+const CLAVES_JSON = [
+  'leyenda_anverso', 'leyenda_reverso', 'emisor', 'autoridad',
+  'denominacion', 'ceca', 'fecha', 'referencia_catalogo',
+  'confianza', 'alternativas',
+]
+const ENUM_CONFIANZA = 'ALTA|MEDIA|BAJA|NINGUNA'
+const IDIOMAS = ['es', 'en', 'fr', 'de']
+const TIPOS = ['Moneda', 'Medalla', 'Ficha', 'Billete']
+
+describe('integridad del esquema JSON en prompts de identificación', () => {
+  const prompts = TAREAS.identificacion_moneda.prompts
+
+  for (const lang of IDIOMAS) {
+    describe(`prompt ${lang}`, () => {
+      it('existe y no está vacío', () => {
+        expect(typeof prompts[lang]).toBe('string')
+        expect(prompts[lang].length).toBeGreaterThan(100)
+      })
+
+      for (const clave of CLAVES_JSON) {
+        it(`contiene la clave JSON '${clave}'`, () => {
+          expect(prompts[lang]).toContain(`"${clave}"`)
+        })
+      }
+
+      it(`contiene el enum ${ENUM_CONFIANZA}`, () => {
+        expect(prompts[lang]).toContain(ENUM_CONFIANZA)
+      })
+    })
+  }
+})
+
+describe('cobertura de idiomas del registro TAREAS', () => {
+  for (const [nombre, def] of Object.entries(TAREAS)) {
+    it(`tarea '${nombre}': prompts exactamente en es, en, fr, de`, () => {
+      expect(Object.keys(def.prompts).sort()).toEqual(['de', 'en', 'es', 'fr'])
+    })
+
+    it(`tarea '${nombre}': ningún prompt está vacío`, () => {
+      for (const lang of IDIOMAS) {
+        expect(def.prompts[lang].length).toBeGreaterThan(0)
+      }
+    })
+
+    it(`tarea '${nombre}': los cuatro prompts son distintos entre sí`, () => {
+      const textos = IDIOMAS.map(l => def.prompts[l])
+      const unicos = new Set(textos)
+      expect(unicos.size).toBe(4)
+    })
+  }
+})
+
+describe('TEXTO_BASE_POR_TIPO: 4 tipos × 4 idiomas sin huecos', () => {
+  for (const tipo of TIPOS) {
+    for (const lang of IDIOMAS) {
+      it(`${tipo}/${lang}: existe y no está vacío`, () => {
+        expect(typeof TEXTO_BASE_POR_TIPO[tipo]?.[lang]).toBe('string')
+        expect(TEXTO_BASE_POR_TIPO[tipo][lang].length).toBeGreaterThan(0)
+      })
+    }
+  }
+})
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SECCIÓN 5 — CLAMP DE IDIOMA Y RETROCOMPATIBILIDAD
+// ═══════════════════════════════════════════════════════════════════════════
+
+describe('clamp de lang: fr y de llegan al handler sin convertirse en es', () => {
+  beforeEach(() => { vi.restoreAllMocks() })
+
+  for (const lang of ['fr', 'de']) {
+    it(`lang '${lang}' llega al modelo (el prompt es distinto al de es)`, async () => {
+      const db = crearDbMock(10)
+      let systemUsado = null
+      vi.stubGlobal('fetch', vi.fn(async (url, opts) => {
+        if (url.includes('lemonsqueezy')) {
+          return { ok: true, json: async () => ({ valid: true, license_key: { status: 'active' } }) }
+        }
+        const body = JSON.parse(opts.body)
+        systemUsado = body.system
+        return { ok: true, json: async () => ({ content: [{ type: 'text', text: 'ok' }] }) }
+      }))
+
+      const ctx = crearContexto({
+        license_key: 'TEST-KEY', instance_id: 'INST-1',
+        tarea: 'contexto',
+        campo: 'contexto_historico',
+        datos: 'Felipe IV, 8 reales',
+        lang,
+      }, db)
+
+      await onRequestPost(ctx)
+
+      expect(systemUsado).not.toBeNull()
+      expect(systemUsado).not.toBe(TAREAS.contexto.prompts.es)
+      expect(systemUsado).toBe(TAREAS.contexto.prompts[lang])
+    })
+  }
+
+  for (const langInvalido of ['xx', null, 42, {}]) {
+    it(`lang inválido ${JSON.stringify(langInvalido)} cae a 'es'`, async () => {
+      const db = crearDbMock(10)
+      let systemUsado = null
+      vi.stubGlobal('fetch', vi.fn(async (url, opts) => {
+        if (url.includes('lemonsqueezy')) {
+          return { ok: true, json: async () => ({ valid: true, license_key: { status: 'active' } }) }
+        }
+        systemUsado = JSON.parse(opts.body).system
+        return { ok: true, json: async () => ({ content: [{ type: 'text', text: 'ok' }] }) }
+      }))
+
+      const ctx = crearContexto({
+        license_key: 'TEST-KEY', instance_id: 'INST-1',
+        tarea: 'contexto',
+        campo: 'contexto_historico',
+        datos: 'Felipe IV, 8 reales',
+        lang: langInvalido,
+      }, db)
+
+      await onRequestPost(ctx)
+
+      expect(systemUsado).toBe(TAREAS.contexto.prompts.es)
+    })
+  }
+})
+
+describe('retrocompatibilidad: body sin campo lang usa es', () => {
+  beforeEach(() => { vi.restoreAllMocks() })
+
+  it('petición sin lang devuelve respuesta válida y usa prompt es', async () => {
+    const db = crearDbMock(10)
+    let systemUsado = null
+    vi.stubGlobal('fetch', vi.fn(async (url, opts) => {
+      if (url.includes('lemonsqueezy')) {
+        return { ok: true, json: async () => ({ valid: true, license_key: { status: 'active' } }) }
+      }
+      systemUsado = JSON.parse(opts.body).system
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: 'Texto histórico.' }] }) }
+    }))
+
+    const ctx = crearContexto({
+      license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'contexto',
+      campo: 'contexto_historico',
+      datos: 'Felipe IV, 8 reales, Sevilla, 1625',
+      // sin campo lang
+    }, db)
+
+    const res = await onRequestPost(ctx)
+    const body = await res.json()
+
+    expect(res.status).toBe(200)
+    expect(body.texto).toBe('Texto histórico.')
+    expect(systemUsado).toBe(TAREAS.contexto.prompts.es)
   })
 })
