@@ -127,7 +127,7 @@ export const en: Content = {
   asset_sc_consultas:  '/assets/FichaConsultas.mp4',
   sc_biblioteca_titulo: 'Connect your collection\nwith your library',
   sc_biblioteca_desc:   'Organise books, catalogues, articles and other documents, and link them directly to your coins and banknotes so they are always within reach.',
-  asset_sc_biblioteca:  '/assets/FichaBiblioteca.mp4',
+  asset_sc_biblioteca:  '/assets/FichaBiblio.mp4',
 
 
   comp_groups: [
