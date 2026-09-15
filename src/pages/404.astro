@@ -1,5 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro'
+
+/* Cloudflare Pages sirve este mismo fichero para cualquier ruta que no exista,
+   también dentro de /en/, /fr/ y /de/. Por eso no puede tener un idioma fijo:
+   se renderiza en español —que es lo que verá un rastreador sin JavaScript— y
+   un script lo reescribe según el prefijo de la URL o, si no lo hay, según el
+   idioma del navegador. Se muestra un solo idioma: apilar los cuatro obligaría
+   a hacer scroll, que es justo lo que hay que evitar en un 404. */
 ---
 <Layout
   lang="es"
@@ -13,19 +20,32 @@ import Layout from '../layouts/Layout.astro'
     /* La moneda entra rodando por la izquierda y sale por la derecha, en bucle.
        La rotación (~2 vueltas por ancho de pantalla) va acompasada al avance
        para que ruede de verdad en lugar de flotar girando. */
+    .lg-404-main {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 24px;
+      text-align: center;
+      overflow: hidden;
+    }
     .lg-404-strip {
       position: relative;
       width: 100vw;
       margin-left: calc(50% - 50vw);
-      height: 220px;
+      height: 150px;
       overflow: hidden;
       pointer-events: none;
+      flex-shrink: 0;
     }
     .lg-404-coin {
       position: absolute;
-      left: -240px;
+      left: -170px;
       top: 5px;
-      width: 210px;
+      width: 140px;
       display: block;
       opacity: 0.35;
       filter: grayscale(35%);
@@ -33,44 +53,96 @@ import Layout from '../layouts/Layout.astro'
     }
     @keyframes lg404Roll {
       from { transform: translateX(0) rotate(0deg); }
-      to   { transform: translateX(calc(100vw + 480px)) rotate(760deg); }
+      to   { transform: translateX(calc(100vw + 340px)) rotate(760deg); }
     }
     @media (prefers-reduced-motion: reduce) {
       .lg-404-coin { animation: none; left: 50%; transform: translateX(-50%); }
     }
+    .lg-404-code  { font: 600 13px/1 var(--font-mono); letter-spacing: 0.25em; color: var(--ds-accent); margin: 0; }
+    .lg-404-h1    { font: 700 clamp(24px, 3.4vw, 38px)/1.15 var(--font-display); letter-spacing: -0.025em; color: var(--ds-text-high); margin: 0; max-width: 24ch; }
+    .lg-404-sub   { font: 400 15px/1.6 var(--font-body); color: var(--ds-text-mid); margin: 0; max-width: 46ch; }
+    .lg-404-cta   {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 22px; border-radius: 10px;
+      background: var(--ds-accent); color: #0a0908;
+      font: 600 14px/1 var(--font-display); letter-spacing: -0.01em; text-decoration: none;
+    }
+    .lg-404-logo  { height: 34px; width: auto; display: block; margin-top: 8px; filter: drop-shadow(0 0 16px rgba(201,168,76,0.2)); flex-shrink: 0; }
+
+    /* En pantallas bajas (portátiles pequeños, móvil apaisado) la moneda es lo
+       primero que sobra: sin ella todo sigue cabiendo sin scroll. */
+    @media (max-height: 620px) {
+      .lg-404-strip { display: none; }
+      .lg-404-main  { gap: 14px; }
+      .lg-404-logo  { display: none; }
+    }
   </style>
-  <main style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 32px; text-align: center;">
+
+  <main class="lg-404-main">
     <div class="lg-404-strip" aria-hidden="true">
       <img src="/assets/MonedaIconica.webp" alt="" class="lg-404-coin" />
     </div>
-    <p style="font: 600 13px/1 var(--font-mono); letter-spacing: 0.25em; color: var(--ds-accent); margin: 0;">404</p>
-    <div style="display: flex; flex-direction: column; gap: 6px;">
-      <h1 style="font: 700 clamp(28px, 4vw, 44px)/1.15 var(--font-display); letter-spacing: -0.025em; color: var(--ds-text-high); margin: 0;">
-        Esta pieza no está en la colección
-      </h1>
-      <p style="font: 700 clamp(28px, 4vw, 44px)/1.15 var(--font-display); letter-spacing: -0.025em; color: #EAE0B0; margin: 0;">
-        This piece is not in the collection
-      </p>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 3px;">
-      <p style="font: 400 15px/1.6 var(--font-body); color: var(--ds-text-mid); margin: 0;">
-        La página que buscas no existe o ha cambiado de vitrina.
-      </p>
-      <p style="font: 400 15px/1.6 var(--font-body); color: #EAE0B0; margin: 0;">
-        The page you are looking for does not exist or has moved to another display case.
-      </p>
-    </div>
-    <a
-      href="/"
-      class="lg-btn-shine"
-      style="display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 10px; background: var(--ds-accent); color: #0a0908; font: 600 14px/1 var(--font-display); letter-spacing: -0.01em; text-decoration: none;"
-    >
-      Volver al inicio · Back home
-    </a>
-    <img
-      src="/LogoConTituloHorizontalTrans.svg"
-      alt="Legado"
-      style="height: 40px; width: auto; display: block; margin-top: 18px; filter: drop-shadow(0 0 16px rgba(201,168,76,0.2));"
-    />
+    <p class="lg-404-code">404</p>
+    <h1 class="lg-404-h1" data-404-h1>Esta pieza no está en la colección</h1>
+    <p class="lg-404-sub" data-404-sub>La página que buscas no existe o ha cambiado de vitrina.</p>
+    <a href="/" class="lg-404-cta lg-btn-shine" data-404-cta>Volver al inicio</a>
+    <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" class="lg-404-logo" />
   </main>
+
+  <script is:inline>
+    (function () {
+      var T = {
+        es: {
+          h1:  'Esta pieza no está en la colección',
+          sub: 'La página que buscas no existe o ha cambiado de vitrina.',
+          cta: 'Volver al inicio',
+          home: '/',
+          title: '404 — Legado',
+        },
+        en: {
+          h1:  'This piece is not in the collection',
+          sub: 'The page you are looking for does not exist or has moved to another display case.',
+          cta: 'Back home',
+          home: '/en/',
+          title: '404 — Legado',
+        },
+        fr: {
+          h1:  'Cette pièce n’est pas dans la collection',
+          sub: 'La page que vous cherchez n’existe pas ou a changé de vitrine.',
+          cta: 'Retour à l’accueil',
+          home: '/fr/',
+          title: '404 — Legado',
+        },
+        de: {
+          h1:  'Dieses Stück ist nicht in der Sammlung',
+          sub: 'Die gesuchte Seite gibt es nicht oder sie steht inzwischen in einer anderen Vitrine.',
+          cta: 'Zurück zur Startseite',
+          home: '/de/',
+          title: '404 — Legado',
+        },
+      }
+
+      // 1) el prefijo de la ruta manda: /de/lo-que-sea es un 404 alemán
+      var m = location.pathname.match(/^\/(en|fr|de)(\/|$)/)
+      var code = m ? m[1] : null
+
+      // 2) si la ruta no dice nada, el idioma del navegador
+      if (!code) {
+        var nav = (navigator.language || '').slice(0, 2).toLowerCase()
+        if (T[nav]) code = nav
+      }
+      if (!code || !T[code]) code = 'es'
+      if (code === 'es') return
+
+      var t = T[code]
+      document.documentElement.lang = code
+      document.title = t.title
+      var h1  = document.querySelector('[data-404-h1]')
+      var sub = document.querySelector('[data-404-sub]')
+      var cta = document.querySelector('[data-404-cta]')
+      if (h1)  h1.textContent = t.h1
+      if (sub) sub.textContent = t.sub
+      if (cta) { cta.textContent = t.cta; cta.setAttribute('href', t.home) }
+    })()
+  </script>
 </Layout>

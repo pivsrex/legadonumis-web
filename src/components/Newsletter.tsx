@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-interface Props { lang: 'es' | 'en' }
+import type { Lang } from '../langs'
+
+interface Props { lang: Lang }
 
 const copy = {
   es: {
@@ -13,6 +15,28 @@ const copy = {
     ok:          '¡Suscrito! Gracias por unirte.',
     err:         'Algo fue mal. Inténtalo de nuevo.',
     errConsent:  'Acepta las condiciones para continuar.',
+  },
+  fr: {
+    titulo:      'Découvrez les dernières nouveautés',
+    sub:         'Nouveautés, guides et mises à jour de Legado. Sans spam.',
+    placeholder: 'vous@email.com',
+    consent:     'J’accepte de recevoir des communications de Legado. Je peux me désabonner à tout moment.',
+    cta:         'M’abonner',
+    sending:     'Envoi…',
+    ok:          'Inscription confirmée. Merci de nous rejoindre.',
+    err:         'Quelque chose n’a pas fonctionné. Réessayez.',
+    errConsent:  'Acceptez les conditions pour continuer.',
+  },
+  de: {
+    titulo:      'Bleiben Sie auf dem Laufenden',
+    sub:         'Neues, Anleitungen und Aktualisierungen von Legado. Kein Spam.',
+    placeholder: 'ihre@email.com',
+    consent:     'Ich bin einverstanden, Mitteilungen von Legado zu erhalten. Ich kann mich jederzeit abmelden.',
+    cta:         'Abonnieren',
+    sending:     'Wird gesendet…',
+    ok:          'Abonniert. Danke, dass Sie dabei sind.',
+    err:         'Da ist etwas schiefgegangen. Bitte versuchen Sie es erneut.',
+    errConsent:  'Bitte stimmen Sie den Bedingungen zu, um fortzufahren.',
   },
   en: {
     titulo:      'Stay up to date',

@@ -148,4 +148,5 @@ export interface Content {
   tm5_quote: string
   tm6_quote: string
   tm7_quote: string
+  tm8_quote: string
 }

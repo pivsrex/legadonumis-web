@@ -1,15 +1,18 @@
 import { TwitterIcon, InstagramIcon } from './icons'
 import type { Content } from '../content/types'
+import { LANGS, type Lang } from '../langs'
 
-interface Props { content: Content }
+interface Props { content: Content; lang: Lang }
 
-export default function Footer({ content: C }: Props) {
+export default function Footer({ content: C, lang }: Props) {
   const s = {
     foot: { padding: '125px 0 40px', background: 'var(--ds-bg-0)' },
     container: { maxWidth: 1200, margin: '0 auto', padding: '0 32px' },
     colLabel: { font: '500 11px/1 var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--ds-text-low)', marginBottom: 18, display: 'block' },
     link: { font: '400 14px/2.2 var(--font-body)', color: 'var(--ds-text-mid)', textDecoration: 'none', display: 'block' },
-    bottom: { display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 56, paddingTop: 24, borderTop: '1px solid var(--ds-border-low)', gap: 24, flexWrap: 'wrap' as const },
+    bottom: { display: 'flex', flexDirection: 'column' as const, justifyContent: 'center', alignItems: 'center', marginTop: 56, paddingTop: 24, borderTop: '1px solid var(--ds-border-low)', gap: 14, flexWrap: 'wrap' as const },
+    idiomas: { display: 'flex', gap: 18, flexWrap: 'wrap' as const, justifyContent: 'center' },
+    idioma: { font: '400 13px/1 var(--font-body)', color: 'var(--ds-text-mid)', textDecoration: 'none' },
   }
 
   return (
@@ -61,6 +64,21 @@ export default function Footer({ content: C }: Props) {
 
         </div>
         <div style={s.bottom}>
+          {/* Los cuatro idiomas como enlaces normales: es el único conmutador
+              que queda por debajo de 768 px, donde el nav oculta sus botones. */}
+          <nav style={s.idiomas} aria-label="Idiomas">
+            {LANGS.map((l) => (
+              <a
+                key={l.code}
+                href={l.home}
+                hrefLang={l.code}
+                className="lg-footer-link"
+                aria-current={l.code === lang ? 'true' : undefined}
+                style={{ ...s.idioma, color: l.code === lang ? 'var(--ds-accent)' : s.idioma.color }}>
+                {l.nombre}
+              </a>
+            ))}
+          </nav>
           <div style={{ font: '400 12px/1.5 var(--font-mono)', color: 'var(--ds-text-low)' }}>{C.footer_copy}</div>
         </div>
       </div>

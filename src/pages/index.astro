@@ -1,17 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { es as content } from '../content/es'
-import Navbar      from '../components/Navbar'
-import Hero        from '../components/Hero'
-import Workflow    from '../components/Workflow'
-import Showcase    from '../components/Showcase'
-import Features    from '../components/Features'
-import Comparison  from '../components/Comparison'
+import Navbar       from '../components/Navbar'
+import Hero         from '../components/Hero'
+import Workflow     from '../components/Workflow'
+import Showcase     from '../components/Showcase'
+import Features     from '../components/Features'
+import Comparison   from '../components/Comparison'
 import Testimonials from '../components/Testimonials'
-import FAQ         from '../components/FAQ'
-import Newsletter  from '../components/Newsletter'
-import FinalCTA    from '../components/FinalCTA'
-import Footer      from '../components/Footer'
+import FAQ          from '../components/FAQ'
+import Newsletter   from '../components/Newsletter'
+import FinalCTA     from '../components/FinalCTA'
+import Footer       from '../components/Footer'
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -32,17 +32,17 @@ const faqSchema = {
   ogImage="https://legadonumis.com/assets/og-image.jpg"
 >
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <Navbar content={content} lang="es" altUrl="/en/" client:idle />
+  <Navbar content={content} lang="es" client:idle />
   <main>
-    <Hero        content={content} />
-    <Workflow    content={content} />
-    <Showcase    content={content} client:visible />
-    <Features    content={content} />
-    <Comparison  content={content} client:visible />
+    <Hero         content={content} />
+    <Workflow     content={content} />
+    <Showcase     content={content} client:visible />
+    <Features     content={content} />
+    <Comparison   content={content} client:visible />
     <Testimonials content={content} />
-    <FAQ         content={content} client:visible />
-    <Newsletter  lang="es" client:visible />
-    <FinalCTA    content={content} client:visible />
+    <FAQ          content={content} client:visible />
+    <Newsletter   lang="es" client:visible />
+    <FinalCTA     content={content} client:visible />
   </main>
-  <Footer content={content} />
+  <Footer content={content} lang="es" />
 </Layout>

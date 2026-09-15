@@ -181,7 +181,7 @@ export const es: Content = {
         { feat: 'Actualizaciones',               basico: true,  pro: true },
         { feat: 'Acceso a nuevas funciones',     basico: false, pro: true },
         { feat: 'Soporte técnico',               basico: false, pro: true },
-        { feat: 'Versiones en español e inglés', basico: true,  pro: true },
+        { feat: 'Disponible en alemán, español, francés e inglés', basico: true,  pro: true },
         { feat: 'macOS 11+ (Apple Silicon) · Windows 10+ (64 bits)', basico: true, pro: true },
       ],
     },
@@ -209,4 +209,5 @@ export const es: Content = {
   tm5_quote: 'Antes preparaba las etiquetas una por una. Ahora las genero automáticamente sin tener que copiar datos una y otra vez, y siempre con el diseño que quiero.',
   tm6_quote: 'Cada coleccionista tiene su propia lógica. Legado me deja definir mis propios campos, mi propio orden y mi propio diseño. Por fin una app que se adapta a mí y no al revés.',
   tm7_quote: 'Ahora puedo tener toda mi documentación de referencia vinculada a cada pieza, y acceder a ella justo cuando la necesito.',
+  tm8_quote: 'El mejor legado no es solo dejar una buena colección. Es dejar también las claves para comprenderla, conservarla y gestionarla correctamente.',
 }

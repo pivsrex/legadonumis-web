@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erstattungsrichtlinie — Legado</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/LogoSoloClaroTrans.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="../styles/tokens.css" />
+  <style>
+    body { padding-top: 64px; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+    .legal-hero {
+      padding: 56px 0 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--ds-border-low);
+    }
+    .legal-hero .section-label {
+      font: 500 11px/1 var(--font-body);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ds-text-low);
+      margin: 0 0 12px;
+    }
+    .legal-hero .section-title {
+      font: 600 clamp(22px, 3vw, 30px)/1.15 var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--ds-text-high);
+      margin: 8px 0 0;
+    }
+
+    .legal-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 32px 96px;
+    }
+
+    .legal-body h2 {
+      font: 600 11px/1 var(--font-display);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ds-accent);
+      margin: 40px 0 12px;
+    }
+
+    .legal-body h2:first-child { margin-top: 0; }
+
+    .legal-body p {
+      font: 400 15px/1.85 var(--font-body);
+      color: var(--ds-text-mid);
+      margin-bottom: 14px;
+    }
+
+    .legal-body p:last-child { margin-bottom: 0; }
+
+    .legal-body a { color: var(--ds-accent); }
+
+    .legal-body ul {
+      list-style: none;
+      margin-bottom: 14px;
+      padding: 0;
+    }
+
+    .legal-body ul li {
+      font: 400 15px/1.8 var(--font-body);
+      color: var(--ds-text-mid);
+      padding: 4px 0 4px 20px;
+      position: relative;
+    }
+
+    .legal-body ul li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--ds-accent-deep);
+      font-size: 7px;
+      top: 10px;
+    }
+
+    .legal-date {
+      font: 500 11px/1 var(--font-display);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ds-text-low);
+      opacity: 0.6;
+      margin-bottom: 40px;
+    }
+
+    .legal-divider {
+      height: 1px;
+      background: var(--ds-border-low);
+      margin: 40px 0;
+    }
+
+    .legal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 500 11px/1 var(--font-display);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ds-text-mid);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: color 150ms ease;
+    }
+    .legal-back:hover { color: var(--ds-accent); }
+
+    .highlight-box {
+      background: #181818;
+      border: 1px solid var(--ds-border-low);
+      border-left: 3px solid var(--ds-accent);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0;
+      color: var(--ds-text-high);
+    }
+  </style>
+</head>
+<body>
+
+  <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; background: rgba(10,9,8,0.9); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); border-bottom: 1px solid var(--ds-border-low);">
+    <div style="max-width: 1200px; margin: 0 auto; height: 100%; padding: 0 32px; display: flex; align-items: center;">
+      <a href="/de/" style="display: flex; align-items: center; text-decoration: none;">
+        <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style="height: 39px; width: auto; display: block;" />
+      </a>
+    </div>
+  </nav>
+
+  <div class="legal-hero">
+    <div class="container">
+      <p class="section-label">Rechtliches</p>
+      <h1 class="section-title">Erstattungsrichtlinie</h1>
+    </div>
+  </div>
+
+  <div class="legal-body">
+
+    <a href="/de/" class="legal-back">← Zurück zur Website</a>
+
+    <p class="legal-date">Letzte Aktualisierung: Juli 2026</p>
+
+    <h2>Unsere Regelung</h2>
+    <p>
+      Wir möchten, dass Sie mit Ihrem Kauf zufrieden sind. Wenn Sie auf ein Problem mit der Anwendung stoßen, schreiben Sie uns an <a href="mailto:contacto@legadonumis.com">contacto@legadonumis.com</a>
+      und wir tun unser Möglichstes, es zu lösen, bevor eine Erstattung in Betracht kommt.
+    </p>
+
+    <h2>Wann eine Erstattung möglich ist</h2>
+    <p>Wir nehmen Erstattungsanträge an, sofern sie innerhalb von <strong>30 Tagen</strong> nach dem Kaufdatum gestellt werden, und zwar in folgenden Fällen:</p>
+    <ul>
+      <li>Die Anwendung lässt sich auf einem kompatiblen System (macOS Apple Silicon oder Windows x64) nicht installieren oder nicht starten, und wir konnten das Problem nicht in angemessener Zeit lösen.</li>
+      <li>Die Anwendung hat einen schwerwiegenden Fehler, der die grundlegende Nutzung verhindert, und es gibt keine Behebung.</li>
+    </ul>
+
+    <h2>Wann eine Erstattung nicht möglich ist</h2>
+    <ul>
+      <li>Seit dem Kauf sind mehr als 30 Tage vergangen.</li>
+      <li>Das Gerät erfüllt die Mindestanforderungen nicht (macOS Apple Silicon oder Windows x64).</li>
+      <li>Der Grund ist ein Sinneswandel, nachdem die Anwendung heruntergeladen und genutzt wurde.</li>
+      <li>Zusätzliche KI-Credit-Pakete, deren Credits bereits verbraucht wurden.</li>
+    </ul>
+
+    <div class="legal-divider"></div>
+
+    <h2>So beantragen Sie eine Erstattung</h2>
+    <p>
+      Senden Sie eine E-Mail an <a href="mailto:contacto@legadonumis.com">contacto@legadonumis.com</a>
+      mit der beim Kauf verwendeten E-Mail-Adresse und einer kurzen Beschreibung des Problems. Wir antworten innerhalb von 48 Stunden.
+    </p>
+    <p>
+      Bewilligte Erstattungen werden über LemonSqueezy abgewickelt und über das ursprüngliche Zahlungsmittel zurückgezahlt.
+    </p>
+
+    <h2>Fragen vor dem Kauf?</h2>
+    <p>
+      Wenn Sie nicht sicher sind, ob Legado mit Ihrem System läuft oder zu Ihren Bedürfnissen passt, melden Sie sich vor dem Kauf. Wir helfen gern.
+      <a href="mailto:contacto@legadonumis.com">contacto@legadonumis.com</a>
+    </p>
+
+  </div>
+
+  <footer style="border-top: 1px solid var(--ds-border-low); padding: 32px;">
+    <div style="max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center;">
+      <div style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;">
+        <a href="/de/" style="font: 400 13px/1 var(--font-body); color: var(--ds-text-mid); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-high)'" onmouseout="this.style.color='var(--ds-text-mid)'">Startseite</a>
+        <a href="/de/#workflow" style="font: 400 13px/1 var(--font-body); color: var(--ds-text-mid); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-high)'" onmouseout="this.style.color='var(--ds-text-mid)'">Funktionen</a>
+        <a href="/de/#versiones" style="font: 400 13px/1 var(--font-body); color: var(--ds-text-mid); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-high)'" onmouseout="this.style.color='var(--ds-text-mid)'">Preise</a>
+        <a href="/de/#faq" style="font: 400 13px/1 var(--font-body); color: var(--ds-text-mid); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-high)'" onmouseout="this.style.color='var(--ds-text-mid)'">Fragen</a>
+        <a href="mailto:contacto@legadonumis.com" style="font: 400 13px/1 var(--font-body); color: var(--ds-text-mid); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-high)'" onmouseout="this.style.color='var(--ds-text-mid)'">Kontakt</a>
+      </div>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;">
+        <a href="/de/datenschutz.html" style="font: 400 12px/1 var(--font-body); color: var(--ds-text-low); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-mid)'" onmouseout="this.style.color='var(--ds-text-low)'">Datenschutzerklärung</a>
+        <a href="/de/nutzungsbedingungen.html" style="font: 400 12px/1 var(--font-body); color: var(--ds-text-low); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-mid)'" onmouseout="this.style.color='var(--ds-text-low)'">Nutzungsbedingungen</a>
+        <a href="/de/erstattung.html" style="font: 400 12px/1 var(--font-body); color: var(--ds-text-low); text-decoration: none; transition: color 150ms ease;" onmouseover="this.style.color='var(--ds-text-mid)'" onmouseout="this.style.color='var(--ds-text-low)'">Erstattungsrichtlinie</a>
+      </div>
+      <p style="font: 400 12px/1.5 var(--font-mono); color: var(--ds-text-low); margin: 0;">© 2026 Legado · legadonumis.com · Alle Rechte vorbehalten</p>
+    </div>
+  </footer>
+
+</body>
+</html>

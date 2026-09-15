@@ -1,8 +1,9 @@
 ---
 import { readFileSync } from 'node:fs'
+import { LANGS, lang as infoLang, canonicalDe, type Lang } from '../langs'
 
 export interface Props {
-  lang: 'es' | 'en'
+  lang: Lang
   title: string
   description: string
   canonical: string
@@ -14,9 +15,7 @@ export interface Props {
 const tokensCss = readFileSync(new URL('../../public/styles/tokens.css', import.meta.url), 'utf8')
 
 const { lang, title, description, canonical, ogTitle, ogImage } = Astro.props
-const altLang   = lang === 'es' ? 'en' : 'es'
-const altCanon  = lang === 'es' ? 'https://legadonumis.com/en/' : 'https://legadonumis.com/'
-const ogLocale  = lang === 'es' ? 'es_ES' : 'en_US'
+const ogLocale   = infoLang(lang).locale
 const schemaLang = lang
 ---
 <!doctype html>
@@ -27,8 +26,10 @@ const schemaLang = lang
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
-  <link rel="alternate" hreflang={lang}    href={canonical} />
-  <link rel="alternate" hreflang={altLang} href={altCanon} />
+  {LANGS.map((l) => (
+    <link rel="alternate" hreflang={l.code} href={canonicalDe(l.code)} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={canonicalDe('es')} />
 
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content={canonical} />
@@ -145,6 +146,37 @@ const schemaLang = lang
     .lg-dl-caret { flex-shrink: 0; transition: transform 160ms ease; }
     .lg-dl.open .lg-dl-caret { transform: rotate(180deg); }
 
+    /* Menú de idiomas: el de descarga necesita 240px, éste bastante menos */
+    .lg-lang-menu { min-width: 168px; }
+    .lg-lang-menu .lg-dl-item[aria-current] strong { color: var(--ds-accent); }
+
+    /* Destello periódico sobre el logo del nav (cada 10 s).
+       Vive aquí y no dentro de Navbar.tsx: al renderizarlo React, el servidor
+       escapaba las comillas simples de content:'' y de url('...') como &#x27;
+       y el cliente no, así que la hidratación no cuadraba y la isla entera
+       se volvía a renderizar en el navegador. */
+    .lg-nav-logo-shine::after {
+      content: '';
+      position: absolute; inset: 0;
+      -webkit-mask-image: url('/LogoConTituloHorizontalTrans.svg');
+      mask-image: url('/LogoConTituloHorizontalTrans.svg');
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,248,222,0.85) 50%, transparent 65%) no-repeat;
+      background-size: 260% 100%;
+      background-position: 170% 0;
+      pointer-events: none;
+      animation: lgNavShine 10s ease-in-out 4s infinite;
+    }
+    @keyframes lgNavShine {
+      0%   { background-position: 170% 0; }
+      10%  { background-position: -90% 0; }
+      100% { background-position: -90% 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lg-nav-logo-shine::after { animation: none; }
+    }
+
     /* Destello al pasar el ratón por los botones de descarga */
     .lg-btn-shine { position: relative; overflow: hidden; }
     .lg-btn-shine::after {
@@ -250,8 +282,14 @@ const schemaLang = lang
           const url = basic.getAttribute(isMac ? 'data-mac' : 'data-win')
           if (url) {
             window.open(url, '_blank')
-            const isEn = document.documentElement.lang === 'en'
-            window.location.href = isEn ? '/en/download.html' : '/descarga.html'
+            const paginas = {
+              es: '/descarga.html',
+              en: '/en/download.html',
+              fr: '/fr/telechargement.html',
+              de: '/de/download.html',
+            }
+            const idioma = document.documentElement.lang
+            window.location.href = paginas[idioma] || paginas.es
           }
           return
         }

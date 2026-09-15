@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react'
 import { AppleIcon, WindowsIcon } from './icons'
 import DownloadMenu from './DownloadMenu'
 import type { Content } from '../content/types'
+import { LANGS, type Lang } from '../langs'
 
 interface Props {
   content: Content
-  lang: 'es' | 'en'
-  altUrl: string
+  lang: Lang
 }
 
 const isMac = typeof navigator !== 'undefined' && (/Mac/.test(navigator.userAgent) || /Mac/.test((navigator as { platform?: string }).platform ?? ''))
 
-export default function Navbar({ content: C, lang, altUrl }: Props) {
+export default function Navbar({ content: C, lang }: Props) {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -56,30 +56,6 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
 
   return (
     <nav style={s.nav}>
-      <style>{`
-        /* Destello periódico sobre el logo del nav (cada 10 s) */
-        .lg-nav-logo-shine::after {
-          content: '';
-          position: absolute; inset: 0;
-          -webkit-mask-image: url('/LogoConTituloHorizontalTrans.svg');
-          mask-image: url('/LogoConTituloHorizontalTrans.svg');
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-          background: linear-gradient(115deg, transparent 35%, rgba(255,248,222,0.85) 50%, transparent 65%) no-repeat;
-          background-size: 260% 100%;
-          background-position: 170% 0;
-          pointer-events: none;
-          animation: lgNavShine 10s ease-in-out 4s infinite;
-        }
-        @keyframes lgNavShine {
-          0%   { background-position: 170% 0; }
-          10%  { background-position: -90% 0; }
-          100% { background-position: -90% 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .lg-nav-logo-shine::after { animation: none; }
-        }
-      `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: `${scrolled ? 12 : 16}px 32px`, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
         <a href={lang === 'en' ? '/en/' : '/'}>
           <span className="lg-nav-logo-shine" style={{ position: 'relative', display: 'block' }}>
@@ -96,14 +72,42 @@ export default function Navbar({ content: C, lang, altUrl }: Props) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }} className="lg-nav-btns">
-          <a href={altUrl} style={s.langBtn}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.13)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.26)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)' }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.7 }}>
-              <circle cx="12" cy="12" r="9" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
-            </svg>
-            {lang === 'es' ? 'EN' : 'ES'}
-          </a>
+          {/* Conmutador de idioma. Reutiliza el patrón .lg-dl del menú de
+              descarga, así que el toggle lo maneja el script global de
+              Layout.astro. Sin JavaScript, el botón lleva al pie, donde los
+              cuatro idiomas están como enlaces normales. */}
+          <div className="lg-dl" style={{ position: 'relative', display: 'inline-block' }}>
+            <a
+              href="#contacto"
+              data-dl-toggle
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label={LANGS.find(l => l.code === lang)!.nombre}
+              style={s.langBtn}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.13)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.26)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.7 }} aria-hidden="true">
+                <circle cx="12" cy="12" r="9" /><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
+              </svg>
+              {lang.toUpperCase()}
+              <svg className="lg-dl-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+            <div className="lg-dl-menu lg-lang-menu" role="menu">
+              {LANGS.map(l => (
+                <a
+                  key={l.code}
+                  className="lg-dl-item"
+                  href={l.home}
+                  role="menuitem"
+                  hrefLang={l.code}
+                  aria-current={l.code === lang ? 'true' : undefined}>
+                  <strong>{l.nombre}</strong>
+                </a>
+              ))}
+            </div>
+          </div>
           <DownloadMenu
             labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
             btnStyle={s.btnPri}

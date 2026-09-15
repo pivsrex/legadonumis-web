@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { en as content } from '../../content/en'
+import { de as content } from '../../content/de'
 import Navbar       from '../../components/Navbar'
 import Hero         from '../../components/Hero'
 import Workflow     from '../../components/Workflow'
@@ -24,15 +24,15 @@ const faqSchema = {
 }
 ---
 <Layout
-  lang="en"
-  title="Legado — Your collection's digital home"
-  description="Desktop software to organize, document, and analyze your numismatic collection. Free download. Mac and Windows."
-  canonical="https://legadonumis.com/en/"
-  ogTitle="Legado — Your collection's digital home"
+  lang="de"
+  title="Legado — Das digitale Museum Ihrer Sammlung"
+  description="Desktop-Software, um Ihre numismatische Sammlung zu ordnen, zu dokumentieren und auszuwerten. Kostenloser Download. Mac und Windows."
+  canonical="https://legadonumis.com/de/"
+  ogTitle="Legado — Das digitale Museum Ihrer Sammlung"
   ogImage="https://legadonumis.com/assets/og-image-en.jpg"
 >
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <Navbar content={content} lang="en" client:idle />
+  <Navbar content={content} lang="de" client:idle />
   <main>
     <Hero         content={content} />
     <Workflow     content={content} />
@@ -41,8 +41,8 @@ const faqSchema = {
     <Comparison   content={content} client:visible />
     <Testimonials content={content} />
     <FAQ          content={content} client:visible />
-    <Newsletter   lang="en" client:visible />
+    <Newsletter   lang="de" client:visible />
     <FinalCTA     content={content} client:visible />
   </main>
-  <Footer content={content} lang="en" />
+  <Footer content={content} lang="de" />
 </Layout>

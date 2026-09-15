@@ -24,7 +24,7 @@ function TestimonialCard({ quote }: { quote: string }) {
 }
 
 export default function Testimonials({ content: C }: Props) {
-  const quotes = [C.tm1_quote, C.tm2_quote, C.tm3_quote, C.tm4_quote, C.tm5_quote, C.tm6_quote, C.tm7_quote]
+  const quotes = [C.tm1_quote, C.tm2_quote, C.tm3_quote, C.tm4_quote, C.tm5_quote, C.tm6_quote, C.tm7_quote, C.tm8_quote]
 
   return (
     <section id="testimonials" style={{ padding: '70px 0 0' }}>
@@ -35,7 +35,7 @@ export default function Testimonials({ content: C }: Props) {
           -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
         }
-        .tm-track { display: flex; width: max-content; animation: tmScroll 70s linear infinite; }
+        .tm-track { display: flex; width: max-content; animation: tmScroll 80s linear infinite; }
         .tm-carousel:hover .tm-track { animation-play-state: paused; }
         @media (prefers-reduced-motion: reduce) { .tm-track { animation-play-state: paused !important; } }
       `}</style>

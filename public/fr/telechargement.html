@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Legado - El museo digital de tu colección</title>
-  <meta name="description" content="Descarga Legado Básico gratis. Software numismático para Mac y Windows. Organiza, documenta y visualiza tu colección de monedas." />
+  <title>Legado - Le musée numérique de votre collection</title>
+  <meta name="description" content="Téléchargez Legado Basique gratuitement. Logiciel de numismatique pour Mac et Windows. Organisez, documentez et visualisez votre collection de monnaies." />
   <meta name="robots" content="noindex, follow" />
 
-  <link rel="icon" type="image/svg+xml" href="assets/LogoSoloClaroTrans.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="../assets/LogoSoloClaroTrans.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
 
-  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="../styles/tokens.css" />
 
   <style>
     body { padding-top: 64px; }
@@ -77,7 +77,7 @@
       text-align: center;
     }
 
-    /* ── TARJETAS DE SIGUIENTES PASOS ────────────────────────────── */
+    /* ── IMAGEN DE BIENVENIDA ────────────────────────────────────── */
     .dl-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -138,7 +138,6 @@
     }
     .dl-card-btn--outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-1px); }
 
-    /* ── IMAGEN DE BIENVENIDA ────────────────────────────────────── */
     .dl-welcome-img {
       max-height: 36vh;
       width: auto;
@@ -449,10 +448,10 @@
   <!-- ── NAV ─────────────────────────────────────────────────────── -->
   <nav class="dl-nav">
     <div class="dl-nav-inner">
-      <a href="index.html" style="display:flex; align-items:center;">
-        <img src="LogoConTituloHorizontalTrans.svg" alt="Legado" style="height:39px; width:auto; display:block;" />
+      <a href="/fr/" style="display:flex; align-items:center;">
+        <img src="../LogoConTituloHorizontalTrans.svg" alt="Legado" style="height:39px; width:auto; display:block;" />
       </a>
-      <a href="index.html" class="dl-nav-back">← Volver a la web</a>
+      <a href="/fr/" class="dl-nav-back">← Retour au site</a>
     </div>
   </nav>
 
@@ -461,31 +460,31 @@
     <div class="dl-container">
       <div class="dl-content">
 
-        <!-- Imagen de bienvenida -->
+        <!-- Welcome image -->
         <img
-          src="assets/og-graciaslegado.jpg"
-          alt="Bienvenido a Legado"
+          src="../assets/og-graciaslegado.jpg"
+          alt="Bienvenue dans Legado"
           class="dl-welcome-img"
           loading="eager"
         />
 
-        <!-- Bienvenida -->
+        <!-- Welcome -->
         <div class="dl-block">
-          <h1 class="dl-welcome-h1">Bienvenido a Legado</h1>
-          <p class="dl-welcome-sub">La manera elegante, sencilla y flexible de organizar, documentar y disfrutar tus monedas y billetes</p>
+          <h1 class="dl-welcome-h1">Bienvenue dans Legado</h1>
+          <p class="dl-welcome-sub">La manière élégante, simple et souple d’organiser, documenter et savourer vos monnaies et billets</p>
         </div>
 
-        <!-- Siguientes pasos: guía · Pro · novedades -->
+        <!-- Next steps: guide · Pro · newsletter -->
         <div class="dl-cards">
 
-          <!-- Guía rápida -->
+          <!-- Quick start guide -->
           <div class="dl-card">
             <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6v13"/><path d="M12 6v13"/><path d="M21 6v13"/>
             </svg>
-            <h2 class="dl-card-h">Lee la guía rápida</h2>
-            <p class="dl-card-desc">La instalación en cinco minutos: crea tu primer ejemplar, importa tu colección desde Excel, añade fotografías y protege tus datos con copias de seguridad. Para empezar con buen pie.</p>
-            <a class="dl-card-btn dl-card-btn--gold" href="assets/guia-rapida.pdf" target="_blank" rel="noopener">Abrir la guía (PDF)</a>
+            <h2 class="dl-card-h">Lisez le guide rapide</h2>
+            <p class="dl-card-desc">Opérationnel en cinq minutes : créez votre première pièce, importez votre collection depuis Excel, ajoutez des photographies et protégez vos données par des sauvegardes. Pour bien commencer.</p>
+            <a class="dl-card-btn dl-card-btn--gold" href="../assets/guide-rapide-legado.pdf" target="_blank" rel="noopener">Ouvrir le guide (PDF)</a>
           </div>
 
           <!-- Legado Pro -->
@@ -493,10 +492,10 @@
             <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
-            <h2 class="dl-card-h">Activa la experiencia completa</h2>
-            <p class="dl-card-desc">Ejemplares ilimitados, estadísticas, exportación a PDF y Excel, etiquetas, generación de contenido, referencias directas a bibliografía e identificación de imágenes con ayuda de inteligencia artificial. Sin suscripciones. Con licencia para dos dispositivos.</p>
+            <h2 class="dl-card-h">Activez l’expérience complète</h2>
+            <p class="dl-card-desc">Pièces illimitées, statistiques, exportation en PDF et Excel, étiquettes, génération de contenu, références bibliographiques directes et identification par image avec l’aide de l’intelligence artificielle. Sans abonnement. Licence pour deux appareils.</p>
             <a class="dl-card-btn dl-card-btn--outline"
-               href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa">Descubrir Legado Pro</a>
+               href="https://legadonumis.lemonsqueezy.com/checkout/buy/fbc0bc5f-e323-44a6-b007-9fe0cb707efa">Découvrir Legado Pro</a>
           </div>
 
           <!-- Newsletter -->
@@ -504,8 +503,8 @@
             <svg class="dl-card-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6l9 -6"/>
             </svg>
-            <h2 class="dl-card-h">Descubre las últimas novedades</h2>
-            <p class="dl-card-desc" style="flex: 0 0 auto;">Mejoras, nuevas funciones y consejos sobre Legado, directamente en tu correo.</p>
+            <h2 class="dl-card-h">Restez informé</h2>
+            <p class="dl-card-desc" style="flex: 0 0 auto;">Améliorations, nouveautés et conseils sur Legado, directement dans votre boîte de réception.</p>
 
             <form class="dl-form" id="dl-sub-form" novalidate style="width:100%;">
               <div class="dl-form-row">
@@ -513,33 +512,33 @@
                   type="email"
                   id="dl-email"
                   class="dl-input"
-                  placeholder="tu@correo.com"
+                  placeholder="vous@email.com"
                   autocomplete="email"
                   required
                   style="padding: 11px 14px;"
                 />
-                <button type="submit" class="dl-btn-sub" id="dl-submit-btn" style="padding: 11px 16px;">Suscribirme</button>
+                <button type="submit" class="dl-btn-sub" id="dl-submit-btn" style="padding: 11px 16px;">M’abonner</button>
               </div>
 
               <label class="dl-check-wrap">
                 <input type="checkbox" id="dl-consent" />
                 <span class="dl-check-text" style="font-size:12px;">
-                  Quiero recibir novedades y actualizaciones relacionadas con Legado.
+                  Je souhaite recevoir les actualités et les mises à jour de Legado.
                 </span>
               </label>
 
               <div class="dl-msg dl-msg-err" id="dl-msg-err">
-                Algo no ha funcionado. Comprueba el correo e inténtalo de nuevo.
+                Quelque chose n’a pas fonctionné. Vérifiez l’adresse électronique et réessayez.
               </div>
             </form>
 
             <div class="dl-msg dl-msg-ok" id="dl-msg-ok" style="width:100%;">
-              Suscripción confirmada. Te mantendremos al tanto.
+              Vous êtes abonné. Nous vous tiendrons informé.
             </div>
 
             <p class="dl-legal-note" style="margin-top:4px; font-size:11px;">
-              Sin spam ni cesión de datos a terceros. Baja cuando quieras.
-              <a href="privacidad.html">Política de privacidad</a>
+              Sans spam, sans partage de données. Désabonnement à tout moment.
+              <a href="/fr/confidentialite.html">Politique de confidentialité</a>
             </p>
           </div>
         </div>
@@ -552,16 +551,16 @@
   <footer class="dl-footer">
     <div class="dl-container">
       <div class="dl-footer-links">
-        <a href="index.html"             class="dl-footer-link">Inicio</a>
-        <a href="index.html#workflow"    class="dl-footer-link">Experiencia</a>
-        <a href="index.html#versiones"   class="dl-footer-link">Versiones</a>
-        <a href="index.html#faq"         class="dl-footer-link">Preguntas</a>
-        <a href="privacidad.html"        class="dl-footer-link">Privacidad</a>
-        <a href="terminos.html"          class="dl-footer-link">Términos</a>
-        <a href="reembolso.html"         class="dl-footer-link">Reembolso</a>
-        <a href="mailto:contacto@legadonumis.com" class="dl-footer-link">Contacto</a>
+        <a href="/fr/"                        class="dl-footer-link">Accueil</a>
+        <a href="/fr/#workflow"               class="dl-footer-link">Fonctionnalités</a>
+        <a href="/fr/#versiones"              class="dl-footer-link">Tarifs</a>
+        <a href="/fr/#faq"                    class="dl-footer-link">Questions</a>
+        <a href="/fr/confidentialite.html"            class="dl-footer-link">Confidentialité</a>
+        <a href="/fr/conditions.html"              class="dl-footer-link">Conditions</a>
+        <a href="/fr/remboursement.html"      class="dl-footer-link">Politique de remboursement</a>
+        <a href="mailto:contacto@legadonumis.com" class="dl-footer-link">Contact</a>
       </div>
-      <p class="dl-footer-copy">© 2026 Legado · legadonumis.com · Todos los derechos reservados</p>
+      <p class="dl-footer-copy">© 2026 Legado · legadonumis.com · Tous droits réservés</p>
     </div>
   </footer>
 
@@ -605,12 +604,12 @@
         }
 
         submitBtn.disabled    = true;
-        submitBtn.textContent = 'Enviando…';
+        submitBtn.textContent = 'Sending…';
 
         fetch('/api/subscribe', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, language: 'es' }),
+          body: JSON.stringify({ email: email, language: 'en' }),
         })
           .then(function (res) { return res.json(); })
           .then(function (data) {
@@ -625,7 +624,7 @@
           .catch(function (err) {
             console.error('Subscription error:', err);
             submitBtn.disabled    = false;
-            submitBtn.textContent = 'Suscribirme';
+            submitBtn.textContent = 'Subscribe';
             showErr();
           });
       });

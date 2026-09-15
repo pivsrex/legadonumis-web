@@ -181,7 +181,7 @@ export const en: Content = {
         { feat: 'Updates',                          basico: true,  pro: true },
         { feat: 'Access to new features',           basico: false, pro: true },
         { feat: 'Technical support',                basico: false, pro: true },
-        { feat: 'Available in Spanish and English', basico: true,  pro: true },
+        { feat: 'Available in English, French, German and Spanish', basico: true,  pro: true },
         { feat: 'macOS 11+ (Apple Silicon) · Windows 10+ (64-bit)', basico: true, pro: true },
       ],
     },
@@ -209,4 +209,5 @@ export const en: Content = {
   tm5_quote: 'I used to prepare labels one by one. Now I generate them automatically without copying data over and over, and always with the layout I want.',
   tm6_quote: "Every collector has their own logic. Legado lets me define my own fields, my own order, and my own design. Finally an app that adapts to me — not the other way round.",
   tm7_quote: 'Now I can have all my reference documentation linked to each piece, and access it right when I need it.',
+  tm8_quote: 'The best legacy isn’t just leaving behind a fine collection. It’s also leaving the keys to understand it, preserve it and look after it properly.',
 }

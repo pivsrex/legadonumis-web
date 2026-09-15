@@ -26,6 +26,16 @@ function Cell({ value }: { value: CompRow['basico'] }) {
 export default function Comparison({ content: C }: Props) {
   const [tab, setTab] = useState<'basico' | 'pro'>('pro')
 
+  /* Alto reservado para el bloque de precio de cada plan. Tiene que ser el
+     mismo en las dos columnas o los botones de descarga dejan de alinearse, y
+     tiene que dar cabida al caso más largo: precio + dos líneas de «pago único
+     / sin suscripciones» + licencia + nota de pago, que en alemán y francés
+     ocupan más que en español. */
+  const ALTO_PRECIO = 104
+  /* Y el mismo alto en los dos botones, para que midan igual tanto si la
+     etiqueta cabe en una línea como si son dos. */
+  const ALTO_BOTON = 58
+
   const s = {
     section: { padding: '125px 0 0', background: 'var(--ds-bg-0)' },
     container: { maxWidth: 1200, margin: '0 auto', padding: '0 32px' },
@@ -35,8 +45,8 @@ export default function Comparison({ content: C }: Props) {
     tdFeat: { padding: '9px 24px', font: '400 14px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', verticalAlign: 'middle' as const },
     tdVal:  { padding: '9px 24px', textAlign: 'center' as const, verticalAlign: 'middle' as const },
     groupLabel: { padding: '24px 24px 8px', font: '500 11px/1 var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--ds-accent)' },
-    btnPri: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px', borderRadius: 10, background: 'var(--ds-accent)', color: '#0a0908', border: '1px solid transparent', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em', textDecoration: 'none', whiteSpace: 'pre-line' as const, textAlign: 'center' as const },
-    btnSec: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px', borderRadius: 10, background: 'transparent', color: 'var(--ds-text-high)', border: '1px solid var(--ds-border-mid)', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em', textDecoration: 'none', whiteSpace: 'pre-line' as const, textAlign: 'center' as const },
+    btnPri: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px', minHeight: ALTO_BOTON, width: '100%', boxSizing: 'border-box' as const, borderRadius: 10, background: 'var(--ds-accent)', color: '#0a0908', border: '1px solid transparent', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em', textDecoration: 'none', whiteSpace: 'pre-line' as const, textAlign: 'center' as const },
+    btnSec: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px', minHeight: ALTO_BOTON, width: '100%', boxSizing: 'border-box' as const, borderRadius: 10, background: 'transparent', color: 'var(--ds-text-high)', border: '1px solid var(--ds-border-mid)', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em', textDecoration: 'none', whiteSpace: 'pre-line' as const, textAlign: 'center' as const },
   }
 
   const priceMain = isEU ? `${C.full_precio} €` : `${C.full_precio} US$`
@@ -64,7 +74,7 @@ export default function Comparison({ content: C }: Props) {
                   <th style={s.thPlan}>
                     <span style={{ font: '600 16px/1 var(--font-display)', letterSpacing: '-0.01em', color: 'var(--ds-text-mid)', display: 'block', marginBottom: 6 }}>{C.comp_plan_basic}</span>
                     <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', display: 'block', marginBottom: 14, minHeight: 34 }}>{C.comp_plan_basic_sub}</span>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 16, minHeight: 88 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 16, minHeight: ALTO_PRECIO }}>
                       <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{C.comp_plan_basic_price}</span>
                       <span style={{ visibility: 'hidden', font: '400 12px/1.4 var(--font-body)' }}>—</span>
                     </div>
@@ -86,7 +96,7 @@ export default function Comparison({ content: C }: Props) {
                   <th style={s.thPlan}>
                     <span style={{ font: '600 16px/1 var(--font-display)', letterSpacing: '-0.01em', color: 'var(--ds-accent)', display: 'block', marginBottom: 6 }}>{C.comp_plan_pro}</span>
                     <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', display: 'block', marginBottom: 14, minHeight: 34 }}>{C.comp_plan_pro_sub}</span>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 16, minHeight: 88 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 16, minHeight: ALTO_PRECIO }}>
                       <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{priceMain}</span>
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', whiteSpace: 'pre-line' }}>{C.comp_price_launch}</span>
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)' }}>{C.comp_license_devices}</span>
