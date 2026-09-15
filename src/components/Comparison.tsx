@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { CheckIcon, AppleIcon, WindowsIcon } from './icons'
 import { br, RevealWrapper } from '../utils/text'
 import { BUY_URL, MAC_URL, WIN_URL } from '../config'
+import { descargaActual } from '../langs'
 import type { Content, CompRow } from '../content/types'
 
 interface Props { content: Content }
@@ -81,14 +82,14 @@ export default function Comparison({ content: C }: Props) {
                     <a href={MAC_URL} className="comp-btn-mac lg-btn-shine" style={s.btnSec}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
                       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
-                      onClick={e => { e.preventDefault(); window.open(MAC_URL, '_blank'); window.location.href = document.documentElement.lang === 'en' ? '/en/download.html' : '/descarga.html' }}>
+                      onClick={e => { e.preventDefault(); window.open(MAC_URL, '_blank'); window.location.href = descargaActual() }}>
                       <AppleIcon size={15} />
                       {C.comp_plan_basic_cta_mac}
                     </a>
                     <a href={WIN_URL} className="comp-btn-win lg-btn-shine" style={s.btnSec}
                       onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
                       onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
-                      onClick={e => { e.preventDefault(); window.open(WIN_URL, '_blank'); window.location.href = document.documentElement.lang === 'en' ? '/en/download.html' : '/descarga.html' }}>
+                      onClick={e => { e.preventDefault(); window.open(WIN_URL, '_blank'); window.location.href = descargaActual() }}>
                       <WindowsIcon size={15} />
                       {C.comp_plan_basic_cta_win}
                     </a>

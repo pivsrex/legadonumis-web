@@ -16,3 +16,13 @@ export const SITIO = 'https://legadonumis.com'
 
 export const lang = (code: Lang) => LANGS.find((l) => l.code === code)!
 export const canonicalDe = (code: Lang) => SITIO + lang(code).home
+
+/** Portada del idioma en curso, leída del <html lang>. Para el código de
+ *  cliente, que no recibe `lang` por props. Si el idioma no está registrado,
+ *  cae en español. */
+export const portadaActual = () =>
+  (LANGS.find((l) => l.code === document.documentElement.lang) ?? LANGS[0]).home
+
+/** Ídem para la página de descarga. */
+export const descargaActual = () =>
+  (LANGS.find((l) => l.code === document.documentElement.lang) ?? LANGS[0]).descarga

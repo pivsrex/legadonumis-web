@@ -57,7 +57,7 @@ export default function Navbar({ content: C, lang }: Props) {
   return (
     <nav style={s.nav}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: `${scrolled ? 12 : 16}px 32px`, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
-        <a href={lang === 'en' ? '/en/' : '/'}>
+        <a href={LANGS.find(l => l.code === lang)!.home}>
           <span className="lg-nav-logo-shine" style={{ position: 'relative', display: 'block' }}>
             <img src="/LogoConTituloHorizontalTrans.svg" alt="Legado" style={s.logo} />
           </span>
