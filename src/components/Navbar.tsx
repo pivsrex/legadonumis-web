@@ -102,7 +102,12 @@ export default function Navbar({ content: C, lang }: Props) {
                   href={l.home}
                   role="menuitem"
                   hrefLang={l.code}
-                  aria-current={l.code === lang ? 'true' : undefined}>
+                  aria-current={l.code === lang ? 'true' : undefined}
+                  onClick={() => {
+                    try {
+                      document.cookie = `lang=${l.code}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`
+                    } catch { /* sin cookies: se navega igual */ }
+                  }}>
                   <strong>{l.nombre}</strong>
                 </a>
               ))}

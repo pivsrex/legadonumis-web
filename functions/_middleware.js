@@ -1,11 +1,15 @@
 // Detección de idioma para Cloudflare Pages.
-// Solo redirige en la raíz exacta /; el resto pasa siempre sin tocarse.
-// Cuando el usuario elige idioma en el conmutador (navega a /en/, /fr/, /de/)
-// guardamos su preferencia en una cookie para que la próxima visita a / no
-// lo lleve a donde dice el navegador sino a donde él eligió.
+// Solo actúa en la raíz exacta /; el resto pasa siempre sin tocarse.
+// La cookie lang la escribe el conmutador de idioma (Navbar.tsx) cuando el
+// usuario elige manualmente; el middleware solo la lee.
 
-const SUPPORTED = ['en', 'fr', 'de']
-const LANG_HOME  = { en: '/en/', fr: '/fr/', de: '/de/' }
+// Idiomas reconocidos en la cookie. Incluye ES para que el usuario pueda
+// fijar explícitamente la portada española y el middleware la respete.
+const COOKIE_LANGS  = ['es', 'en', 'fr', 'de']
+
+// Idiomas que, cuando son el destino, provocan una redirección desde /.
+// ES no está aquí: es el contenido por defecto, no redirige.
+const REDIRECT_HOME = { en: '/en/', fr: '/fr/', de: '/de/' }
 
 // User-Agents cuya experiencia depende de ver el contenido canónico (ES).
 const BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|twitterbot|linkedinbot|duckduckbot|ia_archiver|googlebot|bingbot|yandex/i
@@ -13,18 +17,6 @@ const BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|twitterbot|linkedinbo
 export async function onRequest({ request, next }) {
   const url  = new URL(request.url)
   const path = url.pathname
-
-  // Navegación explícita a portada de idioma → registrar preferencia y pasar
-  const explicitLang = path.match(/^\/(en|fr|de)\/$/)?.[1]
-  if (explicitLang) {
-    const res = await next()
-    const out = new Response(res.body, res)
-    out.headers.append(
-      'Set-Cookie',
-      `lang=${explicitLang}; Path=/; Max-Age=31536000; SameSite=Lax; Secure`
-    )
-    return out
-  }
 
   // Solo actuar en la raíz exacta
   if (path !== '/') return next()
@@ -39,8 +31,10 @@ export async function onRequest({ request, next }) {
 
   let target = null
 
-  if (cookieLang && SUPPORTED.includes(cookieLang)) {
-    target = cookieLang
+  if (cookieLang && COOKIE_LANGS.includes(cookieLang)) {
+    // Elección manual registrada. Si el usuario eligió ES, target queda null
+    // y se sirve la portada española sin redirigir.
+    target = REDIRECT_HOME[cookieLang] ? cookieLang : null
   } else {
     // de-AT,de;q=0.9,en;q=0.8  →  de
     const primary = (request.headers.get('Accept-Language') ?? '')
@@ -48,11 +42,11 @@ export async function onRequest({ request, next }) {
       .trim()
       .split(/[-_]/)[0]
       .toLowerCase()
-    if (SUPPORTED.includes(primary)) target = primary
+    if (REDIRECT_HOME[primary]) target = primary
   }
 
-  // Español u otro idioma no soportado: servir portada ES sin redirigir
+  // Español, cookie ES explícita u idioma no soportado: servir portada ES sin redirigir
   if (!target) return next()
 
-  return Response.redirect(`${url.origin}${LANG_HOME[target]}`, 302)
+  return Response.redirect(`${url.origin}${REDIRECT_HOME[target]}`, 302)
 }
