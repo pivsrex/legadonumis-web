@@ -116,6 +116,51 @@ mismo ritmo de lectura por tarjeta (eran 10 s con siete; siguen siendo 10 s con 
    puede resolver con una Function de Cloudflare que mire `Accept-Language` y
    redirija; es trabajo aparte y no bloquea nada.
 
+## Despliegue a producción
+
+**No hay despliegue automático desde `main`**; hay que lanzarlo a mano con wrangler.
+
+### Comando exacto (17 sep 2026)
+
+```bash
+cd /ruta/a/legadonumis-web2
+npm run build
+npx wrangler pages deploy dist --project-name legadonumis-web --branch main
+```
+
+El nombre del proyecto en Cloudflare es **`legadonumis-web`**. Puedes confirmarlo con
+`npx wrangler pages project list`.
+
+### Trampa de la carpeta functions/
+
+`wrangler pages deploy dist` sube el contenido de `dist/`, pero las Pages Functions se
+recogen de la carpeta `functions/` del **directorio desde el que ejecutas el comando**,
+no de dentro de `dist/`. Si lo lanzas desde otro directorio, el sitio se publica sin el
+middleware y wrangler no avisa de error — simplemente no lo sube.
+
+Señal de que fue bien: la salida de wrangler debe incluir la línea
+`✨ Uploading Functions bundle`. Si no aparece, el middleware no está en producción.
+
+### Verificación mínima tras desplegar
+
+```bash
+# 302 → /de/
+curl -sI -H 'Accept-Language: de-AT,de;q=0.9' https://legadonumis.com/ | grep -Ei 'HTTP|location'
+
+# Cookie lang=es prevalece sobre Accept-Language → 200 sin Location
+curl -sI -H 'Accept-Language: de-AT,de;q=0.9' -H 'Cookie: lang=es' https://legadonumis.com/ | grep -Ei 'HTTP|location'
+
+# Ruta interna: 200, sin tocar
+curl -sI -H 'Accept-Language: de-AT,de;q=0.9' https://legadonumis.com/en/privacy | grep 'HTTP'
+
+# Bot: 200 sin redirección
+curl -sI -A 'Googlebot/2.1' https://legadonumis.com/ | grep -Ei 'HTTP|location'
+
+# Las portadas de idioma no deben escribir cookie (cacheables en el borde)
+curl -sI https://legadonumis.com/de/ | grep -i 'set-cookie'   # sin resultados
+curl -sI https://legadonumis.com/en/ | grep -i 'set-cookie'   # sin resultados
+```
+
 ## Nota sobre el build
 
 `npm run build` falla dentro de la carpeta conectada porque Vite necesita borrar
