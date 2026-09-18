@@ -225,6 +225,7 @@ const schemaLang = lang
 <body>
   <slot />
   <script>
+    import { descargaActual } from '../langs'
     // Scroll reveal via vanilla JS (no React hydration needed)
     (function () {
       const seen = new WeakSet()
@@ -282,14 +283,7 @@ const schemaLang = lang
           const url = basic.getAttribute(isMac ? 'data-mac' : 'data-win')
           if (url) {
             window.open(url, '_blank')
-            const paginas = {
-              es: '/descarga.html',
-              en: '/en/download.html',
-              fr: '/fr/telechargement.html',
-              de: '/de/download.html',
-            }
-            const idioma = document.documentElement.lang
-            window.location.href = paginas[idioma] || paginas.es
+            window.location.href = descargaActual()
           }
           return
         }

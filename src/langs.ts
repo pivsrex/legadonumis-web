@@ -4,10 +4,10 @@
    adaptan solos. */
 
 export const LANGS = [
-  { code: 'es', nombre: 'Español',  home: '/',    locale: 'es_ES', descarga: '/descarga.html' },
-  { code: 'en', nombre: 'English',  home: '/en/', locale: 'en_US', descarga: '/en/download.html' },
-  { code: 'fr', nombre: 'Français', home: '/fr/', locale: 'fr_FR', descarga: '/fr/telechargement.html' },
-  { code: 'de', nombre: 'Deutsch',  home: '/de/', locale: 'de_DE', descarga: '/de/download.html' },
+  { code: 'es', nombre: 'Español',  home: '/',    locale: 'es_ES', descarga: '/descarga' },
+  { code: 'en', nombre: 'English',  home: '/en/', locale: 'en_US', descarga: '/en/download' },
+  { code: 'fr', nombre: 'Français', home: '/fr/', locale: 'fr_FR', descarga: '/fr/telechargement' },
+  { code: 'de', nombre: 'Deutsch',  home: '/de/', locale: 'de_DE', descarga: '/de/download' },
 ] as const
 
 export type Lang = (typeof LANGS)[number]['code']

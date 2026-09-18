@@ -109,10 +109,10 @@ export const fr: Content = {
   footer_col_support: 'Assistance',
   footer_col_legal:   'Mentions légales',
 
-  url_download: 'telechargement.html',
-  url_privacy:  'confidentialite.html',
-  url_terms:    'conditions.html',
-  url_refund:   'remboursement.html',
+  url_download: '/fr/telechargement',
+  url_privacy:  '/fr/confidentialite',
+  url_terms:    '/fr/conditions',
+  url_refund:   '/fr/remboursement',
 
   asset_hero:     '/assets/Hero.mp4',
   asset_sc1:      '/assets/FichaNumista.mp4',
