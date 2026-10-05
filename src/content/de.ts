@@ -77,7 +77,9 @@ export const de: Content = {
   faq9_q: 'Auf wie vielen Rechnern kann ich Legado Pro nutzen?',
   faq9_a: 'Die Lizenz für Legado Pro erlaubt die Nutzung auf bis zu zwei Geräten gleichzeitig. Sie können die Lizenz außerdem in der Anwendung selbst auf einem Gerät deaktivieren, um sie freizugeben und auf einem anderen zu aktivieren — etwa beim Wechsel des Rechners.',
   faq10_q: 'Wie aktiviere ich mein Legado Pro?',
-  faq10_a: 'Nach der Zahlung per Kreditkarte oder über PayPal erhalten Sie eine E-Mail mit einem Aktivierungscode. Geben Sie ihn im Bereich „Optionen“ der Anwendung ein.',
+  faq10_a: 'Nach der Zahlung per Kreditkarte oder über PayPal erhalten Sie eine E-Mail mit einem Aktivierungscode. Geben Sie ihn im Bereich „Optionen” der Anwendung ein.',
+  faq11_q: 'In welcher Währung wird abgebucht?',
+  faq11_a: 'Der Preis ist ein Endpreis und enthält die anfallenden Steuern. Die Abbuchung erfolgt in US-Dollar: Lemon Squeezy rechnet zum Mittelkurs um und erhebt keine Umrechnungsgebühr. Ihre Bank kann ihre üblichen Gebühren für Fremdwährungszahlungen berechnen.',
 
   comp_h2:  'Bringen Sie Ihre Sammlung\nauf die nächste Stufe',
   comp_sub: 'Beginnen Sie mit dem Wesentlichen\noder nutzen Sie das volle Erlebnis',
@@ -195,13 +197,13 @@ export const de: Content = {
   comp_plan_pro_sub:       'Ihr digitales Museum ohne Grenzen',
   comp_price_launch:       'Einmalige Zahlung\nOhne Abonnement',
   comp_license_devices:    'Lizenz für zwei Geräte',
-  comp_payment_note:       'Endpreis, Steuern inbegriffen. Die Abbuchung erfolgt in US-Dollar; Lemon Squeezy rechnet zum Mittelkurs um und erhebt keine Umrechnungsgebühr.',
+  comp_payment_note:       'Sichere Zahlung über Lemon Squeezy · Steuern inbegriffen',
   comp_euro_approx:        'ca. {n} €',
   comp_plan_pro_cta:       'Legado Pro\nherunterladen',
   comp_plan_pro_cta_sub:   'und das Pro-Erlebnis freischalten',
   comp_footnote1:          '* Abfragen in Numista erfordern einen kostenlosen API-Schlüssel, erhältlich auf numista.com.',
 
-  full_precio: '89',
+  full_precio: '99',
 
   tm1_quote: 'Die Angaben zu meiner Sammlung lagen verstreut in verschiedenen Dateien und Notizen. In kurzer Zeit hatte ich alles nach Legado übertragen, und jetzt finde ich jede Angabe in Sekunden.',
   tm2_quote: 'Die Erinnerungen helfen mir, die Live-Auktionen nicht zu verpassen, die mich interessieren. Mit Legado plane ich besser und vermeide Spontankäufe.',

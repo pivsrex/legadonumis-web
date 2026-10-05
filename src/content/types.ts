@@ -80,6 +80,8 @@ export interface Content {
   faq9_a: string
   faq10_q: string
   faq10_a: string
+  faq11_q: string
+  faq11_a: string
   comp_h2: string
   comp_sub: string
   cta_titulo: string

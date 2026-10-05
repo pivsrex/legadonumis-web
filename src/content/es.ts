@@ -78,6 +78,8 @@ export const es: Content = {
   faq9_a: 'La licencia de Legado Pro permite usar la aplicación en hasta dos dispositivos simultáneamente. Además, puedes desactivar la licencia en un equipo desde la propia aplicación para liberarla y activarla en otro, por ejemplo al cambiar de ordenador.',
   faq10_q: '¿Cómo activo mi Legado Pro?',
   faq10_a: 'Tras realizar el pago con tarjeta de crédito o a través de PayPal, recibirás un correo electrónico con un código de activación. Introdúcelo en la sección "Ajustes" de la aplicación.',
+  faq11_q: '¿En qué moneda se cobra?',
+  faq11_a: 'El precio es final e incluye los impuestos aplicables. El cargo se realiza en dólares estadounidenses: LemonSqueezy convierte al cambio medio del mercado y no añade comisión por la conversión. Tu banco puede aplicar su propia comisión por operaciones en divisa extranjera.',
 
   comp_h2:  'Lleva tu colección\nal siguiente nivel',
   comp_sub: 'Comienza con lo esencial o\naccede a la experiencia completa',
@@ -195,13 +197,13 @@ export const es: Content = {
   comp_plan_pro_sub:       'Tu museo digital sin límites',
   comp_price_launch:       'Pago único · Sin suscripciones',
   comp_license_devices:    'Licencia para dos dispositivos',
-  comp_payment_note:       'Precio final, impuestos incluidos. El cargo se realiza en dólares; LemonSqueezy aplica el cambio medio del mercado sin añadir comisión.',
+  comp_payment_note:       'Pago seguro vía LemonSqueezy · impuestos incluidos',
   comp_euro_approx:        'aprox. {n} €',
   comp_plan_pro_cta:       'Descargar\nLegado Pro',
   comp_plan_pro_cta_sub:   'y Activa Experiencia Pro',
   comp_footnote1:          '* Las consultas a Numista requieren una clave API gratuita disponible en numista.com.',
 
-  full_precio: '89',
+  full_precio: '99',
 
   tm1_quote: 'Tenía la información de mi colección repartida entre distintos archivos y notas. En muy poco tiempo conseguí trasladarlo todo a Legado y ahora encuentro cualquier dato en cuestión de segundos.',
   tm2_quote: 'Los recordatorios me ayudan a no perderme las subastas en vivo que me interesan. Con Legado puedo planificar mejor y evitar compras impulsivas.',

@@ -78,6 +78,8 @@ export const en: Content = {
   faq9_a: 'A Legado Pro license lets you use the app on up to two devices at the same time. You can also deactivate the license on one computer from within the app to free it up and activate it on another — for example, when switching machines.',
   faq10_q: 'How do I activate my Legado Pro?',
   faq10_a: "After completing your payment by credit card or PayPal, you'll receive an email with an activation code. Enter it in the Settings section of the app.",
+  faq11_q: 'What currency am I charged in?',
+  faq11_a: 'The price is final and includes applicable taxes. You are charged in US dollars: Lemon Squeezy converts at the mid-market rate and adds no conversion fee. Your own bank may charge its usual foreign-transaction fee.',
 
   comp_h2:  'Take your collection\nto the next level',
   comp_sub: 'Start with the essentials or\nunlock the full experience',
@@ -195,13 +197,13 @@ export const en: Content = {
   comp_plan_pro_sub:       'Your digital museum, unlimited',
   comp_price_launch:       'One-time payment\nNo subscriptions',
   comp_license_devices:    'License for two devices',
-  comp_payment_note:       'Final price, taxes included. Charged in US dollars; Lemon Squeezy applies the mid-market rate and adds no conversion fee.',
+  comp_payment_note:       'Secure payment via Lemon Squeezy · taxes included',
   comp_euro_approx:        'approx. €{n}',
   comp_plan_pro_cta:       'Download\nLegado Pro',
   comp_plan_pro_cta_sub:   'and Activate the Pro Experience',
   comp_footnote1:          '* Numista lookups require a free API key available at numista.com.',
 
-  full_precio: '89',
+  full_precio: '99',
 
   tm1_quote: 'My collection data was scattered across different files and notes. In no time I moved everything to Legado, and now I can find any detail in seconds.',
   tm2_quote: 'The reminders help me keep track of live auctions that interest me. With Legado I can plan better and avoid impulse purchases.',

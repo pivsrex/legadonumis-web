@@ -54,6 +54,7 @@ export default function FAQ({ content: C }: Props) {
     { q: C.faq8_q, a: C.faq8_a },
     { q: C.faq9_q, a: C.faq9_a },
     { q: C.faq10_q, a: C.faq10_a },
+    { q: C.faq11_q, a: C.faq11_a },
   ]
 
   const left  = items.filter((_, i) => i % 2 === 0)

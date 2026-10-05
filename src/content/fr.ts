@@ -77,7 +77,9 @@ export const fr: Content = {
   faq9_q: 'Sur combien d’ordinateurs puis-je utiliser Legado Pro ?',
   faq9_a: 'La licence de Legado Pro permet d’utiliser l’application sur deux appareils au plus, simultanément. Vous pouvez en outre désactiver la licence sur un appareil depuis l’application elle-même pour la libérer et l’activer sur un autre, par exemple lorsque vous changez d’ordinateur.',
   faq10_q: 'Comment activer mon Legado Pro ?',
-  faq10_a: 'Après le paiement par carte bancaire ou via PayPal, vous recevrez un courrier électronique contenant un code d’activation. Saisissez-le dans la section « Réglages » de l’application.',
+  faq10_a: "Après le paiement par carte bancaire ou via PayPal, vous recevrez un courrier électronique contenant un code d’activation. Saisissez-le dans la section « Réglages » de l’application.",
+  faq11_q: "Dans quelle devise suis-je débité ?",
+  faq11_a: "Le prix est final et comprend les taxes applicables. Le débit se fait en dollars américains : Lemon Squeezy convertit au taux moyen du marché et n'ajoute aucuns frais de conversion. Votre banque peut appliquer ses propres frais sur les opérations en devise étrangère.",
 
   comp_h2:  'Faites passer votre collection\nà la vitesse supérieure',
   comp_sub: 'Commencez par l’essentiel\nou accédez à l’expérience complète',
@@ -195,13 +197,13 @@ export const fr: Content = {
   comp_plan_pro_sub:       'Votre musée numérique sans limites',
   comp_price_launch:       'Paiement unique\nSans abonnement',
   comp_license_devices:    'Licence pour deux appareils',
-  comp_payment_note:       'Prix final, taxes comprises. Débité en dollars américains ; Lemon Squeezy applique le taux moyen du marché sans frais de conversion ajoutés.',
+  comp_payment_note:       'Paiement sécurisé via Lemon Squeezy · taxes comprises',
   comp_euro_approx:        'env. {n} €',
   comp_plan_pro_cta:       'Télécharger\nLegado Pro',
   comp_plan_pro_cta_sub:   'et activer l’expérience Pro',
   comp_footnote1:          '* Les consultations de Numista requièrent une clé API gratuite, disponible sur numista.com.',
 
-  full_precio: '89',
+  full_precio: '99',
 
   tm1_quote: 'Les informations de ma collection étaient éparpillées entre des fichiers et des notes. En très peu de temps j’ai tout transféré dans Legado, et maintenant je retrouve n’importe quelle donnée en quelques secondes.',
   tm2_quote: 'Les rappels m’aident à ne pas manquer les ventes en direct qui m’intéressent. Avec Legado je planifie mieux et j’évite les achats impulsifs.',

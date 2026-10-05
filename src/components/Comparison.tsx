@@ -37,7 +37,7 @@ const isEuroZone = typeof Intl !== 'undefined' &&
 
 // Equivalente en euros del precio base. Tasa BCE: 1 EUR = 1.1225 USD (2026-10-02).
 // Para actualizar: cambiar EURO_EQUIV y la tasa en este comentario.
-const EURO_EQUIV = 79 // Math.round(89 / 1.1225)
+const EURO_EQUIV = 88 // Math.round(99 / 1.1225)
 
 function Cell({ value }: { value: CompRow['basico'] }) {
   if (value === true)  return <CheckIcon size={15} style={{ color: 'var(--ds-accent)', display: 'block', margin: '0 auto' }} />
@@ -58,12 +58,12 @@ export default function Comparison({ content: C }: Props) {
   const [tab, setTab] = useState<'basico' | 'pro'>('pro')
 
   /* Alto reservado para el bloque de precio de cada plan. Tiene que ser el
-     mismo en las dos columnas o los botones de descarga dejan de alinearse, y
-     tiene que dar cabida al caso más largo: precio + línea de equivalente en
-     euros (siempre reservada, visible u oculta) + dos líneas de «pago único /
-     sin suscripciones» + licencia + nota de pago —que en alemán es la más larga
-     y puede alcanzar los 5-6 renglones a 11 px en columnas de ~204 px—. */
-  const ALTO_PRECIO = 200
+     mismo en las dos columnas o los botones de descarga dejan de alinearse.
+     No se puede volver a 104: la línea de equivalente en euros ocupa ~20 px
+     aunque esté oculta (visibility, no desmontaje), y la nota de pago pasa de
+     1 renglón a 2 en alemán a 1440 px (y a 3 en columnas ≤ ~130 px). Mínimo
+     estimado con alemán a 700 px: ~150 px. Se usa 156 con margen de 6 px. */
+  const ALTO_PRECIO = 156
   /* Y el mismo alto en los dos botones, para que midan igual tanto si la
      etiqueta cabe en una línea como si son dos. */
   const ALTO_BOTON = 58
