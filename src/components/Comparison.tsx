@@ -7,7 +7,37 @@ import type { Content, CompRow } from '../content/types'
 
 interface Props { content: Content }
 
-const isEU  = typeof Intl !== 'undefined' && Intl.DateTimeFormat().resolvedOptions().timeZone.startsWith('Europe/')
+// Husos horarios de países de la zona euro. Solo controla si se muestra el equivalente
+// aproximado en euros; no afecta a lo que cobra LemonSqueezy.
+const EURO_ZONE_TZ = new Set([
+  'Europe/Berlin', 'Europe/Busingen',                                        // Alemania
+  'Europe/Vienna',                                                            // Austria
+  'Europe/Brussels',                                                          // Bélgica
+  'Asia/Nicosia',                                                             // Chipre
+  'Europe/Zagreb',                                                            // Croacia
+  'Europe/Bratislava',                                                        // Eslovaquia
+  'Europe/Ljubljana',                                                         // Eslovenia
+  'Europe/Madrid', 'Atlantic/Canary', 'Africa/Ceuta',                        // España
+  'Europe/Tallinn',                                                           // Estonia
+  'Europe/Helsinki',                                                          // Finlandia
+  'Europe/Paris',                                                             // Francia
+  'Europe/Athens',                                                            // Grecia
+  'Europe/Dublin',                                                            // Irlanda
+  'Europe/Rome',                                                              // Italia
+  'Europe/Riga',                                                              // Letonia
+  'Europe/Vilnius',                                                           // Lituania
+  'Europe/Luxembourg',                                                        // Luxemburgo
+  'Europe/Malta',                                                             // Malta
+  'Europe/Amsterdam',                                                         // Países Bajos
+  'Europe/Lisbon', 'Atlantic/Azores', 'Atlantic/Madeira',                    // Portugal
+  'Europe/Andorra', 'Europe/Monaco', 'Europe/San_Marino', 'Europe/Vatican',  // microestados
+])
+const isEuroZone = typeof Intl !== 'undefined' &&
+  EURO_ZONE_TZ.has(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
+// Equivalente en euros del precio base. Tasa BCE: 1 EUR = 1.1225 USD (2026-10-02).
+// Para actualizar: cambiar EURO_EQUIV y la tasa en este comentario.
+const EURO_EQUIV = 79 // Math.round(89 / 1.1225)
 
 function Cell({ value }: { value: CompRow['basico'] }) {
   if (value === true)  return <CheckIcon size={15} style={{ color: 'var(--ds-accent)', display: 'block', margin: '0 auto' }} />
@@ -29,10 +59,11 @@ export default function Comparison({ content: C }: Props) {
 
   /* Alto reservado para el bloque de precio de cada plan. Tiene que ser el
      mismo en las dos columnas o los botones de descarga dejan de alinearse, y
-     tiene que dar cabida al caso más largo: precio + dos líneas de «pago único
-     / sin suscripciones» + licencia + nota de pago, que en alemán y francés
-     ocupan más que en español. */
-  const ALTO_PRECIO = 104
+     tiene que dar cabida al caso más largo: precio + línea de equivalente en
+     euros (siempre reservada, visible u oculta) + dos líneas de «pago único /
+     sin suscripciones» + licencia + nota de pago —que en alemán es la más larga
+     y puede alcanzar los 5-6 renglones a 11 px en columnas de ~204 px—. */
+  const ALTO_PRECIO = 200
   /* Y el mismo alto en los dos botones, para que midan igual tanto si la
      etiqueta cabe en una línea como si son dos. */
   const ALTO_BOTON = 58
@@ -50,7 +81,7 @@ export default function Comparison({ content: C }: Props) {
     btnSec: { display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '11px 16px', minHeight: ALTO_BOTON, width: '100%', boxSizing: 'border-box' as const, borderRadius: 10, background: 'transparent', color: 'var(--ds-text-high)', border: '1px solid var(--ds-border-mid)', font: '600 14px/1.3 var(--font-display)', letterSpacing: '-0.01em', textDecoration: 'none', whiteSpace: 'pre-line' as const, textAlign: 'center' as const },
   }
 
-  const priceMain = isEU ? `${C.full_precio} €` : `${C.full_precio} US$`
+  const priceMain = `US$ ${C.full_precio}`
 
   return (
     <section id="versiones" style={s.section}>
@@ -98,7 +129,10 @@ export default function Comparison({ content: C }: Props) {
                     <span style={{ font: '600 16px/1 var(--font-display)', letterSpacing: '-0.01em', color: 'var(--ds-accent)', display: 'block', marginBottom: 6 }}>{C.comp_plan_pro}</span>
                     <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', display: 'block', marginBottom: 14, minHeight: 34 }}>{C.comp_plan_pro_sub}</span>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginBottom: 16, minHeight: ALTO_PRECIO }}>
-                      <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{priceMain}</span>
+                      <span style={{ font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)', whiteSpace: 'nowrap' }}>{priceMain}</span>
+                      <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', visibility: isEuroZone ? 'visible' : 'hidden' }}>
+                        {C.comp_euro_approx.replace('{n}', String(EURO_EQUIV))}
+                      </span>
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', whiteSpace: 'pre-line' }}>{C.comp_price_launch}</span>
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)' }}>{C.comp_license_devices}</span>
                       <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)' }}>{C.comp_payment_note}</span>
@@ -170,7 +204,10 @@ export default function Comparison({ content: C }: Props) {
                 <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)', marginBottom: 16 }}>{C.comp_plan_basic_price}</span>
               ) : (
                 <div style={{ marginBottom: 16 }}>
-                  <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)' }}>{priceMain}</span>
+                  <span style={{ display: 'block', font: '700 22px/1 var(--font-display)', letterSpacing: '-0.03em', color: 'var(--ds-text-high)', whiteSpace: 'nowrap' }}>{priceMain}</span>
+                  <span style={{ display: 'block', font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 2, visibility: isEuroZone ? 'visible' : 'hidden' }}>
+                    {C.comp_euro_approx.replace('{n}', String(EURO_EQUIV))}
+                  </span>
                   <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', marginTop: 4, whiteSpace: 'pre-line' }}>{C.comp_price_launch}</span>
                   <span style={{ display: 'block', font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)', marginTop: 2 }}>{C.comp_license_devices}</span>
                   <span style={{ display: 'block', font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 2 }}>{C.comp_payment_note}</span>

@@ -136,6 +136,7 @@ export interface Content {
   comp_price_launch: string
   comp_license_devices: string
   comp_payment_note: string
+  comp_euro_approx: string
   comp_plan_pro_cta: string
   comp_plan_pro_cta_sub: string
   comp_footnote1: string
