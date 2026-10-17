@@ -470,27 +470,20 @@ describe('validarRespuesta() — juego completo de claves', () => {
     expect(validarRespuesta(RESPUESTA_VALIDA_CON_NULLS)).toBeNull()
   })
 
-  // EL TEST CENTRAL: reproduce el bug. El modelo obedece la instrucción de
-  // conservar 'confianza' en español pero traduce el resto de las claves.
-  // Con el código antiguo este test FALLA (validarRespuesta devuelve null).
-  it('respuesta parcialmente traducida (Emittent/Nennwert) → claves_ausentes con emisor y denominacion', () => {
-    const traducida = {
-      Zeichenseite: null,     // leyenda_anverso traducido
-      Rückseite: null,        // leyenda_reverso traducido
-      Emittent: 'Spanien',    // emisor traducido
-      Autorität: 'Felipe IV',
-      Nennwert: '8 Reales',   // denominacion traducido
-      Münzstätte: 'Sevilla',  // ceca traducido
-      Datum: '1625',          // fecha traducido
-      Katalog: 'KM#139',      // referencia_catalogo traducido
-      confianza: 'ALTA',      // éste sí en español — el modelo obedeció esa instrucción
-      Alternativen: [],       // alternativas traducido
+  it('respuesta correcta en alemán (valores en alemán, claves en español) → válida', () => {
+    const correcta = {
+      leyenda_anverso: 'PHILIPP IIII D G',
+      leyenda_reverso: 'HISPAN',
+      emisor: 'Spanien',           // valor en alemán — correcto
+      autoridad: 'Philipp IV.',    // valor en alemán — correcto
+      denominacion: '8 Reales',
+      ceca: 'Sevilla',
+      fecha: '1625',
+      referencia_catalogo: 'KM#139.3',
+      confianza: 'ALTA',           // siempre en español
+      alternativas: [],
     }
-    const err = validarRespuesta(traducida)
-    expect(err).not.toBeNull()
-    expect(err).toMatch(/^claves_ausentes:/)
-    expect(err).toContain('emisor')
-    expect(err).toContain('denominacion')
+    expect(validarRespuesta(correcta)).toBeNull()
   })
 
   // Quitar cada clave por separado produce un error que la nombra
@@ -525,6 +518,41 @@ describe('integridad del esquema JSON en prompts de identificación', () => {
       it(`contiene el enum ${ENUM_CONFIANZA}`, () => {
         expect(prompts[lang]).toContain(ENUM_CONFIANZA)
       })
+    })
+  }
+})
+
+// Estos tests verifican que la instrucción de idioma está presente en los prompts,
+// pero no demuestran que el modelo la obedezca. La verificación real es manual
+// contra la URL de previsualización de Cloudflare.
+describe('instrucción explícita de idioma en prompts de identificación', () => {
+  const prompts = TAREAS.identificacion_moneda.prompts
+
+  it('es: contiene instrucción de responder en español', () => {
+    expect(prompts.es).toContain('español')
+  })
+
+  it('en: contiene instrucción de responder en inglés', () => {
+    expect(prompts.en).toContain('English')
+  })
+
+  it('fr: contiene instrucción de responder en francés', () => {
+    expect(prompts.fr).toContain('français')
+  })
+
+  it('de: contiene instrucción de responder en alemán', () => {
+    expect(prompts.de).toContain('Deutsch')
+  })
+})
+
+describe('TEXTO_BASE_POR_TIPO: instrucción de idioma en el turno de usuario', () => {
+  const tokens = { es: 'español', en: 'English', fr: 'français', de: 'Deutsch' }
+
+  for (const lang of IDIOMAS) {
+    it(`${lang}: todos los tipos incluyen instrucción de idioma`, () => {
+      for (const tipo of TIPOS) {
+        expect(TEXTO_BASE_POR_TIPO[tipo][lang]).toContain(tokens[lang])
+      }
     })
   }
 })
