@@ -9,8 +9,6 @@ interface Props {
   lang: Lang
 }
 
-const isMac = typeof navigator !== 'undefined' && (/Mac/.test(navigator.userAgent) || /Mac/.test((navigator as { platform?: string }).platform ?? ''))
-
 export default function Navbar({ content: C, lang }: Props) {
   const [scrolled, setScrolled] = useState(false)
 
@@ -56,6 +54,11 @@ export default function Navbar({ content: C, lang }: Props) {
 
   return (
     <nav style={s.nav}>
+      <style>{`
+        .nav-dl-mac, .nav-dl-win, .nav-dl-sep { display: inline-flex; align-items: center; }
+        html.is-mac .nav-dl-win, html.is-mac .nav-dl-sep,
+        html.is-win .nav-dl-mac, html.is-win .nav-dl-sep { display: none; }
+      `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: `${scrolled ? 12 : 16}px 32px`, width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
         <a href={LANGS.find(l => l.code === lang)!.home}>
           <span className="lg-nav-logo-shine" style={{ position: 'relative', display: 'block' }}>
@@ -117,8 +120,10 @@ export default function Navbar({ content: C, lang }: Props) {
             labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
             btnStyle={s.btnPri}
           >
-            {isMac ? <AppleIcon size={15} /> : <WindowsIcon size={15} />}
-            {isMac ? C.nav_btn_mac : C.nav_btn_win}
+            <span className="nav-dl-mac"><AppleIcon size={15} /></span>
+            <span className="nav-dl-sep" style={{ font: '300 13px/1', opacity: 0.5 }}>/</span>
+            <span className="nav-dl-win"><WindowsIcon size={15} /></span>
+            {C.nav_btn_mac}
           </DownloadMenu>
         </div>
       </div>

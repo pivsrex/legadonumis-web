@@ -90,6 +90,12 @@ export default function Comparison({ content: C }: Props) {
         @media (max-width: 700px) { .comp-desktop { display: none; } .comp-mobile { display: block; } }
         html.is-mac .comp-icon-win, html.is-win .comp-icon-mac { display: none; }
         html.is-mac .comp-btn-win, html.is-win .comp-btn-mac { display: none !important; }
+        .comp-win-note { display: none; }
+        html.is-win .comp-win-note { display: table-row; }
+        html.is-win .lg-comparison thead th { border-bottom: none !important; }
+        .comp-win-note td { border-bottom: 1px solid var(--ds-border-low); }
+        .comp-win-note-mob { display: none; }
+        html.is-win .comp-win-note-mob { display: block; }
       `}</style>
       <div style={s.container}>
         <RevealWrapper>
@@ -145,6 +151,18 @@ export default function Comparison({ content: C }: Props) {
                       {C.comp_plan_pro_cta}
                     </a>
                   </th>
+                </tr>
+                <tr className="comp-win-note">
+                  <td></td>
+                  <td colSpan={2} style={{ padding: '0 24px 20px', textAlign: 'center' }}>
+                    <a
+                      href={C.url_win_warning}
+                      style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', textDecoration: 'none' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--ds-accent)')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'var(--ds-text-mid)')}>
+                      {C.comp_win_warning_note}
+                    </a>
+                  </td>
                 </tr>
               </thead>
               <tbody>
@@ -220,6 +238,15 @@ export default function Comparison({ content: C }: Props) {
                   {C.comp_plan_pro_cta}
                 </a>
               )}
+              <div className="comp-win-note-mob" style={{ marginTop: 10, textAlign: 'center' }}>
+                <a
+                  href={C.url_win_warning}
+                  style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ds-accent)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ds-text-mid)')}>
+                  {C.comp_win_warning_note}
+                </a>
+              </div>
             </div>
             {C.comp_groups.map((group, gi) => (
               <div key={gi}>

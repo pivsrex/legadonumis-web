@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avertissement Windows lors de l'installation de Legado — legadonumis.com</title>
+  <meta name="description" content="Windows affiche un avertissement lors de l'installation de Legado. Voici ce qui se passe et comment procéder pour installer sans problème." />
+  <link rel="canonical" href="https://legadonumis.com/fr/avertissement-windows" />
+
+  <link rel="icon" type="image/svg+xml" href="../assets/LogoSoloClaroTrans.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
+
+  <link rel="stylesheet" href="../styles/tokens.css" />
+
+  <style>
+    body { padding-top: 64px; }
+    a    { color: inherit; text-decoration: none; }
+
+    .aw-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px;
+      background: rgba(10,9,8,0.92);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border-bottom: 1px solid var(--ds-border-low);
+    }
+    .aw-nav-inner {
+      max-width: 1200px; margin: 0 auto; height: 100%;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .aw-nav-back {
+      font: 400 13px/1 var(--font-body);
+      color: var(--ds-text-mid);
+      transition: color 150ms ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .aw-nav-back:hover { color: var(--ds-accent); }
+
+    .aw-main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 32px 96px;
+    }
+
+    .aw-h1 {
+      font: 700 clamp(26px, 3.2vw, 38px)/1.15 var(--font-display);
+      letter-spacing: -0.03em;
+      color: var(--ds-heading);
+      margin: 0 0 16px;
+    }
+    .aw-lead {
+      font: 400 17px/1.65 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0 0 48px;
+      border-left: 3px solid var(--ds-accent);
+      padding-left: 18px;
+    }
+    .aw-h2 {
+      font: 600 20px/1.25 var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--ds-text-high);
+      margin: 48px 0 16px;
+    }
+    .aw-p {
+      font: 400 15px/1.7 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0 0 20px;
+    }
+    .aw-p strong { font-weight: 600; color: var(--ds-text-high); }
+
+    .aw-steps { display: flex; flex-direction: column; gap: 40px; margin: 0 0 8px; }
+    .aw-step { display: flex; flex-direction: column; gap: 14px; }
+    .aw-step-head { display: flex; align-items: flex-start; gap: 14px; }
+    .aw-step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font: 600 13px/1 var(--font-display);
+      color: var(--ds-accent);
+      margin-top: 2px;
+    }
+    .aw-step-body {
+      font: 400 15px/1.7 var(--font-body);
+      color: var(--ds-text-mid);
+      flex: 1;
+      margin: 0;
+    }
+    .aw-step-body strong { font-weight: 600; color: var(--ds-text-high); }
+
+    .aw-screenshot {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--ds-border-low);
+      background: var(--ds-bg-2);
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ds-text-low);
+      font: 400 13px/1.5 var(--font-body);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .aw-callout {
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 12px;
+      background: rgba(201,168,76,0.05);
+      padding: 20px 24px;
+      margin: 40px 0 0;
+    }
+    .aw-callout-h { font: 600 15px/1.3 var(--font-display); color: var(--ds-accent); margin: 0 0 8px; }
+    .aw-callout-p { font: 400 14px/1.65 var(--font-body); color: var(--ds-text-mid); margin: 0; }
+    .aw-callout-p a { color: var(--ds-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    .aw-footer {
+      border-top: 1px solid var(--ds-border-low);
+      padding: 18px 32px 14px;
+      text-align: center;
+      margin-top: 80px;
+    }
+    .aw-footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 10px; flex-wrap: wrap; }
+    .aw-footer-link { font: 400 13px/1 var(--font-body); color: var(--ds-text-low); transition: color 150ms ease; }
+    .aw-footer-link:hover { color: var(--ds-text-mid); }
+    .aw-footer-copy { font: 400 12px/1 var(--font-mono); color: var(--ds-text-low); }
+
+    @media (max-width: 480px) {
+      .aw-main      { padding: 40px 20px 72px; }
+      .aw-nav-inner { padding: 0 20px; }
+      .aw-footer    { padding: 18px 20px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="aw-nav">
+    <div class="aw-nav-inner">
+      <a href="/fr/" style="display:flex; align-items:center;">
+        <img src="../LogoConTituloHorizontalTrans.svg" alt="Legado" style="height:39px; width:auto; display:block;" />
+      </a>
+      <a href="/fr/" class="aw-nav-back">← Retour au site</a>
+    </div>
+  </nav>
+
+  <main class="aw-main">
+
+    <h1 class="aw-h1">Windows affiche-t-il un avertissement lors de l'installation de Legado&nbsp;?</h1>
+    <p class="aw-lead">Oui, et c'est tout à fait normal. Voici quoi faire.</p>
+
+    <h2 class="aw-h2">Ce que vous verrez</h2>
+
+    <div class="aw-steps">
+
+      <div class="aw-step">
+        <div class="aw-step-head">
+          <div class="aw-step-num">1</div>
+          <p class="aw-step-body">
+            Lors du téléchargement, votre navigateur peut vous proposer de supprimer le fichier&nbsp;:
+            <strong>choisissez de le conserver.</strong>
+            Dans Chrome et Edge, l'option se trouve derrière les trois points, à côté de l'avertissement.
+          </p>
+        </div>
+        <div class="aw-screenshot" role="img" aria-label="Avertissement du navigateur lors du téléchargement du programme d'installation de Legado pour Windows, avec l'option de conserver le fichier">
+          Capture d'écran disponible prochainement
+        </div>
+      </div>
+
+      <div class="aw-step">
+        <div class="aw-step-head">
+          <div class="aw-step-num">2</div>
+          <p class="aw-step-body">
+            À l'ouverture, un écran bleu apparaîtra&nbsp;:
+            <strong>«&nbsp;Windows a protégé votre ordinateur&nbsp;».</strong>
+            Cliquez sur <strong>«&nbsp;Informations complémentaires&nbsp;».</strong>
+          </p>
+        </div>
+        <div class="aw-screenshot" role="img" aria-label="Écran bleu «&nbsp;Windows a protégé votre ordinateur&nbsp;» lors de l'ouverture du programme d'installation de Legado">
+          Capture d'écran disponible prochainement
+        </div>
+      </div>
+
+      <div class="aw-step">
+        <div class="aw-step-head">
+          <div class="aw-step-num">3</div>
+          <p class="aw-step-body">
+            Après avoir cliqué sur «&nbsp;Informations complémentaires&nbsp;», le bouton
+            <strong>«&nbsp;Exécuter quand même&nbsp;»</strong>
+            apparaîtra. Cliquez dessus pour continuer l'installation.
+          </p>
+        </div>
+        <div class="aw-screenshot" role="img" aria-label="Écran «&nbsp;Windows a protégé votre ordinateur&nbsp;» après avoir cliqué sur «&nbsp;Informations complémentaires&nbsp;», avec le bouton «&nbsp;Exécuter quand même&nbsp;» visible">
+          Capture d'écran disponible prochainement
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="aw-h2">Pourquoi cet avertissement apparaît</h2>
+    <p class="aw-p">
+      Legado est inscrit dans l'<strong>Apple Developer Program</strong>, c'est pourquoi la version
+      macOS s'installe sans aucun avertissement. Sur Windows, l'équivalent est un certificat de
+      signature de code que Legado ne possède pas encore. C'est pour cette raison que Windows affiche
+      cet avertissement. Le programme est exactement le même sur les deux plateformes.
+    </p>
+
+    <div class="aw-callout">
+      <p class="aw-callout-h">Téléchargez toujours depuis legadonumis.com</p>
+      <p class="aw-callout-p">
+        C'est la seule source officielle. Si vous avez téléchargé le programme d'installation depuis
+        <a href="https://legadonumis.com/fr/">legadonumis.com</a>,
+        vous pouvez l'installer en toute confiance.
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="aw-footer">
+    <div class="aw-footer-links">
+      <a href="/fr/"               class="aw-footer-link">Accueil</a>
+      <a href="/fr/#versiones"     class="aw-footer-link">Tarifs</a>
+      <a href="/fr/#faq"           class="aw-footer-link">FAQ</a>
+      <a href="confidentialite.html" class="aw-footer-link">Confidentialité</a>
+      <a href="conditions.html"    class="aw-footer-link">Conditions</a>
+      <a href="mailto:contacto@legadonumis.com" class="aw-footer-link">Contact</a>
+    </div>
+    <p class="aw-footer-copy">© 2026 Legado · legadonumis.com · Tous droits réservés</p>
+  </footer>
+
+</body>
+</html>

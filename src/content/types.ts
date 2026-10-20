@@ -113,6 +113,8 @@ export interface Content {
   url_privacy: string
   url_terms: string
   url_refund: string
+  url_win_warning: string
+  comp_win_warning_note: string
   asset_hero: string
   asset_sc1: string
   asset_sc2: string

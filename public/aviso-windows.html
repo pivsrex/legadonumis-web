@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aviso de Windows al instalar Legado — legadonumis.com</title>
+  <meta name="description" content="Windows muestra una advertencia al instalar Legado. Aquí te explicamos qué ocurre y cómo proceder para instalar sin problema." />
+  <link rel="canonical" href="https://legadonumis.com/aviso-windows" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/LogoSoloClaroTrans.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+
+  <link rel="stylesheet" href="styles/tokens.css" />
+
+  <style>
+    body { padding-top: 64px; }
+    a    { color: inherit; text-decoration: none; }
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    .aw-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px;
+      background: rgba(10,9,8,0.92);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border-bottom: 1px solid var(--ds-border-low);
+    }
+    .aw-nav-inner {
+      max-width: 1200px; margin: 0 auto; height: 100%;
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .aw-nav-back {
+      font: 400 13px/1 var(--font-body);
+      color: var(--ds-text-mid);
+      transition: color 150ms ease;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .aw-nav-back:hover { color: var(--ds-accent); }
+
+    /* ── CONTENEDOR ──────────────────────────────────────────────── */
+    .aw-main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 56px 32px 96px;
+    }
+
+    /* ── TIPOGRAFÍA ──────────────────────────────────────────────── */
+    .aw-h1 {
+      font: 700 clamp(26px, 3.2vw, 38px)/1.15 var(--font-display);
+      letter-spacing: -0.03em;
+      color: var(--ds-heading);
+      margin: 0 0 16px;
+    }
+    .aw-lead {
+      font: 400 17px/1.65 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0 0 48px;
+      border-left: 3px solid var(--ds-accent);
+      padding-left: 18px;
+    }
+    .aw-h2 {
+      font: 600 20px/1.25 var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--ds-text-high);
+      margin: 48px 0 16px;
+    }
+    .aw-p {
+      font: 400 15px/1.7 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0 0 20px;
+    }
+    .aw-p strong {
+      font-weight: 600;
+      color: var(--ds-text-high);
+    }
+
+    /* ── PASOS ───────────────────────────────────────────────────── */
+    .aw-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin: 0 0 8px;
+    }
+    .aw-step {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .aw-step-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .aw-step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font: 600 13px/1 var(--font-display);
+      color: var(--ds-accent);
+      margin-top: 2px;
+    }
+    .aw-step-body {
+      font: 400 15px/1.7 var(--font-body);
+      color: var(--ds-text-mid);
+      flex: 1;
+      margin: 0;
+    }
+    .aw-step-body strong {
+      font-weight: 600;
+      color: var(--ds-text-high);
+    }
+
+    /* ── CAPTURAS ────────────────────────────────────────────────── */
+    .aw-screenshot {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--ds-border-low);
+      background: var(--ds-bg-2);
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ds-text-low);
+      font: 400 13px/1.5 var(--font-body);
+      text-align: center;
+      padding: 24px;
+    }
+
+    /* ── AVISO DESCARGA ──────────────────────────────────────────── */
+    .aw-callout {
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 12px;
+      background: rgba(201,168,76,0.05);
+      padding: 20px 24px;
+      margin: 40px 0 0;
+    }
+    .aw-callout-h {
+      font: 600 15px/1.3 var(--font-display);
+      color: var(--ds-accent);
+      margin: 0 0 8px;
+    }
+    .aw-callout-p {
+      font: 400 14px/1.65 var(--font-body);
+      color: var(--ds-text-mid);
+      margin: 0;
+    }
+    .aw-callout-p a {
+      color: var(--ds-accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    .aw-footer {
+      border-top: 1px solid var(--ds-border-low);
+      padding: 18px 32px 14px;
+      text-align: center;
+      margin-top: 80px;
+    }
+    .aw-footer-links {
+      display: flex; gap: 24px; justify-content: center;
+      margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .aw-footer-link {
+      font: 400 13px/1 var(--font-body);
+      color: var(--ds-text-low);
+      transition: color 150ms ease;
+    }
+    .aw-footer-link:hover { color: var(--ds-text-mid); }
+    .aw-footer-copy {
+      font: 400 12px/1 var(--font-mono);
+      color: var(--ds-text-low);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .aw-main        { padding: 40px 20px 72px; }
+      .aw-nav-inner   { padding: 0 20px; }
+      .aw-footer      { padding: 18px 20px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────────────────── -->
+  <nav class="aw-nav">
+    <div class="aw-nav-inner">
+      <a href="/" style="display:flex; align-items:center;">
+        <img src="LogoConTituloHorizontalTrans.svg" alt="Legado" style="height:39px; width:auto; display:block;" />
+      </a>
+      <a href="/" class="aw-nav-back">← Volver a la web</a>
+    </div>
+  </nav>
+
+  <!-- ── CONTENIDO ─────────────────────────────────────────────── -->
+  <main class="aw-main">
+
+    <h1 class="aw-h1">¿Windows muestra una advertencia al instalar Legado?</h1>
+    <p class="aw-lead">Sí, y no pasa nada. Aquí te explicamos qué hacer.</p>
+
+    <h2 class="aw-h2">Lo que verás</h2>
+
+    <div class="aw-steps">
+
+      <div class="aw-step">
+        <div class="aw-step-head">
+          <div class="aw-step-num">1</div>
+          <p class="aw-step-body">
+            Al descargar, tu navegador puede ofrecerte descartar el archivo:
+            <strong>elige conservarlo.</strong>
+            En Chrome y Edge la opción está detrás de los tres puntos, junto al aviso.
+          </p>
+        </div>
+        <div class="aw-screenshot" role="img" aria-label="Aviso del navegador al descargar el instalador de Legado para Windows, con la opción de conservar el archivo">
+          Captura próximamente disponible
+        </div>
+      </div>
+
+      <div class="aw-step">
+        <div class="aw-step-head">
+          <div class="aw-step-num">2</div>
+          <p class="aw-step-body">
+            Al abrirlo, aparecerá una pantalla azul:
+            <strong>«Windows protegió su PC».</strong>
+            Pulsa <strong>«Más información».</strong>
+          </p>
+        </div>
+        <div class="aw-screenshot" role="img" aria-label="Pantalla azul «Windows protegió su PC» al abrir el instalador de Legado">
+          Captura próximamente disponible
+        </div>
+      </div>
+
+      <div class="aw-step">
+        <div class="aw-step-head">
+          <div class="aw-step-num">3</div>
+          <p class="aw-step-body">
+            Tras pulsar «Más información» aparecerá el botón
+            <strong>«Ejecutar de todas formas».</strong>
+            Pulsa sobre él para continuar la instalación.
+          </p>
+        </div>
+        <div class="aw-screenshot" role="img" aria-label="Pantalla «Windows protegió su PC» tras pulsar «Más información», con el botón «Ejecutar de todas formas» visible">
+          Captura próximamente disponible
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="aw-h2">Por qué aparece</h2>
+    <p class="aw-p">
+      Legado está registrado en el <strong>Apple Developer Program</strong>, y por eso la versión
+      de macOS se instala sin ningún aviso. En Windows el equivalente es un certificado de firma
+      que Legado no posee. Por esa razón Windows muestra esa advertencia.
+      El programa es exactamente el mismo en las dos plataformas.
+    </p>
+
+    <div class="aw-callout">
+      <p class="aw-callout-h">Descarga siempre desde legadonumis.com</p>
+      <p class="aw-callout-p">
+        Es la única fuente oficial. Si descargaste el instalador desde
+        <a href="https://legadonumis.com">legadonumis.com</a>,
+        puedes instalarlo con total confianza.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+  <footer class="aw-footer">
+    <div class="aw-footer-links">
+      <a href="/"               class="aw-footer-link">Inicio</a>
+      <a href="/#versiones"     class="aw-footer-link">Versiones</a>
+      <a href="/#faq"           class="aw-footer-link">Preguntas</a>
+      <a href="privacidad.html" class="aw-footer-link">Privacidad</a>
+      <a href="terminos.html"   class="aw-footer-link">Términos</a>
+      <a href="mailto:contacto@legadonumis.com" class="aw-footer-link">Contacto</a>
+    </div>
+    <p class="aw-footer-copy">© 2026 Legado · legadonumis.com · Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>

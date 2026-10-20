@@ -252,7 +252,7 @@ const schemaLang = lang
     // Menú desplegable de descarga (Básico/Pro).
     // Delegación en document: sobrevive a la hidratación de las islas.
     ;(function () {
-      const isMac = /Mac/.test(navigator.userAgent)
+      const isMac = document.documentElement.classList.contains('is-mac')
       const cerrar = () => document.querySelectorAll('.lg-dl.open').forEach((d) => {
         d.classList.remove('open')
         const t = d.querySelector('[data-dl-toggle]')

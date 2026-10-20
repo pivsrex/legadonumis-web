@@ -111,10 +111,12 @@ export const de: Content = {
   footer_col_support: 'Support',
   footer_col_legal:   'Rechtliches',
 
-  url_download: '/de/download',
-  url_privacy:  '/de/datenschutz',
-  url_terms:    '/de/nutzungsbedingungen',
-  url_refund:   '/de/erstattung',
+  url_download:      '/de/download',
+  url_privacy:       '/de/datenschutz',
+  url_terms:         '/de/nutzungsbedingungen',
+  url_refund:        '/de/erstattung',
+  url_win_warning:   '/de/windows-hinweis',
+  comp_win_warning_note: 'Zeigt Windows eine Warnung? Lesen Sie das vor der Installation',
 
   asset_hero:     '/assets/Hero.mp4',
   asset_sc1:      '/assets/FichaNumista.mp4',
