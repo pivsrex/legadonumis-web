@@ -115,22 +115,6 @@
       color: var(--ds-text-high);
     }
 
-    /* ── CAPTURAS ────────────────────────────────────────────────── */
-    .aw-screenshot {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--ds-border-low);
-      background: var(--ds-bg-2);
-      aspect-ratio: 16 / 9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ds-text-low);
-      font: 400 13px/1.5 var(--font-body);
-      text-align: center;
-      padding: 24px;
-    }
-
     /* ── AVISO DESCARGA ──────────────────────────────────────────── */
     .aw-callout {
       border: 1px solid rgba(201,168,76,0.35);
@@ -216,9 +200,6 @@
             En Chrome y Edge la opción está detrás de los tres puntos, junto al aviso.
           </p>
         </div>
-        <div class="aw-screenshot" role="img" aria-label="Aviso del navegador al descargar el instalador de Legado para Windows, con la opción de conservar el archivo">
-          Captura próximamente disponible
-        </div>
       </div>
 
       <div class="aw-step">
@@ -229,9 +210,6 @@
             <strong>«Windows protegió su PC».</strong>
             Pulsa <strong>«Más información».</strong>
           </p>
-        </div>
-        <div class="aw-screenshot" role="img" aria-label="Pantalla azul «Windows protegió su PC» al abrir el instalador de Legado">
-          Captura próximamente disponible
         </div>
       </div>
 
@@ -244,19 +222,16 @@
             Pulsa sobre él para continuar la instalación.
           </p>
         </div>
-        <div class="aw-screenshot" role="img" aria-label="Pantalla «Windows protegió su PC» tras pulsar «Más información», con el botón «Ejecutar de todas formas» visible">
-          Captura próximamente disponible
-        </div>
       </div>
 
     </div>
 
     <h2 class="aw-h2">Por qué aparece</h2>
     <p class="aw-p">
-      Legado está registrado en el <strong>Apple Developer Program</strong>, y por eso la versión
-      de macOS se instala sin ningún aviso. En Windows el equivalente es un certificado de firma
-      que Legado no posee. Por esa razón Windows muestra esa advertencia.
-      El programa es exactamente el mismo en las dos plataformas.
+      Windows incluye una función de seguridad llamada SmartScreen. Cuando descargas un programa, SmartScreen lo compara con un registro de reputación que mantiene Microsoft: si el archivo ya es conocido y lo usan muchas personas, se instala sin decir nada; si es nuevo, o todavía no se ha visto en muchos ordenadores, muestra ese aviso azul y te pide que confirmes antes de continuar.
+    </p>
+    <p class="aw-p">
+      Es una comprobación de reputación, no un análisis de virus. SmartScreen no está diciendo que haya encontrado nada dañino en el archivo: está diciendo que todavía no le resulta familiar. Por el mismo motivo, tu navegador puede avisarte de que el instalador de Legado no se descarga habitualmente.
     </p>
 
     <div class="aw-callout">

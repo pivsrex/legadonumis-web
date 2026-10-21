@@ -92,7 +92,7 @@ export default function Comparison({ content: C }: Props) {
         html.is-mac .comp-btn-win, html.is-win .comp-btn-mac { display: none !important; }
         .comp-win-note { display: none; }
         html.is-win .comp-win-note { display: table-row; }
-        html.is-win .lg-comparison thead th { border-bottom: none !important; }
+        html.is-win .lg-comparison thead th { border-bottom: none !important; padding-bottom: 10px !important; }
         .comp-win-note td { border-bottom: 1px solid var(--ds-border-low); }
         .comp-win-note-mob { display: none; }
         html.is-win .comp-win-note-mob { display: block; }

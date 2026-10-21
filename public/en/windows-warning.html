@@ -100,21 +100,6 @@
     }
     .aw-step-body strong { font-weight: 600; color: var(--ds-text-high); }
 
-    .aw-screenshot {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--ds-border-low);
-      background: var(--ds-bg-2);
-      aspect-ratio: 16 / 9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--ds-text-low);
-      font: 400 13px/1.5 var(--font-body);
-      text-align: center;
-      padding: 24px;
-    }
-
     .aw-callout {
       border: 1px solid rgba(201,168,76,0.35);
       border-radius: 12px;
@@ -188,9 +173,6 @@
             In Chrome and Edge the option is behind the three-dot menu, next to the warning.
           </p>
         </div>
-        <div class="aw-screenshot" role="img" aria-label="Browser warning when downloading the Legado installer for Windows, with the option to keep the file">
-          Screenshot coming soon
-        </div>
       </div>
 
       <div class="aw-step">
@@ -201,9 +183,6 @@
             <strong>"Windows protected your PC".</strong>
             Click <strong>"More info".</strong>
           </p>
-        </div>
-        <div class="aw-screenshot" role="img" aria-label="Blue screen reading &quot;Windows protected your PC&quot; when opening the Legado installer">
-          Screenshot coming soon
         </div>
       </div>
 
@@ -216,19 +195,16 @@
             button will appear. Click it to continue the installation.
           </p>
         </div>
-        <div class="aw-screenshot" role="img" aria-label="&quot;Windows protected your PC&quot; screen after clicking &quot;More info&quot;, showing the &quot;Run anyway&quot; button">
-          Screenshot coming soon
-        </div>
       </div>
 
     </div>
 
     <h2 class="aw-h2">Why it appears</h2>
     <p class="aw-p">
-      Legado is registered in the <strong>Apple Developer Program</strong>, which is why the macOS
-      version installs without any warning. On Windows, the equivalent is a code-signing certificate
-      that Legado does not yet have. That is why Windows shows that warning.
-      The software is exactly the same on both platforms.
+      Windows includes a security feature called SmartScreen. When you download a program, SmartScreen checks it against a reputation registry maintained by Microsoft: if the file is already known and used by many people, it installs without any notice; if it is new, or hasn't been seen on many computers yet, it shows that blue screen and asks you to confirm before continuing.
+    </p>
+    <p class="aw-p">
+      It is a reputation check, not a virus scan. SmartScreen is not saying it found anything harmful in the file: it is saying the file is not yet familiar to it. For the same reason, your browser may warn you that the Legado installer is not commonly downloaded.
     </p>
 
     <div class="aw-callout">
