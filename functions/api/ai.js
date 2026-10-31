@@ -677,7 +677,7 @@ export async function onRequestPost(context) {
     // Forma de respuesta específica por tarea
     if (tarea === 'identificacion_moneda') {
       const { confianza, para_confirmar, ...identificacion } = resultado
-      return json({ confianza, para_confirmar, identificacion, coste_cobrado })
+      return json({ confianza, para_confirmar: para_confirmar ?? null, identificacion, coste_cobrado })
     }
     return json({ resultado, coste: coste_cobrado })
   }

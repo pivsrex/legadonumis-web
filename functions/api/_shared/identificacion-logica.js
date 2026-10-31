@@ -9,7 +9,7 @@ export const CONFIANZAS_VALIDAS = new Set(['ALTA', 'MEDIA', 'BAJA', 'NINGUNA'])
 /** Claves que el prompt exige en el JSON de identificación, en español. */
 export const CLAVES_IDENTIFICACION = [
   'leyenda_anverso', 'leyenda_reverso', 'emisor', 'autoridad', 'denominacion',
-  'ceca', 'fecha', 'referencia_catalogo', 'confianza', 'para_confirmar', 'alternativas',
+  'ceca', 'fecha', 'referencia_catalogo', 'confianza', 'alternativas',
 ]
 
 /**

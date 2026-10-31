@@ -486,6 +486,13 @@ describe('validarRespuesta() — juego completo de claves', () => {
     expect(validarRespuesta(correcta)).toBeNull()
   })
 
+  it('respuesta sin para_confirmar → válida (el modelo puede omitirla)', () => {
+    // Caso exacto que rompió producción: el modelo omite la clave en lugar de
+    // devolver null. para_confirmar es opcional; no debe estar en CLAVES_IDENTIFICACION.
+    expect('para_confirmar' in RESPUESTA_VALIDA_CON_NULLS).toBe(false)
+    expect(validarRespuesta(RESPUESTA_VALIDA_CON_NULLS)).toBeNull()
+  })
+
   // Quitar cada clave por separado produce un error que la nombra
   for (const clave of CLAVES_IDENTIFICACION) {
     it(`ausencia de '${clave}' → error que la nombra`, () => {
