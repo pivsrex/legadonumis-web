@@ -440,7 +440,6 @@ const TAREAS = {
     maxTokens: 1500,
     coste:     5,
     esJson:    true,
-    temperature: 0,
     prompts:   { es: SYSTEM_IDENTIFICACION_ES, en: SYSTEM_IDENTIFICACION_EN, fr: SYSTEM_IDENTIFICACION_FR, de: SYSTEM_IDENTIFICACION_DE },
     maxImagenes:    4,
     maxBytesImagen: 1024 * 1024,       // 1 MB por imagen
@@ -622,7 +621,6 @@ export async function onRequestPost(context) {
         max_tokens: def.maxTokens,
         system:     def.prompts[lang],
         messages:   def.construir(v.ok, lang),
-        ...(def.temperature !== undefined ? { temperature: def.temperature } : {}),
       }),
     })
     data = await antRes.json()
