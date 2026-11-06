@@ -12,14 +12,29 @@ export const CLAVES_IDENTIFICACION = [
   'ceca', 'fecha', 'referencia_catalogo', 'confianza', 'alternativas',
 ]
 
+// Campos de identificación cuyo contenido cuenta como aportación al usuario.
+// Excluye confianza, para_confirmar, razonamiento, certezas y alternativas
+// (estas últimas se comprueban por separado).
+const CAMPOS_APORTACION = [
+  'leyenda_anverso', 'leyenda_reverso', 'emisor', 'autoridad', 'denominacion',
+  'ceca', 'fecha', 'referencia_catalogo', 'ambito', 'epoca',
+]
+
 /**
- * Devuelve los créditos a reembolsar según la confianza del resultado.
- * BAJA o NINGUNA → reembolso 4 (coste neto 1).
- * ALTA o MEDIA   → reembolso 0 (coste neto 5).
+ * Devuelve los créditos a reembolsar según el contenido del resultado.
+ * Se reembolsan 4 créditos (coste neto 1) solo cuando la respuesta no aporta
+ * nada: todos los campos de identificación son null o vacíos Y no hay alternativas.
+ * En cualquier otro caso, reembolso 0 (coste neto 5).
+ * La confianza global no interviene en este cálculo.
  */
 export function calcularReembolso(resultado) {
-  const c = resultado?.confianza
-  return (c === 'BAJA' || c === 'NINGUNA') ? 4 : 0
+  if (!resultado || typeof resultado !== 'object') return 4
+  const tieneContenido = CAMPOS_APORTACION.some(k => {
+    const v = resultado[k]
+    return typeof v === 'string' && v.trim().length > 0
+  })
+  const tieneAlternativas = Array.isArray(resultado.alternativas) && resultado.alternativas.length > 0
+  return (tieneContenido || tieneAlternativas) ? 0 : 4
 }
 
 /**

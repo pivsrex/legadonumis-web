@@ -35,16 +35,88 @@ describe('CONFIANZAS_VALIDAS', () => {
 })
 
 describe('calcularReembolso()', () => {
-  it('ALTA  → 0', () => expect(calcularReembolso({ confianza: 'ALTA' })).toBe(0))
-  it('MEDIA → 0', () => expect(calcularReembolso({ confianza: 'MEDIA' })).toBe(0))
-  it('BAJA  → 4', () => expect(calcularReembolso({ confianza: 'BAJA' })).toBe(4))
-  it('NINGUNA → 4', () => expect(calcularReembolso({ confianza: 'NINGUNA' })).toBe(4))
+  // Con contenido → reembolso 0 (la confianza no decide el precio)
+  it('respuesta con emisor → 0', () =>
+    expect(calcularReembolso({ emisor: 'España', alternativas: [] })).toBe(0))
+  it('respuesta con solo leyenda_anverso → 0', () =>
+    expect(calcularReembolso({ leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', alternativas: [] })).toBe(0))
+  it('respuesta con solo alternativas → 0', () =>
+    expect(calcularReembolso({ alternativas: [{ emisor: 'España' }] })).toBe(0))
+  it('confianza BAJA con contenido → 0', () =>
+    expect(calcularReembolso({ ambito: 'Grecia arcaica', confianza: 'BAJA', alternativas: [] })).toBe(0))
 
-  it('reembolso + coste_cobrado siempre suma 5', () => {
-    for (const c of ['ALTA', 'MEDIA', 'BAJA', 'NINGUNA']) {
-      const r = calcularReembolso({ confianza: c })
-      expect(r + (COSTE_IDENTIFICACION - r)).toBe(COSTE_IDENTIFICACION)
-    }
+  // Sin contenido ni alternativas → reembolso 4
+  it('todo nulo, sin alternativas → 4', () =>
+    expect(calcularReembolso({ leyenda_anverso: null, alternativas: [] })).toBe(4))
+  it('cadena vacía no cuenta → 4', () =>
+    expect(calcularReembolso({ emisor: '', alternativas: [] })).toBe(4))
+  it('solo espacios en blanco no cuenta → 4', () =>
+    expect(calcularReembolso({ emisor: '   ', alternativas: [] })).toBe(4))
+  it('confianza NINGUNA sin contenido → 4', () =>
+    expect(calcularReembolso({ confianza: 'NINGUNA', alternativas: [] })).toBe(4))
+})
+
+describe('calcularReembolso() — criterio nuevo: reembolso solo si no aporta nada', () => {
+  it('todo vacío y sin alternativas → reembolso 4', () => {
+    expect(calcularReembolso({
+      leyenda_anverso: null, leyenda_reverso: null,
+      emisor: null, autoridad: null, denominacion: null,
+      ceca: null, fecha: null, referencia_catalogo: null,
+      ambito: null, epoca: null,
+      confianza: 'NINGUNA', alternativas: [],
+    })).toBe(4)
+  })
+
+  it('solo ambito y epoca → reembolso 0', () => {
+    expect(calcularReembolso({
+      leyenda_anverso: null, leyenda_reverso: null,
+      emisor: null, autoridad: null, denominacion: null,
+      ceca: null, fecha: null, referencia_catalogo: null,
+      ambito: 'Grecia arcaica, posiblemente Jonia o Caria',
+      epoca: 'siglo V a.C.',
+      confianza: 'BAJA', alternativas: [],
+    })).toBe(0)
+  })
+
+  it('todo vacío pero con una alternativa → reembolso 0', () => {
+    expect(calcularReembolso({
+      leyenda_anverso: null, leyenda_reverso: null,
+      emisor: null, autoridad: null, denominacion: null,
+      ceca: null, fecha: null, referencia_catalogo: null,
+      ambito: null, epoca: null,
+      confianza: 'NINGUNA',
+      alternativas: [{ emisor: 'España', autoridad: null, denominacion: '8 reales', ceca: null, fecha: null }],
+    })).toBe(0)
+  })
+
+  it('solo las leyendas transcritas → reembolso 0', () => {
+    expect(calcularReembolso({
+      leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', leyenda_reverso: null,
+      emisor: null, autoridad: null, denominacion: null,
+      ceca: null, fecha: null, referencia_catalogo: null,
+      ambito: null, epoca: null,
+      confianza: 'BAJA', alternativas: [],
+    })).toBe(0)
+  })
+
+  it('campo con cadena vacía no cuenta como aportación', () => {
+    expect(calcularReembolso({
+      leyenda_anverso: '', leyenda_reverso: null,
+      emisor: null, autoridad: null, denominacion: null,
+      ceca: null, fecha: null, referencia_catalogo: null,
+      ambito: null, epoca: null,
+      confianza: 'NINGUNA', alternativas: [],
+    })).toBe(4)
+  })
+
+  it('campo con solo espacios en blanco no cuenta como aportación', () => {
+    expect(calcularReembolso({
+      leyenda_anverso: '   ', leyenda_reverso: null,
+      emisor: null, autoridad: null, denominacion: null,
+      ceca: null, fecha: null, referencia_catalogo: null,
+      ambito: null, epoca: null,
+      confianza: 'NINGUNA', alternativas: [],
+    })).toBe(4)
   })
 })
 
@@ -222,7 +294,7 @@ describe('handler identificacion_moneda — cobro', () => {
     expect(db.saldo).toBe(95)
   })
 
-  it('BAJA: coste neto 1 (reembolso de 4)', async () => {
+  it('BAJA con contenido: coste neto 5 (sin reembolso)', async () => {
     const db = crearDbMock(100)
     vi.stubGlobal('fetch', mockFetch(respuestaModelo('BAJA')))
 
@@ -236,12 +308,12 @@ describe('handler identificacion_moneda — cobro', () => {
 
     expect(res.status).toBe(200)
     expect(body.confianza).toBe('BAJA')
-    expect(body.coste_cobrado).toBe(1)
-    expect(db.saldo).toBe(99)   // 100 - 5 + 4
-    expect(db.consumos[0]).toMatchObject({ coste: 1, resultado: 'ok' })
+    expect(body.coste_cobrado).toBe(5)
+    expect(db.saldo).toBe(95)
+    expect(db.consumos[0]).toMatchObject({ coste: 5, resultado: 'ok' })
   })
 
-  it('NINGUNA: coste neto 1 (reembolso de 4)', async () => {
+  it('NINGUNA con contenido: coste neto 5 (sin reembolso)', async () => {
     const db = crearDbMock(100)
     vi.stubGlobal('fetch', mockFetch(respuestaModelo('NINGUNA')))
 
@@ -254,8 +326,8 @@ describe('handler identificacion_moneda — cobro', () => {
     const body = await res.json()
 
     expect(res.status).toBe(200)
-    expect(body.coste_cobrado).toBe(1)
-    expect(db.saldo).toBe(99)
+    expect(body.coste_cobrado).toBe(5)
+    expect(db.saldo).toBe(95)
   })
 
   it('saldo insuficiente (< 5): devuelve 402 sin llamar a Anthropic', async () => {
