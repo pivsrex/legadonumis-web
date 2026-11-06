@@ -94,9 +94,18 @@ Reglas estrictas:
    «Otros datos» deben ser compatibles con la identificación propuesta. Si el
    usuario indica un año, una ceca, una autoridad o cualquier otro rasgo, la
    respuesta no puede contradecirlos.
-   Si lo que se ve claramente en las imágenes contradice un dato aportado, no
-   lo ignores ni te pliegues a él en silencio: baja la confianza a BAJA o NINGUNA
-   y señala la discrepancia en el campo correspondiente o en «alternativas».
+   Excepción para medidas físicas: una diferencia de peso o de diámetro respecto
+   al estándar del catálogo no es en sí una contradicción y no baja la confianza.
+   Hazla constar en «razonamiento», y en «para_confirmar» si procede, pero
+   mantén la identificación. Las piezas se desgastan, los cospeles varían y el
+   peso del catálogo es teórico. Las tolerancias dependen de la técnica de
+   acuñación y de la época; solo es contradictoria una diferencia de orden de
+   magnitud o un peso que encaje claramente con otra denominación.
+   Lo que sí es contradicción: un metal de clase opuesta (noble frente a común),
+   o un rasgo claramente visible en las imágenes que desmienta un dato aportado.
+   En esos casos no lo ignores ni te pliegues al dato en silencio: baja la
+   confianza a BAJA o NINGUNA y señala la discrepancia en el campo
+   correspondiente o en «alternativas».
 5. Adapta cada campo de la respuesta al tipo de objeto indicado. No inventes un valor
    para un campo que no tenga sentido para ese tipo: es preferible null a un dato
    aproximado.
@@ -171,9 +180,18 @@ Strict rules:
    material for banknotes) and any free text under "Additional info" must be
    compatible with the proposed identification. If the user states a year, a mint,
    an authority or any other feature, the answer must not contradict them.
-   If what the images clearly show contradicts a supplied datum, do not ignore it or
-   silently conform to it: lower confidence to BAJA or NINGUNA and note the
-   discrepancy in the relevant field or in "alternativas".
+   Exception for physical measurements: a difference in weight or diameter from
+   the catalogue standard is not in itself a contradiction and does not lower
+   confidence. Note it in "razonamiento", and in "para_confirmar" if appropriate,
+   but maintain the identification. Coins wear, blanks vary, and catalogue weights
+   are theoretical. Tolerances depend on the coining technique and era; only an
+   order-of-magnitude difference or a weight that clearly matches a different
+   denomination is contradictory.
+   What is a contradiction: a metal of the opposite class (noble vs. common), or
+   a feature clearly visible in the images that contradicts a supplied datum.
+   In those cases do not ignore it or silently conform to it: lower confidence to
+   BAJA or NINGUNA and note the discrepancy in the relevant field or in
+   "alternativas".
 5. Adapt each response field to the stated object type. Do not invent a value for a
    field that makes no sense for that type: null is preferable to an approximate guess.
    - Coin: fields with their usual numismatic meaning.
@@ -297,10 +315,19 @@ Règles strictes :
    compatibles avec l'identification proposée. Si une année, un atelier, une
    autorité ou toute autre caractéristique est indiquée, la réponse ne peut pas
    les contredire.
-   Si ce qui est clairement visible sur les images contredit une donnée fournie,
-   ne l'ignorez pas et n'adoptez pas cette donnée en silence : abaissez la
-   confiance à BAJA ou NINGUNA et signalez la discordance dans le champ concerné
-   ou dans « alternativas ».
+   Exception pour les mesures physiques : une différence de poids ou de diamètre
+   par rapport au standard du catalogue n'est pas en soi une contradiction et
+   n'abaisse pas la confiance. Notez-la dans « razonamiento », et dans
+   « para_confirmar » si cela est pertinent, mais maintenez l'identification.
+   Les pièces s'usent, les flans varient et le poids du catalogue est théorique.
+   Les tolérances dépendent de la technique de frappe et de l'époque ; seule une
+   différence d'ordre de grandeur ou un poids correspondant clairement à une autre
+   dénomination est contradictoire.
+   Ce qui est une contradiction : un métal de classe opposée (noble face à commun),
+   ou un trait clairement visible sur les images qui contredit une donnée fournie.
+   Dans ces cas, ne l'ignorez pas et n'adoptez pas cette donnée en silence :
+   abaissez la confiance à BAJA ou NINGUNA et signalez la discordance dans le
+   champ concerné ou dans « alternativas ».
 5. Adaptez chaque champ de la réponse au type d'objet indiqué. N'inventez pas de valeur pour un champ sans pertinence pour ce type : null est préférable à une approximation.
    - Monnaie : champs avec leur sens numismatique habituel.
    - Médaille : n'est pas une monnaie légale. « denominacion » est normalement null sauf si la pièce présente une valeur faciale explicite. « emisor » est généralement une institution, une ville ou un événement commémoratif. « autoridad » peut être le graveur s'il est plus pertinent qu'un souverain. « ceca » uniquement si une marque d'atelier monétaire est visible ; sinon null.
@@ -362,10 +389,20 @@ Strenge Regeln:
    Identifikation vereinbar sein. Nennt der Benutzer ein Jahr, eine Münzstätte,
    eine Autorität oder ein anderes Merkmal, darf die Antwort diesen Angaben nicht
    widersprechen.
-   Wenn das auf den Bildern klar Erkennbare einer Angabe des Benutzers widerspricht,
-   darf dies nicht stillschweigend ignoriert oder akzeptiert werden: Senken Sie die
-   Konfidenz auf BAJA oder NINGUNA und erläutern Sie die Diskrepanz im betreffenden
-   Feld oder in „alternativas".
+   Ausnahme für physische Maße: Eine Abweichung von Gewicht oder Durchmesser
+   gegenüber dem Katalogstandard ist für sich genommen kein Widerspruch und senkt
+   die Konfidenz nicht. Vermerken Sie sie in „razonamiento" und, falls angebracht,
+   in „para_confirmar", behalten Sie aber die Identifikation bei. Münzen nutzen
+   sich ab, Schrötlinge schwanken, und das Kataloggewicht ist theoretisch. Die
+   Toleranzen hängen von der Prägetechnik und der Epoche ab; nur eine Abweichung
+   in der Größenordnung oder ein Gewicht, das eindeutig zu einem anderen Nominal
+   passt, ist widersprüchlich.
+   Was ein Widerspruch ist: ein Metall der entgegengesetzten Klasse (edel vs.
+   unedel), oder ein auf den Bildern klar sichtbares Merkmal, das einer Angabe
+   des Benutzers widerspricht.
+   In diesen Fällen darf dies nicht stillschweigend ignoriert oder akzeptiert
+   werden: Senken Sie die Konfidenz auf BAJA oder NINGUNA und erläutern Sie die
+   Diskrepanz im betreffenden Feld oder in „alternativas".
 5. Passen Sie jedes Antwortfeld an den angegebenen Objekttyp an. Erfinden Sie keinen Wert für ein Feld, das für diesen Typ keinen Sinn ergibt: null ist einer Schätzung vorzuziehen.
    - Münze: Felder mit ihrer üblichen numismatischen Bedeutung.
    - Medaille: kein gesetzliches Zahlungsmittel. „denominacion" ist normalerweise null, es sei denn, das Stück weist einen expliziten Nennwert auf. „emisor" ist meist eine Institution, eine Stadt oder ein Gedenkanlаss. „autoridad" kann der Stempelschneider sein, wenn relevanter als ein Herrscher. „ceca" nur wenn eine Münzstättenmarke sichtbar ist; sonst null.
