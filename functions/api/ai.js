@@ -128,6 +128,25 @@ Reglas estrictas:
    datos del usuario se basa la atribución, cómo has usado cada dato aportado y,
    si alguno contradice lo que ves, qué has hecho. Cuando la confianza es NINGUNA,
    explica qué ha faltado para poder identificar la pieza.
+7. Rellena "ambito" y "epoca" siempre que puedas sostenerlos con evidencia, aunque
+   el resto de campos quede en null. Son lo primero que el usuario quiere saber.
+   "ambito": la cultura, civilización o ámbito de emisión. Ejemplos: «Grecia arcaica,
+   Jonia o Caria», «Imperio otomano, provincia de Egipto», «monarquía hispánica»,
+   «Imperio romano». Si no puedes defender ninguno, usa null.
+   "epoca": el periodo aproximado con la precisión que el material permita: un siglo,
+   un cuarto de siglo, un reinado o una década. Si no puedes defenderla, usa null.
+   "certezas": un objeto con una entrada por cada campo que lleve valor (distinto de
+   null), indicando cuán bien sostiene la evidencia ese campo en concreto.
+   ALTA cuando la evidencia disponible sostiene ese campo sin alternativa razonable.
+   Para "ambito" y "epoca", el estilo, el módulo, la técnica de acuñación y la
+   iconografía pueden bastar para ALTA sin necesidad de leyenda. Para "emisor",
+   "autoridad", "ceca" y "fecha", lo que normalmente justifica ALTA es la epigrafía
+   legible o un dato aportado por el usuario que la respalde.
+   MEDIA cuando el campo es probable pero admite alternativas.
+   BAJA cuando es una hipótesis entre varias igualmente defendibles.
+   "confianza" sigue refiriéndose a la atribución precisa del ejemplar y no se
+   calcula como media de las certezas por campo.
+   Los campos en null no necesitan entrada en "certezas".
 
 Escribe todos los valores de los campos en español.
 
@@ -141,9 +160,12 @@ Devuelve EXCLUSIVAMENTE un objeto JSON válido, sin texto antes ni después:
   "ceca": "ciudad o marca de ceca (si aplica) o null",
   "fecha": "año o rango visible o null",
   "referencia_catalogo": "KM#, RIC, etc. o null",
+  "ambito": "cultura, civilización o ámbito de emisión o null",
+  "epoca": "periodo aproximado con la precisión que el material permita o null",
   "confianza": "ALTA|MEDIA|BAJA|NINGUNA",
   "para_confirmar": "qué haría falta para confirmar (p. ej. peso, diámetro, marca de ceca, leyenda completa) o null si confianza es ALTA",
   "razonamiento": "en qué elementos visuales o datos del usuario se basa la atribución, y cómo se han tratado las contradicciones si las hay",
+  "certezas": { "emisor": "ALTA|MEDIA|BAJA", "fecha": "ALTA|MEDIA|BAJA" },
   "alternativas": []
 }
 
@@ -213,6 +235,25 @@ Strict rules:
    data support the attribution, how each supplied datum was used, and whether any
    datum contradicts what you see and how you handled it. When confidence is NINGUNA,
    explain what was missing to identify the item.
+7. Fill in "ambito" and "epoca" whenever you can support them with evidence, even
+   if other fields remain null. They are the first thing the user wants to know.
+   "ambito": the culture, civilisation or issuing sphere. Examples: "Archaic Greece,
+   Ionia or Caria", "Ottoman Empire, province of Egypt", "Hispanic monarchy",
+   "Roman Empire". If you cannot defend any, use null.
+   "epoca": the approximate period with the precision the material allows: a century,
+   a quarter-century, a reign or a decade. If you cannot defend it, use null.
+   "certezas": an object with one entry per field that carries a value (other than
+   null), stating how well the evidence supports that specific field.
+   ALTA when the available evidence supports that field without reasonable alternative.
+   For "ambito" and "epoca", style, module, coining technique and iconography can
+   justify ALTA without a legend. For "emisor", "autoridad", "ceca" and "fecha",
+   what normally justifies ALTA is legible epigraphy or user-supplied data
+   confirming it.
+   MEDIA when the field is probable but admits alternatives.
+   BAJA when it is a hypothesis among several equally defensible ones.
+   "confianza" continues to refer to the precise attribution of the piece and is
+   not calculated as an average of the per-field "certezas".
+   Fields that are null need no entry in "certezas".
 
 Write all field values in English. The JSON key names and the values of "confianza" (ALTA, MEDIA, BAJA, NINGUNA) remain exactly as shown.
 
@@ -226,9 +267,12 @@ Return EXCLUSIVELY a valid JSON object, with no text before or after it:
   "ceca": "city or mint mark (if applicable) or null",
   "fecha": "visible year or range or null",
   "referencia_catalogo": "KM#, RIC, etc. or null",
+  "ambito": "culture, civilisation or issuing sphere or null",
+  "epoca": "approximate period with the precision the material allows or null",
   "confianza": "ALTA|MEDIA|BAJA|NINGUNA",
   "para_confirmar": "what would confirm the attribution (e.g. weight, diameter, mint mark, full legend) or null if confidence is ALTA",
   "razonamiento": "visual elements or user data the attribution is based on, and how any contradictions were handled",
+  "certezas": { "emisor": "ALTA|MEDIA|BAJA", "fecha": "ALTA|MEDIA|BAJA" },
   "alternativas": []
 }
 
@@ -339,6 +383,28 @@ Règles strictes :
    a été utilisée, et si l'une d'elles contredit ce que vous voyez et comment vous
    l'avez traitée. Quand la confiance est NINGUNA, expliquez ce qui a manqué pour
    identifier la pièce.
+7. Renseignez « ambito » et « epoca » dès que vous pouvez les étayer par des
+   preuves, même si les autres champs restent null. Ce sont les premières
+   informations que l'utilisateur souhaite connaître.
+   « ambito » : la culture, la civilisation ou la sphère d'émission. Exemples :
+   « Grèce archaïque, Ionie ou Carie », « Empire ottoman, province d'Égypte »,
+   « monarchie hispanique », « Empire romain ». Si vous ne pouvez en défendre
+   aucun, utilisez null.
+   « epoca » : la période approximative avec la précision que le matériau permet :
+   un siècle, un quart de siècle, un règne ou une décennie. Si vous ne pouvez la
+   défendre, utilisez null.
+   « certezas » : un objet avec une entrée par champ ayant une valeur (autre que
+   null), indiquant dans quelle mesure les preuves étayent ce champ en particulier.
+   ALTA quand les preuves disponibles soutiennent ce champ sans alternative
+   raisonnable. Pour « ambito » et « epoca », le style, le module, la technique de
+   frappe et l'iconographie peuvent suffire pour ALTA sans légende. Pour « emisor »,
+   « autoridad », « ceca » et « fecha », ce qui justifie normalement ALTA est
+   l'épigraphie lisible ou une donnée fournie par l'utilisateur qui la confirme.
+   MEDIA quand le champ est probable mais admet des alternatives.
+   BAJA quand il s'agit d'une hypothèse parmi plusieurs également défendables.
+   « confianza » continue de se référer à l'attribution précise de la pièce et
+   n'est pas calculée comme une moyenne des « certezas » par champ.
+   Les champs null n'ont pas besoin d'entrée dans « certezas ».
 
 Renvoyez EXCLUSIVEMENT un objet JSON valide, sans texte avant ni après :
 {
@@ -350,9 +416,12 @@ Renvoyez EXCLUSIVEMENT un objet JSON valide, sans texte avant ni après :
   "ceca": "ville ou marque d'atelier monétaire (si applicable) ou null",
   "fecha": "année ou plage visible ou null",
   "referencia_catalogo": "KM#, RIC, etc. ou null",
+  "ambito": "culture, civilisation ou sphère d'émission ou null",
+  "epoca": "période approximative avec la précision que le matériau permet ou null",
   "confianza": "ALTA|MEDIA|BAJA|NINGUNA",
   "para_confirmar": "ce qui permettrait de confirmer l'attribution (p. ex. poids, diamètre, marque d'atelier, légende complète) ou null si la confiance est ALTA",
   "razonamiento": "éléments visuels ou données de l'utilisateur sur lesquels repose l'attribution, et traitement des éventuelles contradictions",
+  "certezas": { "emisor": "ALTA|MEDIA|BAJA", "fecha": "ALTA|MEDIA|BAJA" },
   "alternativas": []
 }
 
@@ -414,6 +483,28 @@ Strenge Regeln:
    verwendet wurde und ob eine davon im Widerspruch zum Sichtbaren steht und wie
    damit umgegangen wurde. Bei Konfidenz NINGUNA: erläutern Sie, was für eine
    Identifikation gefehlt hat.
+7. Füllen Sie „ambito" und „epoca" immer dann aus, wenn Sie sie mit Belegen stützen
+   können, auch wenn andere Felder null bleiben. Es sind die ersten Informationen,
+   die der Benutzer wissen möchte.
+   „ambito": die Kultur, Zivilisation oder der Ausstellungsbereich. Beispiele:
+   „Archaisches Griechenland, Ionien oder Karien", „Osmanisches Reich, Provinz
+   Ägypten", „hispanische Monarchie", „Römisches Reich". Können Sie keinen
+   verteidigen, verwenden Sie null.
+   „epoca": der ungefähre Zeitraum mit der Genauigkeit, die das Material erlaubt:
+   ein Jahrhundert, ein Vierteljahrhundert, eine Regierungszeit oder ein Jahrzehnt.
+   Können Sie ihn nicht verteidigen, verwenden Sie null.
+   „certezas": ein Objekt mit einem Eintrag pro Feld, das einen Wert trägt (ungleich
+   null), das angibt, wie gut die Belege dieses Feld stützen.
+   ALTA, wenn die verfügbaren Belege dieses Feld ohne vernünftige Alternative stützen.
+   Für „ambito" und „epoca" können Stil, Modul, Prägetechnik und Ikonographie für
+   ALTA genügen, ohne dass eine Umschrift vorliegt. Für „emisor", „autoridad",
+   „ceca" und „fecha" rechtfertigt normalerweise lesbare Epigraphik oder eine vom
+   Benutzer angegebene, dies bestätigende Angabe ein ALTA.
+   MEDIA, wenn das Feld wahrscheinlich ist, aber Alternativen zulässt.
+   BAJA, wenn es eine Hypothese unter mehreren gleichermaßen vertretbaren ist.
+   „confianza" bezieht sich weiterhin auf die präzise Zuweisung des Stücks und
+   wird nicht als Durchschnitt der einzelnen „certezas"-Werte berechnet.
+   Felder, die null sind, benötigen keinen Eintrag in „certezas".
 
 Geben Sie AUSSCHLIESSLICH ein gültiges JSON-Objekt zurück, ohne Text davor oder danach:
 {
@@ -425,9 +516,12 @@ Geben Sie AUSSCHLIESSLICH ein gültiges JSON-Objekt zurück, ohne Text davor ode
   "ceca": "Stadt oder Münzstättenmarke (falls zutreffend) oder null",
   "fecha": "sichtbares Jahr oder Zeitraum oder null",
   "referencia_catalogo": "KM#, RIC, usw. oder null",
+  "ambito": "Kultur, Zivilisation oder Ausstellungsbereich oder null",
+  "epoca": "ungefährer Zeitraum mit der Genauigkeit, die das Material erlaubt, oder null",
   "confianza": "ALTA|MEDIA|BAJA|NINGUNA",
   "para_confirmar": "was zur Bestätigung nötig wäre (z. B. Gewicht, Durchmesser, Münzzeichen, vollständige Umschrift) oder null bei ALTA",
   "razonamiento": "visuelle Elemente oder Benutzerdaten, auf denen die Zuweisung beruht, und Umgang mit etwaigen Widersprüchen",
+  "certezas": { "emisor": "ALTA|MEDIA|BAJA", "fecha": "ALTA|MEDIA|BAJA" },
   "alternativas": []
 }
 
@@ -749,8 +843,8 @@ export async function onRequestPost(context) {
 
     // Forma de respuesta específica por tarea
     if (tarea === 'identificacion_moneda') {
-      const { confianza, para_confirmar, razonamiento, ...identificacion } = resultado
-      return json({ confianza, para_confirmar: para_confirmar ?? null, razonamiento: razonamiento ?? null, identificacion, coste_cobrado })
+      const { confianza, para_confirmar, razonamiento, certezas, ...identificacion } = resultado
+      return json({ confianza, para_confirmar: para_confirmar ?? null, razonamiento: razonamiento ?? null, certezas: certezas ?? null, identificacion, coste_cobrado })
     }
     return json({ resultado, coste: coste_cobrado })
   }
