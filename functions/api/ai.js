@@ -116,6 +116,17 @@ Reglas estrictas:
    En esos casos no lo ignores ni te pliegues al dato en silencio: baja la
    confianza a BAJA o NINGUNA y señala la discrepancia en el campo
    correspondiente o en «alternativas».
+   Caso especial — leyendas o inscripciones aportadas por el usuario: una leyenda
+   es el dato más determinante que puede aportarse y se trata como tal.
+   Compárala con las leyendas conocidas del tipo que vayas a proponer y hazlo
+   constar en «razonamiento»: di si la frase aportada corresponde a ese tipo o si
+   no has logrado situarla. Compartir alfabeto no es correspondencia: que una
+   leyenda esté en griego, árabe o cirílico no la hace coherente con cualquier
+   tipo de ese ámbito. Si no logras situar la frase exacta, no sostengas
+   «emisor», «autoridad» ni «ambito» por encima de BAJA apoyándote en la
+   escritura: dilo abiertamente y recurre a «alternativas». Una leyenda que no
+   corresponde a las leyendas conocidas del tipo propuesto es una contradicción
+   en el sentido del párrafo anterior.
 5. Adapta cada campo de la respuesta al tipo de objeto indicado. No inventes un valor
    para un campo que no tenga sentido para ese tipo: es preferible null a un dato
    aproximado.
@@ -238,6 +249,17 @@ Strict rules:
    In those cases do not ignore it or silently conform to it: lower confidence to
    BAJA or NINGUNA and note the discrepancy in the relevant field or in
    "alternativas".
+   Special case — legends or inscriptions provided by the user: a legend is the
+   most decisive piece of data the user can supply and must be treated as such.
+   Compare it with the known legends of the type you intend to propose and state
+   this in "razonamiento": say whether the supplied text matches that type or
+   whether you have been unable to place it. Sharing an alphabet is not a match:
+   a legend being in Greek, Arabic or Cyrillic does not make it consistent with
+   any type from that script area. If you cannot place the exact text, do not
+   sustain "emisor", "autoridad" or "ambito" above BAJA on the basis of the
+   script alone: state this openly and fall back on "alternativas". A legend that
+   does not match the known legends of the proposed type is a contradiction in
+   the sense of the paragraph above.
 5. Adapt each response field to the stated object type. Do not invent a value for a
    field that makes no sense for that type: null is preferable to an approximate guess.
    - Coin: fields with their usual numismatic meaning.
@@ -412,6 +434,18 @@ Règles strictes :
    Dans ces cas, ne l'ignorez pas et n'adoptez pas cette donnée en silence :
    abaissez la confiance à BAJA ou NINGUNA et signalez la discordance dans le
    champ concerné ou dans « alternativas ».
+   Cas particulier — légendes ou inscriptions fournies par l'utilisateur : une
+   légende est l'élément le plus déterminant que l'utilisateur puisse apporter et
+   doit être traitée comme tel. Comparez-la avec les légendes connues du type que
+   vous allez proposer et signalez-le dans « razonamiento » : indiquez si le texte
+   fourni correspond à ce type ou si vous n'avez pas réussi à le situer. Partager
+   un alphabet ne constitue pas une correspondance : qu'une légende soit en grec,
+   en arabe ou en cyrillique ne la rend pas cohérente avec n'importe quel type de
+   ce domaine. Si vous ne pouvez pas situer le texte exact, ne soutenez ni
+   « emisor », ni « autoridad », ni « ambito » au-dessus de BAJA sur la seule base
+   de l'écriture : dites-le ouvertement et recourez aux « alternativas ». Une légende
+   qui ne correspond pas aux légendes connues du type proposé est une contradiction
+   au sens du paragraphe précédent.
 5. Adaptez chaque champ de la réponse au type d'objet indiqué. N'inventez pas de valeur pour un champ sans pertinence pour ce type : null est préférable à une approximation.
    - Monnaie : champs avec leur sens numismatique habituel.
    - Médaille : n'est pas une monnaie légale. « denominacion » est normalement null sauf si la pièce présente une valeur faciale explicite. « emisor » est généralement une institution, une ville ou un événement commémoratif. « autoridad » peut être le graveur s'il est plus pertinent qu'un souverain. « ceca » uniquement si une marque d'atelier monétaire est visible ; sinon null.
@@ -528,6 +562,18 @@ Strenge Regeln:
    In diesen Fällen darf dies nicht stillschweigend ignoriert oder akzeptiert
    werden: Senken Sie die Konfidenz auf BAJA oder NINGUNA und erläutern Sie die
    Diskrepanz im betreffenden Feld oder in „alternativas".
+   Sonderfall — vom Benutzer angegebene Legenden oder Inschriften: Eine Legende
+   ist das aussagekräftigste Datenelement, das der Benutzer liefern kann, und muss
+   als solches behandelt werden. Vergleichen Sie sie mit den bekannten Legenden des
+   vorgeschlagenen Typs und halten Sie dies in „razonamiento" fest: Sagen Sie, ob
+   der gelieferte Text zu diesem Typ passt oder ob Sie ihn nicht einordnen konnten.
+   Eine gemeinsame Schrift ist keine Übereinstimmung: Eine Legende in
+   griechischer, arabischer oder kyrillischer Schrift ist damit nicht mit jedem
+   Typ dieses Schriftbereichs vereinbar. Wenn Sie den genauen Text nicht einordnen können,
+   stützen Sie „emisor", „autoridad" oder „ambito" nicht allein auf die Schrift
+   über BAJA hinaus: Sagen Sie dies offen und greifen Sie auf „alternativas"
+   zurück. Eine Legende, die nicht zu den bekannten Legenden des vorgeschlagenen
+   Typs passt, ist ein Widerspruch im Sinne des obigen Absatzes.
 5. Passen Sie jedes Antwortfeld an den angegebenen Objekttyp an. Erfinden Sie keinen Wert für ein Feld, das für diesen Typ keinen Sinn ergibt: null ist einer Schätzung vorzuziehen.
    - Münze: Felder mit ihrer üblichen numismatischen Bedeutung.
    - Medaille: kein gesetzliches Zahlungsmittel. „denominacion" ist normalerweise null, es sei denn, das Stück weist einen expliziten Nennwert auf. „emisor" ist meist eine Institution, eine Stadt oder ein Gedenkanlаss. „autoridad" kann der Stempelschneider sein, wenn relevanter als ein Herrscher. „ceca" nur wenn eine Münzstättenmarke sichtbar ist; sonst null.
