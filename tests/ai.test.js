@@ -38,8 +38,8 @@ describe('calcularReembolso()', () => {
   // Con contenido → reembolso 0 (la confianza no decide el precio)
   it('respuesta con emisor → 0', () =>
     expect(calcularReembolso({ emisor: 'España', alternativas: [] })).toBe(0))
-  it('respuesta con solo leyenda_anverso → 0', () =>
-    expect(calcularReembolso({ leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', alternativas: [] })).toBe(0))
+  it('respuesta con solo leyenda_anverso → 4 (leyendas ya no cuentan como aportación)', () =>
+    expect(calcularReembolso({ leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', alternativas: [] })).toBe(4))
   it('respuesta con solo alternativas → 0', () =>
     expect(calcularReembolso({ alternativas: [{ emisor: 'España' }] })).toBe(0))
   it('confianza BAJA con contenido → 0', () =>
@@ -89,14 +89,14 @@ describe('calcularReembolso() — criterio nuevo: reembolso solo si no aporta na
     })).toBe(0)
   })
 
-  it('solo las leyendas transcritas → reembolso 0', () => {
+  it('solo las leyendas transcritas → reembolso 4 (leyendas ya no cuentan como aportación)', () => {
     expect(calcularReembolso({
       leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', leyenda_reverso: null,
       emisor: null, autoridad: null, denominacion: null,
       ceca: null, fecha: null, referencia_catalogo: null,
       ambito: null, epoca: null,
       confianza: 'BAJA', alternativas: [],
-    })).toBe(0)
+    })).toBe(4)
   })
 
   it('campo con cadena vacía no cuenta como aportación', () => {

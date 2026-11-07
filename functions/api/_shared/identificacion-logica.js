@@ -16,7 +16,7 @@ export const CLAVES_IDENTIFICACION = [
 // Excluye confianza, para_confirmar, razonamiento, certezas y alternativas
 // (estas últimas se comprueban por separado).
 const CAMPOS_APORTACION = [
-  'leyenda_anverso', 'leyenda_reverso', 'emisor', 'autoridad', 'denominacion',
+  'emisor', 'autoridad', 'denominacion',
   'ceca', 'fecha', 'referencia_catalogo', 'ambito', 'epoca',
 ]
 
