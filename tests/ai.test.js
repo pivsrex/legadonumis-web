@@ -229,7 +229,7 @@ function respuestaModelo(confianza) {
 }
 
 // Helper: simula fetch global (LemonSqueezy válido + Anthropic con respuesta)
-function mockFetch(modelResponse) {
+function mockFetch(modelResponse, extraAnthropic = {}) {
   return vi.fn(async (url, _opts) => {
     // LemonSqueezy validate
     if (url.includes('lemonsqueezy')) {
@@ -246,6 +246,7 @@ function mockFetch(modelResponse) {
         content: [{ type: 'text', text: typeof modelResponse === 'string'
           ? modelResponse
           : JSON.stringify(modelResponse) }],
+        ...extraAnthropic,
       }),
     }
   })
@@ -393,6 +394,49 @@ describe('handler identificacion_moneda — cobro', () => {
     expect(body.error).toBe('respuesta_json_invalida')
     expect(db.saldo).toBe(100)
     expect(db.consumos[0]).toMatchObject({ coste: 5, resultado: 'reembolsado' })
+  })
+
+  it('respuesta cortada por el techo de salida: codigo propio, no respuesta_json_invalida', async () => {
+    const db = crearDbMock(100)
+    // JSON sin cerrar: lo que llega cuando el modelo agota max_tokens.
+    vi.stubGlobal('fetch', mockFetch(
+      '{"emisor":"Reino de Hungria","autoridad":"Fernando I","razonamiento":"Las leyendas',
+      { stop_reason: 'max_tokens', usage: { output_tokens: 4000 } },
+    ))
+
+    const ctx = crearContexto({
+      license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG],
+    }, db)
+
+    const res = await onRequestPost(ctx)
+    const body = await res.json()
+
+    expect(res.status).toBe(500)
+    expect(body.error).toBe('respuesta_truncada:4000/4000')
+    expect(db.saldo).toBe(100)
+    expect(db.consumos[0]).toMatchObject({ coste: 5, resultado: 'reembolsado' })
+  })
+
+  it('respuesta cortada que aun asi parsea y valida: se acepta, no se rechaza', async () => {
+    const db = crearDbMock(100)
+    vi.stubGlobal('fetch', mockFetch(
+      respuestaModelo('MEDIA'),
+      { stop_reason: 'max_tokens', usage: { output_tokens: 4000 } },
+    ))
+
+    const ctx = crearContexto({
+      license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG],
+    }, db)
+
+    const res = await onRequestPost(ctx)
+    const body = await res.json()
+
+    expect(res.status).toBe(200)
+    expect(body.error).toBeUndefined()
+    expect(body.confianza).toBe('MEDIA')
+    expect(db.consumos[0]).toMatchObject({ resultado: 'ok' })
   })
 })
 

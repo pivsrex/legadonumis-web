@@ -1056,6 +1056,16 @@ export async function onRequestPost(context) {
     } catch {
       await reembolsarCreditos(db, license_key, def.coste)
       await registrarConsumo(db, license_key, tarea, def.coste, 'reembolsado')
+      // Si el modelo agotó el techo de salida, el JSON llega sin cerrar y el
+      // parseo falla por eso, no porque devolviera basura. Se consulta aquí y no
+      // antes, a propósito: una respuesta cortada que aun así parsea es
+      // aprovechable y no debe rechazarse. El 6/11/2026 trece fallos de este
+      // tipo se presentaron como «respuesta_json_invalida» y costó una tarde
+      // descubrir que solo faltaba espacio.
+      if (data?.stop_reason === 'max_tokens') {
+        const generados = data?.usage?.output_tokens ?? '?'
+        return json({ error: `respuesta_truncada:${generados}/${def.maxTokens}` }, 500)
+      }
       return json({ error: 'respuesta_json_invalida' }, 500)
     }
 
