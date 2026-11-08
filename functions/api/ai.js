@@ -116,6 +116,17 @@ Reglas estrictas:
    En esos casos no lo ignores ni te pliegues al dato en silencio: baja la
    confianza a BAJA o NINGUNA y señala la discrepancia en el campo
    correspondiente o en «alternativas».
+   Caso especial — leyendas, visibles o aportadas: di de forma explícita en
+   «razonamiento» si la frase está entre las leyendas conocidas del tipo que
+   propones o si no has logrado situarla. La comparación es asimétrica, y es
+   deliberado: no lograr situar la frase OBLIGA a no sostener «emisor»,
+   «autoridad» ni «ambito» por encima de BAJA apoyándote en el alfabeto, y a
+   recurrir a «alternativas»; en cambio, afirmar de memoria que la leyenda
+   coincide NO cuenta como la confirmación que exige la regla 2 y no sube la
+   confianza por sí mismo. Compartir alfabeto no es coincidencia. No presentes
+   esa comparación como una verificación: no escribas que la leyenda «confirma»
+   la atribución. Conserva todos los campos en la respuesta: lo que no se
+   sostenga va en null, nunca se omite.
 5. Adapta cada campo de la respuesta al tipo de objeto indicado. No inventes un valor
    para un campo que no tenga sentido para ese tipo: es preferible null a un dato
    aproximado.
@@ -142,6 +153,12 @@ Reglas estrictas:
    «no se aprecia», en lugar de «no logro leer»); y sin mencionar al usuario en
    tercera persona («la ceca aportada», «el peso indicado», «según los datos
    aportados», en lugar de «el usuario aporta»).
+   No afirmes, ni en «razonamiento» ni en «para_confirmar», que un rasgo, una
+   leyenda o un tipo sea exclusivo, único, casi exclusivo, propio o distintivo de
+   un emisor, una ceca o una época. Puedes decir que lo que se observa coincide
+   con un tipo o corresponde a él, y nombrarlo como base de la propuesta; no
+   puedes afirmar nada sobre lo que no existe en otras acuñaciones, porque eso no
+   se comprueba ni en las imágenes ni en los datos aportados.
 7. Rellena "ambito" y "epoca" siempre que puedas sostenerlos con evidencia, aunque
    el resto de campos quede en null. Son lo primero que el usuario quiere saber.
    "ambito": la cultura, civilización o ámbito de emisión. Ejemplos: «Grecia arcaica,
@@ -238,6 +255,17 @@ Strict rules:
    In those cases do not ignore it or silently conform to it: lower confidence to
    BAJA or NINGUNA and note the discrepancy in the relevant field or in
    "alternativas".
+   Special case — legends, whether visible or supplied: state explicitly in
+   "razonamiento" whether the phrase is among the known legends of the type you
+   propose, or that you have not managed to place it. The comparison is
+   asymmetric, and deliberately so: failing to place the phrase REQUIRES that you
+   not sustain "emisor", "autoridad" or "ambito" above BAJA on the strength of the
+   alphabet, and that you fall back on "alternativas"; whereas asserting from
+   memory that the legend matches does NOT count as the confirmation required by
+   rule 2 and does not by itself raise confidence. Sharing an alphabet is not a
+   match. Do not present this comparison as a verification: do not write that the
+   legend "confirms" the attribution. Keep every field in the response: what you
+   cannot sustain goes in null, and is never omitted.
 5. Adapt each response field to the stated object type. Do not invent a value for a
    field that makes no sense for that type: null is preferable to an approximate guess.
    - Coin: fields with their usual numismatic meaning.
@@ -263,6 +291,12 @@ Strict rules:
    such as «the name cannot be read» instead of «I cannot read»); and do not refer
    to the user in the third person («the supplied mint», «the indicated weight»,
    «according to the data provided», instead of «the user states»).
+   Do not assert, either in "razonamiento" or in "para_confirmar", that a
+   feature, a legend or a type is exclusive, unique, almost exclusive, proper or
+   distinctive to an issuer, a mint or a period. You may say that what is observed
+   matches or corresponds to a type, and name it as the basis of the proposal; you
+   may not assert anything about what does not occur in other coinages, because
+   that cannot be checked in the images or in the supplied data.
 7. Fill in "ambito" and "epoca" whenever you can support them with evidence, even
    if other fields remain null. They are the first thing the user wants to know.
    "ambito": the culture, civilisation or issuing sphere. Examples: "Archaic Greece,
@@ -412,6 +446,18 @@ Règles strictes :
    Dans ces cas, ne l'ignorez pas et n'adoptez pas cette donnée en silence :
    abaissez la confiance à BAJA ou NINGUNA et signalez la discordance dans le
    champ concerné ou dans « alternativas ».
+   Cas particulier — légendes, visibles ou fournies : indiquez explicitement dans
+   « razonamiento » si la phrase figure parmi les légendes connues du type que
+   vous proposez, ou que vous n'êtes pas parvenu à la situer. La comparaison est
+   asymétrique, et c'est délibéré : ne pas parvenir à situer la phrase OBLIGE à ne
+   soutenir ni « emisor », ni « autoridad », ni « ambito » au-delà de BAJA en vous
+   appuyant sur l'alphabet, et à recourir aux « alternativas » ; en revanche,
+   affirmer de mémoire que la légende correspond NE compte PAS comme la
+   confirmation exigée par la règle 2 et n'élève pas la confiance à elle seule.
+   Partager un alphabet n'est pas une correspondance. Ne présentez pas cette
+   comparaison comme une vérification : n'écrivez pas que la légende « confirme »
+   l'attribution. Conservez tous les champs dans la réponse : ce qui ne peut être
+   soutenu prend la valeur null, et n'est jamais omis.
 5. Adaptez chaque champ de la réponse au type d'objet indiqué. N'inventez pas de valeur pour un champ sans pertinence pour ce type : null est préférable à une approximation.
    - Monnaie : champs avec leur sens numismatique habituel.
    - Médaille : n'est pas une monnaie légale. « denominacion » est normalement null sauf si la pièce présente une valeur faciale explicite. « emisor » est généralement une institution, une ville ou un événement commémoratif. « autoridad » peut être le graveur s'il est plus pertinent qu'un souverain. « ceca » uniquement si une marque d'atelier monétaire est visible ; sinon null.
@@ -427,6 +473,13 @@ Règles strictes :
    à lire», «on ne distingue pas», plutôt que «je ne parviens pas à lire») ; et sans
    désigner l'utilisateur à la troisième personne («l'atelier indiqué», «le poids
    fourni», «selon les données fournies», plutôt que «l'utilisateur indique»).
+   N'affirmez pas, ni dans « razonamiento » ni dans « para_confirmar », qu'un
+   trait, une légende ou un type soit exclusif, unique, quasi exclusif, propre ou
+   distinctif d'un émetteur, d'un atelier ou d'une époque. Vous pouvez dire que ce
+   qui est observé correspond à un type et le nommer comme fondement de la
+   proposition ; vous ne pouvez rien affirmer sur ce qui n'existe pas dans
+   d'autres frappes, car cela ne se vérifie ni sur les images ni dans les données
+   fournies.
 7. Renseignez « ambito » et « epoca » dès que vous pouvez les étayer par des
    preuves, même si les autres champs restent null. Ce sont les premières
    informations que l'utilisateur souhaite connaître.
@@ -528,6 +581,18 @@ Strenge Regeln:
    In diesen Fällen darf dies nicht stillschweigend ignoriert oder akzeptiert
    werden: Senken Sie die Konfidenz auf BAJA oder NINGUNA und erläutern Sie die
    Diskrepanz im betreffenden Feld oder in „alternativas".
+   Sonderfall — Legenden, ob sichtbar oder angegeben: Geben Sie in „razonamiento"
+   ausdrücklich an, ob die Wendung zu den bekannten Legenden des von Ihnen
+   vorgeschlagenen Typs gehört oder ob sie nicht eingeordnet werden konnte. Der
+   Vergleich ist bewusst asymmetrisch: Lässt sich die Wendung nicht einordnen,
+   dürfen „emisor", „autoridad" und „ambito" nicht über BAJA hinaus auf die
+   Schrift gestützt werden, und es ist auf „alternativas" zurückzugreifen;
+   umgekehrt gilt eine aus dem Gedächtnis behauptete Übereinstimmung NICHT als
+   die von Regel 2 verlangte Bestätigung und erhöht die Konfidenz nicht von sich
+   aus. Dieselbe Schrift ist keine Übereinstimmung. Stellen Sie diesen Vergleich
+   nicht als Überprüfung dar: Schreiben Sie nicht, die Legende „bestätige" die
+   Zuordnung. Behalten Sie alle Felder in der Antwort: Was nicht gestützt werden
+   kann, wird null und wird niemals weggelassen.
 5. Passen Sie jedes Antwortfeld an den angegebenen Objekttyp an. Erfinden Sie keinen Wert für ein Feld, das für diesen Typ keinen Sinn ergibt: null ist einer Schätzung vorzuziehen.
    - Münze: Felder mit ihrer üblichen numismatischen Bedeutung.
    - Medaille: kein gesetzliches Zahlungsmittel. „denominacion" ist normalerweise null, es sei denn, das Stück weist einen expliziten Nennwert auf. „emisor" ist meist eine Institution, eine Stadt oder ein Gedenkanlаss. „autoridad" kann der Stempelschneider sein, wenn relevanter als ein Herrscher. „ceca" nur wenn eine Münzstättenmarke sichtbar ist; sonst null.
@@ -544,6 +609,14 @@ Strenge Regeln:
    lesen»); und ohne den Benutzer in der dritten Person zu nennen («die angegebene
    Münzstätte», «das angegebene Gewicht», «den angegebenen Daten zufolge» statt
    «der Benutzer gibt an»).
+   Behaupten Sie weder in „razonamiento" noch in „para_confirmar", ein Merkmal,
+   eine Legende oder ein Typ sei ausschließlich, einzigartig, nahezu
+   ausschließlich, eigentümlich oder kennzeichnend für einen bestimmten
+   Emittenten, eine Münzstätte oder eine Epoche. Sie dürfen sagen, dass das
+   Beobachtete einem Typ entspricht, und diesen als Grundlage des Vorschlags
+   nennen; Sie dürfen nichts darüber behaupten, was in anderen Prägungen nicht
+   vorkommt, denn das lässt sich weder auf den Bildern noch anhand der
+   angegebenen Daten überprüfen.
 7. Füllen Sie „ambito" und „epoca" immer dann aus, wenn Sie sie mit Belegen stützen
    können, auch wenn andere Felder null bleiben. Es sind die ersten Informationen,
    die der Benutzer wissen möchte.
