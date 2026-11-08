@@ -171,6 +171,16 @@ Reglas estrictas:
    numismático cualquier cosa que no se vea en estas imágenes. La diferencia es
    simple: puedes describir esta pieza y proponer, no puedes describir lo que hay
    o no hay en otras piezas.
+   El Análisis se dirige a una persona, no a un sistema. No nombres nunca los
+   campos de la respuesta ni los niveles de confianza: ni «emisor»,
+   «autoridad», «ceca», «ambito», «epoca», «confianza», ni ALTA, MEDIA, BAJA o
+   NINGUNA, y no hables de una atribución «por encima de» ningún nivel. La
+   interfaz ya muestra la certeza de cada dato por separado; aquí no se repite
+   como etiqueta. Di lo mismo como se lo diría un numismático a otro: «con lo que
+   se ve no puede determinarse quién la emitió ni en qué ceca se batió» en lugar
+   de «no se sostiene una atribución de emisor, autoridad o ceca por encima de
+   BAJA»; «la atribución queda por confirmar porque no hay marcas ni monograma
+   legibles» en lugar de «la confianza es MEDIA por falta de marcas».
 7. Rellena "ambito" y "epoca" siempre que puedas sostenerlos con evidencia, aunque
    el resto de campos quede en null. Son lo primero que el usuario quiere saber.
    "ambito": la cultura, civilización o ámbito de emisión. Ejemplos: «Grecia arcaica,
@@ -320,6 +330,16 @@ Strict rules:
    numismatic corpus anything that is not visible in these images. The
    distinction is simple: you may describe this piece and propose, you may not
    describe what other pieces do or do not have.
+   The Análisis addresses a person, not a system. Never name the response fields
+   or the confidence levels: not "emisor", "autoridad", "ceca", "ambito",
+   "epoca", "confianza", nor ALTA, MEDIA, BAJA or NINGUNA, and do not speak of an
+   attribution "above" any level. The interface already shows the certainty of
+   each datum separately; it is not repeated here as a label. Say the same thing
+   as one numismatist would say it to another: "with what is visible it cannot be
+   determined who issued it or at which mint it was struck" instead of "an
+   attribution of emisor, autoridad or ceca above BAJA is not sustained"; "the
+   attribution remains to be confirmed because no marks or monogram are legible"
+   instead of "confidence is MEDIA for lack of marks".
 7. Fill in "ambito" and "epoca" whenever you can support them with evidence, even
    if other fields remain null. They are the first thing the user wants to know.
    "ambito": the culture, civilisation or issuing sphere. Examples: "Archaic Greece,
@@ -515,6 +535,17 @@ Règles strictes :
    soit qui ne se voie pas sur ces images. La distinction est simple : vous
    pouvez décrire cette pièce et proposer, vous ne pouvez pas décrire ce que
    d'autres pièces ont ou n'ont pas.
+   L'Analyse s'adresse à une personne, non à un système. Ne nommez jamais les
+   champs de la réponse ni les niveaux de confiance : ni « emisor »,
+   « autoridad », « ceca », « ambito », « epoca », « confianza », ni ALTA, MEDIA,
+   BAJA ou NINGUNA, et ne parlez pas d'une attribution « au-dessus de » un
+   niveau. L'interface montre déjà la certitude de chaque donnée séparément ;
+   elle n'est pas répétée ici sous forme d'étiquette. Dites la même chose comme
+   un numismate le dirait à un autre : « avec ce qui est visible, on ne peut
+   déterminer ni qui l'a émise ni dans quel atelier elle a été frappée » au lieu
+   de « une attribution d'emisor, autoridad ou ceca au-dessus de BAJA n'est pas
+   soutenue » ; « l'attribution reste à confirmer car aucune marque ni monogramme
+   n'est lisible » au lieu de « la confiance est MEDIA par manque de marques ».
 7. Renseignez « ambito » et « epoca » dès que vous pouvez les étayer par des
    preuves, même si les autres champs restent null. Ce sont les premières
    informations que l'utilisateur souhaite connaître.
@@ -665,6 +696,18 @@ Strenge Regeln:
    zuzuschreiben, was auf diesen Bildern nicht zu sehen ist. Der Unterschied ist
    einfach: Sie dürfen dieses Stück beschreiben und einen Vorschlag machen, Sie
    dürfen nicht beschreiben, was andere Stücke haben oder nicht haben.
+   Die Analyse richtet sich an einen Menschen, nicht an ein System. Nennen Sie
+   niemals die Antwortfelder oder die Konfidenzstufen: weder „emisor",
+   „autoridad", „ceca", „ambito", „epoca", „confianza" noch ALTA, MEDIA, BAJA
+   oder NINGUNA, und sprechen Sie nicht von einer Zuordnung „über" einer Stufe.
+   Die Benutzeroberfläche zeigt die Sicherheit jeder Angabe bereits einzeln; sie
+   wird hier nicht als Etikett wiederholt. Sagen Sie dasselbe, wie es ein
+   Numismatiker einem anderen sagen würde: „Mit dem, was zu sehen ist, lässt sich
+   nicht bestimmen, wer sie ausgegeben hat und in welcher Münzstätte sie geprägt
+   wurde" statt „eine Zuordnung von emisor, autoridad oder ceca über BAJA ist
+   nicht gestützt"; „die Zuordnung bleibt zu bestätigen, da keine Marken oder
+   Monogramme lesbar sind" statt „die Konfidenz ist MEDIA wegen fehlender
+   Marken".
 7. Füllen Sie „ambito" und „epoca" immer dann aus, wenn Sie sie mit Belegen stützen
    können, auch wenn andere Felder null bleiben. Es sind die ersten Informationen,
    die der Benutzer wissen möchte.
