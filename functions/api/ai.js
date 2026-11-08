@@ -667,7 +667,13 @@ const TAREAS = {
 
   identificacion_moneda: {
     modelo:    MODELO_IDENTIFICACION,
-    maxTokens: 2000,
+    // El 6/11/2026 el prompt pasó a pedir ambito, epoca y un mapa de certezas
+    // además de la prosa de razonamiento y las alternativas, y con el techo en
+    // 2000 la respuesta se cortaba: JSON sin cerrar y respuesta_json_invalida.
+    // Las piezas con leyendas en griego o árabe (caras en tokens) fallaban casi
+    // siempre. Los tokens de salida solo se pagan si se generan, así que un
+    // techo holgado no encarece las respuestas normales.
+    maxTokens: 4000,
     coste:     5,
     esJson:    true,
     prompts:   { es: SYSTEM_IDENTIFICACION_ES, en: SYSTEM_IDENTIFICACION_EN, fr: SYSTEM_IDENTIFICACION_FR, de: SYSTEM_IDENTIFICACION_DE },
