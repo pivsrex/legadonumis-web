@@ -3,15 +3,14 @@
 // Body: { license_key, instance_id }
 // Returns: { valid: boolean, token?: string }
 //
-// Cuando `valid` es true se firma un token offline-verificable (ver
-// `_shared/license-token.js`) para que el cliente pueda confirmar
-// criptográficamente su estado de Pro sin depender de un booleano local sin
-// firmar. Si LemonSqueezy no responde (catch de abajo) se mantiene la
-// política de fail-open existente — `valid: true` sin token nuevo — porque
-// esto es RE-verificación de una licencia ya confirmada antes: el cliente
-// sigue usando su token anterior, que todavía no habrá expirado (TTL 45
-// días). No se firma aquí un token para una licencia que este servidor no
-// ha podido confirmar — eso sí sería fabricar una credencial de la nada.
+// Política de fallo (fail-open): solo se invalida una licencia cuando
+// LemonSqueezy responde 2xx con JSON interpretable que dice explícitamente
+// que la licencia NO está activa. Cualquier otra situación (red caída,
+// API key revocada, respuesta mal formada, error 5xx transitorio) devuelve
+// valid:true porque esto es RE-verificación de una licencia ya confirmada:
+// el cliente conserva su token anterior (TTL 45 días) y sigue operando. No
+// se firma token nuevo en estos casos de incertidumbre — solo cuando LS
+// confirma explícitamente.
 //
 // La huella del equipo que se firma dentro del token se lee de D1 (tabla
 // `activaciones`, grabada por `activate.js`) — este endpoint NO acepta una
@@ -46,7 +45,19 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({ license_key, instance_id }),
     })
-    const data = await res.json()
+
+    if (!res.ok) {
+      console.warn(`[validate] LemonSqueezy respondió ${res.status} — fail-open`)
+      return json({ valid: true })
+    }
+
+    let data
+    try { data = await res.json() }
+    catch {
+      console.warn('[validate] Respuesta de LemonSqueezy no es JSON válido — fail-open')
+      return json({ valid: true })
+    }
+
     const valid = data.valid === true && data.license_key?.status === 'active'
     if (!valid) return json({ valid: false })
 
@@ -54,7 +65,7 @@ export async function onRequestPost(context) {
     const token = await firmarTokenLicencia(license_key, instance_id, deviceFingerprint, context.env)
     return json({ valid: true, token: token ?? undefined })
   } catch {
-    // Sin red hacia LemonSqueezy → no invalidar (misma política que antes).
+    // Sin red hacia LemonSqueezy → no invalidar.
     // Sin token nuevo: el cliente conserva el que ya tenía.
     return json({ valid: true })
   }

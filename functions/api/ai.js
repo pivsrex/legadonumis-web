@@ -1103,6 +1103,9 @@ function sanear(s) {
 }
 
 async function validarLicencia(licenseKey, instanceId, lsApiKey) {
+  // Solo devuelve false cuando LS responde 2xx con JSON que dice explícitamente
+  // que la licencia no está activa. Cualquier error de red, clave revocada o
+  // respuesta inesperada es fail-open: la consulta AI ya en curso se procesa.
   try {
     const res = await fetch(LS_VALIDATE, {
       method: 'POST',
@@ -1113,11 +1116,20 @@ async function validarLicencia(licenseKey, instanceId, lsApiKey) {
       },
       body: new URLSearchParams({ license_key: licenseKey, instance_id: instanceId }),
     })
-    if (!res.ok) return false
-    const d = await res.json()
+    if (!res.ok) {
+      console.warn(`[ai/validarLicencia] LemonSqueezy respondió ${res.status} — fail-open`)
+      return true
+    }
+    let d
+    try { d = await res.json() }
+    catch {
+      console.warn('[ai/validarLicencia] Respuesta no es JSON válido — fail-open')
+      return true
+    }
     return d.valid === true && d.license_key?.status === 'active'
   } catch {
-    return false
+    console.warn('[ai/validarLicencia] Error de red — fail-open')
+    return true
   }
 }
 

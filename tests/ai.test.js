@@ -711,6 +711,96 @@ describe('TEXTO_BASE_POR_TIPO: 4 tipos × 4 idiomas sin huecos', () => {
   }
 })
 
+// ═══════════════════════════════════════════════════════════════════════════
+// SECCIÓN 6 — validarLicencia: política fail-open ante errores de LS
+// Verifica que un 401/500/cuerpo-inválido/sin-red NO bloquea la petición
+// (antes de este cambio, !res.ok devolvía false → 403 invalid_license).
+// ═══════════════════════════════════════════════════════════════════════════
+
+describe('validarLicencia — política fail-open ante errores de LS', () => {
+  beforeEach(() => { vi.restoreAllMocks() })
+
+  it('LS responde 401 → la petición AI se procesa (no devuelve 403)', async () => {
+    const db = crearDbMock(100)
+    vi.stubGlobal('fetch', vi.fn(async (url) => {
+      if (url.includes('lemonsqueezy')) return { ok: false, status: 401 }
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
+    }))
+
+    const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
+    const res = await onRequestPost(ctx)
+
+    expect(res.status).not.toBe(403)
+    expect(res.status).toBe(200)
+  })
+
+  it('LS responde 500 → la petición AI se procesa (no devuelve 403)', async () => {
+    const db = crearDbMock(100)
+    vi.stubGlobal('fetch', vi.fn(async (url) => {
+      if (url.includes('lemonsqueezy')) return { ok: false, status: 500 }
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
+    }))
+
+    const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
+    const res = await onRequestPost(ctx)
+
+    expect(res.status).not.toBe(403)
+    expect(res.status).toBe(200)
+  })
+
+  it('LS responde ok pero cuerpo no es JSON → la petición AI se procesa', async () => {
+    const db = crearDbMock(100)
+    vi.stubGlobal('fetch', vi.fn(async (url) => {
+      if (url.includes('lemonsqueezy')) {
+        return { ok: true, json: async () => { throw new SyntaxError('no es JSON') } }
+      }
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
+    }))
+
+    const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
+    const res = await onRequestPost(ctx)
+
+    expect(res.status).not.toBe(403)
+    expect(res.status).toBe(200)
+  })
+
+  it('fetch a LS lanza excepción (sin red) → la petición AI se procesa', async () => {
+    const db = crearDbMock(100)
+    vi.stubGlobal('fetch', vi.fn(async (url) => {
+      if (url.includes('lemonsqueezy')) throw new Error('network down')
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
+    }))
+
+    const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
+    const res = await onRequestPost(ctx)
+
+    expect(res.status).not.toBe(403)
+    expect(res.status).toBe(200)
+  })
+
+  it('LS responde 200 con licencia inactiva → 403 invalid_license (invalidación legítima)', async () => {
+    const db = crearDbMock(100)
+    vi.stubGlobal('fetch', vi.fn(async (url) => {
+      if (url.includes('lemonsqueezy')) {
+        return { ok: true, json: async () => ({ valid: false, license_key: { status: 'inactive' } }) }
+      }
+      throw new Error('no debería llegar a Anthropic')
+    }))
+
+    const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
+    const res = await onRequestPost(ctx)
+    const body = await res.json()
+
+    expect(res.status).toBe(403)
+    expect(body.error).toBe('invalid_license')
+  })
+})
+
 describe('handler identificacion_moneda — respuesta con claves traducidas', () => {
   beforeEach(() => { vi.restoreAllMocks() })
 
