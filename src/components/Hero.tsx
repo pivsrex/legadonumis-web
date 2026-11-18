@@ -2,6 +2,7 @@ import { AppleIcon, WindowsIcon } from './icons'
 import { br } from '../utils/text'
 import DownloadMenu from './DownloadMenu'
 import type { Content } from '../content/types'
+import { URL_COMPRA_PRO } from '../config'
 
 interface Props { content: Content }
 
@@ -96,7 +97,7 @@ export default function Hero({ content: C }: Props) {
         <div className="hero-intro" style={{ animationDelay: '280ms', position: 'relative', zIndex: 5 }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, marginTop: 4 }}>
             <DownloadMenu
-              labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
+              labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub, proComingSoon: URL_COMPRA_PRO ? undefined : C.comp_pro_proximamente }}
               btnStyle={s.btnPri}
               center
             >

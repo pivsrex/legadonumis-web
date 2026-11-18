@@ -79,7 +79,7 @@ export const fr: Content = {
   faq10_q: 'Comment activer mon Legado Pro ?',
   faq10_a: "Après le paiement par carte bancaire ou via PayPal, vous recevrez un courrier électronique contenant un code d’activation. Saisissez-le dans la section « Réglages » de l’application.",
   faq11_q: "Dans quelle devise suis-je débité ?",
-  faq11_a: "Le prix est final et comprend les taxes applicables. Le débit se fait en dollars américains : Lemon Squeezy convertit au taux moyen du marché et n'ajoute aucuns frais de conversion. Votre banque peut appliquer ses propres frais sur les opérations en devise étrangère.",
+  faq11_a: "Le prix est final et comprend les taxes applicables. Le débit se fait en dollars américains. Votre banque peut appliquer ses propres frais sur les opérations en devise étrangère.",
 
   comp_h2:  'Faites passer votre collection\nà la vitesse supérieure',
   comp_sub: 'Commencez par l’essentiel\nou accédez à l’expérience complète',
@@ -199,7 +199,8 @@ export const fr: Content = {
   comp_plan_pro_sub:       'Votre musée numérique sans limites',
   comp_price_launch:       'Paiement unique\nSans abonnement',
   comp_license_devices:    'Licence pour deux appareils',
-  comp_payment_note:       'Paiement sécurisé via Lemon Squeezy · taxes comprises',
+  comp_pro_proximamente:   'Legado Pro sera disponible prochainement',
+  comp_payment_note:       'Paiement sécurisé · taxes comprises',
   comp_euro_approx:        'env. {n} €',
   comp_plan_pro_cta:       'Télécharger\nLegado Pro',
   comp_plan_pro_cta_sub:   'et activer l’expérience Pro',

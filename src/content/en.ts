@@ -79,7 +79,7 @@ export const en: Content = {
   faq10_q: 'How do I activate my Legado Pro?',
   faq10_a: "After completing your payment by credit card or PayPal, you'll receive an email with an activation code. Enter it in the Settings section of the app.",
   faq11_q: 'What currency am I charged in?',
-  faq11_a: 'The price is final and includes applicable taxes. You are charged in US dollars: Lemon Squeezy converts at the mid-market rate and adds no conversion fee. Your own bank may charge its usual foreign-transaction fee.',
+  faq11_a: 'The price is final and includes applicable taxes. You are charged in US dollars. Your own bank may charge its usual foreign-transaction fee.',
 
   comp_h2:  'Take your collection\nto the next level',
   comp_sub: 'Start with the essentials or\nunlock the full experience',
@@ -199,7 +199,8 @@ export const en: Content = {
   comp_plan_pro_sub:       'Your digital museum, unlimited',
   comp_price_launch:       'One-time payment\nNo subscriptions',
   comp_license_devices:    'License for two devices',
-  comp_payment_note:       'Secure payment via Lemon Squeezy · taxes included',
+  comp_pro_proximamente:   'Legado Pro will be available shortly',
+  comp_payment_note:       'Secure payment · taxes included',
   comp_euro_approx:        'approx. €{n}',
   comp_plan_pro_cta:       'Download\nLegado Pro',
   comp_plan_pro_cta_sub:   'and Activate the Pro Experience',

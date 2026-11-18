@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { CheckIcon, AppleIcon, WindowsIcon } from './icons'
 import { br, RevealWrapper } from '../utils/text'
-import { BUY_URL, MAC_URL, WIN_URL } from '../config'
+import { URL_COMPRA_PRO, MAC_URL, WIN_URL } from '../config'
 import { descargaActual } from '../langs'
 import type { Content, CompRow } from '../content/types'
 
 interface Props { content: Content }
 
 // Husos horarios de países de la zona euro. Solo controla si se muestra el equivalente
-// aproximado en euros; no afecta a lo que cobra LemonSqueezy.
+// aproximado en euros; no afecta a lo que cobra el proveedor de pago.
 const EURO_ZONE_TZ = new Set([
   'Europe/Berlin', 'Europe/Busingen',                                        // Alemania
   'Europe/Vienna',                                                            // Austria
@@ -143,13 +143,33 @@ export default function Comparison({ content: C }: Props) {
                       <span style={{ font: '400 12px/1.4 var(--font-body)', color: 'var(--ds-accent)' }}>{C.comp_license_devices}</span>
                       <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)' }}>{C.comp_payment_note}</span>
                     </div>
-                    <a href={BUY_URL} className="lg-btn-shine" style={s.btnPri}
-                      onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                      onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
-                      <span className="comp-icon-mac"><AppleIcon size={15} /></span>
-                      <span className="comp-icon-win"><WindowsIcon size={15} /></span>
-                      {C.comp_plan_pro_cta}
-                    </a>
+                    {URL_COMPRA_PRO ? (
+                      <a href={URL_COMPRA_PRO} className="lg-btn-shine" style={s.btnPri}
+                        onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+                        onMouseLeave={e => (e.currentTarget.style.opacity = '1')}>
+                        <span className="comp-icon-mac"><AppleIcon size={15} /></span>
+                        <span className="comp-icon-win"><WindowsIcon size={15} /></span>
+                        {C.comp_plan_pro_cta}
+                      </a>
+                    ) : (
+                      <>
+                        <a href={MAC_URL} className="comp-btn-mac lg-btn-shine" style={s.btnSec}
+                          onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
+                          onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
+                          onClick={e => { e.preventDefault(); window.open(MAC_URL, '_blank') }}>
+                          <AppleIcon size={15} />
+                          {C.comp_plan_basic_cta_mac}
+                        </a>
+                        <a href={WIN_URL} className="comp-btn-win lg-btn-shine" style={s.btnSec}
+                          onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
+                          onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
+                          onClick={e => { e.preventDefault(); window.open(WIN_URL, '_blank') }}>
+                          <WindowsIcon size={15} />
+                          {C.comp_plan_basic_cta_win}
+                        </a>
+                        <span style={{ font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 6, display: 'block', textAlign: 'center' }}>{C.comp_pro_proximamente}</span>
+                      </>
+                    )}
                   </th>
                 </tr>
                 <tr className="comp-win-note">
@@ -232,11 +252,31 @@ export default function Comparison({ content: C }: Props) {
                 </div>
               )}
               {tab === 'pro' && (
-                <a href={BUY_URL} className="lg-btn-shine" style={{ ...s.btnPri, display: 'flex' }}>
-                  <span className="comp-icon-mac"><AppleIcon size={15} /></span>
-                  <span className="comp-icon-win"><WindowsIcon size={15} /></span>
-                  {C.comp_plan_pro_cta}
-                </a>
+                URL_COMPRA_PRO ? (
+                  <a href={URL_COMPRA_PRO} className="lg-btn-shine" style={{ ...s.btnPri, display: 'flex' }}>
+                    <span className="comp-icon-mac"><AppleIcon size={15} /></span>
+                    <span className="comp-icon-win"><WindowsIcon size={15} /></span>
+                    {C.comp_plan_pro_cta}
+                  </a>
+                ) : (
+                  <>
+                    <a href={MAC_URL} className="comp-btn-mac lg-btn-shine" style={{ ...s.btnSec, display: 'flex' }}
+                      onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
+                      onClick={e => { e.preventDefault(); window.open(MAC_URL, '_blank') }}>
+                      <AppleIcon size={15} />
+                      {C.comp_plan_basic_cta_mac}
+                    </a>
+                    <a href={WIN_URL} className="comp-btn-win lg-btn-shine" style={{ ...s.btnSec, display: 'flex', marginTop: 8 }}
+                      onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--ds-border-high)')}
+                      onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--ds-border-mid)')}
+                      onClick={e => { e.preventDefault(); window.open(WIN_URL, '_blank') }}>
+                      <WindowsIcon size={15} />
+                      {C.comp_plan_basic_cta_win}
+                    </a>
+                    <span style={{ display: 'block', font: '400 11px/1.4 var(--font-body)', color: 'var(--ds-text-mid)', marginTop: 8, textAlign: 'center' }}>{C.comp_pro_proximamente}</span>
+                  </>
+                )
               )}
               <div className="comp-win-note-mob" style={{ marginTop: 10, textAlign: 'center' }}>
                 <a

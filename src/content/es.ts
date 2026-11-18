@@ -79,7 +79,7 @@ export const es: Content = {
   faq10_q: '¿Cómo activo mi Legado Pro?',
   faq10_a: 'Tras realizar el pago con tarjeta de crédito o a través de PayPal, recibirás un correo electrónico con un código de activación. Introdúcelo en la sección "Ajustes" de la aplicación.',
   faq11_q: '¿En qué moneda se cobra?',
-  faq11_a: 'El precio es final e incluye los impuestos aplicables. El cargo se realiza en dólares estadounidenses: LemonSqueezy convierte al cambio medio del mercado y no añade comisión por la conversión. Tu banco puede aplicar su propia comisión por operaciones en divisa extranjera.',
+  faq11_a: 'El precio es final e incluye los impuestos aplicables. El cargo se realiza en dólares estadounidenses. Tu banco puede aplicar su propia comisión por operaciones en divisa extranjera.',
 
   comp_h2:  'Lleva tu colección\nal siguiente nivel',
   comp_sub: 'Comienza con lo esencial o\naccede a la experiencia completa',
@@ -199,7 +199,8 @@ export const es: Content = {
   comp_plan_pro_sub:       'Tu museo digital sin límites',
   comp_price_launch:       'Pago único · Sin suscripciones',
   comp_license_devices:    'Licencia para dos dispositivos',
-  comp_payment_note:       'Pago seguro vía LemonSqueezy · impuestos incluidos',
+  comp_pro_proximamente:   'Legado Pro estará disponible en breve',
+  comp_payment_note:       'Pago seguro · impuestos incluidos',
   comp_euro_approx:        'aprox. {n} €',
   comp_plan_pro_cta:       'Descargar\nLegado Pro',
   comp_plan_pro_cta_sub:   'y Activa Experiencia Pro',

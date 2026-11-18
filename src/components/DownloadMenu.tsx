@@ -1,4 +1,4 @@
-import { BUY_URL, MAC_URL, WIN_URL } from '../config'
+import { URL_COMPRA_PRO, MAC_URL, WIN_URL } from '../config'
 import type { CSSProperties, ReactNode } from 'react'
 
 /* Botón de descarga con menú desplegable Básico/Pro.
@@ -7,7 +7,7 @@ import type { CSSProperties, ReactNode } from 'react'
    Sin JavaScript, el botón lleva a la tabla comparativa (#versiones). */
 
 interface Props {
-  labels: { pro: string; proSub: string; basic: string; basicSub: string }
+  labels: { pro: string; proSub: string; basic: string; basicSub: string; proComingSoon?: string }
   btnStyle: CSSProperties
   center?: boolean
   children: ReactNode
@@ -36,10 +36,17 @@ export default function DownloadMenu({ labels, btnStyle, center, children }: Pro
         </svg>
       </a>
       <div className={`lg-dl-menu${center ? ' center' : ''}`} role="menu">
-        <a className="lg-dl-item pro" href={BUY_URL} role="menuitem">
-          <strong>{labels.pro}</strong>
-          <span>{labels.proSub}</span>
-        </a>
+        {URL_COMPRA_PRO ? (
+          <a className="lg-dl-item pro" href={URL_COMPRA_PRO} role="menuitem">
+            <strong>{labels.pro}</strong>
+            <span>{labels.proSub}</span>
+          </a>
+        ) : (
+          <a className="lg-dl-item pro" href={MAC_URL} data-mac={MAC_URL} data-win={WIN_URL} role="menuitem">
+            <strong>{labels.pro}</strong>
+            <span>{labels.proComingSoon ?? labels.proSub}</span>
+          </a>
+        )}
         <a className="lg-dl-item" href={MAC_URL} data-mac={MAC_URL} data-win={WIN_URL} role="menuitem">
           <strong>{labels.basic}</strong>
           <span>{labels.basicSub}</span>

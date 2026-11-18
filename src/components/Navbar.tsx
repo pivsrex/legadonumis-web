@@ -3,6 +3,7 @@ import { AppleIcon, WindowsIcon } from './icons'
 import DownloadMenu from './DownloadMenu'
 import type { Content } from '../content/types'
 import { LANGS, type Lang } from '../langs'
+import { URL_COMPRA_PRO } from '../config'
 
 interface Props {
   content: Content
@@ -117,7 +118,7 @@ export default function Navbar({ content: C, lang }: Props) {
             </div>
           </div>
           <DownloadMenu
-            labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub }}
+            labels={{ pro: C.dl_pro_label, proSub: C.dl_pro_sub, basic: C.dl_basic_label, basicSub: C.dl_basic_sub, proComingSoon: URL_COMPRA_PRO ? undefined : C.comp_pro_proximamente }}
             btnStyle={s.btnPri}
           >
             <span className="nav-dl-mac"><AppleIcon size={15} /></span>

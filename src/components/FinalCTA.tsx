@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { RevealWrapper } from '../utils/text'
-import { DISCOUNT_CODE } from '../config'
+import { DISCOUNT_CODE, URL_COMPRA_PRO } from '../config'
 import type { Content } from '../content/types'
 
 interface Props { content: Content }
@@ -222,24 +222,32 @@ export default function FinalCTA({ content: C }: Props) {
                 <p style={{ font: '600 15px/1 var(--font-display)', color: 'var(--ds-accent)', margin: 0, letterSpacing: '0.02em' }}>
                   {C.cta_puzzle_done}
                 </p>
-                <p style={{ font: '400 13px/1.5 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0 }}>
-                  {C.cta_discount_label}
-                </p>
-                <button
-                  type="button"
-                  className="lg-code-chip"
-                  onClick={copiarCodigo}
-                  title={copied ? C.cta_code_copied : DISCOUNT_CODE}
-                  style={{
-                    font: '600 15px/1 var(--font-mono)', letterSpacing: '0.18em',
-                    color: 'var(--ds-accent)', background: 'rgba(201,168,76,0.08)',
-                    border: '1px dashed rgba(201,168,76,0.5)', borderRadius: 8,
-                    padding: '10px 18px', cursor: 'pointer',
-                    transition: 'border-color 180ms ease',
-                  }}
-                >
-                  {copied ? C.cta_code_copied : DISCOUNT_CODE}
-                </button>
+                {URL_COMPRA_PRO ? (
+                  <>
+                    <p style={{ font: '400 13px/1.5 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0 }}>
+                      {C.cta_discount_label}
+                    </p>
+                    <button
+                      type="button"
+                      className="lg-code-chip"
+                      onClick={copiarCodigo}
+                      title={copied ? C.cta_code_copied : DISCOUNT_CODE}
+                      style={{
+                        font: '600 15px/1 var(--font-mono)', letterSpacing: '0.18em',
+                        color: 'var(--ds-accent)', background: 'rgba(201,168,76,0.08)',
+                        border: '1px dashed rgba(201,168,76,0.5)', borderRadius: 8,
+                        padding: '10px 18px', cursor: 'pointer',
+                        transition: 'border-color 180ms ease',
+                      }}
+                    >
+                      {copied ? C.cta_code_copied : DISCOUNT_CODE}
+                    </button>
+                  </>
+                ) : (
+                  <p style={{ font: '400 13px/1.5 var(--font-body)', color: 'var(--ds-text-mid)', margin: 0 }}>
+                    {C.comp_pro_proximamente}
+                  </p>
+                )}
                 <p className="lg-coin-hint" style={{ font: '400 12px/1 var(--font-body)', letterSpacing: '0.06em', color: 'var(--ds-text-mid)', margin: '6px 0 0' }}>
                   {C.cta_lupa_hint}
                 </p>
