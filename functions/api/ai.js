@@ -767,8 +767,10 @@ const BASE64_REGEX            = /^[A-Za-z0-9+/]+=*$/
 
 // Únicos dos sitios donde se fija el modelo de IA.
 // Los modelos nuevos rechazan temperature, top_p y top_k: no añadir esos parámetros a la API.
-// Si se cambia algún modelo, re-ejecutar el banco de regresión antes de desplegar.
-// Validado contra claude-sonnet-5 en banco de 15 casos (23-10-2026): 15/15 pasados, 59 cr.
+// La validación de 15/15 casos (23-10-2026) se hizo contra claude-sonnet-5, no contra
+// los modelos actuales. Si alguna vez se quiere comprobar un cambio de modelo, existe un
+// banco de 15 casos con sus fotos en docs/testers/regresion del repositorio de la app:
+// node scripts/regresion-identificacion.mjs
 const MODELO_IDENTIFICACION = 'claude-sonnet-5-5'
 const MODELO_CONTEXTO       = 'claude-haiku-5-5'
 
