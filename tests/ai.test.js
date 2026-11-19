@@ -3,7 +3,7 @@
  *
  * Sección 1 — Unidad: calcularReembolso y validarRespuesta (funciones reales exportadas).
  * Sección 2 — Integración: handler onRequestPost con D1 y Anthropic simulados.
- *   Cubre: cobro ALTA/MEDIA (5 cr), reembolso BAJA/NINGUNA (neto 1), error de red
+ *   Cubre: cobro ALTA/MEDIA (5 cr), reembolso BAJA/NINGUNA (neto 2), error de red
  *   (reembolso total), saldo insuficiente (402 sin llamar a Anthropic).
  * Sección 3 — Regresión: la tarea «contexto» se comporta igual tras los cambios en
  *   MAX_BODY_BYTES y en la firma de construir(lang).
@@ -38,33 +38,33 @@ describe('calcularReembolso()', () => {
   // Con contenido → reembolso 0 (la confianza no decide el precio)
   it('respuesta con emisor → 0', () =>
     expect(calcularReembolso({ emisor: 'España', alternativas: [] })).toBe(0))
-  it('respuesta con solo leyenda_anverso → 4 (leyendas ya no cuentan como aportación)', () =>
-    expect(calcularReembolso({ leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', alternativas: [] })).toBe(4))
+  it('respuesta con solo leyenda_anverso → 3 (leyendas ya no cuentan como aportación)', () =>
+    expect(calcularReembolso({ leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', alternativas: [] })).toBe(3))
   it('respuesta con solo alternativas → 0', () =>
     expect(calcularReembolso({ alternativas: [{ emisor: 'España' }] })).toBe(0))
   it('confianza BAJA con contenido → 0', () =>
     expect(calcularReembolso({ ambito: 'Grecia arcaica', confianza: 'BAJA', alternativas: [] })).toBe(0))
 
-  // Sin contenido ni alternativas → reembolso 4
-  it('todo nulo, sin alternativas → 4', () =>
-    expect(calcularReembolso({ leyenda_anverso: null, alternativas: [] })).toBe(4))
-  it('cadena vacía no cuenta → 4', () =>
-    expect(calcularReembolso({ emisor: '', alternativas: [] })).toBe(4))
-  it('solo espacios en blanco no cuenta → 4', () =>
-    expect(calcularReembolso({ emisor: '   ', alternativas: [] })).toBe(4))
-  it('confianza NINGUNA sin contenido → 4', () =>
-    expect(calcularReembolso({ confianza: 'NINGUNA', alternativas: [] })).toBe(4))
+  // Sin contenido ni alternativas → reembolso 3
+  it('todo nulo, sin alternativas → 3', () =>
+    expect(calcularReembolso({ leyenda_anverso: null, alternativas: [] })).toBe(3))
+  it('cadena vacía no cuenta → 3', () =>
+    expect(calcularReembolso({ emisor: '', alternativas: [] })).toBe(3))
+  it('solo espacios en blanco no cuenta → 3', () =>
+    expect(calcularReembolso({ emisor: '   ', alternativas: [] })).toBe(3))
+  it('confianza NINGUNA sin contenido → 3', () =>
+    expect(calcularReembolso({ confianza: 'NINGUNA', alternativas: [] })).toBe(3))
 })
 
 describe('calcularReembolso() — criterio nuevo: reembolso solo si no aporta nada', () => {
-  it('todo vacío y sin alternativas → reembolso 4', () => {
+  it('todo vacío y sin alternativas → reembolso 3', () => {
     expect(calcularReembolso({
       leyenda_anverso: null, leyenda_reverso: null,
       emisor: null, autoridad: null, denominacion: null,
       ceca: null, fecha: null, referencia_catalogo: null,
       ambito: null, epoca: null,
       confianza: 'NINGUNA', alternativas: [],
-    })).toBe(4)
+    })).toBe(3)
   })
 
   it('solo ambito y epoca → reembolso 0', () => {
@@ -89,14 +89,14 @@ describe('calcularReembolso() — criterio nuevo: reembolso solo si no aporta na
     })).toBe(0)
   })
 
-  it('solo las leyendas transcritas → reembolso 4 (leyendas ya no cuentan como aportación)', () => {
+  it('solo las leyendas transcritas → reembolso 3 (leyendas ya no cuentan como aportación)', () => {
     expect(calcularReembolso({
       leyenda_anverso: 'ΑΘΕΝΑΙΟΝ', leyenda_reverso: null,
       emisor: null, autoridad: null, denominacion: null,
       ceca: null, fecha: null, referencia_catalogo: null,
       ambito: null, epoca: null,
       confianza: 'BAJA', alternativas: [],
-    })).toBe(4)
+    })).toBe(3)
   })
 
   it('campo con cadena vacía no cuenta como aportación', () => {
@@ -106,7 +106,7 @@ describe('calcularReembolso() — criterio nuevo: reembolso solo si no aporta na
       ceca: null, fecha: null, referencia_catalogo: null,
       ambito: null, epoca: null,
       confianza: 'NINGUNA', alternativas: [],
-    })).toBe(4)
+    })).toBe(3)
   })
 
   it('campo con solo espacios en blanco no cuenta como aportación', () => {
@@ -116,7 +116,7 @@ describe('calcularReembolso() — criterio nuevo: reembolso solo si no aporta na
       ceca: null, fecha: null, referencia_catalogo: null,
       ambito: null, epoca: null,
       confianza: 'NINGUNA', alternativas: [],
-    })).toBe(4)
+    })).toBe(3)
   })
 })
 

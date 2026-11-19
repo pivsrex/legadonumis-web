@@ -22,19 +22,21 @@ const CAMPOS_APORTACION = [
 
 /**
  * Devuelve los créditos a reembolsar según el contenido del resultado.
- * Se reembolsan 4 créditos (coste neto 1) solo cuando la respuesta no aporta
- * nada: todos los campos de identificación son null o vacíos Y no hay alternativas.
+ * Se reembolsan 3 créditos (coste neto 2) cuando la respuesta no aporta nada:
+ * todos los campos de identificación son null o vacíos Y no hay alternativas.
  * En cualquier otro caso, reembolso 0 (coste neto 5).
  * La confianza global no interviene en este cálculo.
+ * Coste neto mínimo 2 (no 1): la llamada a la IA cuesta lo mismo acierte o
+ * falle, así que un fallo no puede costar una quinta parte que un acierto.
  */
 export function calcularReembolso(resultado) {
-  if (!resultado || typeof resultado !== 'object') return 4
+  if (!resultado || typeof resultado !== 'object') return 3
   const tieneContenido = CAMPOS_APORTACION.some(k => {
     const v = resultado[k]
     return typeof v === 'string' && v.trim().length > 0
   })
   const tieneAlternativas = Array.isArray(resultado.alternativas) && resultado.alternativas.length > 0
-  return (tieneContenido || tieneAlternativas) ? 0 : 4
+  return (tieneContenido || tieneAlternativas) ? 0 : 3
 }
 
 /**
