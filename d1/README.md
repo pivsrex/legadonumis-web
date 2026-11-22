@@ -270,6 +270,63 @@ npx wrangler d1 execute legado-creditos --remote \
   --command="SELECT instance_id, license_key, device_fingerprint FROM activaciones ORDER BY creada_en DESC LIMIT 20"
 ```
 
+### Migración a Dodo Payments — nuevas columnas en `licencias` y tabla `webhooks_vistos` (noviembre 2026)
+
+Se añaden cinco columnas a `licencias`, un índice sobre `payment_id` y la tabla
+`webhooks_vistos`. Las sentencias hay que ejecutarlas en el orden indicado **antes
+de desplegar el código nuevo**.
+
+```bash
+# 1. Nuevas columnas en licencias
+npx wrangler d1 execute legado-creditos --remote \
+  --command="ALTER TABLE licencias ADD COLUMN estado TEXT NOT NULL DEFAULT 'activa'"
+npx wrangler d1 execute legado-creditos --remote \
+  --command="ALTER TABLE licencias ADD COLUMN email TEXT"
+npx wrangler d1 execute legado-creditos --remote \
+  --command="ALTER TABLE licencias ADD COLUMN customer_id TEXT"
+npx wrangler d1 execute legado-creditos --remote \
+  --command="ALTER TABLE licencias ADD COLUMN payment_id TEXT"
+npx wrangler d1 execute legado-creditos --remote \
+  --command="ALTER TABLE licencias ADD COLUMN dodo_lic_id TEXT"
+
+# 2. Índice sobre payment_id
+npx wrangler d1 execute legado-creditos --remote \
+  --command="CREATE INDEX IF NOT EXISTS idx_licencias_payment ON licencias (payment_id)"
+
+# 2b. Índice único parcial: un pago origina como mucho una licencia
+npx wrangler d1 execute legado-creditos --remote \
+  --command="CREATE UNIQUE INDEX IF NOT EXISTS idx_licencias_payment_unico ON licencias (payment_id) WHERE payment_id IS NOT NULL"
+
+# 3. Tabla de idempotencia
+npx wrangler d1 execute legado-creditos --remote \
+  --command="CREATE TABLE IF NOT EXISTS webhooks_vistos (webhook_id TEXT PRIMARY KEY, tipo TEXT NOT NULL, creado_en INTEGER NOT NULL DEFAULT (strftime('%s','now')))"
+```
+
+Repetir los tres pasos para `legado-creditos-preview`.
+
+#### Normalización de claves a minúsculas
+
+LemonSqueezy emitía las claves en MAYÚSCULAS y el código anterior usaba
+`.toUpperCase()`. Dodo Payments las emite en minúsculas. A partir de esta
+migración todo el sistema normaliza a **minúsculas** mediante `normalizarClave()`
+en `functions/api/_shared/licencia.js`. Las filas antiguas hay que bajarlas
+**antes de desplegar el código nuevo**; si se hace después, las claves en
+mayúsculas ya no coincidirán con las búsquedas en minúsculas y las validaciones
+fallará silenciosamente.
+
+```bash
+npx wrangler d1 execute legado-creditos --remote \
+  --command="UPDATE licencias    SET license_key = lower(license_key)"
+npx wrangler d1 execute legado-creditos --remote \
+  --command="UPDATE activaciones SET license_key = lower(license_key)"
+```
+
+`licencias.license_key` es PRIMARY KEY; si hubiera dos filas que colisionasen al
+bajarlas (improbable: LemonSqueezy no emite duplicados) el `UPDATE` fallará con
+error de unicidad. Verificar con `SELECT * FROM licencias` antes de ejecutarlo.
+
+Repetir para `legado-creditos-preview`.
+
 ---
 
 ## Consultas útiles

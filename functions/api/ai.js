@@ -1,4 +1,5 @@
 import { calcularReembolso, validarRespuesta } from './_shared/identificacion-logica.js'
+import { licenciaVigente, normalizarClave }   from './_shared/licencia.js'
 
 // POST /api/ai
 // Proxy controlado hacia Anthropic. Valida licencia y descuenta créditos de
@@ -14,8 +15,7 @@ import { calcularReembolso, validarRespuesta } from './_shared/identificacion-lo
 // sin acotar — cualquiera con una licencia válida podría ejecutar prompts
 // arbitrarios, o meter 200k tokens de entrada, pagando un solo crédito.
 
-const LS_VALIDATE = 'https://api.lemonsqueezy.com/v1/licenses/validate'
-const ANTHROPIC   = 'https://api.anthropic.com/v1/messages'
+const ANTHROPIC = 'https://api.anthropic.com/v1/messages'
 
 // Tope duro del cuerpo. Las tareas con imágenes envían hasta 3 MB de base64
 // más overhead de JSON — 4 MB es el límite seguro.
@@ -985,10 +985,10 @@ export async function onRequestPost(context) {
     return json({ error: 'invalid_body' }, 400)
   }
 
-  const { license_key, instance_id, tarea } = body
+  const { instance_id, tarea } = body
+  const license_key = normalizarClave(body.license_key)
 
-  if (typeof license_key !== 'string' || typeof instance_id !== 'string' ||
-      !license_key || !instance_id) {
+  if (!license_key || typeof instance_id !== 'string' || !instance_id) {
     return json({ error: 'missing_params' }, 400)
   }
 
@@ -998,13 +998,14 @@ export async function onRequestPost(context) {
   const lang = IDIOMAS_IA.has(body.lang) ? body.lang : 'es'
 
   // Validación específica de la tarea. Se hace ANTES de validar licencia y de
-  // tocar créditos: una petición malformada no debe costar nada ni consumir
-  // una llamada a LemonSqueezy.
+  // tocar créditos: una petición malformada no debe costar nada.
   const v = def.validar(body)
   if (v.error) return json({ error: v.error }, 400)
 
-  const valid = await validarLicencia(license_key, instance_id, context.env.LS_API_KEY)
-  if (!valid) return json({ error: 'invalid_license' }, 403)
+  // Fail-open: 'indeterminado' (D1 no disponible) no invalida. Solo 'no-vigente'
+  // devuelve 403 — es RE-verificación de una licencia ya confirmada.
+  const estadoLic = await licenciaVigente(db, license_key, instance_id)
+  if (estadoLic === 'no-vigente') return json({ error: 'invalid_license' }, 403)
 
   // Descuento atómico: una sola sentencia con guarda. Si el saldo no llega,
   // `changes` es 0 y no se ha modificado nada.
@@ -1104,37 +1105,6 @@ export async function onRequestPost(context) {
 // Elimina caracteres de control que no aportan nada y complican el escapado.
 function sanear(s) {
   return s.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
-}
-
-async function validarLicencia(licenseKey, instanceId, lsApiKey) {
-  // Solo devuelve false cuando LS responde 2xx con JSON que dice explícitamente
-  // que la licencia no está activa. Cualquier error de red, clave revocada o
-  // respuesta inesperada es fail-open: la consulta AI ya en curso se procesa.
-  try {
-    const res = await fetch(LS_VALIDATE, {
-      method: 'POST',
-      headers: {
-        'Accept':        'application/json',
-        'Content-Type':  'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${lsApiKey}`,
-      },
-      body: new URLSearchParams({ license_key: licenseKey, instance_id: instanceId }),
-    })
-    if (!res.ok) {
-      console.warn(`[ai/validarLicencia] LemonSqueezy respondió ${res.status} — fail-open`)
-      return true
-    }
-    let d
-    try { d = await res.json() }
-    catch {
-      console.warn('[ai/validarLicencia] Respuesta no es JSON válido — fail-open')
-      return true
-    }
-    return d.valid === true && d.license_key?.status === 'active'
-  } catch {
-    console.warn('[ai/validarLicencia] Error de red — fail-open')
-    return true
-  }
 }
 
 // Descuenta `n` créditos de forma atómica. Devuelve true solo si había saldo

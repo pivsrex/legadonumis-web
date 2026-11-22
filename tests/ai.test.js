@@ -162,7 +162,7 @@ describe('validarRespuesta()', () => {
 // UTILIDADES DE TEST (mocks de D1, licencia y Anthropic)
 // ═══════════════════════════════════════════════════════════════════════════
 
-function crearDbMock(saldoInicial = 100) {
+function crearDbMock(saldoInicial = 100, { licenciaValida = true, licenciaThrows = false } = {}) {
   let saldo = saldoInicial
   const consumos = []
   return {
@@ -187,6 +187,16 @@ function crearDbMock(saldoInicial = 100) {
                 return { meta: { changes: 1 } }
               }
               return { meta: { changes: 1 } }
+            },
+            async first() {
+              if (licenciaThrows) throw new Error('D1 error simulado')
+              // JOIN activaciones → consulta de licenciaVigente
+              if (sql.includes('JOIN activaciones')) {
+                if (licenciaValida === true)       return { estado: 'activa' }
+                if (licenciaValida === 'revocada') return { estado: 'revocada' }
+                return null
+              }
+              return null
             },
           }
         },
@@ -228,18 +238,11 @@ function respuestaModelo(confianza) {
   }
 }
 
-// Helper: simula fetch global (LemonSqueezy válido + Anthropic con respuesta)
+// Helper: simula fetch global (solo Anthropic, la validación de licencia usa D1)
 function mockFetch(modelResponse, extraAnthropic = {}) {
-  return vi.fn(async (url, _opts) => {
-    // LemonSqueezy validate
-    if (url.includes('lemonsqueezy')) {
-      return {
-        ok: true,
-        json: async () => ({ valid: true, license_key: { status: 'active' } }),
-      }
-    }
+  return vi.fn(async (_url, _opts) => {
     // Anthropic — el content real incluye "type" por bloque (ai.js filtra por
-    // type === 'text' desde 2014132 para saltar bloques 'thinking').
+    // type === 'text' para saltar bloques 'thinking').
     return {
       ok: true,
       json: async () => ({
@@ -712,20 +715,20 @@ describe('TEXTO_BASE_POR_TIPO: 4 tipos × 4 idiomas sin huecos', () => {
 })
 
 // ═══════════════════════════════════════════════════════════════════════════
-// SECCIÓN 6 — validarLicencia: política fail-open ante errores de LS
-// Verifica que un 401/500/cuerpo-inválido/sin-red NO bloquea la petición
-// (antes de este cambio, !res.ok devolvía false → 403 invalid_license).
+// SECCIÓN 6 — licenciaVigente: política de verificación basada en D1
+// La validación de licencia usa D1 (JOIN activaciones). Fail-open solo cuando
+// D1 lanza excepción ('indeterminado'); la licencia ausente/revocada → 403.
 // ═══════════════════════════════════════════════════════════════════════════
 
-describe('validarLicencia — política fail-open ante errores de LS', () => {
+describe('licenciaVigente — verificación D1 y política fail-open', () => {
   beforeEach(() => { vi.restoreAllMocks() })
 
-  it('LS responde 401 → la petición AI se procesa (no devuelve 403)', async () => {
-    const db = crearDbMock(100)
-    vi.stubGlobal('fetch', vi.fn(async (url) => {
-      if (url.includes('lemonsqueezy')) return { ok: false, status: 401 }
-      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
-    }))
+  it('D1 lanza excepción (error transitorio) → indeterminado → la petición AI se procesa', async () => {
+    const db = crearDbMock(100, { licenciaThrows: true })
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }),
+    })))
 
     const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
       tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
@@ -735,12 +738,12 @@ describe('validarLicencia — política fail-open ante errores de LS', () => {
     expect(res.status).toBe(200)
   })
 
-  it('LS responde 500 → la petición AI se procesa (no devuelve 403)', async () => {
-    const db = crearDbMock(100)
-    vi.stubGlobal('fetch', vi.fn(async (url) => {
-      if (url.includes('lemonsqueezy')) return { ok: false, status: 500 }
-      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
-    }))
+  it('D1 dice activa → vigente → la petición AI se procesa', async () => {
+    const db = crearDbMock(100, { licenciaValida: true })
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }),
+    })))
 
     const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
       tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
@@ -750,46 +753,22 @@ describe('validarLicencia — política fail-open ante errores de LS', () => {
     expect(res.status).toBe(200)
   })
 
-  it('LS responde ok pero cuerpo no es JSON → la petición AI se procesa', async () => {
-    const db = crearDbMock(100)
-    vi.stubGlobal('fetch', vi.fn(async (url) => {
-      if (url.includes('lemonsqueezy')) {
-        return { ok: true, json: async () => { throw new SyntaxError('no es JSON') } }
-      }
-      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
-    }))
+  it('D1 no tiene la fila del equipo (JOIN vacío) → no-vigente → 403 invalid_license', async () => {
+    const db = crearDbMock(100, { licenciaValida: false })
+    vi.stubGlobal('fetch', vi.fn(async () => { throw new Error('no debería llegar a Anthropic') }))
 
     const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
       tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
     const res = await onRequestPost(ctx)
+    const body = await res.json()
 
-    expect(res.status).not.toBe(403)
-    expect(res.status).toBe(200)
+    expect(res.status).toBe(403)
+    expect(body.error).toBe('invalid_license')
   })
 
-  it('fetch a LS lanza excepción (sin red) → la petición AI se procesa', async () => {
-    const db = crearDbMock(100)
-    vi.stubGlobal('fetch', vi.fn(async (url) => {
-      if (url.includes('lemonsqueezy')) throw new Error('network down')
-      return { ok: true, json: async () => ({ content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }] }) }
-    }))
-
-    const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
-      tarea: 'identificacion_moneda', imagenes: [IMG] }, db)
-    const res = await onRequestPost(ctx)
-
-    expect(res.status).not.toBe(403)
-    expect(res.status).toBe(200)
-  })
-
-  it('LS responde 200 con licencia inactiva → 403 invalid_license (invalidación legítima)', async () => {
-    const db = crearDbMock(100)
-    vi.stubGlobal('fetch', vi.fn(async (url) => {
-      if (url.includes('lemonsqueezy')) {
-        return { ok: true, json: async () => ({ valid: false, license_key: { status: 'inactive' } }) }
-      }
-      throw new Error('no debería llegar a Anthropic')
-    }))
+  it('D1 tiene la licencia revocada → no-vigente → 403 invalid_license', async () => {
+    const db = crearDbMock(100, { licenciaValida: 'revocada' })
+    vi.stubGlobal('fetch', vi.fn(async () => { throw new Error('no debería llegar a Anthropic') }))
 
     const ctx = crearContexto({ license_key: 'TEST-KEY', instance_id: 'INST-1',
       tarea: 'identificacion_moneda', imagenes: [IMG] }, db)

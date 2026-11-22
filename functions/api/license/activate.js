@@ -1,97 +1,130 @@
 // POST /api/license/activate
-// Registra un equipo en LemonSqueezy. La API key nunca sale del servidor.
+// Registra un equipo en D1. Consulta Dodo Payments solo si la clave no existe
+// aún en la base de datos local (clave desconocida, fail-CLOSED).
 // Body: { license_key, device_fingerprint }
 // Returns: { ok: boolean, instanceId?: string, token?: string, error?: string }
-//
-// Tras confirmar con LemonSqueezy que la licencia es válida, garantiza que
-// exista la fila en D1 y abona los 500 créditos iniciales si aún no se han
-// otorgado. Es la red de seguridad por si el webhook license_key_created no
-// llegó a procesarse (caída, configuración incompleta, nombre de evento erróneo, etc.).
 //
 // También firma un token de licencia offline-verificable (ver
 // `_shared/license-token.js`) — es el único momento, junto con
 // `license/validate.js`, en que se emite uno.
+//
+// La huella del equipo se graba en D1 en el momento de la activación y
+// validate.js la lee de ahí. Ver d1/schema.sql (tabla activaciones) sobre
+// por qué la huella no puede actualizarse fuera de una activación real.
 
-import { CREDITOS_INICIALES } from '../_shared/creditos.js'
-import { firmarTokenLicencia } from '../_shared/license-token.js'
-
-const LS_ACTIVATE   = 'https://api.lemonsqueezy.com/v1/licenses/activate'
-const INSTANCE_NAME = 'Legado-360024'
+import { CREDITOS_INICIALES }                              from '../_shared/creditos.js'
+import { normalizarClave, LIMITE_EQUIPOS, preguntarADodo } from '../_shared/licencia.js'
+import { firmarTokenLicencia }                             from '../_shared/license-token.js'
 
 export async function onRequestPost(context) {
   let body
   try { body = await context.request.json() }
   catch { return json({ ok: false, error: 'invalid_body' }, 400) }
 
-  const { license_key, device_fingerprint } = body
-  if (!license_key || typeof license_key !== 'string') {
-    return json({ ok: false, error: 'missing_license_key' }, 400)
-  }
-  const deviceFingerprint = typeof device_fingerprint === 'string' && device_fingerprint ? device_fingerprint : null
+  const clave = normalizarClave(body?.license_key)
+  if (!clave) return json({ ok: false, error: 'missing_license_key' }, 400)
 
-  const keyNorm = license_key.trim().toUpperCase()
+  const deviceFingerprint = typeof body?.device_fingerprint === 'string' && body.device_fingerprint
+    ? body.device_fingerprint
+    : null
+
+  const db = context.env.DB
+  if (!db) return json({ ok: false, error: 'db_error' }, 503)
 
   try {
-    const res = await fetch(LS_ACTIVATE, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${context.env.LS_API_KEY}`,
-        'Accept':        'application/json',
-        'Content-Type':  'application/json',
-      },
-      body: JSON.stringify({ license_key: keyNorm, instance_name: INSTANCE_NAME }),
-    })
-    const data = await res.json()
+    // 1. Buscar la fila de licencia en D1.
+    let fila = await db
+      .prepare('SELECT estado FROM licencias WHERE license_key = ?1')
+      .bind(clave)
+      .first()
 
-    if (data.activated && data.instance?.id) {
-      // LemonSqueezy confirmó la licencia. Garantizar créditos iniciales en D1.
-      // Best-effort: si falla el registro, la activación ya se completó en LS
-      // y iniciales_otorgados = 0 permite que el próximo intento lo reintente.
-      const db = context.env.DB
-      if (db) {
-        try {
-          // 1. Asegurar que existe la fila.
-          await db
-            .prepare(`INSERT INTO licencias (license_key, creditos, iniciales_otorgados)
-                      VALUES (?1, 0, 0)
-                      ON CONFLICT (license_key) DO NOTHING`)
-            .bind(keyNorm)
-            .run()
-          // 2. Abonar créditos iniciales si aún no se han otorgado (guarda atómica).
-          //    Si el webhook ya puso iniciales_otorgados = 1, esta sentencia no hace nada.
-          //    Si dos activaciones llegan a la vez, solo una pasará el WHERE.
-          await db
-            .prepare(`UPDATE licencias
-                         SET creditos = creditos + ?2, iniciales_otorgados = 1
-                       WHERE license_key = ?1 AND iniciales_otorgados = 0`)
-            .bind(keyNorm, CREDITOS_INICIALES)
-            .run()
-        } catch {
-          console.error('[activate] Error al abonar créditos iniciales — se reintentará en la próxima activación')
-        }
+    // 2. Clave desconocida → preguntar a Dodo (fail-CLOSED).
+    if (!fila) {
+      const valida = await preguntarADodo(clave, context.env)
+      if (!valida) return json({ ok: false, error: 'invalid' })
 
-        // Graba la huella de este equipo contra el instance_id nuevo que
-        // acaba de dar LemonSqueezy. validate.js la lee de aquí y nunca de
-        // lo que mande el cliente — ver el comentario en d1/schema.sql sobre
-        // por qué la huella no puede actualizarse fuera de una activación real.
-        try {
-          await db
-            .prepare(`INSERT INTO activaciones (instance_id, license_key, device_fingerprint)
-                      VALUES (?1, ?2, ?3)
-                      ON CONFLICT (instance_id) DO UPDATE SET device_fingerprint = excluded.device_fingerprint`)
-            .bind(data.instance.id, keyNorm, deviceFingerprint)
-            .run()
-        } catch (e) {
-          console.error('[activate] Error al grabar la huella del equipo — el token no atará a ningún dispositivo hasta la próxima activación', e)
-        }
-      }
-      const token = await firmarTokenLicencia(keyNorm, data.instance.id, deviceFingerprint, context.env)
-      return json({ ok: true, instanceId: data.instance.id, token: token ?? undefined })
+      // Dodo confirmó la licencia; insertar fila base.
+      await db
+        .prepare(
+          `INSERT INTO licencias (license_key, creditos, iniciales_otorgados, estado)
+           VALUES (?1, 0, 0, 'activa')
+           ON CONFLICT (license_key) DO NOTHING`,
+        )
+        .bind(clave)
+        .run()
+
+      fila = { estado: 'activa' }
     }
 
-    return json({ ok: false, error: data.error ?? 'invalid' })
+    // 3. Licencia revocada.
+    if (fila.estado !== 'activa') return json({ ok: false, error: 'revoked' })
+
+    // 4. ¿El mismo equipo ya activó? Detectar por huella (reinstalación).
+    if (deviceFingerprint) {
+      const filaExistente = await db
+        .prepare(
+          'SELECT instance_id FROM activaciones WHERE license_key = ?1 AND device_fingerprint = ?2 LIMIT 1',
+        )
+        .bind(clave, deviceFingerprint)
+        .first()
+
+      if (filaExistente) {
+        // Intentar abonar créditos iniciales por si el webhook no llegó a hacerlo
+        // antes de que este equipo activara por primera vez. Best-effort: si falla,
+        // la plaza ya está grabada y la activación no puede fallar por esto.
+        await abonarInicialesSiProcede(db, clave)
+        const token = await firmarTokenLicencia(clave, filaExistente.instance_id, deviceFingerprint, context.env)
+        return json({ ok: true, instanceId: filaExistente.instance_id, token: token ?? undefined })
+      }
+    }
+
+    // 5. Comprobar límite de activaciones.
+    const { count } = await db
+      .prepare('SELECT COUNT(*) AS count FROM activaciones WHERE license_key = ?1')
+      .bind(clave)
+      .first()
+
+    if (count >= LIMITE_EQUIPOS) return json({ ok: false, error: 'activation_limit' })
+
+    // 6. Nueva activación: nuevo instance_id + grabar huella.
+    const instanceId = crypto.randomUUID()
+    await db
+      .prepare(
+        `INSERT INTO activaciones (instance_id, license_key, device_fingerprint)
+         VALUES (?1, ?2, ?3)`,
+      )
+      .bind(instanceId, clave, deviceFingerprint)
+      .run()
+
+    // 7. Abonar créditos iniciales si aún no se han otorgado. La plaza ya está
+    // grabada en el paso 6; si esto falla, la activación no puede revertirse,
+    // así que no se puede lanzar — el webhook o la próxima activación lo reintentará.
+    await abonarInicialesSiProcede(db, clave)
+
+    const token = await firmarTokenLicencia(clave, instanceId, deviceFingerprint, context.env)
+    return json({ ok: true, instanceId, token: token ?? undefined })
   } catch {
-    return json({ ok: false, error: 'network_error' }, 502)
+    return json({ ok: false, error: 'db_error' }, 503)
+  }
+}
+
+// Abona los créditos iniciales si aún no se han otorgado (guarda atómica).
+// Si el webhook ya lo hizo, esta sentencia no hace nada.
+// NUNCA lanza: se llama después de grabar la plaza en activaciones o de
+// confirmar que ya existe, así que un fallo aquí no puede deshacer la
+// activación — solo retrasar el abono hasta la próxima activación.
+async function abonarInicialesSiProcede(db, clave) {
+  try {
+    await db
+      .prepare(
+        `UPDATE licencias
+            SET creditos = creditos + ?2, iniciales_otorgados = 1
+          WHERE license_key = ?1 AND iniciales_otorgados = 0`,
+      )
+      .bind(clave, CREDITOS_INICIALES)
+      .run()
+  } catch {
+    console.error('[activate] Error al abonar créditos iniciales — se reintentará en la próxima activación')
   }
 }
 

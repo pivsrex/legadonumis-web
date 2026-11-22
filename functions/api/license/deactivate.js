@@ -1,49 +1,36 @@
 // DELETE /api/license/deactivate
-// Libera la plaza de activación de un equipo en LemonSqueezy. La API key nunca sale del servidor.
+// Libera la plaza de activación de un equipo eliminando la fila de D1.
 // Body: { license_key, instance_id }
-// Returns: { ok: boolean }
+// Returns: { ok: boolean, error?: string }
 //
-// Este endpoint faltaba por completo (no existía ni aquí ni en el repo
-// anterior). El cliente (electron/license.ts → deactivateWithServer) ya
-// llamaba a esta ruta desde el principio, pero al no existir, la petición
-// fallaba silenciosamente (best-effort, el resultado se descarta) y
-// deactivateLicense() limpiaba igualmente el estado local — el usuario veía
-// "desactivado" con éxito, pero la instancia seguía contando contra el
-// límite de activaciones de la licencia en LemonSqueezy. Sin esto,
-// "desactivar aquí, activar en otro equipo" solo funcionaba mientras el
-// límite de activaciones no se agotara con instancias fantasma nunca
-// liberadas.
+// Idempotente: si la fila ya no existe (desactivación doble), responde ok:true
+// igualmente. El cliente (electron/license.ts → deactivateWithServer) llama
+// este endpoint best-effort y limpia su estado local independientemente del
+// resultado, así que el único fallo real que reportar es un error de BD.
 
-const LS_DEACTIVATE = 'https://api.lemonsqueezy.com/v1/licenses/deactivate'
+import { normalizarClave } from '../_shared/licencia.js'
 
 export async function onRequestDelete(context) {
   let body
   try { body = await context.request.json() }
   catch { return json({ ok: false, error: 'invalid_body' }, 400) }
 
-  const { license_key, instance_id } = body
-  if (!license_key || !instance_id) {
-    return json({ ok: false, error: 'missing_params' }, 400)
-  }
+  const clave      = normalizarClave(body?.license_key)
+  const instanceId = typeof body?.instance_id === 'string' ? body.instance_id.trim() : ''
+
+  if (!clave || !instanceId) return json({ ok: false, error: 'missing_params' }, 400)
+
+  const db = context.env.DB
+  if (!db) return json({ ok: false, error: 'db_error' }, 503)
 
   try {
-    const res = await fetch(LS_DEACTIVATE, {
-      method: 'POST',   // la API de LemonSqueezy usa POST para /deactivate, aunque el cliente nos llame con DELETE
-      headers: {
-        'Authorization': `Bearer ${context.env.LS_API_KEY}`,
-        'Accept':        'application/json',
-        'Content-Type':  'application/json',
-      },
-      body: JSON.stringify({ license_key, instance_id }),
-    })
-    const data = await res.json()
-    return json({ ok: data.deactivated === true })
+    await db
+      .prepare('DELETE FROM activaciones WHERE instance_id = ?1 AND license_key = ?2')
+      .bind(instanceId, clave)
+      .run()
+    return json({ ok: true })
   } catch {
-    // Sin red hacia LemonSqueezy: no se puede confirmar la liberación. El
-    // cliente ya limpia su estado local de todos modos (deactivateLicense()
-    // en electron/license.ts es best-effort a propósito), así que aquí solo
-    // devolvemos el fallo real — no hay nada más seguro que responder.
-    return json({ ok: false, error: 'network_error' }, 502)
+    return json({ ok: false, error: 'db_error' }, 503)
   }
 }
 

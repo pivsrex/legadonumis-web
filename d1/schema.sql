@@ -75,3 +75,44 @@ CREATE TABLE IF NOT EXISTS activaciones (
 
 CREATE INDEX IF NOT EXISTS idx_activaciones_licencia
   ON activaciones (license_key);
+
+-- Columnas añadidas noviembre 2026 para la migración a Dodo Payments.
+-- En bases de datos ya existentes hay que ejecutar los ALTER TABLE manualmente
+-- (ver d1/README.md → Migración de esquema — Dodo Payments).
+-- estado: 'activa' | 'revocada' — pasa a 'revocada' cuando llega un reembolso.
+-- email: correo del comprador, llega en el aviso payment.succeeded.
+-- customer_id: identificador de cliente en Dodo Payments, para consultas de soporte.
+-- payment_id: pago que originó la licencia; con este campo se cosen los dos avisos
+--   de una misma venta (license_key.created y payment.succeeded) y se procesa el
+--   reembolso desde refund.succeeded.
+-- dodo_lic_id: identificador lic_... que Dodo asigna a la licencia.
+ALTER TABLE licencias ADD COLUMN estado      TEXT NOT NULL DEFAULT 'activa';
+ALTER TABLE licencias ADD COLUMN email       TEXT;
+ALTER TABLE licencias ADD COLUMN customer_id TEXT;
+ALTER TABLE licencias ADD COLUMN payment_id  TEXT;
+ALTER TABLE licencias ADD COLUMN dodo_lic_id TEXT;
+
+-- Índice sobre payment_id: clave de costura entre los dos avisos de una misma
+-- venta y clave de búsqueda al procesar un reembolso.
+CREATE INDEX IF NOT EXISTS idx_licencias_payment
+  ON licencias (payment_id);
+
+-- Garantía de que un pago origina como mucho una licencia. Sin esto, si dos
+-- avisos de la misma venta llegasen a crear filas distintas, los créditos
+-- iniciales se repartirían entre ambas en lugar de sumarse en una sola. El
+-- índice es PARCIAL a propósito (WHERE payment_id IS NOT NULL): las licencias
+-- heredadas de LemonSqueezy no tienen payment_id y deben poder coexistir con
+-- el campo vacío sin que haya conflicto entre ellas.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_licencias_payment_unico
+  ON licencias (payment_id) WHERE payment_id IS NOT NULL;
+
+-- Tabla de idempotencia para el receptor de Dodo Payments.
+-- Dodo reintenta un aviso hasta 8 veces si no recibe 2xx, así que el mismo
+-- aviso puede llegar varias veces y no puede abonar créditos dos veces.
+-- ⚠️  Esta tabla no se crea sola: hay que ejecutar el schema en la base de datos
+--     ya existente (ver d1/README.md → Migración de esquema — Dodo Payments).
+CREATE TABLE IF NOT EXISTS webhooks_vistos (
+  webhook_id TEXT    PRIMARY KEY,
+  tipo       TEXT    NOT NULL,
+  creado_en  INTEGER NOT NULL DEFAULT (strftime('%s','now'))
+);

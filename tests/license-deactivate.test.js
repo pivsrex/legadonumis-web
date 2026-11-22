@@ -1,28 +1,48 @@
 /**
- * Tests de functions/api/license/deactivate.js.
+ * Tests de functions/api/license/deactivate.js (D1-based).
  *
- * Este endpoint no existía (ver el comentario en el propio archivo): el
- * cliente lo llamaba desde siempre, pero la ruta no estaba implementada, así
- * que "desactivar aquí, activar en otro equipo" solo parecía funcionar en el
- * cliente sin liberar de verdad la plaza en LemonSqueezy.
+ * Cubre:
+ *   1. Validación de entrada (body malformado, campos ausentes → 400).
+ *   2. DELETE exitoso → ok:true.
+ *   3. DELETE sobre fila inexistente (desactivación doble) → ok:true (idempotente).
+ *   4. D1 lanza error → 503, ok:false.
  */
-import { describe, it, expect, vi, afterEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { onRequestDelete } from '../functions/api/license/deactivate.js'
 
-function crearContexto(bodyObj) {
+function crearDbMock({ throws = false } = {}) {
+  const eliminadas = []
+  const mock = {
+    get eliminadas() { return eliminadas },
+    prepare(sql) {
+      return {
+        bind(...args) {
+          return {
+            async run() {
+              if (throws) throw new Error('D1 error simulado')
+              if (sql.includes('DELETE FROM activaciones')) {
+                eliminadas.push({ instanceId: args[0], clave: args[1] })
+              }
+              return { meta: { changes: 1 } }
+            },
+          }
+        },
+      }
+    },
+  }
+  return mock
+}
+
+function crearContexto(bodyObj, db = crearDbMock()) {
   return {
     request: { json: async () => bodyObj },
-    env: { LS_API_KEY: 'test-ls-key' },
+    env: { DB: db },
   }
 }
 
-afterEach(() => {
-  vi.unstubAllGlobals()
-})
-
 describe('onRequestDelete — validación de entrada', () => {
   it('body no es JSON válido → 400, ok:false', async () => {
-    const ctx = { request: { json: async () => { throw new Error('bad json') } }, env: {} }
+    const ctx = { request: { json: async () => { throw new Error('bad json') } }, env: { DB: crearDbMock() } }
     const res = await onRequestDelete(ctx)
     expect(res.status).toBe(400)
     expect((await res.json()).ok).toBe(false)
@@ -41,38 +61,29 @@ describe('onRequestDelete — validación de entrada', () => {
   })
 })
 
-describe('onRequestDelete — LemonSqueezy confirma la desactivación', () => {
-  it('deactivated:true → ok:true, 200', async () => {
-    vi.stubGlobal('fetch', vi.fn(async (url, opts) => {
-      expect(url).toBe('https://api.lemonsqueezy.com/v1/licenses/deactivate')
-      expect(opts.method).toBe('POST')
-      expect(opts.headers.Authorization).toBe('Bearer test-ls-key')
-      expect(JSON.parse(opts.body)).toEqual({ license_key: 'LK-1', instance_id: 'inst-1' })
-      return { json: async () => ({ deactivated: true }) }
-    }))
+describe('onRequestDelete — D1 procesa la eliminación', () => {
+  it('fila existe → DELETE ejecutado → ok:true, 200', async () => {
+    const db = crearDbMock()
+    const res = await onRequestDelete(crearContexto({ license_key: 'LK-1', instance_id: 'inst-1' }, db))
+    expect(res.status).toBe(200)
+    expect((await res.json()).ok).toBe(true)
+    expect(db.eliminadas).toHaveLength(1)
+    expect(db.eliminadas[0].instanceId).toBe('inst-1')
+    expect(db.eliminadas[0].clave).toBe('lk-1')   // normalizarClave hace trim+lowercase
+  })
 
-    const res = await onRequestDelete(crearContexto({ license_key: 'LK-1', instance_id: 'inst-1' }))
+  it('fila ya no existe (desactivación doble) → ok:true, 200 (idempotente)', async () => {
+    const res = await onRequestDelete(crearContexto({ license_key: 'LK-1', instance_id: 'inst-inexistente' }))
     expect(res.status).toBe(200)
     expect((await res.json()).ok).toBe(true)
   })
 })
 
-describe('onRequestDelete — LemonSqueezy rechaza o falla', () => {
-  it('deactivated:false (instancia ya inválida) → ok:false, 200', async () => {
-    vi.stubGlobal('fetch', vi.fn(async () => ({
-      json: async () => ({ deactivated: false, error: 'instance not found' }),
-    })))
-
-    const res = await onRequestDelete(crearContexto({ license_key: 'LK-1', instance_id: 'inst-inexistente' }))
-    expect(res.status).toBe(200)
-    expect((await res.json()).ok).toBe(false)
-  })
-
-  it('fetch lanza (sin red hacia LemonSqueezy) → 502, ok:false', async () => {
-    vi.stubGlobal('fetch', vi.fn(async () => { throw new Error('network down') }))
-
-    const res = await onRequestDelete(crearContexto({ license_key: 'LK-1', instance_id: 'inst-1' }))
-    expect(res.status).toBe(502)
+describe('onRequestDelete — fallo de D1', () => {
+  it('D1 lanza error → 503, ok:false', async () => {
+    const db = crearDbMock({ throws: true })
+    const res = await onRequestDelete(crearContexto({ license_key: 'LK-1', instance_id: 'inst-1' }, db))
+    expect(res.status).toBe(503)
     expect((await res.json()).ok).toBe(false)
   })
 })
