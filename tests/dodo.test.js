@@ -393,6 +393,37 @@ describe('payment.succeeded — pack de créditos', () => {
     expect(db.state.licencias.size).toBe(0)
     expect(db.state.compras.length).toBe(1)
   })
+
+  it('metadata.license_key que no existe en la base → no se abona nada, queda en compras_sin_procesar con la clave, 200', async () => {
+    const db    = crearDbMock()
+    const clave = 'clave-inexistente'
+    // La clave NO existe en db.state.licencias
+
+    const body = JSON.stringify(payloadPagoPack('pay_pack_4', 'nuevo@example.com', clave))
+    const res  = await onRequestPost(crearContexto({ id: 'wh-pack-4', body, dbMock: db }))
+
+    expect(res.status).toBe(200)
+    expect(db.state.licencias.size).toBe(0)
+    expect(db.state.compras.length).toBe(1)
+    const [claveGuardada] = db.state.compras[0]
+    expect(claveGuardada).toBe(clave)
+  })
+
+  it('licencia sí existe → se abonan los 200 y compras_sin_procesar queda vacío', async () => {
+    const db    = crearDbMock()
+    const clave = 'clave-pack-existe'
+    db.state.licencias.set(clave, {
+      license_key: clave, creditos: 100, iniciales_otorgados: 1,
+      estado: 'activa', email: 'existe@example.com',
+      customer_id: 'cust_x', payment_id: 'pay_orig_x', dodo_lic_id: null,
+    })
+
+    const body = JSON.stringify(payloadPagoPack('pay_pack_5', 'existe@example.com', clave))
+    await onRequestPost(crearContexto({ id: 'wh-pack-5', body, dbMock: db }))
+
+    expect(db.state.licencias.get(clave)?.creditos).toBe(100 + CREDITOS_PACK_200)
+    expect(db.state.compras.length).toBe(0)
+  })
 })
 
 describe('refund.succeeded', () => {

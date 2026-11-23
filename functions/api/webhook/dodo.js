@@ -147,7 +147,9 @@ async function manejarPagoExitoso(data, db, productoCreditosId) {
       return new Response('ok')
     }
 
-    await db
+    // Un pago que no acaba en créditos tiene que dejar rastro para poder
+    // repararlo a mano, porque el cliente sí ha pagado.
+    const rAbono = await db
       .prepare(
         `UPDATE licencias
             SET creditos = creditos + ?1, actualizada_en = strftime('%s','now')
@@ -155,6 +157,18 @@ async function manejarPagoExitoso(data, db, productoCreditosId) {
       )
       .bind(CREDITOS_PACK_200 * cantidad, clave)
       .run()
+
+    if (rAbono.meta.changes === 0) {
+      console.warn(`[dodo-webhook] pack para licencia inexistente — payment_id: ${paymentId}, email: ${email}, clave: …${clave.slice(-4)}`)
+      await db
+        .prepare(
+          `INSERT INTO compras_sin_procesar (license_key, variant_id, evento, payload)
+           VALUES (?1, NULL, ?2, ?3)`,
+        )
+        .bind(clave, 'payment.succeeded', JSON.stringify({ payment_id: paymentId, email, creditos: CREDITOS_PACK_200 * cantidad }))
+        .run()
+      return new Response('ok')
+    }
 
     console.log(`[dodo-webhook] pack ${cantidad}×200 abonado — …${clave.slice(-4)}`)
     return new Response('ok')
