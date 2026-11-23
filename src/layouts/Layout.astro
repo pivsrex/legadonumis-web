@@ -1,6 +1,7 @@
 ---
 import { readFileSync } from 'node:fs'
 import { LANGS, lang as infoLang, canonicalDe, type Lang } from '../langs'
+import { PRECIOS } from '../config'
 
 export interface Props {
   lang: Lang
@@ -65,8 +66,10 @@ const schemaLang = lang
     "inLanguage": schemaLang,
     "url": "https://legadonumis.com",
     "offers": [
-      { "@type": "Offer", "name": "Legado Basic", "price": "0", "priceCurrency": "EUR" },
-      { "@type": "Offer", "name": "Legado Pro",   "price": "99", "priceCurrency": "USD" }
+      { "@type": "Offer", "name": "Legado Basic", "price": "0",                        "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Legado Pro",   "price": String(PRECIOS.USD), "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Legado Pro",   "price": String(PRECIOS.EUR), "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Legado Pro",   "price": String(PRECIOS.GBP), "priceCurrency": "GBP" }
     ]
   })} />
 

@@ -141,7 +141,9 @@ export interface Content {
   comp_license_devices: string
   comp_pro_proximamente: string
   comp_payment_note: string
-  comp_euro_approx: string
+  precio_usd: string
+  precio_eur: string
+  precio_gbp: string
   comp_plan_pro_cta: string
   comp_plan_pro_cta_sub: string
   comp_footnote1: string

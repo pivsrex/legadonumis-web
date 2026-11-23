@@ -11,3 +11,9 @@ export const WIN_URL = `https://github.com/pivsrex/Legado-releases/releases/down
 // No es canjeable cuando URL_COMPRA_PRO es null. Reemplazar por el de la nueva pasarela
 // antes de volver a poner URL_COMPRA_PRO, o eliminar si la nueva no usa códigos.
 export const DISCOUNT_CODE = 'EXNDAXNQ'
+
+// Precios de Legado Pro por moneda. DEBEN COINCIDIR con las reglas de
+// Localized Pricing del producto en la pasarela: si cambias uno, cambia
+// también el otro o la web prometerá una cifra y el checkout cobrará otra.
+// USD es el precio base: se aplica a todo el que no caiga en EUR ni en GBP.
+export const PRECIOS = { USD: 99, EUR: 99, GBP: 89 } as const
