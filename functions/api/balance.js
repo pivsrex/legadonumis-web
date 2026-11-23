@@ -4,6 +4,8 @@
 //
 // Fuente de verdad: D1 (tabla `licencias`). Ver d1/README.md.
 
+import { normalizarClave } from './_shared/licencia.js'
+
 export async function onRequestPost(context) {
   let license_key, instance_id
   try {
@@ -14,11 +16,12 @@ export async function onRequestPost(context) {
     return json({ error: 'invalid_json' }, 400)
   }
 
-  if (!license_key || !instance_id) {
+  const clave = normalizarClave(license_key)
+  if (!clave || !instance_id) {
     return json({ error: 'missing_params' }, 400)
   }
 
-  return responderSaldo(context.env.DB, license_key)
+  return responderSaldo(context.env.DB, clave)
 }
 
 export async function onRequestGet(context) {
@@ -26,11 +29,12 @@ export async function onRequestGet(context) {
   const license_key = params.get('license_key')
   const instance_id = params.get('instance_id')
 
-  if (!license_key || !instance_id) {
+  const clave = normalizarClave(license_key)
+  if (!clave || !instance_id) {
     return json({ error: 'missing_params' }, 400)
   }
 
-  return responderSaldo(context.env.DB, license_key)
+  return responderSaldo(context.env.DB, clave)
 }
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -47,6 +51,9 @@ async function getCredits(db, licenseKey) {
       .prepare('SELECT creditos FROM licencias WHERE license_key = ?1')
       .bind(licenseKey)
       .first()
+    if (!row) {
+      console.warn(`[balance] licencia no encontrada en D1 — …${licenseKey.slice(-4)}`)
+    }
     return row?.creditos ?? 0
   } catch {
     return 0
