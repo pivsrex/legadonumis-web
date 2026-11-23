@@ -910,3 +910,117 @@ describe('retrocompatibilidad: body sin campo lang usa es', () => {
     expect(systemUsado).toBe(TAREAS.contexto.prompts.es)
   })
 })
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SECCIÓN 7 — guard de texto vacío y campo thinking en la petición
+// ═══════════════════════════════════════════════════════════════════════════
+
+describe('tarea contexto — guard de respuesta vacía', () => {
+  beforeEach(() => { vi.restoreAllMocks() })
+
+  const ctxContexto = (db) => crearContexto({
+    license_key: 'TEST-KEY', instance_id: 'INST-1',
+    tarea: 'contexto', campo: 'contexto_historico', datos: 'Felipe IV, 8 reales',
+  }, db)
+
+  it('sin bloque text y stop_reason max_tokens → 500 respuesta_truncada, crédito reembolsado', async () => {
+    const db = crearDbMock(10)
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => ({
+        content:     [{ type: 'thinking', thinking: 'razonamiento interno...' }],
+        stop_reason: 'max_tokens',
+        usage:       { input_tokens: 50, output_tokens: 800 },
+      }),
+    })))
+
+    const res = await onRequestPost(ctxContexto(db))
+    const body = await res.json()
+
+    expect(res.status).toBe(500)
+    expect(body.error).toBe('respuesta_truncada:800/800')
+    expect(db.saldo).toBe(10)                                                    // reembolsado
+    expect(db.consumos[0]).toMatchObject({ coste: 1, resultado: 'reembolsado' })
+  })
+
+  it('bloque text con solo espacios → 500 respuesta_vacia, crédito reembolsado', async () => {
+    const db = crearDbMock(10)
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => ({
+        content:     [{ type: 'text', text: '   \n   ' }],
+        stop_reason: 'end_turn',
+        usage:       { input_tokens: 50, output_tokens: 5 },
+      }),
+    })))
+
+    const res = await onRequestPost(ctxContexto(db))
+    const body = await res.json()
+
+    expect(res.status).toBe(500)
+    expect(body.error).toBe('respuesta_vacia')
+    expect(db.saldo).toBe(10)
+    expect(db.consumos[0]).toMatchObject({ coste: 1, resultado: 'reembolsado' })
+  })
+
+  it('texto no vacío → 200, crédito cobrado y registrado ok', async () => {
+    const db = crearDbMock(10)
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      json: async () => ({
+        content:     [{ type: 'text', text: 'Texto histórico generado.' }],
+        stop_reason: 'end_turn',
+      }),
+    })))
+
+    const res = await onRequestPost(ctxContexto(db))
+    const body = await res.json()
+
+    expect(res.status).toBe(200)
+    expect(body.texto).toBe('Texto histórico generado.')
+    expect(db.saldo).toBe(9)
+    expect(db.consumos[0]).toMatchObject({ coste: 1, resultado: 'ok' })
+  })
+})
+
+describe('thinking en la petición a Anthropic', () => {
+  beforeEach(() => { vi.restoreAllMocks() })
+
+  it('tarea contexto → la petición incluye thinking: { type: "disabled" }', async () => {
+    const db = crearDbMock(10)
+    let bodyEnviado = null
+    vi.stubGlobal('fetch', vi.fn(async (_url, opts) => {
+      bodyEnviado = JSON.parse(opts.body)
+      return { ok: true, json: async () => ({ content: [{ type: 'text', text: 'Texto.' }] }) }
+    }))
+
+    await onRequestPost(crearContexto({
+      license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'contexto', campo: 'contexto_historico', datos: 'Felipe IV',
+    }, db))
+
+    expect(bodyEnviado?.thinking).toEqual({ type: 'disabled' })
+  })
+
+  it('tarea identificacion_moneda → la petición NO incluye el campo thinking', async () => {
+    const db = crearDbMock(100)
+    let bodyEnviado = null
+    vi.stubGlobal('fetch', vi.fn(async (_url, opts) => {
+      bodyEnviado = JSON.parse(opts.body)
+      return {
+        ok: true,
+        json: async () => ({
+          content: [{ type: 'text', text: JSON.stringify(respuestaModelo('ALTA')) }],
+        }),
+      }
+    }))
+
+    await onRequestPost(crearContexto({
+      license_key: 'TEST-KEY', instance_id: 'INST-1',
+      tarea: 'identificacion_moneda', imagenes: [IMG],
+    }, db))
+
+    expect(bodyEnviado).not.toBeNull()
+    expect(Object.prototype.hasOwnProperty.call(bodyEnviado, 'thinking')).toBe(false)
+  })
+})

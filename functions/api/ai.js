@@ -804,7 +804,8 @@ const TEXTO_BASE_POR_TIPO = {
 const TAREAS = {
   contexto: {
     modelo:    MODELO_CONTEXTO,
-    maxTokens: 800,  // 250-320 palabras pedidas; margen ampliado (con Haiku 5.5 el techo no encarece)
+    maxTokens: 800,  // 250-320 palabras pedidas; con el razonamiento desactivado vuelve a sobrar
+    thinking:  { type: 'disabled' },  // Haiku 5.5 razona por defecto (medium); desactivarlo libera el techo para la respuesta real
     coste:     1,
     prompts:   { es: SYSTEM_CONTEXTO_ES, en: SYSTEM_CONTEXTO_EN, fr: SYSTEM_CONTEXTO_FR, de: SYSTEM_CONTEXTO_DE },
     campos:    new Set(['contexto_historico']),
@@ -1024,6 +1025,7 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         model:      def.modelo,
         max_tokens: def.maxTokens,
+        ...(def.thinking ? { thinking: def.thinking } : {}),
         system:     def.prompts[lang],
         messages:   def.construir(v.ok, lang),
       }),
@@ -1096,6 +1098,20 @@ export async function onRequestPost(context) {
   }
 
   // ── Tareas de texto plano ──────────────────────────────────────────────────
+  // Una respuesta sin bloque de texto no es un texto vacío válido: es un fallo
+  // del modelo (razonamiento que agotó el techo, respuesta cortada antes de
+  // llegar al contenido). Cobrarla convertiría un error del servidor en una
+  // pérdida silenciosa para el usuario.
+  if (!texto.trim()) {
+    console.warn('[ai] respuesta de texto vacía — stop_reason:', data?.stop_reason, '— usage:', data?.usage)
+    await reembolsarCreditos(db, license_key, def.coste)
+    await registrarConsumo(db, license_key, tarea, def.coste, 'reembolsado')
+    if (data?.stop_reason === 'max_tokens') {
+      const generados = data?.usage?.output_tokens ?? '?'
+      return json({ error: `respuesta_truncada:${generados}/${def.maxTokens}` }, 500)
+    }
+    return json({ error: 'respuesta_vacia' }, 500)
+  }
   await registrarConsumo(db, license_key, tarea, def.coste, 'ok')
   return json({ texto, coste: def.coste })
 }
