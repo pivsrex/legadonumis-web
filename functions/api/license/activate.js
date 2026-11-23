@@ -24,6 +24,13 @@ export async function onRequestPost(context) {
   const clave = normalizarClave(body?.license_key)
   if (!clave) return json({ ok: false, error: 'missing_license_key' }, 400)
 
+  // La base de datos usa siempre `clave` (minúsculas). El token debe contener
+  // la clave TAL CUAL la mandó el cliente porque el cliente compara payload.lk
+  // con la cadena que él guardó —que es la que él envió—, no con la versión
+  // normalizada. Si se firmara `clave` aquí, la activación respondería ok pero
+  // la app se quedaría en Básico porque los strings no coincidirían.
+  const claveOriginal = body.license_key.trim()
+
   const deviceFingerprint = typeof body?.device_fingerprint === 'string' && body.device_fingerprint
     ? body.device_fingerprint
     : null
@@ -73,7 +80,8 @@ export async function onRequestPost(context) {
         // antes de que este equipo activara por primera vez. Best-effort: si falla,
         // la plaza ya está grabada y la activación no puede fallar por esto.
         await abonarInicialesSiProcede(db, clave)
-        const token = await firmarTokenLicencia(clave, filaExistente.instance_id, deviceFingerprint, context.env)
+        // Firmar con claveOriginal, no con clave: ver comentario al inicio del handler.
+        const token = await firmarTokenLicencia(claveOriginal, filaExistente.instance_id, deviceFingerprint, context.env)
         return json({ ok: true, instanceId: filaExistente.instance_id, token: token ?? undefined })
       }
     }
@@ -101,7 +109,8 @@ export async function onRequestPost(context) {
     // así que no se puede lanzar — el webhook o la próxima activación lo reintentará.
     await abonarInicialesSiProcede(db, clave)
 
-    const token = await firmarTokenLicencia(clave, instanceId, deviceFingerprint, context.env)
+    // Firmar con claveOriginal, no con clave: ver comentario al inicio del handler.
+    const token = await firmarTokenLicencia(claveOriginal, instanceId, deviceFingerprint, context.env)
     return json({ ok: true, instanceId, token: token ?? undefined })
   } catch {
     return json({ ok: false, error: 'db_error' }, 503)

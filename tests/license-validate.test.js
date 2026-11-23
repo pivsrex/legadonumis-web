@@ -6,20 +6,29 @@
  *   2. D1 responde de forma definitiva: vigente → valid:true; no-vigente → valid:false.
  *   3. Política fail-open: D1 lanza excepción → valid:true (RE-verificación de
  *      licencia ya confirmada; el cliente conserva su token anterior).
+ *   4. Clave en MAYÚSCULAS → D1 buscada en minúsculas, token firmado con MAYÚSCULAS.
  */
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { onRequestPost } from '../functions/api/license/validate.js'
+import { firmarTokenLicencia } from '../functions/api/_shared/license-token.js'
 
-function crearDbMock({ estado = 'activa', throws = false } = {}) {
+vi.mock('../functions/api/_shared/license-token.js', () => ({
+  firmarTokenLicencia: vi.fn(async (licenseKey, instanceId) => `tok:${licenseKey}:${instanceId}`),
+}))
+
+// claveBd: si se pasa, el JOIN solo responde a esa clave exacta.
+// En bind(instanceId, clave), la clave es args[1].
+function crearDbMock({ estado = 'activa', throws = false, claveBd = null } = {}) {
   return {
     prepare(sql) {
       return {
-        bind(..._args) {
+        bind(...args) {
           return {
             async first() {
               if (throws) throw new Error('D1 error simulado')
               // JOIN activaciones → consulta de licenciaVigente
               if (sql.includes('JOIN activaciones')) {
+                if (claveBd !== null && args[1] !== claveBd) return null
                 if (estado === 'activa') return { estado: 'activa' }
                 return null
               }
@@ -90,5 +99,25 @@ describe('onRequestPost — política fail-open (D1 no puede confirmar)', () => 
     ))
     expect(res.status).toBe(200)
     expect((await res.json()).valid).toBe(true)
+  })
+})
+
+describe('onRequestPost — clave original en el token', () => {
+  it('clave enviada en MAYÚSCULAS → D1 buscada en minúsculas, token firmado con MAYÚSCULAS', async () => {
+    // claveBd:'abcd-1234' hace que el JOIN solo devuelva 'activa' si el código
+    // consulta D1 con la clave normalizada. Si llega 'ABCD-1234', devuelve null
+    // → 'no-vigente' → valid:false. Que el test dé valid:true prueba que D1
+    // fue consultado con la versión en minúsculas.
+    firmarTokenLicencia.mockClear()
+    const db = crearDbMock({ estado: 'activa', claveBd: 'abcd-1234' })
+    const res = await onRequestPost(crearContexto({ license_key: 'ABCD-1234', instance_id: 'inst-1' }, db))
+
+    expect(res.status).toBe(200)
+    const body = await res.json()
+    expect(body.valid).toBe(true)   // licencia encontrada con clave normalizada
+
+    // El primer argumento de firmarTokenLicencia debe ser la clave original, no 'abcd-1234'
+    expect(firmarTokenLicencia).toHaveBeenCalledOnce()
+    expect(firmarTokenLicencia.mock.calls[0][0]).toBe('ABCD-1234')
   })
 })

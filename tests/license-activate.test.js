@@ -14,12 +14,19 @@
  */
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { onRequestPost } from '../functions/api/license/activate.js'
+import { firmarTokenLicencia } from '../functions/api/_shared/license-token.js'
+
+// Mock del módulo de firma: registra las llamadas para inspeccionar los args.
+vi.mock('../functions/api/_shared/license-token.js', () => ({
+  firmarTokenLicencia: vi.fn(async (licenseKey, instanceId) => `tok:${licenseKey}:${instanceId}`),
+}))
 
 afterEach(() => { vi.unstubAllGlobals() })
 
 /**
  * @param {{
  *   estadoLicencia?: 'activa'|'revocada'|null,
+ *   claveBd?: string|null,
  *   huellaExistente?: string|null,
  *   instanceIdExistente?: string|null,
  *   numActivaciones?: number,
@@ -29,6 +36,7 @@ afterEach(() => { vi.unstubAllGlobals() })
  */
 function crearDbMock({
   estadoLicencia      = 'activa',
+  claveBd             = null,       // si se pasa, el SELECT solo responde a esa clave exacta
   huellaExistente     = null,
   instanceIdExistente = null,
   numActivaciones     = 0,
@@ -49,6 +57,7 @@ function crearDbMock({
               // SELECT estado FROM licencias
               if (sql.includes('SELECT estado FROM licencias')) {
                 if (estadoLicencia === null) return null
+                if (claveBd !== null && args[0] !== claveBd) return null
                 return { estado: estadoLicencia }
               }
               // SELECT instance_id FROM activaciones WHERE ... device_fingerprint
@@ -234,6 +243,26 @@ describe('onRequestPost — fallos de infraestructura', () => {
     const res = await onRequestPost(crearContexto({ license_key: 'LK-1' }, db))
     expect(res.status).toBe(503)
     expect((await res.json()).ok).toBe(false)
+  })
+})
+
+describe('onRequestPost — clave original en el token', () => {
+  it('clave enviada en MAYÚSCULAS → D1 buscada en minúsculas, token firmado con MAYÚSCULAS', async () => {
+    // claveBd:'abcd-1234' hace que el mock solo devuelva 'activa' si el código
+    // consulta D1 con la clave normalizada. Si llega 'ABCD-1234', devuelve null
+    // → preguntarADodo → fetch no stubado → error → ok:false. Que el test dé
+    // ok:true prueba que D1 fue consultado con la versión en minúsculas.
+    firmarTokenLicencia.mockClear()
+    const db = crearDbMock({ estadoLicencia: 'activa', claveBd: 'abcd-1234', numActivaciones: 0 })
+    const res = await onRequestPost(crearContexto({ license_key: 'ABCD-1234', device_fingerprint: 'fp-test' }, db))
+
+    expect(res.status).toBe(200)
+    const body = await res.json()
+    expect(body.ok).toBe(true)   // licencia encontrada con clave normalizada
+
+    // El primer argumento de firmarTokenLicencia debe ser la clave original, no 'abcd-1234'
+    expect(firmarTokenLicencia).toHaveBeenCalledOnce()
+    expect(firmarTokenLicencia.mock.calls[0][0]).toBe('ABCD-1234')
   })
 })
 

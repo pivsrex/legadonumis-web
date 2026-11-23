@@ -32,6 +32,13 @@ export async function onRequestPost(context) {
 
   if (!clave || !instanceId) return json({ valid: false }, 400)
 
+  // La base de datos usa siempre `clave` (minúsculas). El token debe contener
+  // la clave TAL CUAL la mandó el cliente porque el cliente compara payload.lk
+  // con la cadena que él guardó —que es la que él envió—, no con la versión
+  // normalizada. Si se firmara `clave` aquí, la revalidación rompería el token
+  // aunque la activación inicial hubiera funcionado bien.
+  const claveOriginal = body.license_key.trim()
+
   const db     = context.env.DB
   const estado = await licenciaVigente(db, clave, instanceId)
 
@@ -44,7 +51,8 @@ export async function onRequestPost(context) {
   if (estado !== 'vigente') return json({ valid: false })
 
   const deviceFingerprint = await huellaDeInstancia(db, instanceId)
-  const token = await firmarTokenLicencia(clave, instanceId, deviceFingerprint, context.env)
+  // Firmar con claveOriginal, no con clave: ver comentario arriba.
+  const token = await firmarTokenLicencia(claveOriginal, instanceId, deviceFingerprint, context.env)
   return json({ valid: true, token: token ?? undefined })
 }
 
