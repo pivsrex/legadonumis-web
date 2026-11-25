@@ -188,6 +188,37 @@ function crearDbMock() {
     return null
   }
 
+  function all(sql, args) {
+    const s = sql.replace(/\s+/g, ' ').trim()
+
+    if (s.includes('SELECT license_key FROM licencias WHERE customer_id')) {
+      const [val] = args
+      const rows = []
+      for (const row of store.licencias.values()) {
+        if (row.customer_id === val && row.license_key !== null) {
+          rows.push({ license_key: row.license_key })
+          if (rows.length >= 2) break
+        }
+      }
+      return { results: rows }
+    }
+
+    if (s.includes('SELECT license_key FROM licencias WHERE email')) {
+      const [val] = args
+      const rows = []
+      for (const row of store.licencias.values()) {
+        if (row.email === val && row.license_key !== null) {
+          rows.push({ license_key: row.license_key })
+          if (rows.length >= 2) break
+        }
+      }
+      return { results: rows }
+    }
+
+    console.warn('[MockDB] all() SQL no reconocida:', s.slice(0, 80))
+    return { results: [] }
+  }
+
   return {
     state: store,
     prepare(sql) {
@@ -196,6 +227,7 @@ function crearDbMock() {
           return {
             run:   async () => run(sql, args),
             first: async () => first(sql, args),
+            all:   async () => all(sql, args),
           }
         },
       }
@@ -224,12 +256,12 @@ function payloadPagoLicencia(paymentId, email) {
   }
 }
 
-function payloadPagoPack(paymentId, email, metaKey = undefined) {
+function payloadPagoPack(paymentId, email, metaKey = undefined, customerId = 'cust_2') {
   return {
     type: 'payment.succeeded',
     data: {
       payment_id: paymentId,
-      customer: { email, id: 'cust_2' },
+      customer: { email, id: customerId },
       metadata: metaKey ? { license_key: metaKey } : {},
       product_cart: [{ product_id: 'prod_creditos_200', quantity: 1 }],
     },
@@ -423,6 +455,54 @@ describe('payment.succeeded — pack de créditos', () => {
 
     expect(db.state.licencias.get(clave)?.creditos).toBe(100 + CREDITOS_PACK_200)
     expect(db.state.compras.length).toBe(0)
+  })
+
+  it('sin metadata pero con customer_id coincidente → suma CREDITOS_PACK_200', async () => {
+    const db    = crearDbMock()
+    const clave = 'clave-pack-custid'
+    db.state.licencias.set(clave, {
+      license_key: clave, creditos: 80, iniciales_otorgados: 1,
+      estado: 'activa', email: 'custid@example.com',
+      customer_id: 'cust_match', payment_id: 'pay_orig_cid', dodo_lic_id: null,
+    })
+
+    // Email distinto al de la licencia, pero customer_id coincide
+    const body = JSON.stringify(payloadPagoPack('pay_pack_cid', 'otro@example.com', undefined, 'cust_match'))
+    await onRequestPost(crearContexto({ id: 'wh-pack-cid', body, dbMock: db }))
+
+    expect(db.state.licencias.get(clave)?.creditos).toBe(80 + CREDITOS_PACK_200)
+    expect(db.state.compras.length).toBe(0)
+  })
+
+  it('email ambiguo (dos licencias con el mismo correo) → compras_sin_procesar, sin abonar a ninguna', async () => {
+    const db     = crearDbMock()
+    const clave1 = 'clave-amb-1'
+    const clave2 = 'clave-amb-2'
+    const emailCompartido = 'shared@example.com'
+
+    db.state.licencias.set(clave1, {
+      license_key: clave1, creditos: 100, iniciales_otorgados: 1,
+      estado: 'activa', email: emailCompartido,
+      customer_id: 'cust_a1', payment_id: 'pay_a1', dodo_lic_id: null,
+    })
+    db.state.licencias.set(clave2, {
+      license_key: clave2, creditos: 200, iniciales_otorgados: 1,
+      estado: 'activa', email: emailCompartido,
+      customer_id: 'cust_a2', payment_id: 'pay_a2', dodo_lic_id: null,
+    })
+
+    // customer_id del payload no coincide con ninguna; email es ambiguo
+    const body = JSON.stringify(payloadPagoPack('pay_pack_amb', emailCompartido, undefined, 'cust_zz'))
+    await onRequestPost(crearContexto({ id: 'wh-pack-amb', body, dbMock: db }))
+
+    // Ninguna licencia recibe créditos
+    expect(db.state.licencias.get(clave1)?.creditos).toBe(100)
+    expect(db.state.licencias.get(clave2)?.creditos).toBe(200)
+    // La compra queda pendiente de revisión manual
+    expect(db.state.compras.length).toBe(1)
+    // El payload guardado deja rastro de por qué falló el email
+    const payloadGuardado = JSON.parse(db.state.compras[0][1])
+    expect(payloadGuardado.criterios?.email).toBe('ambiguo')
   })
 })
 

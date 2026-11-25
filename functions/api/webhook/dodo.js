@@ -109,6 +109,16 @@ async function manejarLicenciaCreada(data, db) {
   return new Response('ok')
 }
 
+// Ejecuta una consulta SELECT con LIMIT 2 y devuelve la license_key solo si
+// hay exactamente una coincidencia. Con cero filas devuelve null; con dos o más,
+// señala ambigüedad para que el llamador lo anote en los diagnósticos.
+async function buscarClavePorCriterio(db, sql, valorBusqueda) {
+  const { results } = await db.prepare(sql).bind(valorBusqueda).all()
+  if (results.length === 1) return { clave: results[0].license_key, ambiguo: false }
+  if (results.length > 1)  return { clave: null, ambiguo: true }
+  return { clave: null, ambiguo: false }
+}
+
 async function manejarPagoExitoso(data, db, productoCreditosId) {
   const paymentId   = data?.payment_id      ?? null
   const email       = data?.customer?.email ?? null
@@ -124,25 +134,57 @@ async function manejarPagoExitoso(data, db, productoCreditosId) {
   if (itemCreditos) {
     const cantidad = itemCreditos.quantity ?? 1
 
-    // Buscar la licencia a recargar: 1) metadata.license_key, 2) email del cliente.
+    // Buscar la licencia a recargar. Orden de preferencia:
+    //   1) metadata.license_key — Dodo no transporta esta metadata cuando el checkout
+    //      se abre por enlace de pago (verificado: el evento llega con metadata: {}).
+    //      Se conserva como primera vía porque al crear sesiones de checkout por API
+    //      la metadata sí viaja con el evento.
+    //   2) customer_id — identifica al cliente de forma exacta si ya compró con la
+    //      misma cuenta de Dodo. Solo se acepta si hay una única coincidencia (LIMIT 2).
+    //   3) email — último recurso; solo se acepta si hay una única coincidencia (LIMIT 2).
+    //      Con varias coincidencias el criterio se descarta para no abonar a la licencia
+    //      equivocada en silencio.
+
     let clave = normalizarClave(metadata.license_key)
+    let criterioBusqueda = clave ? 'metadata' : null
+    const diagCriterios = {}
+
+    if (!clave) diagCriterios.metadata = 'sin_valor'
+
+    if (!clave && customerId) {
+      const r = await buscarClavePorCriterio(
+        db,
+        `SELECT license_key FROM licencias WHERE customer_id = ?1 AND license_key IS NOT NULL LIMIT 2`,
+        customerId,
+      )
+      if (r.ambiguo)    diagCriterios.customer_id = 'ambiguo'
+      else if (r.clave) { clave = r.clave; criterioBusqueda = 'customer_id' }
+      else              diagCriterios.customer_id = 'no_encontrado'
+    } else if (!customerId) {
+      diagCriterios.customer_id = 'sin_valor'
+    }
 
     if (!clave && email) {
-      const fila = await db
-        .prepare(`SELECT license_key FROM licencias WHERE email = ?1 AND license_key IS NOT NULL LIMIT 1`)
-        .bind(email)
-        .first()
-      clave = fila?.license_key ?? null
+      const r = await buscarClavePorCriterio(
+        db,
+        `SELECT license_key FROM licencias WHERE email = ?1 AND license_key IS NOT NULL LIMIT 2`,
+        email,
+      )
+      if (r.ambiguo)    diagCriterios.email = 'ambiguo'
+      else if (r.clave) { clave = r.clave; criterioBusqueda = 'email' }
+      else              diagCriterios.email = 'no_encontrado'
+    } else if (!email) {
+      diagCriterios.email = 'sin_valor'
     }
 
     if (!clave) {
-      console.warn(`[dodo-webhook] pack sin licencia identificable — payment_id: ${paymentId}, email: ${email}`)
+      console.warn(`[dodo-webhook] pack sin licencia identificable — payment_id: ${paymentId}, customer_id: ${customerId}, email: ${email}`, diagCriterios)
       await db
         .prepare(
           `INSERT INTO compras_sin_procesar (license_key, variant_id, evento, payload)
            VALUES (NULL, NULL, ?1, ?2)`,
         )
-        .bind('payment.succeeded', JSON.stringify({ payment_id: paymentId, email }))
+        .bind('payment.succeeded', JSON.stringify({ payment_id: paymentId, customer_id: customerId, email, criterios: diagCriterios }))
         .run()
       return new Response('ok')
     }
@@ -159,18 +201,18 @@ async function manejarPagoExitoso(data, db, productoCreditosId) {
       .run()
 
     if (rAbono.meta.changes === 0) {
-      console.warn(`[dodo-webhook] pack para licencia inexistente — payment_id: ${paymentId}, email: ${email}, clave: …${clave.slice(-4)}`)
+      console.warn(`[dodo-webhook] pack para licencia inexistente — payment_id: ${paymentId}, customer_id: ${customerId}, email: ${email}, clave: …${clave.slice(-4)}`)
       await db
         .prepare(
           `INSERT INTO compras_sin_procesar (license_key, variant_id, evento, payload)
            VALUES (?1, NULL, ?2, ?3)`,
         )
-        .bind(clave, 'payment.succeeded', JSON.stringify({ payment_id: paymentId, email, creditos: CREDITOS_PACK_200 * cantidad }))
+        .bind(clave, 'payment.succeeded', JSON.stringify({ payment_id: paymentId, customer_id: customerId, email, creditos: CREDITOS_PACK_200 * cantidad }))
         .run()
       return new Response('ok')
     }
 
-    console.log(`[dodo-webhook] pack ${cantidad}×200 abonado — …${clave.slice(-4)}`)
+    console.log(`[dodo-webhook] pack ${cantidad}×200 abonado — …${clave.slice(-4)} (criterio: ${criterioBusqueda})`)
     return new Response('ok')
   }
 
