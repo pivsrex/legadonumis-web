@@ -65,7 +65,7 @@ export default function Newsletter({ lang }: Props) {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, lang }),
+        body: JSON.stringify({ email, language: lang }),
       })
       setStatus(res.ok ? 'ok' : 'err')
     } catch {

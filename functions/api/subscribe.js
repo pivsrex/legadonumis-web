@@ -25,11 +25,16 @@ export async function onRequestPost(context) {
       await kv.put(rlKey, String(count + 1), { expirationTtl: 7200 })
     }
 
-    const { email, language } = await context.request.json();
+    const body = await context.request.json();
 
-    if (!email) {
+    if (!body.email) {
       return json({ success: false, message: 'Email required' }, 400);
     }
+
+    const email = body.email;
+    const LANGS = ['es', 'en', 'fr', 'de'];
+    const raw   = body.language ?? body.lang;
+    const language = LANGS.includes(raw) ? raw : 'en';
 
     const loopsApiKey = context.env.LOOPS_API_KEY;
     if (!loopsApiKey) return json({ success: false, message: 'Not configured' }, 503);
@@ -37,7 +42,7 @@ export async function onRequestPost(context) {
     const res  = await fetch(LOOPS_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + loopsApiKey },
-      body:    JSON.stringify({ email, language: language || 'es' }),
+      body:    JSON.stringify({ email, language }),
     });
     const data = await res.json();
 
