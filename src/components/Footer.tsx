@@ -1,4 +1,3 @@
-import { TwitterIcon, InstagramIcon } from './icons'
 import type { Content } from '../content/types'
 import { LANGS, type Lang } from '../langs'
 
@@ -19,7 +18,6 @@ export default function Footer({ content: C, lang }: Props) {
     <footer id="contacto" style={s.foot}>
       <style>{`
         .lg-footer-link:hover { color: var(--ds-text-high) !important; }
-        .lg-footer-social:hover { color: var(--ds-text-high) !important; }
       `}</style>
       <div style={s.container}>
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48 }} className="lg-footer-grid">
@@ -30,16 +28,6 @@ export default function Footer({ content: C, lang }: Props) {
             <a href={`mailto:${C.footer_email}`} style={{ font: '400 14px/1 var(--font-mono)', color: 'var(--ds-accent)', textDecoration: 'none', display: 'block', marginTop: 12 }}>
               {C.footer_email}
             </a>
-            <div style={{ display: 'flex', gap: 16, marginTop: 14, justifyContent: 'center' }}>
-              <a href="https://x.com/LegadoNumis" target="_blank" rel="noopener noreferrer"
-                className="lg-footer-social" style={{ color: 'var(--ds-text-mid)', transition: 'color 150ms ease' }}>
-                <TwitterIcon size={17} />
-              </a>
-              <a href="https://www.instagram.com/legadonumis/" target="_blank" rel="noopener noreferrer"
-                className="lg-footer-social" style={{ color: 'var(--ds-text-mid)', transition: 'color 150ms ease' }}>
-                <InstagramIcon size={17} />
-              </a>
-            </div>
           </div>
 
           <div>
