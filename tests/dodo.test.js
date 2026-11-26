@@ -8,10 +8,12 @@
  *   - payment.succeeded para pack: con metadata, con email conocido, sin ninguno
  *   - refund.succeeded
  */
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { createHmac } from 'node:crypto'
-import { onRequestPost } from '../functions/api/webhook/dodo.js'
+import { onRequestPost, idiomaPorPais } from '../functions/api/webhook/dodo.js'
 import { CREDITOS_INICIALES, CREDITOS_PACK_200 } from '../functions/api/_shared/creditos.js'
+
+afterEach(() => { vi.restoreAllMocks() })
 
 // ── Helpers de firma ─────────────────────────────────────────────────────────
 
@@ -244,12 +246,13 @@ function payloadCreada(clave, paymentId) {
   }
 }
 
-function payloadPagoLicencia(paymentId, email) {
+function payloadPagoLicencia(paymentId, email, billingCountry = undefined) {
   return {
     type: 'payment.succeeded',
     data: {
       payment_id: paymentId,
       customer: { email, id: 'cust_1' },
+      billing: billingCountry ? { country: billingCountry } : undefined,
       metadata: {},
       product_cart: [{ product_id: 'prod_licencia', quantity: 1 }],
     },
@@ -523,5 +526,83 @@ describe('refund.succeeded', () => {
     expect(db.state.licencias.get(clave)?.estado).toBe('revocada')
     // La fila y los créditos se conservan para auditoría
     expect(db.state.licencias.get(clave)?.creditos).toBe(500)
+  })
+})
+
+describe('idiomaPorPais', () => {
+  it.each([
+    ['ES', 'es'], ['MX', 'es'], ['AR', 'es'],
+    ['FR', 'fr'], ['BE', 'fr'],
+    ['DE', 'de'], ['AT', 'de'],
+    ['GB', 'en'], ['US', 'en'], [null, 'en'], [undefined, 'en'], ['', 'en'],
+  ])('país %s → idioma %s', (pais, esperado) => {
+    expect(idiomaPorPais(pais)).toBe(esperado)
+  })
+})
+
+describe('correo de bienvenida en compra de licencia', () => {
+  function crearEnvLoops() {
+    return {
+      LOOPS_API_KEY:      'loops_key',
+      LOOPS_TX_COMPRA_ES: 'tx_es',
+      LOOPS_TX_COMPRA_EN: 'tx_en',
+      LOOPS_TX_COMPRA_FR: 'tx_fr',
+      LOOPS_TX_COMPRA_DE: 'tx_de',
+    }
+  }
+
+  it('compra desde España → fetch a Loops con transactionalId español y Idempotency-Key', async () => {
+    const db        = crearDbMock()
+    const payId     = 'pay_mail_es'
+    const email     = 'es@example.com'
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+    global.fetch    = fetchMock
+
+    const body = JSON.stringify(payloadPagoLicencia(payId, email, 'ES'))
+    const id   = 'wh-mail-es'
+    await onRequestPost(crearContexto({ id, body, dbMock: db, envExtra: crearEnvLoops() }))
+
+    expect(fetchMock).toHaveBeenCalledOnce()
+    const [url, opts] = fetchMock.mock.calls[0]
+    expect(url).toBe('https://app.loops.so/api/v1/transactional')
+    const sent = JSON.parse(opts.body)
+    expect(sent.transactionalId).toBe('tx_es')
+    expect(sent.email).toBe(email)
+    expect(opts.headers['Idempotency-Key']).toBe(id)
+  })
+
+  it('compra desde Alemania → se envía el correo en alemán', async () => {
+    const db        = crearDbMock()
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+    global.fetch    = fetchMock
+
+    const body = JSON.stringify(payloadPagoLicencia('pay_mail_de', 'de@example.com', 'DE'))
+    await onRequestPost(crearContexto({ id: 'wh-mail-de', body, dbMock: db, envExtra: crearEnvLoops() }))
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body)
+    expect(sent.transactionalId).toBe('tx_de')
+  })
+
+  it('sin país de facturación → se envía el correo en inglés', async () => {
+    const db        = crearDbMock()
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+    global.fetch    = fetchMock
+
+    const body = JSON.stringify(payloadPagoLicencia('pay_mail_nopais', 'nopais@example.com'))
+    await onRequestPost(crearContexto({ id: 'wh-mail-nopais', body, dbMock: db, envExtra: crearEnvLoops() }))
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body)
+    expect(sent.transactionalId).toBe('tx_en')
+  })
+
+  it('Loops falla → el webhook responde 200 igualmente (el cobro no se rompe)', async () => {
+    const db        = crearDbMock()
+    const fetchMock = vi.fn().mockRejectedValue(new Error('Network error'))
+    global.fetch    = fetchMock
+
+    const body = JSON.stringify(payloadPagoLicencia('pay_mail_err', 'err@example.com', 'FR'))
+    const res  = await onRequestPost(crearContexto({ id: 'wh-mail-err', body, dbMock: db, envExtra: crearEnvLoops() }))
+
+    expect(res.status).toBe(200)
   })
 })

@@ -50,7 +50,7 @@ export async function onRequestPost(context) {
 
   try {
     if (tipo === 'license_key.created') return await manejarLicenciaCreada(payload.data, db)
-    if (tipo === 'payment.succeeded')   return await manejarPagoExitoso(payload.data, db, context.env.DODO_PRODUCT_CREDITOS_200)
+    if (tipo === 'payment.succeeded')   return await manejarPagoExitoso(payload.data, db, context.env.DODO_PRODUCT_CREDITOS_200, webhookId, context.env)
     if (tipo === 'refund.succeeded')    return await manejarReembolso(payload.data, db)
 
     console.warn('[dodo-webhook] tipo no gestionado:', tipo)
@@ -119,7 +119,57 @@ async function buscarClavePorCriterio(db, sql, valorBusqueda) {
   return { clave: null, ambiguo: false }
 }
 
-async function manejarPagoExitoso(data, db, productoCreditosId) {
+// El idioma se deduce del país de facturación porque Dodo no sabe en qué idioma
+// usa la aplicación el comprador. Es una aproximación; un alemán que compre desde
+// Londres recibirá el correo en inglés.
+
+export function idiomaPorPais(pais) {
+  const p = (pais ?? '').trim().toUpperCase()
+  if (['ES','MX','AR','CO','CL','PE','VE','EC','GT','CU','BO','DO','HN','PY','SV','NI','CR','PA','UY','PR'].includes(p)) return 'es'
+  if (['FR','BE','LU','MC'].includes(p)) return 'fr'
+  if (['DE','AT','CH','LI'].includes(p)) return 'de'
+  return 'en'
+}
+
+async function enviarCorreoCompra(email, pais, idWebhook, env) {
+  if (!email) {
+    console.warn('[dodo-webhook] correo de bienvenida sin enviar: email del comprador no disponible')
+    return
+  }
+  const idioma = idiomaPorPais(pais)
+  const TX_IDS = {
+    es: env.LOOPS_TX_COMPRA_ES,
+    en: env.LOOPS_TX_COMPRA_EN,
+    fr: env.LOOPS_TX_COMPRA_FR,
+    de: env.LOOPS_TX_COMPRA_DE,
+  }
+  const transactionalId = TX_IDS[idioma]
+  if (!transactionalId || !env.LOOPS_API_KEY) {
+    console.warn(`[dodo-webhook] correo de bienvenida sin enviar: falta configuración de Loops (idioma: ${idioma})`)
+    return
+  }
+  try {
+    const res = await fetch('https://app.loops.so/api/v1/transactional', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + env.LOOPS_API_KEY,
+        'Idempotency-Key': idWebhook,
+      },
+      body: JSON.stringify({ transactionalId, email }),
+    })
+    if (res.ok) {
+      console.log(`[dodo-webhook] correo de bienvenida enviado — idioma: ${idioma}, país: ${pais ?? 'desconocido'}`)
+    } else {
+      const json = await res.json().catch(() => ({}))
+      console.error(`[dodo-webhook] error Loops al enviar correo de bienvenida — status: ${res.status}, mensaje: ${json.message ?? '(sin mensaje)'}`)
+    }
+  } catch (err) {
+    console.error('[dodo-webhook] excepción al enviar correo de bienvenida:', err?.message ?? err)
+  }
+}
+
+async function manejarPagoExitoso(data, db, productoCreditosId, webhookId, env) {
   const paymentId   = data?.payment_id      ?? null
   const email       = data?.customer?.email ?? null
   const customerId  = data?.customer?.id    ?? null
@@ -235,6 +285,7 @@ async function manejarPagoExitoso(data, db, productoCreditosId) {
       .run()
   }
 
+  await enviarCorreoCompra(email, data?.billing?.country ?? null, webhookId, env)
   return new Response('ok')
 }
 
