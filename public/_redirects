@@ -1,18 +1,36 @@
 # Redirecciones de compra.
 #
-# La aplicación Legado apunta SIEMPRE a estas dos direcciones, nunca a la
-# pasarela de pago. Las direcciones van compiladas dentro de la app, así que
-# cambiar el destino aquí tiene efecto inmediato sobre todas las copias ya
-# instaladas, sin publicar una versión nueva.
+# La aplicación Legado apunta SIEMPRE aquí, nunca a la pasarela de pago. Las
+# direcciones van compiladas dentro de la app, así que cambiar el destino en
+# este fichero tiene efecto inmediato sobre todas las copias ya instaladas,
+# sin publicar una versión nueva.
 #
 # El salto es un 302 y no muestra ninguna página: el usuario pulsa «Comprar»
-# en la aplicación y lo que ve es el checkout.
+# en la aplicación y lo que ve es el destino.
+#
+# El último segmento es el idioma de la aplicación, no el del navegador. Sin
+# él, la web decidiría por su cuenta y alguien con Legado en alemán y Chrome
+# en inglés aterrizaría en la página inglesa. El español necesita `?lang=es`
+# porque su portada vive en la raíz, y la raíz elige idioma sola: ese
+# parámetro le dice que no lo haga (ver functions/_middleware.js).
 #
 # QUÉ HAY QUE CAMBIAR EL DÍA DE LANZAMIENTO (ver docs/dia-de-lanzamiento.md en
-# el repositorio de la aplicación): sustituir los dos destinos de abajo por las
-# direcciones de pago de Dodo en MODO REAL, cada una con el parámetro
-# showCurrencySelector=false. Mientras tanto llevan a la tabla comparativa,
-# que es lo único que hoy tiene sentido enseñar: la compra está cerrada.
+# el repositorio de la aplicación): sustituir los destinos por las direcciones
+# de pago de Dodo en MODO REAL, cada una con showCurrencySelector=false. Si el
+# checkout de Dodo admite un parámetro de idioma, usarlo en cada línea; si no,
+# las cuatro de cada grupo apuntarán al mismo sitio y el idioma del path pasa
+# a no servir de nada, lo cual no estorba.
 
-/comprar    /#versiones   302
-/creditos   /#versiones   302
+/comprar/es    /?lang=es#versiones   302
+/comprar/en    /en/#versiones        302
+/comprar/fr    /fr/#versiones        302
+/comprar/de    /de/#versiones        302
+
+/creditos/es   /?lang=es#versiones   302
+/creditos/en   /en/#versiones        302
+/creditos/fr   /fr/#versiones        302
+/creditos/de   /de/#versiones        302
+
+# Sin idioma: las usa la 1.0.52 de pruebas, que ya está instalada. No quitar.
+/comprar       /#versiones           302
+/creditos      /#versiones           302

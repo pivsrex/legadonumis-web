@@ -25,6 +25,17 @@ export async function onRequest({ request, next }) {
   const ua = request.headers.get('User-Agent') ?? ''
   if (BOT_RE.test(ua)) return next()
 
+  // Idioma explícito en la dirección: lo usa la aplicación de escritorio, que
+  // sabe en qué idioma la está viendo el usuario y no quiere que lo decida el
+  // navegador (ver public/_redirects). Manda sobre la cookie y sobre
+  // Accept-Language porque es una elección, no una pista.
+  const langParam = url.searchParams.get('lang')
+  if (langParam && COOKIE_LANGS.includes(langParam)) {
+    return REDIRECT_HOME[langParam]
+      ? Response.redirect(`${url.origin}${REDIRECT_HOME[langParam]}`, 302)
+      : next()
+  }
+
   // Cookie de preferencia (elección manual) > Accept-Language (sugerencia del navegador)
   const cookies    = request.headers.get('Cookie') ?? ''
   const cookieLang = cookies.match(/(?:^|;\s*)lang=([a-z]{2})/)?.[1]
