@@ -186,7 +186,7 @@ export const en: Content = {
         { feat: 'Access to new features',           basico: false, pro: true },
         { feat: 'Technical support',                basico: false, pro: true },
         { feat: 'Available in English, French, German and Spanish', basico: true,  pro: true },
-        { feat: 'macOS 11+ (Apple Silicon) · Windows 10+ (64-bit)', basico: true, pro: true },
+        { feat: 'macOS 13+ (Apple Silicon) · Windows 10+ (64-bit)', basico: true, pro: true },
       ],
     },
   ],
