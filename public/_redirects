@@ -1,0 +1,18 @@
+# Redirecciones de compra.
+#
+# La aplicación Legado apunta SIEMPRE a estas dos direcciones, nunca a la
+# pasarela de pago. Las direcciones van compiladas dentro de la app, así que
+# cambiar el destino aquí tiene efecto inmediato sobre todas las copias ya
+# instaladas, sin publicar una versión nueva.
+#
+# El salto es un 302 y no muestra ninguna página: el usuario pulsa «Comprar»
+# en la aplicación y lo que ve es el checkout.
+#
+# QUÉ HAY QUE CAMBIAR EL DÍA DE LANZAMIENTO (ver docs/dia-de-lanzamiento.md en
+# el repositorio de la aplicación): sustituir los dos destinos de abajo por las
+# direcciones de pago de Dodo en MODO REAL, cada una con el parámetro
+# showCurrencySelector=false. Mientras tanto llevan a la tabla comparativa,
+# que es lo único que hoy tiene sentido enseñar: la compra está cerrada.
+
+/comprar    /#versiones   302
+/creditos   /#versiones   302
