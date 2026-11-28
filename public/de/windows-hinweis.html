@@ -110,7 +110,29 @@
       .aw-nav-inner { padding: 0 20px; }
       .aw-footer    { padding: 18px 20px 14px; }
     }
-  </style>
+      /* ── CAPTURAS DEL AVISO ──────────────────────────────────────── */
+    .aw-figura {
+      margin: 0 0 0 42px;   /* alineada con el texto: 28 del número + 14 de hueco */
+    }
+    .aw-figura img {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--ds-border-low);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.38);
+    }
+    .aw-figura figcaption {
+      font: 400 13px/1.5 var(--font-body);
+      color: var(--ds-text-mid);
+      margin-top: 10px;
+      max-width: 400px;
+    }
+    @media (max-width: 560px) {
+      .aw-figura { margin-left: 0; }
+    }
+</style>
 </head>
 <body>
 
@@ -152,6 +174,10 @@
             Klicken Sie auf <strong>„Weitere Informationen".</strong>
           </p>
         </div>
+        <figure class="aw-figura">
+          <img src="/assets/smartscreen-1.png" alt="Blaue Windows-Warnung mit hervorgehobenem Link „Weitere Informationen“" loading="lazy" width="660" height="617" />
+          <figcaption>Das Fenster erscheint in der Sprache Ihres Windows; hier ist es auf Englisch abgebildet.</figcaption>
+        </figure>
       </div>
 
       <div class="aw-step">
@@ -163,6 +189,10 @@
             Klicken Sie darauf, um die Installation fortzusetzen.
           </p>
         </div>
+        <figure class="aw-figura">
+          <img src="/assets/smartscreen-2.png" alt="Dieselbe Warnung nach dem Klick auf „Weitere Informationen“, mit hervorgehobener Schaltfläche „Trotzdem ausführen“" loading="lazy" width="660" height="617" />
+          <figcaption>Die Schaltfläche „Trotzdem ausführen“ erscheint erst, nachdem Sie auf „Weitere Informationen“ geklickt haben.</figcaption>
+        </figure>
       </div>
 
     </div>

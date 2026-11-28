@@ -142,7 +142,29 @@
       .aw-nav-inner { padding: 0 20px; }
       .aw-footer    { padding: 18px 20px 14px; }
     }
-  </style>
+      /* ── CAPTURAS DEL AVISO ──────────────────────────────────────── */
+    .aw-figura {
+      margin: 0 0 0 42px;   /* alineada con el texto: 28 del número + 14 de hueco */
+    }
+    .aw-figura img {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--ds-border-low);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.38);
+    }
+    .aw-figura figcaption {
+      font: 400 13px/1.5 var(--font-body);
+      color: var(--ds-text-mid);
+      margin-top: 10px;
+      max-width: 400px;
+    }
+    @media (max-width: 560px) {
+      .aw-figura { margin-left: 0; }
+    }
+</style>
 </head>
 <body>
 
@@ -184,6 +206,10 @@
             Click <strong>"More info".</strong>
           </p>
         </div>
+        <figure class="aw-figura">
+          <img src="/assets/smartscreen-1.png" alt="Blue Windows warning with the “More info” link highlighted" loading="lazy" width="660" height="617" />
+          <figcaption>The dialog appears in your Windows language; it is shown here in English.</figcaption>
+        </figure>
       </div>
 
       <div class="aw-step">
@@ -195,6 +221,10 @@
             button will appear. Click it to continue the installation.
           </p>
         </div>
+        <figure class="aw-figura">
+          <img src="/assets/smartscreen-2.png" alt="The same warning after clicking “More info”, with the “Run anyway” button highlighted" loading="lazy" width="660" height="617" />
+          <figcaption>The “Run anyway” button only appears after you click “More info”.</figcaption>
+        </figure>
       </div>
 
     </div>
